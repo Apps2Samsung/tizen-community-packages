@@ -20,6 +20,10 @@
       "branch": "release",
       "output_name": "vlc-tizen-tv.wgt"
     },
+    "PatrickSt1991/chorus2-tizen": {
+      "branch": "release",
+      "output_name": "kodi-chorus-tizen.wgt"
+    },
     "reisxd/TizenBrew": {
       "branch": "release",
       "output_name": "TizenBrew.wgt"
