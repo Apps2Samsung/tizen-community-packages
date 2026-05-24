@@ -6,7 +6,7 @@
   "release:OneLiberty/moonlight-chrome-tizen": "v1.2.1",
   "release:MrPhaze62/moonlight-chrome-tizen-no-gamemode": "samsung_wasm-21031261929",
   "release:PatrickSt1991/Sportlink.Club.Info.Viewer": "v1.0.3",
-  "release:PatrickSt1991/vlc-tizen-tv": "v1.0-20260524-0722",
+  "release:PatrickSt1991/vlc-tizen-tv": "v1.0-20260524-0729",
   "release:PatrickSt1991/chorus2-tizen": "tizen-v21.x-1.0.1-2026-05-21-1443",
   "release:reisxd/TizenBrew": "v2.0.5",
   "release:dos-ise/doom-tizen": "v2026.0210.0944-main",
@@ -16,5 +16,6 @@
   "direct:TizenTVWebApp/TVideoPlayer": "etag:\"5ffe8d0002722208c57393676c1d5d0e8f0e0592c1a511f275505455c2d63349\"|mod:|len:61404893",
   "direct:KaashDev/TVapp": "etag:\"e5943bc9a636a9d3b4a433a5ec11b98a850873ef222389d67027b81bff703fd3\"|mod:|len:45372",
   "direct:yadPe/PlayerAVPlay": "etag:\"86d18fae091a6bb45afea7897ba07656ac8c1c6123440d25cddd8ca944129b26\"|mod:|len:32385",
-  "direct:futo-org/FCastReceiver": "etag:\"ffdc59301ed48f6a265c93ec27b7b263\"|mod:Wed, 08 Oct 2025 17:07:02 GMT|len:6669120"
+  "direct:futo-org/FCastReceiver": "etag:\"ffdc59301ed48f6a265c93ec27b7b263\"|mod:Wed, 08 Oct 2025 17:07:02 GMT|len:6669120",
+  "direct:PatrickSt1991/tizen-community-packages": "etag:\"76c7abc2fc40f84b17ac2acf306749e29bf1461541ceb65d5600f2f5e6555842\"|mod:|len:3130441"
 }
