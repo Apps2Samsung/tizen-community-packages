@@ -68,6 +68,6 @@
     "PatrickSt1991/tizen-community-packages": {
       "url": "https://raw.githubusercontent.com/PatrickSt1991/tizen-community-packages/main/Stremio.wgt",
       "output_name": "Stremio-Tizen4.wgt"
-    },
+    }
   }
 }
