@@ -42,6 +42,12 @@
         { "match": "Nuvio-Online.wgt", "output_name": "Nuvio-Online.wgt" },
         { "match": "Nuvio-Native.wgt", "output_name": "Nuvio-Native.wgt" }
       ]
+    },
+    "NuvioMedia/NuvioWeb": {
+      "branch": "main",
+      "assets": [
+        { "match": "NuvioTV-Tizen-.*[.]wgt$", "output_name": "NuvioTV.wgt" }
+      ]
     }
   },
   "direct": {
