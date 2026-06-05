@@ -46,7 +46,7 @@
     "NuvioMedia/NuvioWeb": {
       "branch": "main",
       "assets": [
-        { "match": "NuvioTV-Tizen-.*[.]wgt$", "output_name": "NuvioTV.wgt" }
+        { "match": "NuvioTV-Tizen-.*[.]wgt$", "output_name": "NuvioTV-Official.wgt" }
       ]
     }
   },
