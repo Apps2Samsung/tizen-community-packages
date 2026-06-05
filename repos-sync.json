@@ -24,6 +24,10 @@
       "branch": "release",
       "output_name": "kodi-chorus-tizen.wgt"
     },
+    "PatrickSt1991/flixor-tizen": {
+      "branch": "release",
+      "output_name": "flixor-plex.wgt"
+    },
     "reisxd/TizenBrew": {
       "branch": "release",
       "output_name": "TizenBrew.wgt"
