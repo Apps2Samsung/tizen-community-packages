@@ -75,8 +75,8 @@
       "url": "https://dl.fcast.org/tizen/1.0.0/FCastReceiver.wgt",
       "output_name": "FCastReceiver.wgt"
     },
-    "PatrickSt1991/tizen-community-packages": {
-      "url": "https://raw.githubusercontent.com/PatrickSt1991/tizen-community-packages/main/Stremio.wgt",
+    "Apps2Samsung/tizen-community-packages": {
+      "url": "https://raw.githubusercontent.com/Apps2Samsung/tizen-community-packages/main/Stremio.wgt",
       "output_name": "Stremio-Tizen4.wgt"
     }
   }

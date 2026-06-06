@@ -1,5 +1,5 @@
 # 🌐 Tizen Community Packages
-[![Sync Tizen Community Packages](https://github.com/PatrickSt1991/tizen-community-packages/actions/workflows/sync-packages.yml/badge.svg)](https://github.com/PatrickSt1991/tizen-community-packages/actions/workflows/sync-packages.yml)
+[![Sync Tizen Community Packages](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml/badge.svg)](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-green.svg)](../../issues)
 [![Tizen](https://img.shields.io/badge/Platform-Tizen-lightgrey.svg)](https://www.tizen.org/)

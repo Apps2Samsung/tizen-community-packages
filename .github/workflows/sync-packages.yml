@@ -169,7 +169,7 @@ jobs:
         run: |
           mkdir -p tizen-studio
           curl -L -o tizen-installer \
-            "https://github.com/PatrickSt1991/tizen-community-packages/releases/download/tizen-deps-5.5/web-cli_Tizen_Studio_4.0_ubuntu-64.bin"
+            "https://github.com/Apps2Samsung/tizen-community-packages/releases/download/tizen-deps-5.5/web-cli_Tizen_Studio_4.0_ubuntu-64.bin"
           chmod +x tizen-installer
           ./tizen-installer --accept-license "$GITHUB_WORKSPACE/tizen-studio"
           rm tizen-installer
