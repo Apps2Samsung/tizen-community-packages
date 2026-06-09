@@ -24,6 +24,10 @@
       "branch": "release",
       "output_name": "kodi-chorus-tizen.wgt"
     },
+    "PatrickSt1991/tex-tizen": {
+      "branch": "release",
+      "output_name": "kodi-tex-tizen.wgt"
+    },
     "PatrickSt1991/flixor-tizen": {
       "branch": "release",
       "output_name": "flixor-plex.wgt"
