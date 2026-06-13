@@ -15,5 +15,29 @@
     "project_path": "tizen",
     "output_name": "Reiverr.wgt",
     "pre_build": "npm install --no-audit --no-fund && VITE_PLATFORM=tv npx vite build --mode production --outDir tizen/dist"
+  },
+  "kosmodrey/hackTV": {
+    "branch": "master",
+    "skip_npm": true,
+    "project_path": ".",
+    "output_name": "HackTV.wgt"
+  },
+  "sunnyden/TizenYoutube": {
+    "branch": "master",
+    "skip_npm": true,
+    "project_path": ".",
+    "output_name": "TizenYouTube.wgt"
+  },
+  "judithsirera/TizenFeed": {
+    "branch": "master",
+    "skip_npm": true,
+    "project_path": ".",
+    "output_name": "TizenFeed.wgt"
+  },
+  "Saddek/choice-hotel-smart-tv-html5": {
+    "branch": "master",
+    "skip_npm": true,
+    "project_path": ".",
+    "output_name": "ChoiceHotel.wgt"
   }
 }
