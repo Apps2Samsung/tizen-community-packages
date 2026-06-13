@@ -18,19 +18,19 @@
     },
     "PatrickSt1991/vlc-tizen-tv": {
       "branch": "release",
-      "output_name": "vlc-tizen-tv.wgt"
+      "output_name": "VLC-TV.wgt"
     },
     "PatrickSt1991/chorus2-tizen": {
       "branch": "release",
-      "output_name": "kodi-chorus-tizen.wgt"
+      "output_name": "Kodi-Chorus.wgt"
     },
     "PatrickSt1991/tex-tizen": {
       "branch": "release",
-      "output_name": "kodi-tex-tizen.wgt"
+      "output_name": "Kodi-TeX.wgt"
     },
     "PatrickSt1991/flixor-tizen": {
       "branch": "release",
-      "output_name": "flixor-plex.wgt"
+      "output_name": "Plex-Flixor.wgt"
     },
     "reisxd/TizenBrew": {
       "branch": "release",
