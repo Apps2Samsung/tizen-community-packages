@@ -18,7 +18,7 @@
   "release:dos-ise/doom-tizen": "v2026.0210.0944-main",
   "release:dos-ise/openttd-tizen": "Release",
   "release:PatrickSt1991/NuvioWeb": "v0.2.0-2026-06-05-1100",
-  "release:NuvioMedia/NuvioWeb": "0.2.6",
+  "release:NuvioMedia/NuvioWeb": "0.2.7",
   "direct:TizenTVWebApp/TizenTVAudioRecorder": "etag:\"ee5fea95757fb79a31daae30de7054e27323fe8b30e8fca6f38cb195e7f03c02\"|mod:|len:29724428",
   "direct:TizenTVWebApp/TVideoPlayer": "etag:\"5ffe8d0002722208c57393676c1d5d0e8f0e0592c1a511f275505455c2d63349\"|mod:|len:61404893",
   "direct:KaashDev/TVapp": "etag:\"e5943bc9a636a9d3b4a433a5ec11b98a850873ef222389d67027b81bff703fd3\"|mod:|len:45372",
