@@ -56,6 +56,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Nuvio** | TV-first streaming UI for Samsung Tizen. | [NuvioMedia](https://github.com/NuvioMedia/NuvioWeb) |
 | **Chorus2-Tizen** | Chorus2-Tizen (Kodi) Samsung Tizen. | [Chorus2-Tizen](https://github.com/PatrickSt1991/chorus2-tizen) |
 | **Flixor-Tizen** | Modern cross-platform Plex client. Ported to Tizen OS. | [Flixor-Tizen](https://github.com/PatrickSt1991/flixor-tizen) |
+| **StreamVault** | IPTV streaming app for Samsung Tizen smart TVs | [StreamVault](https://github.com/PatrickSt1991/streamvault) |
 
 > 💡 Want your app listed here? See the [Contributing](#-contributing--requesting-apps) section below.
 
