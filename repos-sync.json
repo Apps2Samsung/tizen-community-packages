@@ -32,6 +32,10 @@
       "branch": "release",
       "output_name": "Plex-Flixor.wgt"
     },
+    "PatrickSt1991/streamvault": {
+      "branch": "release",
+      "output_name": "StreamVault.wgt"
+    },
     "reisxd/TizenBrew": {
       "branch": "release",
       "output_name": "TizenBrew.wgt"
