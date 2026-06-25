@@ -5,7 +5,6 @@
   "build:kosmodrey/hackTV@master": "bf27ba91bac71291f072c45040e7bbd58ac9885e",
   "build:sunnyden/TizenYoutube@master": "79bfe9ef3b4f241daa2fac2aa847d9ef6ecf31e4",
   "build:judithsirera/TizenFeed@master": "8c42b51147beafb4556f3939520b14e114fb1a51",
-  "build:Saddek/choice-hotel-smart-tv-html5@master": "0db79b6bf332dcca9d647989370f740978b954a2",
   "release:brightcraft/moonlight-tizen": "v1.12.0",
   "release:OneLiberty/moonlight-chrome-tizen": "v1.2.1",
   "release:MrPhaze62/moonlight-chrome-tizen-no-gamemode": "samsung_wasm-21031261929",
@@ -25,5 +24,6 @@
   "direct:KaashDev/TVapp": "etag:\"e5943bc9a636a9d3b4a433a5ec11b98a850873ef222389d67027b81bff703fd3\"|mod:|len:45372",
   "direct:yadPe/PlayerAVPlay": "etag:\"86d18fae091a6bb45afea7897ba07656ac8c1c6123440d25cddd8ca944129b26\"|mod:|len:32385",
   "direct:futo-org/FCastReceiver": "etag:\"ffdc59301ed48f6a265c93ec27b7b263\"|mod:Wed, 08 Oct 2025 17:07:02 GMT|len:6669120",
+  "direct:prog4food/ottplay-foss-thin-clients": "etag:\"0x8DAFBC24D128479\"|mod:Sat, 21 Jan 2023 15:15:16 GMT|len:10090",
   "direct:Apps2Samsung/tizen-community-packages": "etag:\"76c7abc2fc40f84b17ac2acf306749e29bf1461541ceb65d5600f2f5e6555842\"|mod:|len:3130441"
 }
