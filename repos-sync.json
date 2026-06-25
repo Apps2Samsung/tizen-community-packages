@@ -83,6 +83,10 @@
       "url": "https://dl.fcast.org/tizen/1.0.0/FCastReceiver.wgt",
       "output_name": "FCastReceiver.wgt"
     },
+"prog4food/ottplay-foss-thin-clients": {
+      "url": "https://github.com/prog4food/ottplay-foss-thin-clients/releases/download/samsung-tizen-release/OTTplayFOSS.wgt",
+      "output_name": "OTTplay-FOSS.wgt"
+    },
     "Apps2Samsung/tizen-community-packages": {
       "url": "https://raw.githubusercontent.com/Apps2Samsung/tizen-community-packages/main/Stremio.wgt",
       "output_name": "Stremio-Tizen4.wgt"
