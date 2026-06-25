@@ -33,11 +33,5 @@
     "skip_npm": true,
     "project_path": ".",
     "output_name": "TizenFeed.wgt"
-  },
-  "Saddek/choice-hotel-smart-tv-html5": {
-    "branch": "master",
-    "skip_npm": true,
-    "project_path": ".",
-    "output_name": "ChoiceHotel.wgt"
   }
 }
