@@ -5,7 +5,7 @@
   "build:kosmodrey/hackTV@master": "bf27ba91bac71291f072c45040e7bbd58ac9885e",
   "build:sunnyden/TizenYoutube@master": "79bfe9ef3b4f241daa2fac2aa847d9ef6ecf31e4",
   "build:judithsirera/TizenFeed@master": "8c42b51147beafb4556f3939520b14e114fb1a51",
-  "release:brightcraft/moonlight-tizen": "v1.12.0",
+  "release:brightcraft/moonlight-tizen": "v1.12.1",
   "release:OneLiberty/moonlight-chrome-tizen": "v1.2.1",
   "release:MrPhaze62/moonlight-chrome-tizen-no-gamemode": "samsung_wasm-21031261929",
   "release:PatrickSt1991/Sportlink.Club.Info.Viewer": "v1.0.5",
