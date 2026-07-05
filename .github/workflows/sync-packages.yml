@@ -463,17 +463,91 @@ jobs:
         with:
           name: last-seen-state
           path: .state-download
-      - name: Commit updated state
+
+      - name: Apply new state
         run: |
           set -e
           mkdir -p .github/state
           mv .state-download/new_last_seen.json .github/state/last_seen.json
+
+      - name: Render README version column
+        run: |
+          python3 - <<'PY'
+          # Idempotently refresh the ⚙️ Version column in the Current Packages
+          # table from .github/state/last_seen.json. Adds the column on first run.
+          import json, re, pathlib
+
+          STATE = pathlib.Path(".github/state/last_seen.json")
+          README = pathlib.Path("README.md")
+
+          # README repo-link -> state repo key, for rows where they differ.
+          # Keys are lowercase "owner/repo". Extend as needed.
+          ALIASES = {
+              "futo-org/fcast": "futo-org/fcastreceiver",
+          }
+
+          def build_version_map():
+              state = json.loads(STATE.read_text()) if STATE.exists() else {}
+              ver = {}
+              for k, v in state.items():
+                  if k.startswith("release:"):
+                      repo, version = k[8:], v
+                  elif k.startswith("build:"):
+                      repo, version = k[6:].split("@", 1)[0], v[:7]      # short SHA
+                  elif k.startswith("direct:"):
+                      repo = k[7:]
+                      m = re.search(r"mod:([^|]*)", v)
+                      version = (m.group(1).strip() or "latest") if m else "latest"
+                  else:
+                      continue
+                  ver[repo.lower()] = version
+              return ver
+
+          def version_for(repo_cell, ver):
+              m = re.findall(r"github\.com/([^)\s]+)", repo_cell)
+              if not m:
+                  return "—"
+              key = m[-1].lower().rstrip("/")
+              key = ALIASES.get(key, key)
+              return ver.get(key, "—")
+
+          def main():
+              ver = build_version_map()
+              lines = README.read_text().splitlines()
+              out, i, n = [], 0, len(lines)
+              rows = 0
+              while i < n:
+                  line = lines[i]
+                  if line.lstrip().startswith("|") and "Application" in line and "Repository" in line:
+                      out.append("| 🧩 Application | 📝 Description | 🔗 Repository | ⚙️ Version |")
+                      out.append("|----------------|----------------|------------------|------------|")
+                      i += 2  # skip original header + separator
+                      while i < n and lines[i].lstrip().startswith("|"):
+                          cells = [c.strip() for c in lines[i].strip().strip("|").split("|")]
+                          name = cells[0] if len(cells) > 0 else ""
+                          desc = cells[1] if len(cells) > 1 else ""
+                          repo = cells[2] if len(cells) > 2 else ""   # ignore any existing Version col
+                          out.append(f"| {name} | {desc} | {repo} | `{version_for(repo, ver)}` |")
+                          rows += 1
+                          i += 1
+                      continue
+                  out.append(line)
+                  i += 1
+              README.write_text("\n".join(out) + "\n")
+              print(f"Rendered {rows} package rows.")
+
+          main()
+          PY
+
+      - name: Commit state + README
+        run: |
+          set -e
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .github/state/last_seen.json
+          git add .github/state/last_seen.json README.md
           if git diff --cached --quiet; then
-            echo "State unchanged — nothing to commit."
+            echo "Nothing to commit."
           else
-            git commit -m "chore: update last_seen state [skip ci]"
+            git commit -m "chore: update state + README versions [skip ci]"
             git push
           fi
