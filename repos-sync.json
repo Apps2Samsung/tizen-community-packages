@@ -2,7 +2,10 @@
   "releases": {
     "brightcraft/moonlight-tizen": {
       "branch": "release",
-      "output_name": "Moonlight-Tizen.wgt"
+      "assets": [
+        { "match": "Moonlight.wgt", "output_name": "Moonlight-Tizen.wgt" },
+        { "match": "Moonlight-ForceGM.wgt", "output_name": "Moonlight-ForceGM-Tizen.wgt" }
+      ]
     },
     "OneLiberty/moonlight-chrome-tizen": {
       "branch": "release",
