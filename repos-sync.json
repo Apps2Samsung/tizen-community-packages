@@ -51,13 +51,6 @@
       "branch": "release",
       "output_name": "TransportTycoonDeluxe.wgt"
     },
-    "PatrickSt1991/NuvioWeb": {
-      "branch": "main",
-      "assets": [
-        { "match": "Nuvio-Online.wgt", "output_name": "Nuvio-Online.wgt" },
-        { "match": "Nuvio-Native.wgt", "output_name": "Nuvio-Native.wgt" }
-      ]
-    },
     "NuvioMedia/NuvioWeb": {
       "branch": "main",
       "assets": [
