@@ -51,6 +51,10 @@
       "branch": "release",
       "output_name": "TransportTycoonDeluxe.wgt"
     },
+    "dos-ise/GB-EMU_Tizen": {
+      "branch": "release",
+      "output_name": "GameBoy-Emulator.wgt"
+    },
     "NuvioMedia/NuvioWeb": {
       "branch": "main",
       "assets": [
