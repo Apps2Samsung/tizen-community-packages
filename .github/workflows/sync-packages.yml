@@ -2,8 +2,8 @@ name: Sync Tizen Community Packages
 
 on:
   schedule:
-    # 04:00 UTC daily — 05:00 CET (winter) / 06:00 CEST (summer) in Brussels
-    - cron: '0 4 * * *'
+    # 04:00 UTC daily — 05:00 CET (winter) / 06:00 CEST (summer) in Brussel
+    - cron: '23 2 * * *' 
   workflow_dispatch:
     inputs:
       force:
