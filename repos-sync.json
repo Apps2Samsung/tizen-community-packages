@@ -43,6 +43,10 @@
       "branch": "release",
       "output_name": "TizenBrew.wgt"
     },
+    "reisxd/TizenTube": {
+      "branch": "release",
+      "output_name": "TizenTube.wgt"
+    },
     "dos-ise/doom-tizen": {
       "branch": "release",
       "output_name": "Doom.wgt"
