@@ -46,7 +46,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Sportlink Club Viewer** | Solution for sports clubs to display match information in real time and in a clear, organized way on screens throughout the club! | [PatrickSt1991](https://github.com/PatrickSt1991/Sportlink.Club.Info.Viewer) | `v1.0.5` |
 | **VLC-Tizen-tv** | VLC Like player for your Samsung TV. | [PatrickSt1991](https://github.com/PatrickSt1991/vlc-tizen-tv) | `v1.1.0-20260704-0833` |
 | **TizenBrew** | A way to experience modded websites and you can install newer apps without fighting with Tizen Studio. | [reisxd](https://github.com/reisxd/TizenBrew) | `v2.0.5` |
-| **TizenTube** | TizenTube enhances your favourite streaming websites viewing experience by removing ads and adding support for Sponsorblock. | [reisxd](https://github.com/reisxd/TizenTube) | `v2.0.5` |
+| **TizenTube** | TizenTube enhances your favourite streaming websites viewing experience by removing ads and adding support for Sponsorblock. | [reisxd](https://github.com/reisxd/TizenTube) | `v2.0.0` |
 | **TizenTVAudioRecorder** | HTML5 Audio Recorder (kalaoke App). | [TizenTVWebApp](https://github.com/TizenTVWebApp/TizenTVAudioRecorder) | `latest` |
 | **TVideoPlayer** | Tizen TV HTML video player based on videojs. | [TizenTVWebApp](https://github.com/TizenTVWebApp/TVideoPlayer) | `latest` |
 | **PlayerAVPlay** | AVPlayer app | [yadPe](https://github.com/yadPe/PlayerAVPlay) | `latest` |
@@ -55,7 +55,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **TransportTycoonDeluxe** | OpenTTD is an open source simulation game based upon Transport Tycoon Deluxe. | [dos-ise](https://github.com/dos-ise/OpenTTD-Tizen) | `Release` |
 | **GameBoy-Emulator** | A Game Boy (DMG) emulator. | [dos-ise](https://github.com/dos-ise/GB-EMU_Tizen) | `Release` |
 | **Reiverr** | A clean combined interface for Jellyfin, TMDB, Radarr and Sonarr, as well as a replacement to Overseerr. | [aleksilassila](https://github.com/aleksilassila/reiverr) | `dbdd50d` |
-| **Nuvio** | TV-first streaming UI for Samsung Tizen. | [NuvioMedia](https://github.com/NuvioMedia/NuvioWeb) | `0.3.10-beta` |
+| **Nuvio** | TV-first streaming UI for Samsung Tizen. | [NuvioMedia](https://github.com/NuvioMedia/NuvioWeb) | `0.3.12-beta` |
 | **Chorus2-Tizen** | Chorus2-Tizen (Kodi) Samsung Tizen. | [Chorus2-Tizen](https://github.com/PatrickSt1991/chorus2-tizen) | `tizen-v21.x-1.0.1-2026-05-21-1443` |
 | **Flixor-Tizen** | Modern cross-platform Plex client. Ported to Tizen OS. | [Flixor-Tizen](https://github.com/PatrickSt1991/flixor-tizen) | `v1.0.1-2026-06-10-1239` |
 | **StreamVault** | IPTV streaming app for Samsung Tizen smart TVs | [StreamVault](https://github.com/PatrickSt1991/streamvault) | `v1.0.0-2026-06-21-1058` |
