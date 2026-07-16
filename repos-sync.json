@@ -64,6 +64,10 @@
       "assets": [
         { "match": "NuvioTV-Tizen-.*[.]wgt$", "output_name": "NuvioTV-Official.wgt" }
       ]
+    },
+"corekill/kick-tv-tizen": {
+      "branch": "release",
+      "output_name": KickTV.wgt"
     }
   },
   "direct": {
