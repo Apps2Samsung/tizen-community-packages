@@ -15,7 +15,7 @@
       "branch": "release",
       "output_name": "Moonlight-Chrome-NoGame.wgt"
     },
-    toypoodlegaming/moonlight-chrome-tizen": {
+    "toypoodlegaming/moonlight-chrome-tizen": {
       "branch": "release",
       "output_name": "Moonlight-Chrome-ToypoodleGaming.wgt"
     },
