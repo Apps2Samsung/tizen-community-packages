@@ -67,7 +67,7 @@
     },
 "corekill/kick-tv-tizen": {
       "branch": "release",
-      "output_name": KickTV.wgt"
+      "output_name": "KickTV.wgt"
     }
   },
   "direct": {
