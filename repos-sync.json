@@ -9,11 +9,15 @@
     },
     "OneLiberty/moonlight-chrome-tizen": {
       "branch": "release",
-      "output_name": "Moonlight.wgt"
+      "output_name": "Moonlight-Chrome.wgt"
     },
     "MrPhaze62/moonlight-chrome-tizen-no-gamemode": {
       "branch": "release",
-      "output_name": "Moonlight-NoGame.wgt"
+      "output_name": "Moonlight-Chrome-NoGame.wgt"
+    },
+    toypoodlegaming/moonlight-chrome-tizen": {
+      "branch": "release",
+      "output_name": "Moonlight-Chrome-ToypoodleGaming.wgt"
     },
     "PatrickSt1991/Sportlink.Club.Info.Viewer": {
       "branch": "release",
