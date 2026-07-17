@@ -478,30 +478,26 @@ jobs:
           mkdir -p .github/state
           mv .state-download/new_last_seen.json .github/state/last_seen.json
 
-      - name: Render README version column
+      - name: Render README package table
         run: |
           python3 - <<'PY'
-          # Idempotently refresh the ⚙️ Version column in the Current Packages
-          # table from .github/state/last_seen.json. Adds the column on first run.
-          import json, re, pathlib
+          # Regenerate the entire Current Packages table from packages/*.json.
+          # Rows (name / description / repo link) come from the manifests;
+          # the ⚙️ Version column comes from .github/state/last_seen.json.
+          # Everything outside the table is left untouched.
+          import json, glob, re, pathlib
 
           STATE = pathlib.Path(".github/state/last_seen.json")
           README = pathlib.Path("README.md")
 
-          # README repo-link -> state repo key, for rows where they differ.
-          # Keys are lowercase "owner/repo". Extend as needed.
-          ALIASES = {
-              "futo-org/fcast": "futo-org/fcastreceiver",
-          }
-
-          def build_version_map():
+          def version_map():
               state = json.loads(STATE.read_text()) if STATE.exists() else {}
               ver = {}
               for k, v in state.items():
                   if k.startswith("release:"):
                       repo, version = k[8:], v
                   elif k.startswith("build:"):
-                      repo, version = k[6:].split("@", 1)[0], v[:7]      # short SHA
+                      repo, version = k[6:].split("@", 1)[0], v[:7]   # short SHA
                   elif k.startswith("direct:"):
                       repo = k[7:]
                       m = re.search(r"mod:([^|]*)", v)
@@ -511,38 +507,39 @@ jobs:
                   ver[repo.lower()] = version
               return ver
 
-          def version_for(repo_cell, ver):
-              m = re.findall(r"github\.com/([^)\s]+)", repo_cell)
-              if not m:
-                  return "—"
-              key = m[-1].lower().rstrip("/")
-              key = ALIASES.get(key, key)
-              return ver.get(key, "—")
+          def table():
+              ver = version_map()
+              items = []
+              for path in glob.glob("packages/*.json"):
+                  d = json.loads(pathlib.Path(path).read_text())
+                  repo = d["repo"]
+                  label = d.get("repo_label", repo.split("/")[0])
+                  items.append((
+                      d["name"], d["description"],
+                      f"[{label}](https://github.com/{repo})",
+                      ver.get(repo.lower(), "—"),
+                  ))
+              items.sort(key=lambda r: r[0].lower())
+              rows = ["| 🧩 Application | 📝 Description | 🔗 Repository | ⚙️ Version |",
+                      "|----------------|----------------|------------------|------------|"]
+              rows += [f"| **{n}** | {d} | {link} | `{v}` |" for n, d, link, v in items]
+              return rows
 
           def main():
-              ver = build_version_map()
               lines = README.read_text().splitlines()
               out, i, n = [], 0, len(lines)
-              rows = 0
               while i < n:
                   line = lines[i]
                   if line.lstrip().startswith("|") and "Application" in line and "Repository" in line:
-                      out.append("| 🧩 Application | 📝 Description | 🔗 Repository | ⚙️ Version |")
-                      out.append("|----------------|----------------|------------------|------------|")
-                      i += 2  # skip original header + separator
+                      out.extend(table())
+                      i += 1                                   # skip old header
                       while i < n and lines[i].lstrip().startswith("|"):
-                          cells = [c.strip() for c in lines[i].strip().strip("|").split("|")]
-                          name = cells[0] if len(cells) > 0 else ""
-                          desc = cells[1] if len(cells) > 1 else ""
-                          repo = cells[2] if len(cells) > 2 else ""   # ignore any existing Version col
-                          out.append(f"| {name} | {desc} | {repo} | `{version_for(repo, ver)}` |")
-                          rows += 1
-                          i += 1
+                          i += 1                               # skip old separator + rows
                       continue
                   out.append(line)
                   i += 1
               README.write_text("\n".join(out) + "\n")
-              print(f"Rendered {rows} package rows.")
+              print("Rendered README table.")
 
           main()
           PY
