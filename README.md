@@ -1,7 +1,7 @@
 # 🌐 Tizen Community Packages
 [![Sync Tizen Community Packages](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml/badge.svg)](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Packages](https://img.shields.io/badge/packages-34-blue.svg)](#-current-packages)
+[![Packages](https://img.shields.io/badge/packages-35-blue.svg)](#-current-packages)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-green.svg)](../../issues)
 [![Tizen](https://img.shields.io/badge/Platform-Tizen-lightgrey.svg)](https://www.tizen.org/)
 [![Community](https://img.shields.io/badge/Community-Driven-orange.svg)](#)
@@ -38,7 +38,8 @@ Please check the [Releases](../../releases) page for version-specific details.
 
 | 🧩 Application | 📝 Description | 🔗 Repository | ⚙️ Version |
 |----------------|----------------|------------------|------------|
-| **AniLiberty** | Unofficial AniLibria anime client for Samsung Tizen TV. | [CoreDip](https://github.com/CoreDip/anilibria-tizen-wgt) | `—` |
+| **AniLiberty** | Unofficial AniLibria anime client for Samsung Tizen TV. | [CoreDip](https://github.com/CoreDip/anilibria-tizen-wgt) | `v1.1.0` |
+| **Chiaki-Tizen** | An open source PlayStation remote play project serving as the next-generation of Chiaki. | [Chiaki-Tizen](https://github.com/Trent407/chiaki-tizen) | `v0.1.0` |
 | **Chorus2-Tizen** | Chorus2-Tizen (Kodi) Samsung Tizen. | [Chorus2-Tizen](https://github.com/PatrickSt1991/chorus2-tizen) | `tizen-v21.x-1.0.1-2026-05-21-1443` |
 | **Doom** | A WebAssembly-powered port of Doom packaged as a Samsung Tizen TV application. | [dos-ise](https://github.com/dos-ise/doom-tizen) | `V1` |
 | **FCast** | FCast is an open source protocol that enables wireless streaming of audio and video content between devices. | [futo-org](https://github.com/futo-org/FCastReceiver) | `Wed, 08 Oct 2025 17:07:02 GMT` |
@@ -46,18 +47,18 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Flixor-Tizen** | Modern cross-platform Plex client. Ported to Tizen OS. | [Flixor-Tizen](https://github.com/PatrickSt1991/flixor-tizen) | `v1.0.1-2026-06-10-1239` |
 | **GameBoy-Emulator** | A Game Boy (DMG) emulator. | [dos-ise](https://github.com/dos-ise/GB-EMU_Tizen) | `Latest` |
 | **HackTV** | IPTV client for Samsung Tizen TVs. | [kosmodrey](https://github.com/kosmodrey/hackTV) | `bf27ba9` |
-| **Harbor** | Custom Stremio client (Harbor fork) for Samsung Tizen TV. | [DaviAndreiDev](https://github.com/DaviAndreiDev/harbor-tizen) | `—` |
-| **IPTV Manager** | IPTV manager for Samsung Tizen TV with Xtream Codes support and HLS playback. | [matifDreamIt](https://github.com/matifDreamIt/IPTV-Tizen-TV) | `—` |
-| **KickTV** | Kick.com streaming client for Samsung Tizen TVs. | [corekill](https://github.com/corekill/kick-tv-tizen) | `v2.1.1` |
+| **Harbor** | Custom Stremio client (Harbor fork) for Samsung Tizen TV. | [DaviAndreiDev](https://github.com/DaviAndreiDev/harbor-tizen) | `v0.1.0` |
+| **IPTV Manager** | IPTV manager for Samsung Tizen TV with Xtream Codes support and HLS playback. | [matifDreamIt](https://github.com/matifDreamIt/IPTV-Tizen-TV) | `d8eb66b` |
+| **KickTV** | Kick.com streaming client for Samsung Tizen TVs. | [corekill](https://github.com/corekill/kick-tv-tizen) | `v2.2.0` |
 | **Kodi-TeX** | Kodi TeX web interface ported to Samsung Tizen. | [PatrickSt1991](https://github.com/PatrickSt1991/tex-tizen) | `tex-tizen-v1.3.0-2026-06-09-0952` |
 | **Moonlight** | Open-source client for NVIDIA GameStream and Sunshine. | [OneLiberty](https://github.com/OneLiberty/moonlight-chrome-tizen) | `v1.2.1` |
 | **Moonlight (No Gamemode)** | Open-source client for NVIDIA GameStream and Sunshine with gamemode disabled. | [MrPhaze62](https://github.com/MrPhaze62/moonlight-chrome-tizen-no-gamemode) | `samsung_wasm-21031261929` |
 | **Moonlight (ToypoodleGaming)** | Moonlight NVIDIA GameStream / Sunshine client (ToypoodleGaming fork). | [toypoodlegaming](https://github.com/toypoodlegaming/moonlight-chrome-tizen) | `samsung_wasm-21031332442` |
 | **Moonlight-Tizen** | Open-source client for NVIDIA GameStream and Sunshine Tizen OS 5.5 or higher. | [BrightCraft](https://github.com/brightcraft/moonlight-tizen) | `v1.13.0` |
-| **Nuvio** | TV-first streaming UI for Samsung Tizen. | [NuvioMedia](https://github.com/NuvioMedia/NuvioWeb) | `0.3.16-beta` |
+| **Nuvio** | TV-first streaming UI for Samsung Tizen. | [NuvioMedia](https://github.com/NuvioMedia/NuvioWeb) | `0.3.19-beta` |
 | **OTTplay FOSS** | FOSS OTT / IPTV thin client for Tizen. | [prog4food](https://github.com/prog4food/ottplay-foss-thin-clients) | `Sat, 21 Jan 2023 15:15:16 GMT` |
 | **PlayerAVPlay** | AVPlayer app | [yadPe](https://github.com/yadPe/PlayerAVPlay) | `latest` |
-| **React IPTV** | IPTV player for Samsung Tizen TV, built with React. | [anandsimmy](https://github.com/anandsimmy/react-iptv) | `—` |
+| **React IPTV** | IPTV player for Samsung Tizen TV, built with React. | [anandsimmy](https://github.com/anandsimmy/react-iptv) | `7a7dcc2` |
 | **Reiverr** | A clean combined interface for Jellyfin, TMDB, Radarr and Sonarr, as well as a replacement to Overseerr. | [aleksilassila](https://github.com/aleksilassila/reiverr) | `dbdd50d` |
 | **Sportlink Club Viewer** | Solution for sports clubs to display match information in real time and in a clear, organized way on screens throughout the club! | [PatrickSt1991](https://github.com/PatrickSt1991/Sportlink.Club.Info.Viewer) | `v1.0.5` |
 | **StreamVault** | IPTV streaming app for Samsung Tizen smart TVs | [StreamVault](https://github.com/PatrickSt1991/streamvault) | `v1.0.0-2026-06-21-1058` |
