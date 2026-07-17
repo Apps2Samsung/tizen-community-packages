@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Apps2Samsung/tizen-community-packages/packages.schema.json",
+  "title": "Tizen Community Package manifest",
+  "description": "One file per app under packages/. Compiled into repos-build.json / repos-sync.json by scripts/build-manifests.sh.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "description", "repo", "source"],
+  "properties": {
+    "name": { "type": "string", "minLength": 1, "pattern": "^[^|\n]+$", "description": "Display name shown in the README table. No '|' or newlines." },
+    "description": { "type": "string", "minLength": 1, "pattern": "^[^|\n]+$", "description": "One-line description for the README table. No '|' or newlines." },
+    "repo": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$",
+      "description": "GitHub owner/repo. Used as the manifest key, the README link, and (for build/release) the API target."
+    },
+    "repo_label": { "type": "string", "minLength": 1, "pattern": "^[^|\n]+$", "description": "Optional link text for the README Repository column. Defaults to the repo owner." },
+    "source": {
+      "enum": ["build", "release", "direct"],
+      "description": "build = compiled from source with Tizen Studio; release = prebuilt .wgt from GitHub Releases; direct = downloaded from a fixed URL."
+    },
+    "branch": { "type": "string", "minLength": 1, "description": "build/release only." },
+    "project_path": { "type": "string", "description": "build only. Subdirectory containing the Tizen web project. Defaults to \".\"." },
+    "skip_npm": { "type": "boolean", "description": "build only." },
+    "pre_build": { "type": "string", "description": "build only. Shell command run before packaging." },
+    "url": { "type": "string", "pattern": "^https?://", "description": "direct only. Absolute URL to the .wgt." },
+    "output_name": { "type": "string", "pattern": "\\.wgt$", "description": "Filename inside the bundle. Required unless using assets[]." },
+    "assets": {
+      "type": "array",
+      "minItems": 1,
+      "description": "release only. Use when one release contains multiple .wgt files.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["match", "output_name"],
+        "properties": {
+          "match": { "type": "string", "minLength": 1, "description": "Exact asset name or a regex matched against release asset names." },
+          "output_name": { "type": "string", "pattern": "\\.wgt$" }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "required": ["source"], "properties": { "source": { "const": "build" } } },
+      "then": {
+        "required": ["branch", "output_name"],
+        "not": { "anyOf": [ { "required": ["url"] }, { "required": ["assets"] } ] }
+      }
+    },
+    {
+      "if": { "required": ["source"], "properties": { "source": { "const": "release" } } },
+      "then": {
+        "required": ["branch"],
+        "not": { "anyOf": [ { "required": ["url"] }, { "required": ["skip_npm"] }, { "required": ["pre_build"] }, { "required": ["project_path"] } ] },
+        "oneOf": [
+          { "required": ["output_name"], "not": { "required": ["assets"] } },
+          { "required": ["assets"], "not": { "required": ["output_name"] } }
+        ]
+      }
+    },
+    {
+      "if": { "required": ["source"], "properties": { "source": { "const": "direct" } } },
+      "then": {
+        "required": ["url", "output_name"],
+        "not": { "anyOf": [ { "required": ["branch"] }, { "required": ["assets"] }, { "required": ["skip_npm"] }, { "required": ["pre_build"] }, { "required": ["project_path"] } ] }
+      }
+    }
+  ]
+}
