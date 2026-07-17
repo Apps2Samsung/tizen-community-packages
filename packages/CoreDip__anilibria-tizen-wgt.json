@@ -1,0 +1,10 @@
+{
+  "name": "AniLiberty",
+  "description": "Unofficial AniLibria anime client for Samsung Tizen TV.",
+  "repo": "CoreDip/anilibria-tizen-wgt",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "\\.wgt$", "output_name": "AniLiberty.wgt" }
+  ]
+}
