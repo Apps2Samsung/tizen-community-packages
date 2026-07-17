@@ -1,0 +1,52 @@
+name: "📥 Request a New App"
+description: "Suggest a Tizen app you'd like added to a future bundle"
+title: "[App Request] <App Name>"
+labels: ["app request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Suggesting an app you didn't build yourself? You're in the right place.
+        If you *have* packaged it, use the **Contribute an App** form (or open a pull request) instead.
+
+  - type: input
+    id: name
+    attributes:
+      label: "🧩 App name"
+      placeholder: "Fireplace"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "📝 Description"
+      description: "What does the app do, and why would it be a good fit?"
+    validations:
+      required: true
+
+  - type: input
+    id: link
+    attributes:
+      label: "🔗 Source or homepage"
+      description: "Link to the source code or project homepage."
+      placeholder: "https://github.com/owner/repo"
+    validations:
+      required: true
+
+  - type: input
+    id: license
+    attributes:
+      label: "📋 License (if known)"
+      description: "We can only include open-source / freely distributable apps."
+      placeholder: "MIT"
+    validations:
+      required: false
+
+  - type: textarea
+    id: info
+    attributes:
+      label: "💡 Additional info (optional)"
+      description: "Screenshots, device compatibility, or anything else useful."
+    validations:
+      required: false

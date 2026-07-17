@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: "📦 Contribute via Pull Request (preferred)"
+    url: "https://github.com/Apps2Samsung/tizen-community-packages/blob/main/packages/README.md"
+    about: "The fastest way to add an app: drop one JSON file in packages/ and open a PR. It's validated automatically."
+  - name: "💬 Questions & Discussion"
+    url: "https://github.com/Apps2Samsung/tizen-community-packages/discussions"
+    about: "For general questions, help, or ideas that aren't a specific app request."

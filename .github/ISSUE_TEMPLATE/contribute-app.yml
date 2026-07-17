@@ -1,0 +1,137 @@
+name: "📦 Contribute an App"
+description: "Add your open-source Tizen app (.wgt) to the community bundle"
+title: "[Contribution] <App Name>"
+labels: ["app contribution"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **The fastest way to contribute is a pull request** — add one JSON file to
+        [`packages/`](https://github.com/Apps2Samsung/tizen-community-packages/blob/main/packages/README.md)
+        and it's validated automatically. Use this form only if you'd prefer a maintainer to create the file for you.
+
+        The fields below map directly onto a package manifest, so please fill them in precisely.
+
+  - type: input
+    id: name
+    attributes:
+      label: "🧩 App name"
+      description: "Display name shown in the README table."
+      placeholder: "My Tizen App"
+    validations:
+      required: true
+
+  - type: input
+    id: description
+    attributes:
+      label: "📝 Description"
+      description: "One line. No `|` characters."
+      placeholder: "A short description of what the app does."
+    validations:
+      required: true
+
+  - type: input
+    id: repo
+    attributes:
+      label: "🔗 Repository (owner/repo)"
+      description: "The GitHub repository, as `owner/repo`."
+      placeholder: "yourname/your-app"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: source
+    attributes:
+      label: "📦 Source type"
+      description: |
+        How is the `.wgt` distributed?
+        • **release** — prebuilt `.wgt` attached to a GitHub Release (most common)
+        • **build** — compiled from source with Tizen Studio
+        • **direct** — downloaded from a fixed URL
+      options:
+        - release
+        - build
+        - direct
+    validations:
+      required: true
+
+  - type: input
+    id: output_name
+    attributes:
+      label: "🧱 Output filename"
+      description: "Filename inside the bundle. Must end in `.wgt`."
+      placeholder: "MyApp.wgt"
+    validations:
+      required: true
+
+  - type: input
+    id: branch
+    attributes:
+      label: "🌿 Branch"
+      description: "For **release** and **build** only — the branch/release track. Leave blank for `direct`."
+      placeholder: "release"
+    validations:
+      required: false
+
+  - type: input
+    id: url
+    attributes:
+      label: "🌐 Direct URL"
+      description: "For **direct** only — absolute URL to the `.wgt`. Leave blank otherwise."
+      placeholder: "https://example.com/MyApp.wgt"
+    validations:
+      required: false
+
+  - type: input
+    id: project_path
+    attributes:
+      label: "📁 Project path"
+      description: "For **build** only — subdirectory containing the Tizen web project. Defaults to `.`."
+      placeholder: "tizen"
+    validations:
+      required: false
+
+  - type: textarea
+    id: build_extras
+    attributes:
+      label: "⚙️ Build extras / multiple .wgt files (optional)"
+      description: |
+        For **build**: note if npm should be skipped, or any pre-build shell command.
+        For **release** with several `.wgt` files: list each asset name and the output name you want.
+      placeholder: |
+        skip_npm: true
+        pre_build: npm install && npm run build:tizen
+        assets: Moonlight.wgt -> Moonlight-Tizen.wgt, Moonlight-GM.wgt -> Moonlight-GM.wgt
+    validations:
+      required: false
+
+  - type: input
+    id: license
+    attributes:
+      label: "🧾 License"
+      description: "Must be open-source or otherwise freely redistributable."
+      placeholder: "MIT"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: "🧪 Confirmations"
+      options:
+        - label: "The app is open-source or redistributable under a permissive license"
+          required: true
+        - label: "I have the legal right to have this redistributed"
+          required: true
+        - label: "Tested on a real Tizen device or emulator"
+          required: false
+        - label: "Virus/malware-free to the best of my knowledge"
+          required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: "💬 Notes (optional)"
+      description: "Anything else a maintainer should know."
+    validations:
+      required: false
