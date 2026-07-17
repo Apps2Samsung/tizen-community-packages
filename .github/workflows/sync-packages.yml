@@ -243,7 +243,10 @@ jobs:
               repo_id: (.key | gsub("/"; "-")),
               branch: .value.branch,
               project_path: (.value.project_path // "."),
-              output_name: (.value.output_name // "")
+              output_name: (.value.output_name // ""),
+              skip_npm: (.value.skip_npm // false),
+              pre_build: (.value.pre_build // ""),
+              overlay: (.value.overlay // "")
             }]}' repos-build.json)
           echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
 
@@ -274,13 +277,37 @@ jobs:
         shell: bash
         env:
           TIZEN_PATH: ${{ github.workspace }}/tizen-studio
+          SKIP_NPM: ${{ matrix.skip_npm }}
+          PRE_BUILD: ${{ matrix.pre_build }}
+          OVERLAY: ${{ matrix.overlay }}
+          PROJECT_PATH: ${{ matrix.project_path }}
         run: |
           set -e
           mkdir -p build wgt_files
           cd build
           git clone --depth 1 --branch "${{ matrix.branch }}" "https://github.com/${{ matrix.repo }}.git"
           cd "$(basename "${{ matrix.repo }}")"
-          cd "${{ matrix.project_path }}"
+          repo_root="$(pwd)"
+
+          # Optional npm install + pre_build, run at the repo root.
+          if [ -f package.json ] && [ "$SKIP_NPM" != "true" ]; then
+            echo "npm install..."
+            npm install --no-audit --no-fund --legacy-peer-deps
+          fi
+          if [ -n "$PRE_BUILD" ]; then
+            echo "pre_build: $PRE_BUILD"
+            bash -lc "$PRE_BUILD"
+          fi
+
+          cd "$repo_root/$PROJECT_PATH"
+
+          # Optional overlay: copy apps/<overlay>/ over the project before packaging
+          # (e.g. a config.xml for upstreams that don't ship a Tizen manifest).
+          if [ -n "$OVERLAY" ]; then
+            echo "Applying overlay: apps/$OVERLAY"
+            cp -R "$GITHUB_WORKSPACE/apps/$OVERLAY/." ./
+          fi
+
           echo "Building in: $(pwd)"
           "$TIZEN_PATH/tools/ide/bin/tizen" build-web
           echo "Packaging..."
