@@ -1,0 +1,11 @@
+{
+  "name": "React IPTV",
+  "description": "IPTV player for Samsung Tizen TV, built with React.",
+  "repo": "anandsimmy/react-iptv",
+  "source": "build",
+  "branch": "main",
+  "project_path": "build",
+  "pre_build": "CI=false npm run build",
+  "overlay": "react-iptv",
+  "output_name": "React-IPTV.wgt"
+}
