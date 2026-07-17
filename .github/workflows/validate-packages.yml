@@ -1,0 +1,91 @@
+name: Validate Package Manifests
+
+on:
+  pull_request:
+    paths:
+      - 'packages/**'
+      - 'packages.schema.json'
+      - 'scripts/build-manifests.sh'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install tools
+        run: pip install check-jsonschema
+
+      - name: JSON Schema validation
+        run: check-jsonschema --schemafile packages.schema.json packages/*.json
+
+      - name: Structural checks (filenames, uniqueness)
+        run: |
+          python3 - <<'PY'
+          import json, glob, os, sys
+          errors = []
+          repos, outputs = {}, {}
+          for path in sorted(glob.glob("packages/*.json")):
+              doc = json.load(open(path))
+              repo = doc["repo"]
+
+              # filename must match the repo slug: owner/repo -> owner__repo.json
+              expected = repo.replace("/", "__") + ".json"
+              actual = os.path.basename(path)
+              if actual != expected:
+                  errors.append(f"{actual}: filename must be '{expected}' (derived from repo '{repo}')")
+
+              # one manifest per repo
+              if repo in repos:
+                  errors.append(f"{actual}: repo '{repo}' already defined in {repos[repo]}")
+              repos[repo] = actual
+
+              # output_name must be unique across the whole bundle (top-level + assets)
+              names = []
+              if "output_name" in doc:
+                  names.append(doc["output_name"])
+              for a in doc.get("assets", []):
+                  names.append(a["output_name"])
+              for n in names:
+                  if n in outputs:
+                      errors.append(f"{actual}: output_name '{n}' already used by {outputs[n]}")
+                  outputs[n] = actual
+
+          if errors:
+              print("::error::Manifest validation failed:")
+              for e in errors:
+                  print(f"::error::  {e}")
+              sys.exit(1)
+          print(f"OK — {len(repos)} manifests, {len(outputs)} unique output names.")
+          PY
+
+      - name: Manifests compile cleanly
+        run: bash scripts/build-manifests.sh
+
+      - name: Reachability (warnings only)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Non-blocking: CI network / host quirks shouldn't reject a valid PR.
+          for f in packages/*.json; do
+            src=$(jq -r '.source' "$f")
+            if [ "$src" = "direct" ]; then
+              url=$(jq -r '.url' "$f")
+              code=$(curl -o /dev/null -sIL -w '%{http_code}' "$url" || echo 000)
+              [ "$code" -lt 400 ] 2>/dev/null || echo "::warning file=$f::url $url returned HTTP $code"
+            else
+              repo=$(jq -r '.repo' "$f")
+              code=$(curl -o /dev/null -sL -w '%{http_code}' \
+                -H "Authorization: Bearer $GH_TOKEN" \
+                "https://api.github.com/repos/$repo" || echo 000)
+              [ "$code" = "200" ] || echo "::warning file=$f::repo $repo returned HTTP $code"
+            fi
+          done
