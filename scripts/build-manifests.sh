@@ -24,6 +24,7 @@ jq -s '
         { branch, project_path: (.project_path // "."), output_name }
         + (if has("skip_npm")  then { skip_npm:  .skip_npm }  else {} end)
         + (if has("pre_build") then { pre_build: .pre_build } else {} end)
+        + (if has("overlay")   then { overlay:   .overlay }   else {} end)
       )
     })
   | from_entries
