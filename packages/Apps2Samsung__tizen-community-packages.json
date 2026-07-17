@@ -3,6 +3,6 @@
   "description": "Stremio media center packaged for Tizen 4.0 devices.",
   "repo": "Apps2Samsung/tizen-community-packages",
   "source": "direct",
-  "url": "https://raw.githubusercontent.com/Apps2Samsung/tizen-community-packages/main/Stremio.wgt",
+  "url": "https://raw.githubusercontent.com/Apps2Samsung/tizen-community-packages/main/apps/Stremio.wgt",
   "output_name": "Stremio-Tizen4.wgt"
 }
