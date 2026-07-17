@@ -1,0 +1,10 @@
+{
+  "name": "HackTV",
+  "description": "IPTV client for Samsung Tizen TVs.",
+  "repo": "kosmodrey/hackTV",
+  "source": "build",
+  "branch": "master",
+  "project_path": ".",
+  "skip_npm": true,
+  "output_name": "HackTV.wgt"
+}

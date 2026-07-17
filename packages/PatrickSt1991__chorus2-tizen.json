@@ -1,0 +1,9 @@
+{
+  "name": "Chorus2-Tizen",
+  "description": "Chorus2-Tizen (Kodi) Samsung Tizen.",
+  "repo": "PatrickSt1991/chorus2-tizen",
+  "repo_label": "Chorus2-Tizen",
+  "source": "release",
+  "branch": "release",
+  "output_name": "Kodi-Chorus.wgt"
+}

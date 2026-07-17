@@ -1,0 +1,8 @@
+{
+  "name": "Kodi-TeX",
+  "description": "Kodi TeX web interface ported to Samsung Tizen.",
+  "repo": "PatrickSt1991/tex-tizen",
+  "source": "release",
+  "branch": "release",
+  "output_name": "Kodi-TeX.wgt"
+}

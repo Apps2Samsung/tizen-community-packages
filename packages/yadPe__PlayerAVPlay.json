@@ -1,0 +1,8 @@
+{
+  "name": "PlayerAVPlay",
+  "description": "AVPlayer app",
+  "repo": "yadPe/PlayerAVPlay",
+  "source": "direct",
+  "url": "https://raw.githubusercontent.com/yadPe/PlayerAVPlay/master/PlayerAVPlay.wgt",
+  "output_name": "PlayerAVPlay.wgt"
+}

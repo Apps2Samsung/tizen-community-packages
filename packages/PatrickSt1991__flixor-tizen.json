@@ -1,0 +1,9 @@
+{
+  "name": "Flixor-Tizen",
+  "description": "Modern cross-platform Plex client. Ported to Tizen OS.",
+  "repo": "PatrickSt1991/flixor-tizen",
+  "repo_label": "Flixor-Tizen",
+  "source": "release",
+  "branch": "release",
+  "output_name": "Plex-Flixor.wgt"
+}

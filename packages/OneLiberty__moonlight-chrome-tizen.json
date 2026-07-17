@@ -1,0 +1,8 @@
+{
+  "name": "Moonlight",
+  "description": "Open-source client for NVIDIA GameStream and Sunshine.",
+  "repo": "OneLiberty/moonlight-chrome-tizen",
+  "source": "release",
+  "branch": "release",
+  "output_name": "Moonlight-Chrome.wgt"
+}

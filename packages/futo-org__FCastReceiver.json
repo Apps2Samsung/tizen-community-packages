@@ -1,0 +1,8 @@
+{
+  "name": "FCast",
+  "description": "FCast is an open source protocol that enables wireless streaming of audio and video content between devices.",
+  "repo": "futo-org/FCastReceiver",
+  "source": "direct",
+  "url": "https://dl.fcast.org/tizen/1.0.0/FCastReceiver.wgt",
+  "output_name": "FCastReceiver.wgt"
+}

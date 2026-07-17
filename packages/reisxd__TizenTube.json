@@ -1,0 +1,8 @@
+{
+  "name": "TizenTube",
+  "description": "TizenTube enhances your favourite streaming websites viewing experience by removing ads and adding support for Sponsorblock.",
+  "repo": "reisxd/TizenTube",
+  "source": "release",
+  "branch": "release",
+  "output_name": "TizenTube.wgt"
+}

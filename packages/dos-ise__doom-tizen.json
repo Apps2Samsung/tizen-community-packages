@@ -1,0 +1,8 @@
+{
+  "name": "Doom",
+  "description": "A WebAssembly-powered port of Doom packaged as a Samsung Tizen TV application.",
+  "repo": "dos-ise/doom-tizen",
+  "source": "release",
+  "branch": "release",
+  "output_name": "Doom.wgt"
+}

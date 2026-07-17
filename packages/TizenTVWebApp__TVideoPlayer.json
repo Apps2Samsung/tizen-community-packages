@@ -1,0 +1,8 @@
+{
+  "name": "TVideoPlayer",
+  "description": "Tizen TV HTML video player based on videojs.",
+  "repo": "TizenTVWebApp/TVideoPlayer",
+  "source": "direct",
+  "url": "https://raw.githubusercontent.com/TizenTVWebApp/TVideoPlayer/master/TVideoPlayer.wgt",
+  "output_name": "VideoPlayer.wgt"
+}

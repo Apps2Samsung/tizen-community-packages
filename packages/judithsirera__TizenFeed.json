@@ -1,0 +1,10 @@
+{
+  "name": "TizenFeed",
+  "description": "News / RSS feed sample app for Tizen TV.",
+  "repo": "judithsirera/TizenFeed",
+  "source": "build",
+  "branch": "master",
+  "project_path": ".",
+  "skip_npm": true,
+  "output_name": "TizenFeed.wgt"
+}

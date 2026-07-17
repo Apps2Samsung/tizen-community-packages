@@ -1,0 +1,8 @@
+{
+  "name": "Sportlink Club Viewer",
+  "description": "Solution for sports clubs to display match information in real time and in a clear, organized way on screens throughout the club!",
+  "repo": "PatrickSt1991/Sportlink.Club.Info.Viewer",
+  "source": "release",
+  "branch": "release",
+  "output_name": "Sportlink-Club-Viewer.wgt"
+}

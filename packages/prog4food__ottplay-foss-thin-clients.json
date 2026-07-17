@@ -1,0 +1,8 @@
+{
+  "name": "OTTplay FOSS",
+  "description": "FOSS OTT / IPTV thin client for Tizen.",
+  "repo": "prog4food/ottplay-foss-thin-clients",
+  "source": "direct",
+  "url": "https://github.com/prog4food/ottplay-foss-thin-clients/releases/download/samsung-tizen-release/OTTplayFOSS.wgt",
+  "output_name": "OTTplay-FOSS.wgt"
+}

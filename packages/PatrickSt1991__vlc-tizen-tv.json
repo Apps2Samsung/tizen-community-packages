@@ -1,0 +1,8 @@
+{
+  "name": "VLC-Tizen-tv",
+  "description": "VLC Like player for your Samsung TV.",
+  "repo": "PatrickSt1991/vlc-tizen-tv",
+  "source": "release",
+  "branch": "release",
+  "output_name": "VLC-TV.wgt"
+}

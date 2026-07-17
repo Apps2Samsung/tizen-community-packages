@@ -1,0 +1,9 @@
+{
+  "name": "StreamVault",
+  "description": "IPTV streaming app for Samsung Tizen smart TVs",
+  "repo": "PatrickSt1991/streamvault",
+  "repo_label": "StreamVault",
+  "source": "release",
+  "branch": "release",
+  "output_name": "StreamVault.wgt"
+}

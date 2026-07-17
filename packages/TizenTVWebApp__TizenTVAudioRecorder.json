@@ -1,0 +1,8 @@
+{
+  "name": "TizenTVAudioRecorder",
+  "description": "HTML5 Audio Recorder (kalaoke App).",
+  "repo": "TizenTVWebApp/TizenTVAudioRecorder",
+  "source": "direct",
+  "url": "https://raw.githubusercontent.com/TizenTVWebApp/TizenTVAudioRecorder/master/TizenTVAudioRecorder.wgt",
+  "output_name": "AudioRecorder.wgt"
+}
