@@ -23,6 +23,7 @@
     "project_path": { "type": "string", "description": "build only. Subdirectory containing the Tizen web project. Defaults to \".\"." },
     "skip_npm": { "type": "boolean", "description": "build only." },
     "pre_build": { "type": "string", "description": "build only. Shell command run before packaging." },
+    "overlay": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$", "description": "build only. Name of a directory under apps/ whose contents are copied over the project before packaging (e.g. a config.xml the upstream doesn't ship)." },
     "url": { "type": "string", "pattern": "^https?://", "description": "direct only. Absolute URL to the .wgt." },
     "output_name": { "type": "string", "pattern": "\\.wgt$", "description": "Filename inside the bundle. Required unless using assets[]." },
     "assets": {
@@ -52,7 +53,7 @@
       "if": { "required": ["source"], "properties": { "source": { "const": "release" } } },
       "then": {
         "required": ["branch"],
-        "not": { "anyOf": [ { "required": ["url"] }, { "required": ["skip_npm"] }, { "required": ["pre_build"] }, { "required": ["project_path"] } ] },
+        "not": { "anyOf": [ { "required": ["url"] }, { "required": ["skip_npm"] }, { "required": ["pre_build"] }, { "required": ["project_path"] }, { "required": ["overlay"] } ] },
         "oneOf": [
           { "required": ["output_name"], "not": { "required": ["assets"] } },
           { "required": ["assets"], "not": { "required": ["output_name"] } }
@@ -63,7 +64,7 @@
       "if": { "required": ["source"], "properties": { "source": { "const": "direct" } } },
       "then": {
         "required": ["url", "output_name"],
-        "not": { "anyOf": [ { "required": ["branch"] }, { "required": ["assets"] }, { "required": ["skip_npm"] }, { "required": ["pre_build"] }, { "required": ["project_path"] } ] }
+        "not": { "anyOf": [ { "required": ["branch"] }, { "required": ["assets"] }, { "required": ["skip_npm"] }, { "required": ["pre_build"] }, { "required": ["project_path"] }, { "required": ["overlay"] } ] }
       }
     }
   ]
