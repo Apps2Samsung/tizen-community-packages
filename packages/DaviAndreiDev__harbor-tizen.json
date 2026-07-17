@@ -1,0 +1,10 @@
+{
+  "name": "Harbor",
+  "description": "Custom Stremio client (Harbor fork) for Samsung Tizen TV.",
+  "repo": "DaviAndreiDev/harbor-tizen",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "\\.wgt$", "output_name": "Harbor-Tizen.wgt" }
+  ]
+}
