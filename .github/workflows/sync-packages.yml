@@ -565,8 +565,12 @@ jobs:
                       continue
                   out.append(line)
                   i += 1
-              README.write_text("\n".join(out) + "\n")
-              print("Rendered README table.")
+              text = "\n".join(out) + "\n"
+              # keep the package-count badge in sync
+              count = len(glob.glob("packages/*.json"))
+              text = re.sub(r"(img\.shields\.io/badge/packages-)\d+(-)", rf"\g<1>{count}\g<2>", text)
+              README.write_text(text)
+              print(f"Rendered README table + badge ({count} packages).")
 
           main()
           PY
