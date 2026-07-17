@@ -353,8 +353,14 @@ jobs:
 
       - name: Download release WGTs
         if: ${{ steps.config.outputs.config != '' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -e
+          api() {
+            curl -fsSL -H "Authorization: Bearer $GH_TOKEN" \
+              -H "Accept: application/vnd.github+json" "$@"
+          }
           CFG="${{ steps.config.outputs.config }}"
           repos=$(jq -r '.releases | to_entries[] | .key' "$CFG")
 
@@ -365,7 +371,7 @@ jobs:
             echo "Fetching release for $repo ..."
 
             # 1) Try /releases/latest (non-prerelease, non-draft).
-            json=$(curl -fsSL "$latest_api" 2>/dev/null || echo '')
+            json=$(api "$latest_api" 2>/dev/null || echo '')
 
             # 2) Probe whether /latest actually gave us a usable URL.
             #    Note: relying on a count is fragile because `jq` on empty
@@ -376,7 +382,7 @@ jobs:
             # 3) Fall back to newest non-draft prerelease if /latest had nothing.
             if [ -z "$probe_url" ]; then
               echo "  No /latest assets for $repo, falling back to newest prerelease..."
-              list_json=$(curl -fsSL "$list_api" 2>/dev/null || echo '[]')
+              list_json=$(api "$list_api" 2>/dev/null || echo '[]')
               json=$(echo "$list_json" | jq '[.[] | select(.prerelease==true and .draft==false)][0]' 2>/dev/null || echo 'null')
             fi
 
@@ -385,7 +391,12 @@ jobs:
 
             if [ "$has_assets" = "true" ]; then
               # New style — iterate the configured assets array, match by exact name then regex.
-              while IFS=$'\t' read -r match outname; do
+              # Read each field with `jq -r` by index (NOT @tsv): @tsv escapes backslashes,
+              # which corrupts regex matches like "\.wgt$" into "\\.wgt$".
+              n_assets=$(jq -r ".releases[\"$repo\"].assets | length" "$CFG")
+              for idx in $(seq 0 $((n_assets - 1))); do
+                match=$(jq -r ".releases[\"$repo\"].assets[$idx].match" "$CFG")
+                outname=$(jq -r ".releases[\"$repo\"].assets[$idx].output_name // \"\"" "$CFG")
                 url=$(echo "$json" | jq -r --arg m "$match" \
                   '(.assets // [])[] | select(.name == $m) | .browser_download_url' 2>/dev/null | head -n 1)
                 if [ -z "$url" ]; then
@@ -403,7 +414,7 @@ jobs:
                 fi
                 echo "Downloading $url -> external_wgts/$outname"
                 curl -L -o "external_wgts/$outname" "$url"
-              done < <(jq -r ".releases[\"$repo\"].assets[] | [.match, (.output_name // \"\")] | @tsv" "$CFG")
+              done
             else
               # Legacy style — first non-empty URL across all assets (matches old behavior).
               outname=$(jq -r ".releases[\"$repo\"].output_name" "$CFG")
