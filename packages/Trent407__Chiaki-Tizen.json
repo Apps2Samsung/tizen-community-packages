@@ -1,0 +1,9 @@
+{
+  "name": "Chiaki-Tizen",
+  "description": "An open source PlayStation remote play project serving as the next-generation of Chiaki.",
+  "repo": "Trent407/chiaki-tizen",
+  "repo_label": "Chiaki-Tizen",
+  "source": "release",
+  "branch": "release",
+  "output_name": "Chiaki-Tizen.wgt"
+}
