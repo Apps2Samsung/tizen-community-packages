@@ -1,0 +1,10 @@
+{
+  "name": "Reiverr",
+  "description": "A clean combined interface for Jellyfin, TMDB, Radarr and Sonarr, as well as a replacement to Overseerr.",
+  "repo": "aleksilassila/reiverr",
+  "source": "build",
+  "branch": "master",
+  "project_path": "tizen",
+  "pre_build": "npm install --no-audit --no-fund && VITE_PLATFORM=tv npx vite build --mode production --outDir tizen/dist",
+  "output_name": "Reiverr.wgt"
+}
