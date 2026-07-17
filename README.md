@@ -50,7 +50,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Moonlight (No Gamemode)** | Open-source client for NVIDIA GameStream and Sunshine with gamemode disabled. | [MrPhaze62](https://github.com/MrPhaze62/moonlight-chrome-tizen-no-gamemode) | `samsung_wasm-21031261929` |
 | **Moonlight (ToypoodleGaming)** | Moonlight NVIDIA GameStream / Sunshine client (ToypoodleGaming fork). | [toypoodlegaming](https://github.com/toypoodlegaming/moonlight-chrome-tizen) | `samsung_wasm-21031332442` |
 | **Moonlight-Tizen** | Open-source client for NVIDIA GameStream and Sunshine Tizen OS 5.5 or higher. | [BrightCraft](https://github.com/brightcraft/moonlight-tizen) | `v1.13.0` |
-| **Nuvio** | TV-first streaming UI for Samsung Tizen. | [NuvioMedia](https://github.com/NuvioMedia/NuvioWeb) | `0.3.16-beta` |
+| **Nuvio** | TV-first streaming UI for Samsung Tizen. | [NuvioMedia](https://github.com/NuvioMedia/NuvioWeb) | `0.3.18-beta` |
 | **OTTplay FOSS** | FOSS OTT / IPTV thin client for Tizen. | [prog4food](https://github.com/prog4food/ottplay-foss-thin-clients) | `Sat, 21 Jan 2023 15:15:16 GMT` |
 | **PlayerAVPlay** | AVPlayer app | [yadPe](https://github.com/yadPe/PlayerAVPlay) | `latest` |
 | **Reiverr** | A clean combined interface for Jellyfin, TMDB, Radarr and Sonarr, as well as a replacement to Overseerr. | [aleksilassila](https://github.com/aleksilassila/reiverr) | `dbdd50d` |
