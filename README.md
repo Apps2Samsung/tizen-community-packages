@@ -76,12 +76,18 @@ Include:
 - Link to source or homepage
 
 ### 📦 Contribute an App
-If you’ve built or packaged a `.wgt` file that’s open-source, you can submit it for inclusion:
-1. Open an [Issue](../../issues/new?template=contribute-app.md) to discuss it.
-2. Ensure your app is:
-   - Open-source (or redistributable under a permissive license)
-   - Virus/malware-free
-   - Tested on at least one Tizen device or emulator
+Each app is defined by **one JSON file** in the [`packages/`](packages/) folder — you don't need to edit anything else.
+
+1. **Fork** this repository.
+2. **Add** a file named `packages/<owner>__<repo>.json` for your app (copy an existing one as a template). See [`packages/README.md`](packages/README.md) for every field and worked examples of the three types (`release`, `build`, `direct`).
+3. **Open a pull request.** A bot automatically validates your file against [`packages.schema.json`](packages.schema.json) — a green check means it's ready to merge. Once merged, it's picked up by the next automated build.
+
+Your app should be:
+- Open-source (or redistributable under a permissive license)
+- Virus/malware-free
+- Tested on at least one Tizen device or emulator
+
+> Just want to *suggest* an app without packaging it yourself? Use the **Request an App** option above.
 
 > ⚠️ **Important:**  
 > We can only include applications that are **open-source** and **freely distributable**.  
