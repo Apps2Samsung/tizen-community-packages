@@ -1,0 +1,10 @@
+{
+  "name": "IPTV Manager",
+  "description": "IPTV manager for Samsung Tizen TV with Xtream Codes support and HLS playback.",
+  "repo": "matifDreamIt/IPTV-Tizen-TV",
+  "source": "build",
+  "branch": "main",
+  "project_path": ".",
+  "skip_npm": true,
+  "output_name": "IPTV-Manager.wgt"
+}
