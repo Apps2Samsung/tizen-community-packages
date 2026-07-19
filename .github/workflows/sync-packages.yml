@@ -468,6 +468,7 @@ jobs:
           mkdir -p final_wgts
           cp built/**/*.wgt final_wgts/ 2>/dev/null || true
           cp external/*.wgt final_wgts/ 2>/dev/null || true
+          cp external/*.tpk final_wgts/ 2>/dev/null || true
           echo "Final WGT files:"
           ls -l final_wgts
 
@@ -490,7 +491,9 @@ jobs:
           tag_name: "community-${{ github.run_number }}"
           name: "Community Packages ${{ github.run_number }}"
           target_commitish: ${{ github.sha }}
-          files: "final_wgts/*.wgt"
+          files: |
+            final_wgts/*.wgt
+            final_wgts/*.tpk
           body: |
             Automated community bundle.
 
