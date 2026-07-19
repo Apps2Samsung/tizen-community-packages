@@ -25,7 +25,7 @@
     "pre_build": { "type": "string", "description": "build only. Shell command run before packaging." },
     "overlay": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$", "description": "build only. Name of a directory under apps/ whose contents are copied over the project before packaging (e.g. a config.xml the upstream doesn't ship)." },
     "url": { "type": "string", "pattern": "^https?://", "description": "direct only. Absolute URL to the .wgt." },
-    "output_name": { "type": "string", "pattern": "\\.wgt$", "description": "Filename inside the bundle. Required unless using assets[]." },
+    "output_name": { "type": "string", "pattern": "\\.(wgt|tpk)$", "description": "Filename inside the bundle. Required unless using assets[]." },
     "assets": {
       "type": "array",
       "minItems": 1,
@@ -36,7 +36,7 @@
         "required": ["match", "output_name"],
         "properties": {
           "match": { "type": "string", "minLength": 1, "description": "Exact asset name or a regex matched against release asset names." },
-          "output_name": { "type": "string", "pattern": "\\.wgt$" }
+          "output_name": { "type": "string", "pattern": "\\.(wgt|tpk)$" }
         }
       }
     }
