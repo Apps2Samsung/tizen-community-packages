@@ -1,0 +1,10 @@
+{
+  "name": "HyperTizen",
+  "description": "Hyperion / HyperHDR ambient-light capturer for Samsung Tizen TV (native .tpk; requires TizenBrew for the UI).",
+  "repo": "reisxd/HyperTizen",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "\\.tpk$", "output_name": "HyperTizen.tpk" }
+  ]
+}
