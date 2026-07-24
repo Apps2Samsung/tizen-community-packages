@@ -1,0 +1,10 @@
+{
+  "name": "iperf3 TV",
+  "description": "Measures your Samsung TV's network throughput to an iperf3 server, upload or download. Requires a small WebSocket-to-TCP relay on your LAN.",
+  "repo": "DmitryMaksakov/samsung-tv-iperf3",
+  "source": "build",
+  "branch": "main",
+  "project_path": "app",
+  "skip_npm": true,
+  "output_name": "iperf3-TV.wgt"
+}
