@@ -364,6 +364,10 @@ jobs:
           CFG="${{ steps.config.outputs.config }}"
           repos=$(jq -r '.releases | to_entries[] | .key' "$CFG")
 
+          # A single dead/renamed/asset-less upstream must not break the whole catalog sync —
+          # collect skips and warn, don't `exit 1`.
+          SKIPPED=""
+
           for repo in $repos; do
             latest_api="https://api.github.com/repos/$repo/releases/latest"
             list_api="https://api.github.com/repos/$repo/releases?per_page=20"
@@ -404,10 +408,11 @@ jobs:
                     '(.assets // [])[] | select(.name | test($m)) | .browser_download_url' 2>/dev/null | head -n 1)
                 fi
                 if [ -z "$url" ]; then
-                  echo "ERROR: Asset matching '$match' not found in release for $repo"
-                  echo "Available assets:"
+                  echo "::warning title=Package skipped::Asset matching '$match' not found in release for $repo — skipping this package (repo may be private/renamed/removed, or its release dropped the asset)."
+                  echo "  Available assets:"
                   echo "$json" | jq -r '(.assets // [])[] | .name' 2>/dev/null || echo "  (none)"
-                  exit 1
+                  SKIPPED="$SKIPPED $repo"
+                  continue 2   # skip the rest of this repo's assets and move to the next repo
                 fi
                 if [ -z "$outname" ] || [ "$outname" = "null" ]; then
                   outname="$(basename "$url")"
@@ -420,8 +425,9 @@ jobs:
               outname=$(jq -r ".releases[\"$repo\"].output_name" "$CFG")
               url=$(echo "$json" | jq -r '(.assets // [])[] | .browser_download_url // empty' 2>/dev/null | head -n 1)
               if [ -z "$url" ]; then
-                echo "ERROR: No release asset found for $repo (latest or prerelease)."
-                exit 1
+                echo "::warning title=Package skipped::No release asset found for $repo (latest or prerelease) — skipping this package."
+                SKIPPED="$SKIPPED $repo"
+                continue
               fi
               if [ -z "$outname" ] || [ "$outname" = "null" ]; then
                 outname="$(basename "$url")"
@@ -430,6 +436,10 @@ jobs:
               curl -L -o "external_wgts/$outname" "$url"
             fi
           done
+
+          if [ -n "$SKIPPED" ]; then
+            echo "::warning title=Some packages skipped::The sync completed but skipped:${SKIPPED}"
+          fi
 
       - name: Download direct WGT URLs
         if: ${{ steps.config.outputs.config != '' }}
