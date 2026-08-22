@@ -1,9 +1,11 @@
 {
   "name": "TVapp (Fixed)",
-  "description": "TVapp with community fixes: channel switching now works (was stuck on stream #1), a readable exit dialog, and a compact channel banner. Pending upstream KaashDev/TVapp#4.",
+  "description": "TVapp with community fixes: channel switching now works (was stuck on stream #1), a readable exit dialog, a compact channel banner and larger on-screen text. Pending upstream KaashDev/TVapp#4.",
   "repo": "PatrickSt1991/TVapp",
   "repo_label": "PatrickSt1991 (fork)",
-  "source": "direct",
-  "url": "https://raw.githubusercontent.com/PatrickSt1991/TVapp/main/TVapp.wgt",
-  "output_name": "TVApp-Fixed.wgt"
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "TVapp.wgt", "output_name": "TVApp-Fixed.wgt" }
+  ]
 }
