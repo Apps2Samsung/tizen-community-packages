@@ -1,10 +1,10 @@
 {
-  "name": "en-tvplayer_v2.2.0",
+  "name": "en-tvplayer_v3.0.2",
   "description": "Samsung Tizen TV IPTV Player — plays DRM channels (ClearKey, PlayReady) that other players can't on Tizen.",
   "repo": "Nur-allhi/en-tvplayer",
   "source": "release",
   "branch": "main",
   "assets": [
-    { "match": "\.wgt$", "output_name": "EN-IPTV_Player.wgt" }
+    { "match": "EN-IPTV_Player_v.*\\.wgt$", "output_name": "EN-IPTV_Player_v3.0.2.wgt" }
   ]
 }
