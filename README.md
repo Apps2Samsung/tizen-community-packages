@@ -1,7 +1,7 @@
 # 🌐 Tizen Community Packages
 [![Sync Tizen Community Packages](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml/badge.svg)](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Packages](https://img.shields.io/badge/packages-51-blue.svg)](#-current-packages)
+[![Packages](https://img.shields.io/badge/packages-52-blue.svg)](#-current-packages)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-green.svg)](../../issues)
 [![Tizen](https://img.shields.io/badge/Platform-Tizen-lightgrey.svg)](https://www.tizen.org/)
 [![Community](https://img.shields.io/badge/Community-Driven-orange.svg)](#)
@@ -63,9 +63,10 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Moonlight (ToypoodleGaming)** | Moonlight NVIDIA GameStream / Sunshine client (ToypoodleGaming fork). | [toypoodlegaming](https://github.com/toypoodlegaming/moonlight-chrome-tizen) | `samsung_wasm-21031332442` |
 | **Moonlight-Tizen** | Open-source client for NVIDIA GameStream and Sunshine Tizen OS 5.5 or higher. | [BrightCraft](https://github.com/brightcraft/moonlight-tizen) | `v1.17.2` |
 | **Nuvio** | TV-first streaming UI for Samsung Tizen. | [NuvioMedia](https://github.com/NuvioMedia/NuvioWeb) | `1.2.2` |
+| **Nuvio Native Legacy** | Unofficial native C/SDL2 Nuvio client, fast on older TVs. Native .tpk per Tizen version (4.0-5.5, 6.0, 6.5-7, 8-9) plus a WebAssembly .wgt for Tizen 5.5+. | [iqui27](https://github.com/iqui27/nuvio-native-legacy) | `v1.7.4` |
 | **OpenIPTV** | Privacy focused IPTV player for Samsung Tizen TVs with extended M3U playlists, favourites and search. | [shayanline](https://github.com/shayanline/OpenIPTV) | `1.9.2` |
 | **OTTplay FOSS** | FOSS OTT / IPTV thin client for Tizen. | [prog4food](https://github.com/prog4food/ottplay-foss-thin-clients) | `Sat, 21 Jan 2023 15:15:16 GMT` |
-| **Overscan** | Sideloadable web browser for Samsung Tizen TVs: desktop user agent, JavaScript on, D-pad cursor. | [Apps2Samsung](https://github.com/Apps2Samsung/Overscan) | `build-b019483` |
+| **Overscan** | Sideloadable web browser for Samsung Tizen TVs: desktop user agent, JavaScript on, D-pad cursor. | [Apps2Samsung](https://github.com/Apps2Samsung/Overscan) | `build-6201042` |
 | **Pelagica** | A modern web, desktop and TV client for Jellyfin | [PelagicaApp](https://github.com/PelagicaApp/pelagica) | `4.11.2` |
 | **PlayerAVPlay** | AVPlayer app | [yadPe](https://github.com/yadPe/PlayerAVPlay) | `latest` |
 | **React IPTV** | IPTV player for Samsung Tizen TV, built with React. | [anandsimmy](https://github.com/anandsimmy/react-iptv) | `7a7dcc2` |
