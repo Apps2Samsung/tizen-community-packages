@@ -1,11 +1,13 @@
 name: Validate Package Manifests
 
 on:
-  pull_request:
+  # pull_request_target runs immediately for fork PRs (no "Approve and run").
+  # It runs THIS workflow from the base branch with the base repo's token, so
+  # PR code must never be executed: only the PR's packages/*.json are pulled
+  # in, as data. Schema, scripts and this workflow always come from main.
+  pull_request_target:
     paths:
       - 'packages/**'
-      - 'packages.schema.json'
-      - 'scripts/build-manifests.sh'
   workflow_dispatch:
 
 permissions:
@@ -15,7 +17,21 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
+      # Base branch checkout: trusted schema, scripts and workflow.
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      # Overlay ONLY the PR's manifests. They are read by jq / check-jsonschema /
+      # python json.load, never executed.
+      - name: Take packages/ from the PR
+        if: github.event_name == 'pull_request_target'
+        run: |
+          set -e
+          git fetch --no-tags origin "pull/${{ github.event.pull_request.number }}/head:pr"
+          rm -rf packages
+          git checkout pr -- packages
+          echo "Validating manifests from PR #${{ github.event.pull_request.number }} (${{ github.event.pull_request.head.sha }})"
 
       - uses: actions/setup-python@v5
         with:
@@ -64,7 +80,7 @@ jobs:
               for e in errors:
                   print(f"::error::  {e}")
               sys.exit(1)
-          print(f"OK — {len(repos)} manifests, {len(outputs)} unique output names.")
+          print(f"OK â€” {len(repos)} manifests, {len(outputs)} unique output names.")
           PY
 
       - name: Manifests compile cleanly
