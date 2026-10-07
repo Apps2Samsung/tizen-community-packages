@@ -1,5 +1,5 @@
 {
-  "name": "Sonance",
+  "name": "Sonance3",
   "description": "A music player for Samsung Tizen TVs, built to stream from your self-hosted Navidrome or Subsonic-compatible server.",
   "repo": "MrSimmo/sonance3",
   "source": "release",
