@@ -35,7 +35,7 @@ env:
 
 jobs:
   detect-changes:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       has_changes: ${{ steps.check.outputs.has_changes }}
       changes_summary: ${{ steps.check.outputs.changes_summary }}
@@ -170,7 +170,7 @@ jobs:
           path: new_last_seen.json
 
   prepare:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: detect-changes
     if: needs.detect-changes.outputs.has_changes == 'true'
     steps:
@@ -247,7 +247,7 @@ jobs:
           path: package.exp
 
   generate-matrix-build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: detect-changes
     if: needs.detect-changes.outputs.has_changes == 'true'
     outputs:
@@ -273,8 +273,12 @@ jobs:
           echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
 
   tizen-build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [prepare, generate-matrix-build]
+    # A hung upstream build (npm, pre_build, packaging) must not hold the whole
+    # release for GitHub's 6h default. A timeout counts as a failed leg, and the
+    # release still ships the rest.
+    timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
@@ -352,8 +356,11 @@ jobs:
           path: wgt_files/
 
   external-downloads:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: tizen-build
+    # One broken upstream build must not sink the whole bundle: run as long as
+    # the build matrix actually ran (success or partial failure), not if skipped/cancelled.
+    if: ${{ !cancelled() && (needs.tizen-build.result == 'success' || needs.tizen-build.result == 'failure') }}
     steps:
       - uses: actions/checkout@v4
 
@@ -493,8 +500,9 @@ jobs:
           path: external_wgts/
 
   publish-release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [detect-changes, tizen-build, external-downloads]
+    if: ${{ !cancelled() && needs.external-downloads.result == 'success' && (needs.tizen-build.result == 'success' || needs.tizen-build.result == 'failure') }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
@@ -561,9 +569,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   update-state:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [detect-changes, publish-release]
-    if: success() && needs.detect-changes.outputs.has_changes == 'true'
+    if: ${{ !cancelled() && needs.publish-release.result == 'success' && needs.detect-changes.outputs.has_changes == 'true' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
