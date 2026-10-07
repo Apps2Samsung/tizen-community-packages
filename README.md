@@ -1,7 +1,7 @@
 # 🌐 Tizen Community Packages
 [![Sync Tizen Community Packages](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml/badge.svg)](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Packages](https://img.shields.io/badge/packages-54-blue.svg)](#-current-packages)
+[![Packages](https://img.shields.io/badge/packages-55-blue.svg)](#-current-packages)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-green.svg)](../../issues)
 [![Tizen](https://img.shields.io/badge/Platform-Tizen-lightgrey.svg)](https://www.tizen.org/)
 [![Community](https://img.shields.io/badge/Community-Driven-orange.svg)](#)
@@ -54,6 +54,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **go2rtc** | Watch the cameras of a go2rtc server (standalone or embedded in Frigate): camera grid with previews and full-screen live view. | [Edsol](https://github.com/Edsol/go2rtc-tizen) | `v0.1.0` |
 | **HackTV** | IPTV client for Samsung Tizen TVs. | [kosmodrey](https://github.com/kosmodrey/hackTV) | `bf27ba9` |
 | **HyperTizen** | Hyperion / HyperHDR ambient-light capturer for Samsung Tizen TV (native .tpk; requires TizenBrew for the UI). | [reisxd](https://github.com/reisxd/HyperTizen) | `v1.0.0` |
+| **ImmiTV** | Lightweight Immich photo and video client for Samsung Tizen 4.0 TVs: remote-control navigation, hardware-accelerated AVPlay video playback and a month-based timeline. | [xHiqhAim](https://gitlab.com/xHiqhAim/immitv) | `fe7dc67` |
 | **iperf3 TV** | Measures your Samsung TV's network throughput to an iperf3 server, upload or download. Requires a small WebSocket-to-TCP relay on your LAN. | [DmitryMaksakov](https://github.com/DmitryMaksakov/samsung-tv-iperf3) | `d20ac9f` |
 | **IPTV Manager** | IPTV manager for Samsung Tizen TV with Xtream Codes support and HLS playback. | [matifDreamIt](https://github.com/matifDreamIt/IPTV-Tizen-TV) | `d8eb66b` |
 | **Kick TV 2.0** | Kick live streams and public archives for Samsung Tizen TVs. | [janrydzewski](https://github.com/janrydzewski/kick-tv-2.0) | `v2.0.1` |
@@ -81,7 +82,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Stremio (Tizen 4)** | Stremio media center packaged for Tizen 4.0 devices. | [Apps2Samsung](https://github.com/Apps2Samsung/tizen-community-packages) | `latest` |
 | **tacplayer** | Custom Jellyfin Tizen client with cinematic red UI for Samsung TV | [sfsdffesfsfg-cloud](https://github.com/sfsdffesfsfg-cloud/tacplayer) | `v0.1.0` |
 | **Tailscale** | Tailscale exit-node app for Samsung Tizen TV (experimental; advertises the TV as a tailnet exit node). | [PatrickSt1991](https://github.com/PatrickSt1991/tailscale-tizen) | `tv8-tester` |
-| **Tessel** | Media player for Samsung TVs: SMB shares, USB drives, network streams and subtitles, with an optional transcode server (formerly VLC-Tizen-tv). | [PatrickSt1991](https://github.com/PatrickSt1991/tessel-tizen-tv) | `v1.24.1-20261007-0953` |
+| **Tessel** | Media player for Samsung TVs: SMB shares, USB drives, network streams and subtitles, with an optional transcode server (formerly VLC-Tizen-tv). | [PatrickSt1991](https://github.com/PatrickSt1991/tessel-tizen-tv) | `v1.24.2-20261007-1242` |
 | **TizenBrew** | A way to experience modded websites and you can install newer apps without fighting with Tizen Studio. | [reisxd](https://github.com/reisxd/TizenBrew) | `v2.0.5` |
 | **TizenFeed** | News / RSS feed sample app for Tizen TV. | [judithsirera](https://github.com/judithsirera/TizenFeed) | `8c42b51` |
 | **TizenTVAudioRecorder** | HTML5 Audio Recorder (kalaoke App). | [TizenTVWebApp](https://github.com/TizenTVWebApp/TizenTVAudioRecorder) | `latest` |
