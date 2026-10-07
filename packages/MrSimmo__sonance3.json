@@ -4,5 +4,8 @@
   "repo": "MrSimmo/sonance3",
   "source": "release",
   "branch": "main",
-  "output_name": "Sonance3.wgt"
+  "assets": [
+    { "match": "Sonance3.wgt", "output_name": "Sonance3.wgt" },
+    { "match": "Sonance3-Oblong.wgt", "output_name": "Sonance3-Oblong.wgt" }
+  ]
 }
