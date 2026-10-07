@@ -83,9 +83,16 @@ jobs:
               [ "$code" -lt 400 ] 2>/dev/null || echo "::warning file=$f::url $url returned HTTP $code"
             else
               repo=$(jq -r '.repo' "$f")
-              code=$(curl -o /dev/null -sL -w '%{http_code}' \
-                -H "Authorization: Bearer $GH_TOKEN" \
-                "https://api.github.com/repos/$repo" || echo 000)
-              [ "$code" = "200" ] || echo "::warning file=$f::repo $repo returned HTTP $code"
+              host=$(jq -r '.host // "github"' "$f")
+              if [ "$host" = "gitlab" ]; then
+                gl_id=$(printf '%s' "$repo" | sed 's|/|%2F|g')
+                code=$(curl -o /dev/null -sL -w '%{http_code}' \
+                  "https://gitlab.com/api/v4/projects/$gl_id" || echo 000)
+              else
+                code=$(curl -o /dev/null -sL -w '%{http_code}' \
+                  -H "Authorization: Bearer $GH_TOKEN" \
+                  "https://api.github.com/repos/$repo" || echo 000)
+              fi
+              [ "$code" = "200" ] || echo "::warning file=$f::repo $repo ($host) returned HTTP $code"
             fi
           done

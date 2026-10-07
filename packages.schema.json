@@ -12,7 +12,12 @@
     "repo": {
       "type": "string",
       "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$",
-      "description": "GitHub owner/repo. Used as the manifest key, the README link, and (for build/release) the API target."
+      "description": "owner/repo on the forge named by host (GitHub by default). Used as the manifest key, the README link, and (for build/release) the API target."
+    },
+    "host": {
+      "enum": ["github", "gitlab"],
+      "default": "github",
+      "description": "Forge that hosts repo. Defaults to github. gitlab (gitlab.com) is currently supported for source: build only."
     },
     "repo_label": { "type": "string", "minLength": 1, "pattern": "^[^|\n]+$", "description": "Optional link text for the README Repository column. Defaults to the repo owner." },
     "enabled": { "type": "boolean", "default": true, "description": "Set to false to retire the package without deleting this file: it is skipped by the sync (not built, downloaded, or shipped in the release) and left out of the README table. Absent means true." },
@@ -56,7 +61,7 @@
       "if": { "required": ["source"], "properties": { "source": { "const": "release" } } },
       "then": {
         "required": ["branch"],
-        "not": { "anyOf": [ { "required": ["url"] }, { "required": ["skip_npm"] }, { "required": ["pre_build"] }, { "required": ["project_path"] }, { "required": ["overlay"] } ] },
+        "not": { "anyOf": [ { "required": ["url"] }, { "required": ["skip_npm"] }, { "required": ["pre_build"] }, { "required": ["project_path"] }, { "required": ["overlay"] }, { "required": ["host"] } ] },
         "oneOf": [
           { "required": ["output_name"], "not": { "required": ["assets"] } },
           { "required": ["assets"], "not": { "anyOf": [ { "required": ["output_name"] }, { "required": ["extract"] } ] } }
@@ -67,7 +72,7 @@
       "if": { "required": ["source"], "properties": { "source": { "const": "direct" } } },
       "then": {
         "required": ["url", "output_name"],
-        "not": { "anyOf": [ { "required": ["branch"] }, { "required": ["assets"] }, { "required": ["skip_npm"] }, { "required": ["pre_build"] }, { "required": ["project_path"] }, { "required": ["overlay"] } ] }
+        "not": { "anyOf": [ { "required": ["branch"] }, { "required": ["assets"] }, { "required": ["skip_npm"] }, { "required": ["pre_build"] }, { "required": ["project_path"] }, { "required": ["overlay"] }, { "required": ["host"] } ] }
       }
     }
   ]

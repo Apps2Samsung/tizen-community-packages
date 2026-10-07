@@ -61,7 +61,14 @@ jobs:
           while IFS= read -r entry; do
             repo=$(echo "$entry" | jq -r '.key')
             branch=$(echo "$entry" | jq -r '.value.branch')
-            sha=$(api "https://api.github.com/repos/$repo/commits/$branch" 2>/dev/null | jq -r '.sha // empty')
+            host=$(echo "$entry" | jq -r '.value.host // "github"')
+            if [ "$host" = "gitlab" ]; then
+              # GitLab: project id is the URL-encoded "owner%2Frepo" path.
+              gl_id=$(printf '%s' "$repo" | sed 's|/|%2F|g')
+              sha=$(curl -fsSL "https://gitlab.com/api/v4/projects/$gl_id/repository/branches/$branch" 2>/dev/null | jq -r '.commit.id // empty')
+            else
+              sha=$(api "https://api.github.com/repos/$repo/commits/$branch" 2>/dev/null | jq -r '.sha // empty')
+            fi
             if [ -z "$sha" ]; then
               echo "WARN: could not fetch HEAD for $repo@$branch — keeping previous state"
               prev=$(echo "$old_state" | jq -r --arg k "build:$repo@$branch" '.[$k] // empty')
@@ -246,7 +253,8 @@ jobs:
               output_name: (.value.output_name // ""),
               skip_npm: (.value.skip_npm // false),
               pre_build: (.value.pre_build // ""),
-              overlay: (.value.overlay // "")
+              overlay: (.value.overlay // ""),
+              host: (.value.host // "github")
             }]}' repos-build.json)
           echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
 
@@ -281,11 +289,17 @@ jobs:
           PRE_BUILD: ${{ matrix.pre_build }}
           OVERLAY: ${{ matrix.overlay }}
           PROJECT_PATH: ${{ matrix.project_path }}
+          HOST: ${{ matrix.host }}
         run: |
           set -e
           mkdir -p build wgt_files
           cd build
-          git clone --depth 1 --branch "${{ matrix.branch }}" "https://github.com/${{ matrix.repo }}.git"
+          case "$HOST" in
+            gitlab) clone_url="https://gitlab.com/${{ matrix.repo }}.git" ;;
+            *)      clone_url="https://github.com/${{ matrix.repo }}.git" ;;
+          esac
+          echo "Cloning $clone_url (${{ matrix.branch }})"
+          git clone --depth 1 --branch "${{ matrix.branch }}" "$clone_url"
           cd "$(basename "${{ matrix.repo }}")"
           repo_root="$(pwd)"
 
@@ -589,9 +603,10 @@ jobs:
                       continue
                   repo = d["repo"]
                   label = d.get("repo_label", repo.split("/")[0])
+                  forge = "gitlab.com" if d.get("host") == "gitlab" else "github.com"
                   items.append((
                       d["name"], d["description"],
-                      f"[{label}](https://github.com/{repo})",
+                      f"[{label}](https://{forge}/{repo})",
                       ver.get(repo.lower(), "—"),
                   ))
               items.sort(key=lambda r: r[0].lower())

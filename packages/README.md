@@ -12,7 +12,8 @@ file is valid and ready to merge.
 
 ## 🏷️ File name
 
-Name the file after the app's GitHub repository, with the `/` replaced by a **double underscore**:
+Name the file after the app's repository (`owner/repo`, on GitHub or GitLab), with the `/` replaced by a
+**double underscore**:
 
 ```
 packages/<owner>__<repo>.json
@@ -31,7 +32,7 @@ Examples: `PatrickSt1991/flixor-tizen` → `packages/PatrickSt1991__flixor-tizen
 |-------|------|-------|
 | `name` | string | Display name in the README table. No `\|` or newlines. |
 | `description` | string | One-line description for the README table. No `\|` or newlines. |
-| `repo` | string | GitHub `owner/repo`. Used as the manifest key, the README link, and (for `build`/`release`) the API target. |
+| `repo` | string | `owner/repo` on the forge named by `host` (GitHub by default). Used as the manifest key, the README link, and (for `build`/`release`) the API target. |
 | `source` | enum | One of `release`, `build`, `direct` — see below. |
 
 ### Optional (any type)
@@ -42,6 +43,7 @@ Examples: `PatrickSt1991/flixor-tizen` → `packages/PatrickSt1991__flixor-tizen
 | `output_name` | string | Filename inside the bundle. Must end in `.wgt` or `.tpk`. Required for every type **except** a `release` that uses `assets[]`. |
 | `extract` | string | Only when upstream ships the package **inside a `.zip`**. Entry name or regex to pull out of the archive — see [Zip-wrapped downloads](#-zip-wrapped-downloads). |
 | `enabled` | boolean | `false` retires the package without deleting the file — see [Retiring a package](#-retiring-a-package). Defaults to `true`. |
+| `host` | enum | `github` (default) or `gitlab`. Where `repo` lives. `gitlab` is only supported for `source: "build"` — see [GitLab-hosted projects](#-gitlab-hosted-projects). |
 
 ### Which fields go with which `source`
 
@@ -56,6 +58,7 @@ Examples: `PatrickSt1991/flixor-tizen` → `packages/PatrickSt1991__flixor-tizen
 | `skip_npm` | ❌ | ⬜ optional | ❌ |
 | `pre_build` | ❌ | ⬜ optional | ❌ |
 | `overlay` | ❌ | ⬜ optional | ❌ |
+| `host` | ❌ | ⬜ optional | ❌ |
 
 For a `release`, `output_name` and `assets[]` are **mutually exclusive** — use exactly one. With
 `assets[]`, put `extract` on the individual asset entry rather than at the top level.
@@ -213,6 +216,29 @@ Use when there's no prebuilt release and the app is a Tizen web project the CI c
   "output_name": "React-IPTV.wgt"
 }
 ```
+
+### 🦊 GitLab-hosted projects
+
+If the Tizen project lives on **gitlab.com** instead of GitHub, add `"host": "gitlab"`. The sync then
+tracks the branch head through the GitLab API and clones from `https://gitlab.com/<owner>/<repo>.git`;
+everything else (`project_path`, `skip_npm`, `pre_build`, `overlay`) works the same. The file is still
+named `packages/<owner>__<repo>.json`.
+
+```json
+{
+  "name": "ImmiTV",
+  "description": "Lightweight Immich photo and video client for Samsung Tizen 4.0 TVs.",
+  "repo": "xHiqhAim/immitv",
+  "host": "gitlab",
+  "source": "build",
+  "branch": "main",
+  "skip_npm": true,
+  "output_name": "ImmiTV.wgt"
+}
+```
+
+Only `source: "build"` supports `host: "gitlab"` for now — GitLab Releases and the Package Registry are
+not wired up, so a `release` or `direct` manifest must not set `host`.
 
 ---
 
