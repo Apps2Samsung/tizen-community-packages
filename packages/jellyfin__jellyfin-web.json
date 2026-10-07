@@ -1,7 +1,7 @@
 {
   "name": "Jellyfin + Bonfire",
-  "description": "Official Jellyfin Tizen client patched with the Bonfire loader for multi-user profile switching. Requires the Bonfire plugin on your Jellyfin server.",
-  "repo": "jellyfin/jellyfin-tizen",
+  "description": "Official Jellyfin Web client patched with the Bonfire loader for multi-user profile switching. Requires the Bonfire plugin on your Jellyfin server.",
+  "repo": "jellyfin/jellyfin-web",
   "repo_label": "jellyfin",
   "source": "build",
   "branch": "master",
