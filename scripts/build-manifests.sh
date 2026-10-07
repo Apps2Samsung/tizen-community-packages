@@ -20,7 +20,7 @@ if [ ${#files[@]} -eq 0 ]; then
   exit 1
 fi
 
-# --- repos-build.json : { "<repo>": { branch, project_path, output_name, [skip_npm], [pre_build] } }
+# --- repos-build.json : { "<repo>": { branch, project_path, output_name, [skip_npm], [pre_build], [overlay], [host] } }
 jq -s '
   map(select(.enabled != false))
   | map(select(.source == "build"))
@@ -31,6 +31,7 @@ jq -s '
         + (if has("skip_npm")  then { skip_npm:  .skip_npm }  else {} end)
         + (if has("pre_build") then { pre_build: .pre_build } else {} end)
         + (if has("overlay")   then { overlay:   .overlay }   else {} end)
+        + (if has("host")      then { host:      .host }      else {} end)
       )
     })
   | from_entries
