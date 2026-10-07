@@ -81,7 +81,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Stremio (Tizen 4)** | Stremio media center packaged for Tizen 4.0 devices. | [Apps2Samsung](https://github.com/Apps2Samsung/tizen-community-packages) | `latest` |
 | **tacplayer** | Custom Jellyfin Tizen client with cinematic red UI for Samsung TV | [sfsdffesfsfg-cloud](https://github.com/sfsdffesfsfg-cloud/tacplayer) | `v0.1.0` |
 | **Tailscale** | Tailscale exit-node app for Samsung Tizen TV (experimental; advertises the TV as a tailnet exit node). | [PatrickSt1991](https://github.com/PatrickSt1991/tailscale-tizen) | `tv8-tester` |
-| **Tessel** | Media player for Samsung TVs: SMB shares, USB drives, network streams and subtitles, with an optional transcode server (formerly VLC-Tizen-tv). | [PatrickSt1991](https://github.com/PatrickSt1991/tessel-tizen-tv) | `v1.23.0-20261006-0724` |
+| **Tessel** | Media player for Samsung TVs: SMB shares, USB drives, network streams and subtitles, with an optional transcode server (formerly VLC-Tizen-tv). | [PatrickSt1991](https://github.com/PatrickSt1991/tessel-tizen-tv) | `v1.24.1-20261007-0953` |
 | **TizenBrew** | A way to experience modded websites and you can install newer apps without fighting with Tizen Studio. | [reisxd](https://github.com/reisxd/TizenBrew) | `v2.0.5` |
 | **TizenFeed** | News / RSS feed sample app for Tizen TV. | [judithsirera](https://github.com/judithsirera/TizenFeed) | `8c42b51` |
 | **TizenTVAudioRecorder** | HTML5 Audio Recorder (kalaoke App). | [TizenTVWebApp](https://github.com/TizenTVWebApp/TizenTVAudioRecorder) | `latest` |
