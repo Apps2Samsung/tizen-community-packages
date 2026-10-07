@@ -183,15 +183,10 @@ jobs:
           path: tizen-studio
           key: tizen-web-sdk-4.0
 
-      - name: Setup Node.js 24
-        uses: actions/setup-node@v4
-        with:
-          node-version: '24'
-
       - name: Install base dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y wget zip git jq nodejs npm expect curl unzip
+          sudo DEBIAN_FRONTEND=noninteractive NEEDRESTART_MODE=a apt-get -o DPkg::Lock::Timeout=120 install -y --no-install-recommends wget zip git jq nodejs npm expect curl unzip
 
       - name: Install Tizen Studio Web CLI
         if: steps.tizen-sdk-cache.outputs.cache-hit != 'true'
@@ -298,12 +293,32 @@ jobs:
         with:
           name: package-exp-artifact
           path: .
+      # PR #59: upstream apps increasingly require Node 24 (e.g. jellyfin-web).
+      # This is the job that actually runs npm / pre_build, so it belongs here,
+      # not in prepare (which never touches node).
+      - name: Setup Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
       - name: Fix Tizen Studio permissions
         run: chmod -R +x tizen-studio
+      # apt on a fresh runner can block for a long time (dpkg lock held by
+      # unattended-upgrades, stalled mirror). Try the image's existing index
+      # first, retry with a refresh, and never let this step eat the job budget.
       - name: Install expect
+        timeout-minutes: 8
         run: |
-          sudo apt-get update
-          sudo apt-get install -y expect
+          export DEBIAN_FRONTEND=noninteractive NEEDRESTART_MODE=a
+          for i in 1 2 3; do
+            if sudo -E apt-get -o DPkg::Lock::Timeout=120 install -y --no-install-recommends expect; then
+              break
+            fi
+            echo "apt attempt $i failed, refreshing index and retrying"
+            sudo -E apt-get -o DPkg::Lock::Timeout=120 update || true
+            sleep 10
+          done
+          command -v expect
       - name: Build Tizen Web Project
         shell: bash
         env:
