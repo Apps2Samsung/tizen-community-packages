@@ -183,6 +183,11 @@ jobs:
           path: tizen-studio
           key: tizen-web-sdk-4.0
 
+      - name: Setup Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
       - name: Install base dependencies
         run: |
           sudo apt-get update
