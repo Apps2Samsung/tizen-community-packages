@@ -2,14 +2,27 @@ name: Sync Tizen Community Packages
 
 on:
   schedule:
-    # 04:00 UTC daily — 05:00 CET (winter) / 06:00 CEST (summer) in Brussel
+    # 04:00 UTC daily â€” 05:00 CET (winter) / 06:00 CEST (summer) in Brussel
     - cron: '23 2 * * *' 
+  # A merged PR is a push to main. Bot commits made with GITHUB_TOKEN never
+  # trigger workflows, so the state/README commit below can't loop.
+  push:
+    branches: [main]
+    paths:
+      - 'packages/**'
+      - 'apps/**'
+      - 'scripts/**'
   workflow_dispatch:
     inputs:
       force:
         description: 'Force rebuild even if nothing has changed'
         type: boolean
         default: false
+
+# Never let a scheduled run and a merge run race on the tag / last_seen.json.
+concurrency:
+  group: sync-packages
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -41,7 +54,8 @@ jobs:
         id: check
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          FORCE: ${{ inputs.force }}
+          # Push (merged PR) always rebuilds: an edited manifest isn't an upstream change.
+          FORCE: ${{ github.event_name == 'push' || inputs.force == true }}
         run: |
           set -e
           STATE_FILE=".github/state/last_seen.json"
@@ -70,7 +84,7 @@ jobs:
               sha=$(api "https://api.github.com/repos/$repo/commits/$branch" 2>/dev/null | jq -r '.sha // empty')
             fi
             if [ -z "$sha" ]; then
-              echo "WARN: could not fetch HEAD for $repo@$branch — keeping previous state"
+              echo "WARN: could not fetch HEAD for $repo@$branch â€” keeping previous state"
               prev=$(echo "$old_state" | jq -r --arg k "build:$repo@$branch" '.[$k] // empty')
               [ -n "$prev" ] && sha="$prev" || continue
             fi
@@ -78,7 +92,7 @@ jobs:
             new_state=$(echo "$new_state" | jq --arg k "$key" --arg v "$sha" '. + {($k): $v}')
             old_val=$(echo "$old_state" | jq -r --arg k "$key" '.[$k] // empty')
             if [ "$old_val" != "$sha" ]; then
-              summary="${summary}"$'\n'"- build $repo ($branch) → ${sha:0:7}"
+              summary="${summary}"$'\n'"- build $repo ($branch) â†’ ${sha:0:7}"
               has_changes="true"
             fi
           done < <(jq -c 'to_entries[]' repos-build.json)
@@ -93,7 +107,7 @@ jobs:
               tag=$(echo "$json" | jq -r '[.[] | select(.prerelease==true and .draft==false)][0].tag_name // empty')
             fi
             if [ -z "$tag" ]; then
-              echo "WARN: no releases for $repo — keeping previous state"
+              echo "WARN: no releases for $repo â€” keeping previous state"
               prev=$(echo "$old_state" | jq -r --arg k "release:$repo" '.[$k] // empty')
               [ -n "$prev" ] && tag="$prev" || continue
             fi
@@ -101,7 +115,7 @@ jobs:
             new_state=$(echo "$new_state" | jq --arg k "$key" --arg v "$tag" '. + {($k): $v}')
             old_val=$(echo "$old_state" | jq -r --arg k "$key" '.[$k] // empty')
             if [ "$old_val" != "$tag" ]; then
-              summary="${summary}"$'\n'"- release $repo → $tag"
+              summary="${summary}"$'\n'"- release $repo â†’ $tag"
               has_changes="true"
             fi
           done < <(jq -c '.releases | to_entries[]' repos-sync.json)
@@ -116,22 +130,22 @@ jobs:
             clen=$(echo "$headers" | grep -i '^content-length:' | tail -n1 | cut -d: -f2- | tr -d ' ')
             fingerprint="etag:${etag}|mod:${lastmod}|len:${clen}"
             if [ "$fingerprint" = "etag:|mod:|len:" ]; then
-              echo "WARN: no fingerprint headers for $url — treating as changed"
+              echo "WARN: no fingerprint headers for $url â€” treating as changed"
               fingerprint="unknown:$(date +%s)"
             fi
             key="direct:$repo"
             new_state=$(echo "$new_state" | jq --arg k "$key" --arg v "$fingerprint" '. + {($k): $v}')
             old_val=$(echo "$old_state" | jq -r --arg k "$key" '.[$k] // empty')
             if [ "$old_val" != "$fingerprint" ]; then
-              summary="${summary}"$'\n'"- direct $repo → $fingerprint"
+              summary="${summary}"$'\n'"- direct $repo â†’ $fingerprint"
               has_changes="true"
             fi
           done < <(jq -c '.direct | to_entries[]' repos-sync.json)
 
           if [ "$FORCE" = "true" ]; then
-            echo "Force flag set — treating as changed"
+            echo "Force flag set â€” treating as changed"
             has_changes="true"
-            summary="${summary}"$'\n'"(forced via workflow_dispatch)"
+            summary="${summary}"$'\n'"(forced via ${{ github.event_name }})"
           fi
 
           echo "$new_state" | jq '.' > new_last_seen.json
@@ -378,7 +392,7 @@ jobs:
           CFG="${{ steps.config.outputs.config }}"
           repos=$(jq -r '.releases | to_entries[] | .key' "$CFG")
 
-          # A single dead/renamed/asset-less upstream must not break the whole catalog sync —
+          # A single dead/renamed/asset-less upstream must not break the whole catalog sync â€”
           # collect skips and warn, don't `exit 1`.
           SKIPPED=""
 
@@ -408,7 +422,7 @@ jobs:
             has_assets=$(jq -r ".releases[\"$repo\"] | has(\"assets\")" "$CFG")
 
             if [ "$has_assets" = "true" ]; then
-              # New style — iterate the configured assets array, match by exact name then regex.
+              # New style â€” iterate the configured assets array, match by exact name then regex.
               # Read each field with `jq -r` by index (NOT @tsv): @tsv escapes backslashes,
               # which corrupts regex matches like "\.wgt$" into "\\.wgt$".
               n_assets=$(jq -r ".releases[\"$repo\"].assets | length" "$CFG")
@@ -423,7 +437,7 @@ jobs:
                     '(.assets // [])[] | select(.name | test($m)) | .browser_download_url' 2>/dev/null | head -n 1)
                 fi
                 if [ -z "$url" ]; then
-                  echo "::warning title=Package skipped::Asset matching '$match' not found in release for $repo — skipping this package (repo may be private/renamed/removed, or its release dropped the asset)."
+                  echo "::warning title=Package skipped::Asset matching '$match' not found in release for $repo â€” skipping this package (repo may be private/renamed/removed, or its release dropped the asset)."
                   echo "  Available assets:"
                   echo "$json" | jq -r '(.assets // [])[] | .name' 2>/dev/null || echo "  (none)"
                   SKIPPED="$SKIPPED $repo"
@@ -437,12 +451,12 @@ jobs:
                 bash scripts/unwrap-zip.sh "external_wgts/$outname" "$extract"
               done
             else
-              # Legacy style — first non-empty URL across all assets (matches old behavior).
+              # Legacy style â€” first non-empty URL across all assets (matches old behavior).
               outname=$(jq -r ".releases[\"$repo\"].output_name" "$CFG")
               extract=$(jq -r ".releases[\"$repo\"].extract // \"\"" "$CFG")
               url=$(echo "$json" | jq -r '(.assets // [])[] | .browser_download_url // empty' 2>/dev/null | head -n 1)
               if [ -z "$url" ]; then
-                echo "::warning title=Package skipped::No release asset found for $repo (latest or prerelease) — skipping this package."
+                echo "::warning title=Package skipped::No release asset found for $repo (latest or prerelease) â€” skipping this package."
                 SKIPPED="$SKIPPED $repo"
                 continue
               fi
@@ -506,10 +520,10 @@ jobs:
           for f in final_wgts/*.wgt final_wgts/*.tpk; do
             [ -e "$f" ] || continue
             if unzip -Z1 "$f" 2>/dev/null | grep -qiE '\.(wgt|tpk)$'; then
-              echo "::warning title=Nested archive::$(basename "$f") contains a .wgt/.tpk — it is a zip wrapper, not a package. Set \"extract\" in its manifest. Dropping it from this bundle."
+              echo "::warning title=Nested archive::$(basename "$f") contains a .wgt/.tpk â€” it is a zip wrapper, not a package. Set \"extract\" in its manifest. Dropping it from this bundle."
               rm -f "$f"
             elif ! unzip -Z1 "$f" 2>/dev/null | grep -qx 'config.xml'; then
-              echo "::warning title=No config.xml::$(basename "$f") has no config.xml at its root — it may not be a valid package."
+              echo "::warning title=No config.xml::$(basename "$f") has no config.xml at its root â€” it may not be a valid package."
             fi
           done
 
@@ -524,7 +538,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if git ls-remote --exit-code --tags origin "refs/tags/$TAG" >/dev/null 2>&1; then
-            echo "Tag $TAG already exists on origin — reusing it."
+            echo "Tag $TAG already exists on origin â€” reusing it."
           else
             git tag -a "$TAG" -m "Community Packages ${{ github.run_number }}"
             git push origin "$TAG"
@@ -568,8 +582,8 @@ jobs:
           python3 - <<'PY'
           # Regenerate the entire Current Packages table from packages/*.json.
           # Rows (name / description / repo link) come from the manifests;
-          # the ⚙️ Version column comes from .github/state/last_seen.json.
-          # Manifests with "enabled": false are retired — the sync no longer
+          # the âš™ï¸ Version column comes from .github/state/last_seen.json.
+          # Manifests with "enabled": false are retired â€” the sync no longer
           # ships them, so they are left out of the table and the badge count.
           # Everything outside the table is left untouched.
           import json, glob, re, pathlib
@@ -607,10 +621,10 @@ jobs:
                   items.append((
                       d["name"], d["description"],
                       f"[{label}](https://{forge}/{repo})",
-                      ver.get(repo.lower(), "—"),
+                      ver.get(repo.lower(), "â€”"),
                   ))
               items.sort(key=lambda r: r[0].lower())
-              rows = ["| 🧩 Application | 📝 Description | 🔗 Repository | ⚙️ Version |",
+              rows = ["| ðŸ§© Application | ðŸ“ Description | ðŸ”— Repository | âš™ï¸ Version |",
                       "|----------------|----------------|------------------|------------|"]
               rows += [f"| **{n}** | {d} | {link} | `{v}` |" for n, d, link, v in items]
               return rows
