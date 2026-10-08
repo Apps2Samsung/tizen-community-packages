@@ -558,6 +558,11 @@ jobs:
           echo "Final WGT files:"
           ls -l final_wgts
 
+      - name: Build catalog.json
+        # Per-file index (category, group, variant) that Apps2Samsung reads from
+        # this release to filter the app list. Only files that made the bundle.
+        run: bash scripts/build-catalog.sh packages final_wgts/catalog.json final_wgts
+
       - name: Create and push release tag
         env:
           TAG: "community-${{ github.run_number }}"
@@ -580,6 +585,7 @@ jobs:
           files: |
             final_wgts/*.wgt
             final_wgts/*.tpk
+            final_wgts/catalog.json
           body: |
             Automated community bundle.
 
@@ -609,7 +615,7 @@ jobs:
         run: |
           python3 - <<'PY'
           # Regenerate the entire Current Packages table from packages/*.json.
-          # Rows (name / description / repo link) come from the manifests;
+          # Rows (name / category / description / repo link) come from the manifests;
           # the gear Version column comes from .github/state/last_seen.json.
           # Manifests with "enabled": false are retired - the sync no longer
           # ships them, so they are left out of the table and the badge count.
@@ -636,6 +642,12 @@ jobs:
                   ver[repo.lower()] = version
               return ver
 
+          CATEGORY = {
+              "media": "Media servers & players", "iptv": "IPTV & Live TV", "streaming": "Streaming",
+              "games": "Games & emulators", "casting": "Casting & cameras", "tools": "Tools & system",
+              "other": "Other",
+          }
+
           def table():
               ver = version_map()
               items = []
@@ -647,14 +659,14 @@ jobs:
                   label = d.get("repo_label", repo.split("/")[0])
                   forge = "gitlab.com" if d.get("host") == "gitlab" else "github.com"
                   items.append((
-                      d["name"], d["description"],
+                      d["name"], CATEGORY.get(d.get("category"), "Other"), d["description"],
                       f"[{label}](https://{forge}/{repo})",
                       ver.get(repo.lower(), "\u2014"),
                   ))
               items.sort(key=lambda r: r[0].lower())
-              rows = ["| \U0001F9E9 Application | \U0001F4DD Description | \U0001F517 Repository | \u2699\ufe0f Version |",
-                      "|----------------|----------------|------------------|------------|"]
-              rows += [f"| **{n}** | {d} | {link} | `{v}` |" for n, d, link, v in items]
+              rows = ["| \U0001F9E9 Application | \U0001F3F7\ufe0f Category | \U0001F4DD Description | \U0001F517 Repository | \u2699\ufe0f Version |",
+                      "|----------------|-------------|----------------|------------------|------------|"]
+              rows += [f"| **{n}** | {c} | {d} | {link} | `{v}` |" for n, c, d, link, v in items]
               return rows
 
           def main():

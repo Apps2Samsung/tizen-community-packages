@@ -5,10 +5,16 @@
   "description": "One file per app under packages/. Compiled into repos-build.json / repos-sync.json by scripts/build-manifests.sh.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["name", "description", "repo", "source"],
+  "required": ["name", "description", "category", "repo", "source"],
   "properties": {
     "name": { "type": "string", "minLength": 1, "pattern": "^[^|\n]+$", "description": "Display name shown in the README table. No '|' or newlines." },
     "description": { "type": "string", "minLength": 1, "pattern": "^[^|\n]+$", "description": "One-line description for the README table. No '|' or newlines." },
+    "category": {
+      "enum": ["media", "iptv", "streaming", "games", "casting", "tools", "other"],
+      "description": "Catalog category, shown as a filter in Apps2Samsung. media = media-server clients and local players (Jellyfin, Plex, Kodi, music, photos, USB/DLNA); iptv = IPTV and live TV; streaming = clients for streaming services and sites (YouTube, Twitch, Kick, anime, Nuvio, Stremio); games = games, emulators and game streaming; casting = casting receivers and camera viewers; tools = browsers, loaders, network and system utilities; other = anything else."
+    },
+    "group": { "type": "string", "minLength": 1, "pattern": "^[^|\n]+$", "description": "Optional. Display name of the app this package is a variant of. Packages sharing a group fold into one Apps2Samsung entry with a variant picker (the Moonlight forks all set \"Moonlight\"). A package with several assets[] folds by itself: its group defaults to its name." },
+    "variant": { "type": "string", "minLength": 1, "pattern": "^[^|\n]+$", "description": "Optional. Label for this package's file in the variant picker when it belongs to a group (e.g. \"OneLiberty · Chrome\"). Single-file packages only; with assets[] put variant on each asset. Defaults to the file name without extension." },
     "repo": {
       "type": "string",
       "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$",
@@ -43,6 +49,7 @@
         "required": ["match", "output_name"],
         "properties": {
           "match": { "type": "string", "minLength": 1, "description": "Exact asset name or a regex matched against release asset names." },
+          "variant": { "type": "string", "minLength": 1, "pattern": "^[^|\n]+$", "description": "Optional. Label for this file in the Apps2Samsung variant picker (e.g. \"Tizen 8\"). Defaults to output_name without extension." },
           "output_name": { "type": "string", "pattern": "\\.(wgt|tpk)$" },
           "extract": { "type": "string", "minLength": 1, "description": "This asset is a zip wrapper; extract the entry matching this exact name or regex." }
         }
@@ -50,6 +57,10 @@
     }
   },
   "allOf": [
+    {
+      "if": { "required": ["assets"] },
+      "then": { "not": { "required": ["variant"] } }
+    },
     {
       "if": { "required": ["source"], "properties": { "source": { "const": "build" } } },
       "then": {
