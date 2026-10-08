@@ -1,15 +1,37 @@
 {
   "name": "RÚV",
   "description": "Apps for RÚV, the Icelandic national broadcaster: Sarpur on demand, Barnaefni for children, Unglingar for teens, Menntun for education, and Útvarp radio (not affiliated with RÚV)",
+  "category": "iptv",
+  "group": "RÚV",
   "repo": "sverrirs/ruv-app-samsung",
   "repo_label": "RÚV VOD",
   "source": "release",
   "branch": "master",
   "assets": [
-    { "match": "RUVVod.wgt", "output_name": "RUVVod.wgt" },
-    { "match": "RUVKids.wgt", "output_name": "RUVKids.wgt" },
-    { "match": "RUVUng.wgt", "output_name": "RUVUng.wgt" },
-    { "match": "RUVMennta.wgt", "output_name": "RUVMennta.wgt" },
-    { "match": "RUVUtvarp.wgt", "output_name": "RUVUtvarp.wgt" }
+    {
+      "match": "RUVVod.wgt",
+      "variant": "Sarpur · on demand",
+      "output_name": "RUVVod.wgt"
+    },
+    {
+      "match": "RUVKids.wgt",
+      "variant": "Barnaefni · kids",
+      "output_name": "RUVKids.wgt"
+    },
+    {
+      "match": "RUVUng.wgt",
+      "variant": "Unglingar · teens",
+      "output_name": "RUVUng.wgt"
+    },
+    {
+      "match": "RUVMennta.wgt",
+      "variant": "Menntun · education",
+      "output_name": "RUVMennta.wgt"
+    },
+    {
+      "match": "RUVUtvarp.wgt",
+      "variant": "Útvarp · radio",
+      "output_name": "RUVUtvarp.wgt"
+    }
   ]
 }

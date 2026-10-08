@@ -1,15 +1,36 @@
 {
   "name": "Overscan",
   "description": "Sideloadable web browser for Samsung Tizen TVs: desktop user agent, JavaScript on, D-pad cursor.",
+  "category": "tools",
   "repo": "Apps2Samsung/Overscan",
   "repo_label": "Apps2Samsung",
   "source": "release",
   "branch": "release",
   "assets": [
-    { "match": "Overscan-tizen4.tpk", "output_name": "Overscan-tizen4.tpk" },
-    { "match": "Overscan-tizen5.tpk", "output_name": "Overscan-tizen5.tpk" },
-    { "match": "Overscan-tizen6.tpk", "output_name": "Overscan-tizen6.tpk" },
-    { "match": "Overscan-tizen8.tpk", "output_name": "Overscan-tizen8.tpk" },
-    { "match": "Overscan-nui.tpk",    "output_name": "Overscan-tizen9.tpk" }
+    {
+      "match": "Overscan-tizen4.tpk",
+      "variant": "Tizen 4",
+      "output_name": "Overscan-tizen4.tpk"
+    },
+    {
+      "match": "Overscan-tizen5.tpk",
+      "variant": "Tizen 5",
+      "output_name": "Overscan-tizen5.tpk"
+    },
+    {
+      "match": "Overscan-tizen6.tpk",
+      "variant": "Tizen 6",
+      "output_name": "Overscan-tizen6.tpk"
+    },
+    {
+      "match": "Overscan-tizen8.tpk",
+      "variant": "Tizen 8",
+      "output_name": "Overscan-tizen8.tpk"
+    },
+    {
+      "match": "Overscan-nui.tpk",
+      "variant": "Tizen 9",
+      "output_name": "Overscan-tizen9.tpk"
+    }
   ]
 }

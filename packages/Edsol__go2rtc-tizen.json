@@ -1,6 +1,7 @@
 {
   "name": "go2rtc",
   "description": "Watch the cameras of a go2rtc server (standalone or embedded in Frigate): camera grid with previews and full-screen live view.",
+  "category": "casting",
   "repo": "Edsol/go2rtc-tizen",
   "source": "release",
   "branch": "main",

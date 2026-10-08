@@ -1,6 +1,7 @@
 {
   "name": "Velvet TV",
   "description": "Big-screen TV client for the Velvet self-hosted music server.",
+  "category": "media",
   "repo": "aroundmyroom/Velvet",
   "source": "build",
   "branch": "main",

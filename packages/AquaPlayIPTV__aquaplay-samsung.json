@@ -1,11 +1,15 @@
 {
   "name": "AquaPlay IPTV",
   "description": "Lightweight IPTV player for M3U and Xtream playlists, with a full guide, catch-up and setup from your phone",
+  "category": "iptv",
   "repo": "AquaPlayIPTV/aquaplay-samsung",
   "repo_label": "AquaPlay IPTV",
   "source": "release",
   "branch": "main",
   "assets": [
-    { "match": "^AquaPlay-[0-9.]+\\.wgt$", "output_name": "AquaPlay-IPTV.wgt" }
+    {
+      "match": "^AquaPlay-[0-9.]+\\.wgt$",
+      "output_name": "AquaPlay-IPTV.wgt"
+    }
   ]
 }

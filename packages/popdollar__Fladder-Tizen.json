@@ -1,10 +1,14 @@
 {
   "name": "Fladder",
   "description": "Jellyfin client for Samsung Tizen TV, built with Flutter (native .tpk).",
+  "category": "media",
   "repo": "popdollar/Fladder-Tizen",
   "source": "release",
   "branch": "develop",
   "assets": [
-    { "match": "\\.tpk$", "output_name": "Fladder.tpk" }
+    {
+      "match": "\\.tpk$",
+      "output_name": "Fladder.tpk"
+    }
   ]
 }

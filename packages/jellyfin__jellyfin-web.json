@@ -1,6 +1,7 @@
 {
   "name": "Jellyfin + Bonfire",
   "description": "Official Jellyfin Web client patched with the Bonfire loader for multi-user profile switching. Requires the Bonfire plugin on your Jellyfin server.",
+  "category": "media",
   "repo": "jellyfin/jellyfin-web",
   "repo_label": "jellyfin",
   "source": "build",

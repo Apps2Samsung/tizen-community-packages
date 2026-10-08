@@ -1,6 +1,7 @@
 {
   "name": "GameBoy-Emulator",
   "description": "A Game Boy (DMG) emulator.",
+  "category": "games",
   "repo": "dos-ise/GB-EMU_Tizen",
   "source": "release",
   "branch": "release",

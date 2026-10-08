@@ -1,6 +1,7 @@
 {
   "name": "Reelo",
   "description": "TV client for the Reelo service: films and series with a remote-first interface, family profiles and library sync between devices (Russian UI).",
+  "category": "streaming",
   "repo": "ihovsky/Reelo",
   "repo_label": "Reelo",
   "source": "direct",

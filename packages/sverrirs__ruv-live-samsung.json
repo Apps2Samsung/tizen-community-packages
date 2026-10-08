@@ -1,11 +1,17 @@
 {
   "name": "RÚV Live",
   "description": "Live TV from RÚV, the Icelandic national broadcaster: the RÚV and RÚV 2 channels, with the running schedule and rewind inside the live window (not affiliated with RÚV)",
+  "category": "iptv",
+  "group": "RÚV",
   "repo": "sverrirs/ruv-live-samsung",
   "repo_label": "RÚV Live",
   "source": "release",
   "branch": "master",
   "assets": [
-    { "match": "RUVLive.wgt", "output_name": "RUVLive.wgt" }
+    {
+      "match": "RUVLive.wgt",
+      "variant": "Sjónvarp · live TV",
+      "output_name": "RUVLive.wgt"
+    }
   ]
 }

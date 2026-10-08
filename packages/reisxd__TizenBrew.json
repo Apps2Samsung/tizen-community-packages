@@ -1,6 +1,7 @@
 {
   "name": "TizenBrew",
   "description": "A way to experience modded websites and you can install newer apps without fighting with Tizen Studio.",
+  "category": "tools",
   "repo": "reisxd/TizenBrew",
   "source": "release",
   "branch": "release",

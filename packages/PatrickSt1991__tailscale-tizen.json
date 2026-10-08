@@ -1,10 +1,14 @@
 {
   "name": "Tailscale",
   "description": "Tailscale exit-node app for Samsung Tizen TV (experimental; advertises the TV as a tailnet exit node).",
+  "category": "tools",
   "repo": "PatrickSt1991/tailscale-tizen",
   "source": "release",
   "branch": "main",
   "assets": [
-    { "match": "\\.tpk$", "output_name": "Tailscale.tpk" }
+    {
+      "match": "\\.tpk$",
+      "output_name": "Tailscale.tpk"
+    }
   ]
 }

@@ -1,6 +1,7 @@
 {
   "name": "Kick TV 2.0",
   "description": "Kick live streams and public archives for Samsung Tizen TVs.",
+  "category": "streaming",
   "repo": "janrydzewski/kick-tv-2.0",
   "source": "release",
   "branch": "main",
