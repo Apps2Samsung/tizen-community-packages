@@ -32,6 +32,7 @@ Examples: `PatrickSt1991/flixor-tizen` → `packages/PatrickSt1991__flixor-tizen
 |-------|------|-------|
 | `name` | string | Display name in the README table. No `\|` or newlines. |
 | `description` | string | One-line description for the README table. No `\|` or newlines. |
+| `category` | enum | Where the app shows up when the Apps2Samsung list is filtered — see [Category, group and variant](#%EF%B8%8F-category-group-and-variant). |
 | `repo` | string | `owner/repo` on the forge named by `host` (GitHub by default). Used as the manifest key, the README link, and (for `build`/`release`) the API target. |
 | `source` | enum | One of `release`, `build`, `direct` — see below. |
 
@@ -40,6 +41,8 @@ Examples: `PatrickSt1991/flixor-tizen` → `packages/PatrickSt1991__flixor-tizen
 | Field | Type | Notes |
 |-------|------|-------|
 | `repo_label` | string | Link text for the README's Repository column. Defaults to the repo owner. |
+| `group` | string | Folds this package into one Apps2Samsung entry together with every other package that names the same group (the Moonlight forks). A package with several `assets[]` folds by itself. |
+| `variant` | string | Label for this package's file inside its group, e.g. `OneLiberty · Chrome`. Single-file packages only; with `assets[]` put `variant` on each asset entry. Defaults to the file name. |
 | `output_name` | string | Filename inside the bundle. Must end in `.wgt` or `.tpk`. Required for every type **except** a `release` that uses `assets[]`. |
 | `extract` | string | Only when upstream ships the package **inside a `.zip`**. Entry name or regex to pull out of the archive — see [Zip-wrapped downloads](#-zip-wrapped-downloads). |
 | `enabled` | boolean | `false` retires the package without deleting the file — see [Retiring a package](#-retiring-a-package). Defaults to `true`. |
@@ -62,6 +65,57 @@ Examples: `PatrickSt1991/flixor-tizen` → `packages/PatrickSt1991__flixor-tizen
 
 For a `release`, `output_name` and `assets[]` are **mutually exclusive** — use exactly one. With
 `assets[]`, put `extract` on the individual asset entry rather than at the top level.
+
+---
+
+## 🏷️ Category, group and variant
+
+Apps2Samsung reads a `catalog.json` from every community release (built by
+[`../scripts/build-catalog.sh`](../scripts/build-catalog.sh), one entry per shipped file) and uses it
+to filter the app list and to fold variants of the same app into one entry.
+
+**`category`** is required and is one of:
+
+| Value | Shown as | What goes here |
+|-------|----------|----------------|
+| `media` | Media servers & players | Clients for Jellyfin, Plex, Kodi, Immich, music servers; local USB / DLNA / SMB players |
+| `iptv` | IPTV & Live TV | M3U / Xtream / Stalker players, live TV and broadcaster apps |
+| `streaming` | Streaming | Clients for streaming services and sites: YouTube, Twitch, Kick, anime, Nuvio, Stremio |
+| `games` | Games & emulators | Games, emulators and game streaming (Moonlight, Chiaki) |
+| `casting` | Casting & cameras | AirPlay / FCast receivers, IP camera and NVR viewers |
+| `tools` | Tools & system | Browsers, loaders, network and system utilities |
+| `other` | Other | Anything that fits none of the above |
+
+**`group`** folds packages together. Every package that names the same group becomes one entry in the
+Apps2Samsung app list, and its files are offered in a variant picker. Use it when several repos ship
+the same app (forks, a web and a native build):
+
+```json
+{
+  "name": "Moonlight (No Gamemode)",
+  "description": "Open-source client for NVIDIA GameStream and Sunshine with gamemode disabled.",
+  "category": "games",
+  "group": "Moonlight",
+  "variant": "MrPhaze62 · No Gamemode",
+  "repo": "MrPhaze62/moonlight-chrome-tizen-no-gamemode",
+  "source": "release",
+  "branch": "main",
+  "output_name": "Moonlight-Chrome-NoGame.wgt"
+}
+```
+
+A package with **several `assets[]`** is folded by itself (its group defaults to its `name`), so it only
+needs a `variant` per asset:
+
+```json
+"assets": [
+  { "match": "Overscan-tizen4.tpk", "variant": "Tizen 4", "output_name": "Overscan-tizen4.tpk" },
+  { "match": "Overscan-nui.tpk",    "variant": "Tizen 9", "output_name": "Overscan-tizen9.tpk" }
+]
+```
+
+Without a `variant` the picker shows the file name without its extension. Keep variant labels short
+and distinctive within the group: the fork or author, the Tizen version range, or what differs.
 
 ---
 
@@ -291,6 +345,7 @@ schema-checked, so removing the line is all it takes to bring the app back.
 
 - File is named `packages/<owner>__<repo>.json`.
 - `name` and `description` contain no `|` or newlines (they land in a Markdown table).
+- `category` is one of the seven values above; if the app belongs with an existing one, set the same `group`.
 - The fields match your `source` (see the table above) — the schema rejects mismatches, e.g. `url`
   on a `release`, or both `output_name` and `assets` on the same `release`.
 - `output_name` ends in `.wgt` or `.tpk`.

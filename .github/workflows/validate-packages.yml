@@ -86,6 +86,9 @@ jobs:
       - name: Manifests compile cleanly
         run: bash scripts/build-manifests.sh
 
+      - name: Catalog compiles cleanly
+        run: bash scripts/build-catalog.sh packages "$RUNNER_TEMP/catalog.json"
+
       - name: Reachability (warnings only)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
