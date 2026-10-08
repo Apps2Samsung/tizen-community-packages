@@ -1,8 +1,14 @@
 {
-    "name": "Pelagica",
-    "description": "A modern web, desktop and TV client for Jellyfin",
-    "repo": "PelagicaApp/pelagica",
-    "source": "release",
-    "branch": "release",
-    "assets": [{ "match": "^pelagica-tizen-.*\\.wgt$", "output_name": "pelagica-tizen.wgt" }]
+  "name": "Pelagica",
+  "description": "A modern web, desktop and TV client for Jellyfin",
+  "category": "media",
+  "repo": "PelagicaApp/pelagica",
+  "source": "release",
+  "branch": "release",
+  "assets": [
+    {
+      "match": "^pelagica-tizen-.*\\.wgt$",
+      "output_name": "pelagica-tizen.wgt"
+    }
+  ]
 }

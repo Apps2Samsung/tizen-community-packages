@@ -1,11 +1,20 @@
 {
   "name": "Sonance3",
   "description": "A music player for Samsung Tizen TVs, built to stream from your self-hosted Navidrome or Subsonic-compatible server.",
+  "category": "media",
   "repo": "MrSimmo/sonance3",
   "source": "release",
   "branch": "main",
   "assets": [
-    { "match": "Sonance3.wgt", "output_name": "Sonance3.wgt" },
-    { "match": "Sonance3-Oblong.wgt", "output_name": "Sonance3-Oblong.wgt" }
+    {
+      "match": "Sonance3.wgt",
+      "variant": "Standard",
+      "output_name": "Sonance3.wgt"
+    },
+    {
+      "match": "Sonance3-Oblong.wgt",
+      "variant": "Oblong tile",
+      "output_name": "Sonance3-Oblong.wgt"
+    }
   ]
 }

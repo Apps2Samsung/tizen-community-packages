@@ -1,12 +1,21 @@
 {
   "name": "StreamVault",
   "description": "IPTV streaming app for Samsung Tizen TVs built with React, TypeScript, and Zustand.",
+  "category": "iptv",
   "repo": "christopherklint97/streamvault",
   "repo_label": "StreamVault",
   "source": "release",
   "branch": "main",
   "assets": [
-    { "match": "StreamVault-tizen5-unsigned.wgt",  "output_name": "StreamVault-tizen5.wgt" },
-    { "match": "StreamVault-default-unsigned.wgt", "output_name": "StreamVault.wgt" }
+    {
+      "match": "StreamVault-tizen5-unsigned.wgt",
+      "variant": "Tizen 5",
+      "output_name": "StreamVault-tizen5.wgt"
+    },
+    {
+      "match": "StreamVault-default-unsigned.wgt",
+      "variant": "Standard",
+      "output_name": "StreamVault.wgt"
+    }
   ]
 }

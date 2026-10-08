@@ -1,11 +1,12 @@
 {
   "name": "Fireplace",
   "description": "Transform your Samsung Smart TV into a fireplace.",
+  "category": "other",
   "repo": "thonythony/fireplace",
+  "enabled": false,
   "source": "build",
   "branch": "master",
   "project_path": ".",
-  "enabled": false,
   "skip_npm": true,
   "output_name": "Fireplace.wgt"
 }

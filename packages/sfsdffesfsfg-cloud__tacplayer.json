@@ -1,6 +1,7 @@
 {
   "name": "tacplayer",
   "description": "Custom Jellyfin Tizen client with cinematic red UI for Samsung TV",
+  "category": "media",
   "repo": "sfsdffesfsfg-cloud/tacplayer",
   "source": "release",
   "branch": "v0.1.0",

@@ -1,6 +1,8 @@
 {
   "name": "Moonlight-Tizen",
   "description": "Open-source client for NVIDIA GameStream and Sunshine Tizen OS 5.5 or higher.",
+  "category": "games",
+  "group": "Moonlight",
   "repo": "brightcraft/moonlight-tizen",
   "repo_label": "BrightCraft",
   "source": "release",
@@ -8,10 +10,12 @@
   "assets": [
     {
       "match": "Moonlight.wgt",
+      "variant": "brightcraft · Tizen",
       "output_name": "Moonlight-Tizen.wgt"
     },
     {
       "match": "Moonlight-ForceGM.wgt",
+      "variant": "brightcraft · Tizen ForceGM",
       "output_name": "Moonlight-ForceGM-Tizen.wgt"
     }
   ]

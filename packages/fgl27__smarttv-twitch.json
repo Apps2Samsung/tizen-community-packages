@@ -1,6 +1,7 @@
 {
   "name": "Twitch",
   "description": "Twitch client for Samsung Smart TVs 2015 and newer models.",
+  "category": "streaming",
   "repo": "fgl27/smarttv-twitch",
   "source": "build",
   "branch": "master",

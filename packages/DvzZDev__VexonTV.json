@@ -1,6 +1,7 @@
 {
   "name": "VexonTV",
   "description": "Live TV player for Samsung Tizen TVs: M3U, Xtream Codes and Stalker portals, provider EPG and a remote-first interface.",
+  "category": "iptv",
   "repo": "DvzZDev/VexonTV",
   "repo_label": "VexonTV",
   "source": "build",

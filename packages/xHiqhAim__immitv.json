@@ -1,9 +1,10 @@
 {
   "name": "ImmiTV",
   "description": "Lightweight Immich photo and video client for Samsung Tizen 4.0 TVs: remote-control navigation, hardware-accelerated AVPlay video playback and a month-based timeline.",
+  "category": "media",
   "repo": "xHiqhAim/immitv",
-  "repo_label": "xHiqhAim",
   "host": "gitlab",
+  "repo_label": "xHiqhAim",
   "source": "build",
   "branch": "main",
   "skip_npm": true,

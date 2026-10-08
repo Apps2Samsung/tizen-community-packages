@@ -1,10 +1,14 @@
 {
   "name": "EN TV Player",
   "description": "IPTV player for Samsung Tizen TVs with DRM support, M3U/M3U8 playlists, groups and live TV.",
+  "category": "iptv",
   "repo": "Nur-allhi/en-tvplayer",
   "source": "release",
   "branch": "main",
   "assets": [
-    { "match": "EN-IPTV_Player_v.*[.]wgt$", "output_name": "EN-IPTV_Player.wgt" }
+    {
+      "match": "EN-IPTV_Player_v.*[.]wgt$",
+      "output_name": "EN-IPTV_Player.wgt"
+    }
   ]
 }

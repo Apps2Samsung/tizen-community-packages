@@ -1,6 +1,7 @@
 {
   "name": "Reiverr",
   "description": "A clean combined interface for Jellyfin, TMDB, Radarr and Sonarr, as well as a replacement to Overseerr.",
+  "category": "media",
   "repo": "aleksilassila/reiverr",
   "source": "build",
   "branch": "master",

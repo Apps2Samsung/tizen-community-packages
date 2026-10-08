@@ -1,10 +1,14 @@
 {
   "name": "Tessel",
   "description": "Media player for Samsung TVs: SMB shares, USB drives, network streams and subtitles, with an optional transcode server (formerly VLC-Tizen-tv).",
+  "category": "media",
   "repo": "PatrickSt1991/tessel-tizen-tv",
   "source": "release",
   "branch": "release",
   "assets": [
-    { "match": "^(tessel|vlctv)\\.wgt$", "output_name": "Tessel.wgt" }
+    {
+      "match": "^(tessel|vlctv)\\.wgt$",
+      "output_name": "Tessel.wgt"
+    }
   ]
 }

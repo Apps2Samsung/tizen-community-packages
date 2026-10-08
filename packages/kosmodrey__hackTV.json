@@ -1,6 +1,7 @@
 {
   "name": "HackTV",
   "description": "IPTV client for Samsung Tizen TVs.",
+  "category": "iptv",
   "repo": "kosmodrey/hackTV",
   "source": "build",
   "branch": "master",

@@ -1,6 +1,7 @@
 {
   "name": "React IPTV",
   "description": "IPTV player for Samsung Tizen TV, built with React.",
+  "category": "iptv",
   "repo": "anandsimmy/react-iptv",
   "source": "build",
   "branch": "main",

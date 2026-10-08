@@ -1,6 +1,7 @@
 {
   "name": "TizenFeed",
   "description": "News / RSS feed sample app for Tizen TV.",
+  "category": "other",
   "repo": "judithsirera/TizenFeed",
   "source": "build",
   "branch": "master",

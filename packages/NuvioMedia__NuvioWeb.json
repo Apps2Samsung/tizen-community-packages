@@ -1,12 +1,15 @@
 {
   "name": "Nuvio",
   "description": "TV-first streaming UI for Samsung Tizen.",
+  "category": "streaming",
+  "group": "Nuvio",
   "repo": "NuvioMedia/NuvioWeb",
   "source": "release",
   "branch": "main",
   "assets": [
     {
       "match": "NuvioTV-Tizen-.*[.]wgt$",
+      "variant": "Official web app",
       "output_name": "NuvioTV-Official.wgt"
     }
   ]
