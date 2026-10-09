@@ -10,7 +10,7 @@
   "build:kosmodrey/hackTV@master": "bf27ba91bac71291f072c45040e7bbd58ac9885e",
   "build:matifDreamIt/IPTV-Tizen-TV@main": "d8eb66b9874d54a225cf584824544925e7dd521f",
   "build:vzakharchenko/rtsp-samsung-tv@master": "3aefa3405202ef54bcf32a5a71a47160938addd4",
-  "build:xHiqhAim/immitv@main": "b501c4763b4fdf1a8fcbe3bc54aedb25773927b1",
+  "build:xHiqhAim/immitv@main": "1e581054d3a8c37d1ae7fb7c96396b179f8122d5",
   "release:AdvaithAvinash/AniUltimatium": "betav1.01",
   "release:Apps2Samsung/Overscan": "build-6201042",
   "release:AquaPlayIPTV/aquaplay-samsung": "v1.0.46",
@@ -26,7 +26,7 @@
   "release:PatrickSt1991/chorus2-tizen": "tizen-v21.x-1.0.1-2026-05-21-1443",
   "release:PatrickSt1991/flixor-tizen": "v1.0.1-2026-07-24-1215",
   "release:PatrickSt1991/tailscale-tizen": "tv8-tester",
-  "release:PatrickSt1991/tessel-tizen-tv": "v1.24.2-20261007-1242",
+  "release:PatrickSt1991/tessel-tizen-tv": "v1.25.0-20261009-0741",
   "release:PatrickSt1991/tex-tizen": "tex-tizen-v1.3.0-2026-06-09-0952",
   "release:PelagicaApp/pelagica": "4.11.2",
   "release:SushyDev/tizen-youtube": "v1.4.0",
@@ -53,7 +53,7 @@
   "direct:TizenTVWebApp/TVideoPlayer": "etag:\"5ffe8d0002722208c57393676c1d5d0e8f0e0592c1a511f275505455c2d63349\"|mod:|len:61404893",
   "direct:TizenTVWebApp/TizenTVAudioRecorder": "etag:\"ee5fea95757fb79a31daae30de7054e27323fe8b30e8fca6f38cb195e7f03c02\"|mod:|len:29724428",
   "direct:futo-org/FCastReceiver": "etag:\"ffdc59301ed48f6a265c93ec27b7b263\"|mod:Wed, 08 Oct 2025 17:07:02 GMT|len:6669120",
-  "direct:ihovsky/Reelo": "etag:\"6ac71e1d-7cec44\"|mod:Thu, 08 Oct 2026 04:37:49 GMT|len:8186948",
+  "direct:ihovsky/Reelo": "etag:\"6ac81ba2-7e6c8d\"|mod:Thu, 08 Oct 2026 22:39:30 GMT|len:8285325",
   "direct:prog4food/ottplay-foss-thin-clients": "etag:\"0x8DAFBC24D128479\"|mod:Sat, 21 Jan 2023 15:15:16 GMT|len:10090",
   "direct:yadPe/PlayerAVPlay": "etag:\"86d18fae091a6bb45afea7897ba07656ac8c1c6123440d25cddd8ca944129b26\"|mod:|len:32385"
 }
