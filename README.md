@@ -1,7 +1,7 @@
 # 🌐 Tizen Community Packages
 [![Sync Tizen Community Packages](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml/badge.svg)](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Packages](https://img.shields.io/badge/packages-58-blue.svg)](#-current-packages)
+[![Packages](https://img.shields.io/badge/packages-59-blue.svg)](#-current-packages)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-green.svg)](../../issues)
 [![Tizen](https://img.shields.io/badge/Platform-Tizen-lightgrey.svg)](https://www.tizen.org/)
 [![Community](https://img.shields.io/badge/Community-Driven-orange.svg)](#)
@@ -46,7 +46,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Chiaki-Tizen** | Games & emulators | An open source PlayStation remote play project serving as the next-generation of Chiaki. | [Chiaki-Tizen](https://github.com/Trent407/chiaki-tizen) | `v0.2.0` |
 | **Chorus2-Tizen** | Media servers & players | Chorus2-Tizen (Kodi) Samsung Tizen. | [Chorus2-Tizen](https://github.com/PatrickSt1991/chorus2-tizen) | `tizen-v21.x-1.0.1-2026-05-21-1443` |
 | **Doom** | Games & emulators | A WebAssembly-powered port of Doom packaged as a Samsung Tizen TV application. | [dos-ise](https://github.com/dos-ise/doom-tizen) | `v1.1` |
-| **EN TV Player** | IPTV & Live TV | IPTV player for Samsung Tizen TVs with DRM support, M3U/M3U8 playlists, groups and live TV. | [Nur-allhi](https://github.com/Nur-allhi/en-tvplayer) | `v3.1.0` |
+| **EN TV Player** | IPTV & Live TV | IPTV player for Samsung Tizen TVs with DRM support, M3U/M3U8 playlists, groups and live TV. | [Nur-allhi](https://github.com/Nur-allhi/en-tvplayer) | `v3.2.0` |
 | **FCast** | Casting & cameras | FCast is an open source protocol that enables wireless streaming of audio and video content between devices. | [futo-org](https://github.com/futo-org/FCastReceiver) | `Wed, 08 Oct 2025 17:07:02 GMT` |
 | **Fladder** | Media servers & players | Jellyfin client for Samsung Tizen TV, built with Flutter (native .tpk). | [popdollar](https://github.com/popdollar/Fladder-Tizen) | `Tizen` |
 | **Flixor-Tizen** | Media servers & players | Modern cross-platform Plex client. Ported to Tizen OS. | [Flixor-Tizen](https://github.com/PatrickSt1991/flixor-tizen) | `v1.0.1-2026-07-24-1215` |
@@ -79,6 +79,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **RTSP Camera Viewer** | Casting & cameras | Display RTSP streams from IP cameras on your Samsung TV, with numpad channel switching and a 4-camera grid. Requires the companion rtsp-samsung-tv server (Node or Docker) running on your LAN. | [vzakharchenko](https://github.com/vzakharchenko/rtsp-samsung-tv) | `3aefa34` |
 | **RÚV** | IPTV & Live TV | Apps for RÚV, the Icelandic national broadcaster: Sarpur on demand, Barnaefni for children, Unglingar for teens, Menntun for education, and Útvarp radio (not affiliated with RÚV) | [RÚV VOD](https://github.com/sverrirs/ruv-app-samsung) | `2026.08.25-2350` |
 | **RÚV Live** | IPTV & Live TV | Live TV from RÚV, the Icelandic national broadcaster: the RÚV and RÚV 2 channels, with the running schedule and rewind inside the live window (not affiliated with RÚV) | [RÚV Live](https://github.com/sverrirs/ruv-live-samsung) | `2026.08.25` |
+| **SamSUCKS** | Media servers & players | Fast from-scratch Plex client for Samsung Tizen 6.5+ TVs: smooth scrolling, hardware AVPlay playback with direct play, instant search, audio/subtitle picker and up-next autoplay. Plain JavaScript, no framework. | [rfaile313](https://github.com/rfaile313/samsucks) | `8ea8d72` |
 | **Sonance3** | Media servers & players | A music player for Samsung Tizen TVs, built to stream from your self-hosted Navidrome or Subsonic-compatible server. | [MrSimmo](https://github.com/MrSimmo/sonance3) | `v3.14` |
 | **Sportlink Club Viewer** | Other | Solution for sports clubs to display match information in real time and in a clear, organized way on screens throughout the club! | [PatrickSt1991](https://github.com/PatrickSt1991/Sportlink.Club.Info.Viewer) | `v1.0.5` |
 | **StreamVault** | IPTV & Live TV | IPTV streaming app for Samsung Tizen TVs built with React, TypeScript, and Zustand. | [StreamVault](https://github.com/christopherklint97/streamvault) | `wgt-v1.0.0-36161091307-1` |
