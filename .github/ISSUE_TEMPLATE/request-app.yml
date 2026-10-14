@@ -18,6 +18,7 @@ body:
         >   They're partner-signed and DRM-bound to the TV they shipped on: not redistributable, and a copied
         >   `.wgt` wouldn't activate anyway. Most Samsung TVs already have them built in.
         > - **Modded, cracked or "premium unlocked"** builds of paid apps or services.
+        > - **Don't ask us to port something to Tizen OS** we don't port we only maintain the community package and our own apps
         > - **Closed-source packages** with no license that permits redistribution.
         >
         > 🏨 On a **hospitality / hotel TV** (`HG…` model), side-loading isn't possible at all — developer mode
