@@ -1,0 +1,9 @@
+{
+  "name": "Kodi",
+  "description": "Unofficial WebAssembly port of Kodi for Samsung Tizen TVs (alpha).",
+  "category": "media",
+  "repo": "Ricrdsson1/kodi-tizen-wasm",
+  "source": "release",
+  "branch": "master",
+  "output_name": "Kodi-Samsung.wgt"
+}
