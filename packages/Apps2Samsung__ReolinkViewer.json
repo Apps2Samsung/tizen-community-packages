@@ -1,10 +1,13 @@
 {
   "name": "Reolink Viewer",
-  "description": "Watch a Reolink camera or NVR on your TV: enter its local IP and login, press Start. Plays the camera's own H.264 FLV stream over the LAN, no cloud or helper box.",
+  "description": "Watch a Reolink camera or NVR on your TV: enter its local IP and login, press Start. Plays the camera's H.264 FLV stream over the LAN, or H.265 main streams over RTSP through a relay inside the app (2018+ TVs). No cloud or helper box.",
   "category": "casting",
   "repo": "Apps2Samsung/ReolinkViewer",
   "repo_label": "Apps2Samsung",
   "source": "release",
   "branch": "main",
-  "output_name": "ReolinkViewer.wgt"
+  "assets": [
+    { "match": "^ReolinkViewer[.]wgt$", "output_name": "ReolinkViewer.wgt" },
+    { "match": "^ReolinkViewer-legacy[.]wgt$", "output_name": "ReolinkViewer-legacy.wgt" }
+  ]
 }
