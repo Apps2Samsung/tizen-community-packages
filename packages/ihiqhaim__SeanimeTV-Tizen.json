@@ -1,0 +1,10 @@
+{
+  "name": "SeanimeTV",
+  "description": "Unofficial Seanime client for Samsung Tizen TVs with torrent streaming and AVPlay playback.",
+  "category": "streaming",
+  "repo": "ihiqhaim/SeanimeTV-Tizen",
+  "source": "build",
+  "branch": "main",
+  "skip_npm": true,
+  "output_name": "SeanimeTV.wgt"
+}
