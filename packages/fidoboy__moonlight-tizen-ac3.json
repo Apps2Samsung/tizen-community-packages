@@ -1,0 +1,23 @@
+
+{
+  "name": "Moonlight (AC-3)",
+  "description": "Open-source Moonlight client for Samsung Tizen with optional Dolby Digital and Dolby Digital Plus optical-audio passthrough.",
+  "category": "games",
+  "group": "Moonlight",
+  "repo": "fidoboy/moonlight-tizen-ac3",
+  "repo_label": "fidoboy",
+  "source": "release",
+  "branch": "master",
+  "assets": [
+    {
+      "match": "Moonlight.wgt",
+      "variant": "fidoboy · Dolby",
+      "output_name": "Moonlight-AC3-fidoboy.wgt"
+    },
+    {
+      "match": "Moonlight-ForceGM.wgt",
+      "variant": "fidoboy · Dolby ForceGM",
+      "output_name": "Moonlight-AC3-fidoboy-ForceGM.wgt"
+    }
+  ]
+}
