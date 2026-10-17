@@ -39,9 +39,9 @@ from collections import Counter, defaultdict
 
 LEVELS = {"info": 0, "warn": 1, "critical": 2}
 
-# Privileges that go beyond what a normal sideloaded TV app needs. Tizen only honours
-# them when the package is signed with a partner/platform distributor certificate,
-# which no community build has - but a request for them is still worth a look.
+# Partner/platform-level privileges. Listed only so the report can mark them; a
+# request for one is NOT a finding: Tizen ignores privileges the signing certificate
+# does not cover, so a sideloaded app gains nothing by declaring them.
 ELEVATED_PRIVILEGES = {
     "http://tizen.org/privilege/appmanager.kill",
     "http://tizen.org/privilege/appmanager.certificate",
@@ -251,9 +251,7 @@ def parse_tpk_manifest(root_dir, add):
 
 def check_privileges(privs, add):
     for p in privs:
-        if p in ELEVATED_PRIVILEGES:
-            add("warn", "elevated-privilege", f"requests elevated privilege `{p}` (needs a partner/platform certificate to take effect)")
-        elif p in SENSITIVE_PRIVILEGES:
+        if p in SENSITIVE_PRIVILEGES:
             add("info", "sensitive-privilege", f"requests `{p}` ({SENSITIVE_PRIVILEGES[p]})")
 
 
@@ -347,7 +345,7 @@ def inventory(root_dir, kind, add):
             total += 1
             if ext in (".wgt", ".tpk"):
                 nested.append(rel)
-            if ext in NATIVE_EXT or ext == ".wasm":
+            if ext in NATIVE_EXT or ext in (".wasm", ".nexe", ".pexe"):
                 natives.append(rel)
                 continue
             try:
@@ -360,11 +358,12 @@ def inventory(root_dir, kind, add):
     if nested:
         add("critical", "nested-package", "contains another package: " + ", ".join(nested))
     if kind == "wgt":
-        real = [n for n in natives if not n.endswith(".wasm")]
+        compiled = tuple((".wasm", ".nexe", ".pexe"))
+        real = [n for n in natives if not n.endswith(compiled)]
         if real:
             add("warn", "native-in-webapp", "web app contains native binaries/scripts: " + ", ".join(real[:10]))
-        if any(n.endswith(".wasm") for n in natives):
-            add("info", "wasm", "contains WebAssembly modules (compiled code, not inspectable as text)")
+        if any(n.endswith(compiled) for n in natives):
+            add("info", "compiled-module", "contains WebAssembly / NaCl modules (compiled code, not inspectable as text)")
     return {"files": total, "by_extension": dict(by_ext.most_common()), "native": natives}
 
 
@@ -447,8 +446,7 @@ def render_md(results, meta):
     for r in results:
         m = r.get("manifest", {})
         n_hosts = len(r.get("code", {}).get("hosts", {}))
-        warn_privs = [p for p in m.get("privileges", []) if p in ELEVATED_PRIVILEGES]
-        privs = f"{len(m.get('privileges', []))}" + (f" ({len(warn_privs)} elevated)" if warn_privs else "")
+        privs = str(len(m.get("privileges", [])))
         signer = r.get("signers", {}).get("author-signature.xml", "")
         cn = re.search(r"CN\s*=\s*([^,/|]+)", signer)
         out.append(f"| `{r['file']}` | {BADGE.get(r['level'], r['level'])} | `{m.get('app_id') or m.get('package_id') or '?'}` | {m.get('version') or '?'} | {privs} | {n_hosts} | {cn.group(1).strip() if cn else '—'} |")
@@ -478,7 +476,7 @@ def render_md(results, meta):
         privs = m.get("privileges", [])
         if privs:
             out.append(f"- **Privileges ({len(privs)}):** " + ", ".join(
-                f"**`{p.rsplit('/', 1)[-1]}`**" if p in ELEVATED_PRIVILEGES else f"`{p.rsplit('/', 1)[-1]}`" for p in privs))
+                f"`{p.rsplit('/', 1)[-1]}`" + (" (partner-level, inert without a partner certificate)" if p in ELEVATED_PRIVILEGES else "") for p in privs))
         hosts = r.get("code", {}).get("hosts", {})
         if hosts:
             shown = list(hosts.items())[:40]

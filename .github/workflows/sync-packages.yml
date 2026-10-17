@@ -252,6 +252,7 @@ jobs:
         # Per-package scratch space that pre_build may reuse across runs for
         # expensive, pinned inputs (e.g. the jellyfin-web build at a fixed tag).
         # Keyed on the manifest, so editing pre_build starts from scratch.
+        if: matrix.pre_build != ''
         uses: actions/cache@v4
         with:
           path: ${{ runner.temp }}/build-cache
@@ -517,10 +518,13 @@ jobs:
 
       - name: Start ClamAV install (background)
         # apt runs while the artifacts download below; "Wait for ClamAV" joins it.
+        # The distro AppArmor profile confines freshclam to /etc/clamav and
+        # /var/lib/clamav, so it is unloaded to let it use the cached database dir.
         run: |
           sudo -E setsid nohup sh -c '
             apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -qq install -y --no-install-recommends clamav
             systemctl stop clamav-freshclam 2>/dev/null; systemctl disable clamav-freshclam 2>/dev/null
+            apparmor_parser -R /etc/apparmor.d/usr.bin.freshclam 2>/dev/null
             echo CLAMAV_INSTALL_DONE' > "$RUNNER_TEMP/clamav-install.log" 2>&1 &
 
       - name: Cache key for this week
@@ -560,8 +564,11 @@ jobs:
             if unzip -Z1 "$f" 2>/dev/null | grep -qiE '\.(wgt|tpk)$'; then
               echo "::warning title=Nested archive::$(basename "$f") contains a .wgt/.tpk - it is a zip wrapper, not a package. Set \"extract\" in its manifest. Dropping it from this bundle."
               rm -f "$f"
-            elif ! unzip -Z1 "$f" 2>/dev/null | grep -qx 'config.xml'; then
-              echo "::warning title=No config.xml::$(basename "$f") has no config.xml at its root - it may not be a valid package."
+            else
+              case "$f" in *.tpk) manifest=tizen-manifest.xml ;; *) manifest=config.xml ;; esac
+              if ! unzip -Z1 "$f" 2>/dev/null | grep -qx "$manifest"; then
+                echo "::warning title=No $manifest::$(basename "$f") has no $manifest at its root - it may not be a valid package."
+              fi
             fi
           done
 
