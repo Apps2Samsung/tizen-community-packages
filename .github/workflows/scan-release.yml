@@ -2,8 +2,9 @@ name: Scan Release Packages
 
 # On-demand security scan of an already published community bundle, or of the
 # latest one. Same scanner the sync runs before publishing
-# (scripts/scan-packages.py); this lets anyone re-run it, with fresh ClamAV
-# definitions, against any release and read the report in the job summary.
+# (scripts/scan-packages.py) and the same ClamAV definitions / verdict caches,
+# so a re-scan of an unchanged bundle takes seconds; pass full_rescan to ignore
+# cached verdicts and run ClamAV over every file again.
 
 on:
   workflow_dispatch:
@@ -12,6 +13,10 @@ on:
         description: 'Release tag to scan (e.g. community-123). Empty = latest release.'
         type: string
         default: ''
+      full_rescan:
+        description: 'Ignore cached ClamAV verdicts and rescan every file (~5 min)'
+        type: boolean
+        default: false
       attach:
         description: 'Attach scan-report.md / scan.json to that release (replaces existing)'
         type: boolean
@@ -27,6 +32,38 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+
+      - name: Start ClamAV install (background)
+        # Same recipe as the sync: apt runs while the bundle downloads, and the
+        # distro AppArmor profile is unloaded so freshclam can use the cached
+        # database directory in the workspace.
+        run: |
+          sudo -E setsid nohup sh -c '
+            apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -qq install -y --no-install-recommends clamav
+            systemctl stop clamav-freshclam 2>/dev/null; systemctl disable clamav-freshclam 2>/dev/null
+            apparmor_parser -R /etc/apparmor.d/usr.bin.freshclam 2>/dev/null
+            echo CLAMAV_INSTALL_DONE' > "$RUNNER_TEMP/clamav-install.log" 2>&1 &
+
+      - name: Cache key for this week
+        id: week
+        run: echo "week=$(date -u +%G-W%V)" >> "$GITHUB_OUTPUT"
+
+      - name: Restore ClamAV database cache
+        uses: actions/cache@v4
+        with:
+          path: clamav-db
+          key: clamav-db-${{ steps.week.outputs.week }}
+          restore-keys: clamav-db-
+
+      - name: Restore ClamAV verdict cache
+        # Read-only here: restore only, so an on-demand scan never pollutes the
+        # cache the sync relies on. The sync's latest entry of the week is used.
+        if: ${{ !inputs.full_rescan }}
+        uses: actions/cache/restore@v4
+        with:
+          path: clamav-verdicts.json
+          key: clamav-verdicts-${{ steps.week.outputs.week }}-readonly
+          restore-keys: clamav-verdicts-${{ steps.week.outputs.week }}-
 
       - name: Download release packages
         env:
@@ -45,16 +82,34 @@ jobs:
           gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --dir _scan -p '*.wgt' -p '*.tpk'
           ls -l _scan
 
-      - name: Install ClamAV
+      - name: Wait for ClamAV and refresh definitions
         run: |
-          sudo apt-get update -qq >/dev/null
-          sudo apt-get install -y -qq clamav >/dev/null
-          sudo systemctl stop clamav-freshclam 2>/dev/null || true
-          sudo freshclam --quiet || echo "::warning title=ClamAV::Could not refresh virus definitions; scanning with the installed set."
+          for i in $(seq 1 60); do
+            grep -q CLAMAV_INSTALL_DONE "$RUNNER_TEMP/clamav-install.log" 2>/dev/null && break
+            sleep 3
+          done
+          if ! command -v clamscan >/dev/null; then
+            echo "::warning title=ClamAV::Install did not finish; scanning without it."
+            tail -n 20 "$RUNNER_TEMP/clamav-install.log" || true
+            exit 0
+          fi
+          mkdir -p clamav-db
+          printf 'DatabaseMirror database.clamav.net\nDatabaseDirectory %s\nDatabaseOwner %s\n' "$PWD/clamav-db" "$(id -un)" > "$RUNNER_TEMP/freshclam.conf"
+          freshclam --config-file="$RUNNER_TEMP/freshclam.conf" --datadir="$PWD/clamav-db" \
+            || echo "::warning title=ClamAV::Could not refresh virus definitions; scanning with the cached set."
 
       - name: Security scan
+        env:
+          CLAMAV_DB: ${{ github.workspace }}/clamav-db
         run: |
-          python3 -I scripts/scan-packages.py _scan --json scan.json --md scan-report.md --fail-on never
+          cache_args=""
+          if [ "${{ inputs.full_rescan }}" != "true" ] && [ -f clamav-verdicts.json ]; then
+            # Work on a copy so the restored file is never modified.
+            cp clamav-verdicts.json "$RUNNER_TEMP/verdicts.json"
+            cache_args="--clamav-cache $RUNNER_TEMP/verdicts.json"
+          fi
+          python3 -I scripts/scan-packages.py _scan --json scan.json --md scan-report.md --fail-on never \
+            --clamav-jobs 4 $cache_args
           { echo "## Release \`$TAG\`"; echo; cat scan-report.md; } >> "$GITHUB_STEP_SUMMARY"
           # Surface critical hits as a failed job, but only after the report is written.
           if python3 -I -c 'import json,sys; sys.exit(any(p["level"]=="critical" for p in json.load(open("scan.json"))["packages"]))'; then
