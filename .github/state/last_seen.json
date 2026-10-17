@@ -15,7 +15,7 @@
   "build:titlog/bilibili-tizen@master": "76003faf3ae1a647a92c532b968e4896427530cb",
   "build:vzakharchenko/rtsp-samsung-tv@master": "3aefa3405202ef54bcf32a5a71a47160938addd4",
   "build:xHiqhAim/immitv@main": "76d693aeff9392efc4de1a793d67b2b10d80b423",
-  "release:AdvaithAvinash/AniUltimatium": "Stable-v1.07",
+  "release:AdvaithAvinash/AniUltimatium": "stable-v1.08",
   "release:Apps2Samsung/Overscan": "build-363c881",
   "release:Apps2Samsung/ReolinkViewer": "v1.1.0",
   "release:AquaPlayIPTV/aquaplay-samsung": "v1.0.49",
