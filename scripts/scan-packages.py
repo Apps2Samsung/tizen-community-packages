@@ -367,27 +367,52 @@ def inventory(root_dir, kind, add):
     return {"files": total, "by_extension": dict(by_ext.most_common()), "native": natives}
 
 
-def run_clamav(root_dir, add):
+def run_clamav(pkg_dir, files):
+    """One clamscan over the whole directory of packages.
+
+    clamscan loads the full signature database (~3.6M signatures, 10-20s) on
+    every invocation, so scanning per package is prohibitively slow. It unpacks
+    zip archives itself, so the .wgt/.tpk files are scanned directly and hits
+    are attributed to the package they were found in. Returns {file: status}.
+    """
     if not shutil.which("clamscan"):
-        return {"status": "not-run", "reason": "clamscan not installed"}
+        return {f: {"status": "not-run", "reason": "clamscan not installed"} for f in files}
+    cmd = ["clamscan", "--no-summary", "--infected", "--max-filesize=400M", "--max-scansize=1000M", "--max-files=100000"]
+    if os.environ.get("CLAMAV_DB"):
+        cmd.append("--database=" + os.environ["CLAMAV_DB"])
     try:
-        cmd = ["clamscan", "-r", "--no-summary", "--infected"]
-        if os.environ.get("CLAMAV_DB"):
-            cmd.append("--database=" + os.environ["CLAMAV_DB"])
-        r = subprocess.run(cmd + [root_dir], capture_output=True, text=True, timeout=900)
+        r = subprocess.run(cmd + [os.path.join(pkg_dir, f) for f in files], capture_output=True, text=True, timeout=1800)
     except subprocess.SubprocessError as e:
-        return {"status": "error", "reason": str(e)}
+        return {f: {"status": "error", "reason": str(e)} for f in files}
     if r.returncode == 0:
-        return {"status": "clean"}
-    if r.returncode == 1:
-        hits = [l.strip() for l in r.stdout.splitlines() if l.strip().endswith("FOUND")]
-        for h in hits:
-            add("critical", "clamav", h.replace(root_dir + os.sep, ""))
-        return {"status": "infected", "hits": hits}
-    return {"status": "error", "reason": (r.stderr or r.stdout).strip()[:500]}
+        return {f: {"status": "clean"} for f in files}
+    if r.returncode != 1:
+        reason = (r.stderr or r.stdout).strip()[:500]
+        return {f: {"status": "error", "reason": reason} for f in files}
+    out = {f: {"status": "clean"} for f in files}
+    for line in r.stdout.splitlines():
+        line = line.strip()
+        if not line.endswith("FOUND"):
+            continue
+        path, _, sig = line[: -len("FOUND")].rpartition(": ")
+        # clamscan reports "<package path>: <signature> FOUND"; nested entries
+        # are reported under the archive path as well.
+        name = os.path.basename(path.split("!")[0]) if path else ""
+        for f in files:
+            if name == f or path.startswith(os.path.join(pkg_dir, f)):
+                out[f] = {"status": "infected", "hits": out[f].get("hits", []) + [sig.strip()]}
+                break
+    return out
 
 
-def scan_package(path, use_clamav):
+def finalize(result):
+    """Recompute sort order and overall level after findings were added."""
+    result["findings"] = sorted(result["findings"], key=lambda f: -LEVELS[f["level"]])
+    result["level"] = max((f["level"] for f in result["findings"]), key=lambda l: LEVELS[l], default="clean") if result["findings"] else "clean"
+    return result
+
+
+def scan_package(path):
     findings = []
 
     def add(level, code, message, where=None):
@@ -420,7 +445,7 @@ def scan_package(path, use_clamav):
         result["signers"] = signer_subjects(tmp)
         result["inventory"] = inventory(tmp, kind, add)
         result["code"] = scan_code(tmp, add)
-        result["clamav"] = run_clamav(tmp, add) if use_clamav else {"status": "skipped"}
+        result["clamav"] = {"status": "skipped"}
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
     result["findings"] = [f.to_dict() for f in sorted(findings, key=lambda f: -LEVELS[f.level])]
@@ -500,11 +525,19 @@ def main():
     from concurrent.futures import ProcessPoolExecutor
     workers = max(1, min(len(files), os.cpu_count() or 1))
     with ProcessPoolExecutor(max_workers=workers) as pool:
-        futures = [(f, pool.submit(scan_package, os.path.join(args.dir, f), not args.no_clamav)) for f in files]
+        futures = [(f, pool.submit(scan_package, os.path.join(args.dir, f))) for f in files]
         for f, fut in futures:
             r = fut.result()
             print(f"scanned {f}: {r['level']}", flush=True)
             results.append(r)
+    if not args.no_clamav and files:
+        print("clamscan over the whole bundle ...", flush=True)
+        clam = run_clamav(args.dir, files)
+        for r in results:
+            r["clamav"] = clam.get(r["file"], {"status": "error", "reason": "no result"})
+            for sig in r["clamav"].get("hits", []):
+                r["findings"].append({"level": "critical", "code": "clamav", "message": f"ClamAV: {sig}"})
+            finalize(r)
     for r in results:
         f = r["file"]
         for fd in r["findings"]:
