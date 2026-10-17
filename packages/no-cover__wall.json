@@ -1,0 +1,9 @@
+{
+  "name": "Wall",
+  "description": "Digital photo frame for Samsung Tizen TVs: give it the URL of a ZIP of images, it downloads them and runs a configurable slideshow, with a background service that auto-starts it on boot.",
+  "category": "other",
+  "repo": "no-cover/wall",
+  "source": "release",
+  "branch": "master",
+  "output_name": "Wall.wgt"
+}

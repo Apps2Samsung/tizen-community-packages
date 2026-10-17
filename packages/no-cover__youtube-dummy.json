@@ -1,0 +1,9 @@
+{
+  "name": "YouTube Dummy",
+  "description": "Lightweight wrapper around youtube.com/tv that injects the TizenTube userscript (ad-free, SponsorBlock), handles remote-control navigation and exits cleanly back to Smart Hub.",
+  "category": "streaming",
+  "repo": "no-cover/youtube-dummy",
+  "source": "release",
+  "branch": "master",
+  "output_name": "youtube-dummy.wgt"
+}
