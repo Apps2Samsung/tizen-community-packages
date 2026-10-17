@@ -345,6 +345,13 @@ jobs:
             bash -lc "$PRE_BUILD"
           fi
 
+          # The Tizen packager zips the whole project directory, so a project at the
+          # repo root would ship its .git history inside the .wgt (TizenFeed was
+          # 70MB of mostly git objects) and the package would differ on every
+          # build because of clone timestamps. The clone and pre_build are done
+          # with it by now.
+          rm -rf "$repo_root/.git"
+
           cd "$repo_root/$PROJECT_PATH"
 
           # Optional overlay: copy apps/<overlay>/ over the project before packaging
