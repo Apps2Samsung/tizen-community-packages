@@ -218,6 +218,7 @@ jobs:
             '{include: [to_entries[] | {
               repo: .key,
               repo_id: (.key | gsub("/"; "-")),
+              manifest: ("packages/" + (.key | gsub("/"; "__")) + ".json"),
               branch: .value.branch,
               project_path: (.value.project_path // "."),
               output_name: (.value.output_name // ""),
@@ -254,7 +255,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ runner.temp }}/build-cache
-          key: build-cache-${{ matrix.repo_id }}-${{ hashFiles(format('packages/{0}.json', replace(matrix.repo, '/', '__'))) }}
+          key: build-cache-${{ matrix.repo_id }}-${{ hashFiles(matrix.manifest) }}
       # PR #59: upstream apps increasingly require Node 24 (e.g. jellyfin-web).
       # This is the job that actually runs npm / pre_build, so it belongs here,
       # not in prepare (which never touches node).
