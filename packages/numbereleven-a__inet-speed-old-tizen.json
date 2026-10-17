@@ -1,0 +1,11 @@
+{
+  "name": "inet-speed-old-tizen",
+  "description": "Internet diagnostics for Samsung Tizen 2.4+ TVs: response times of popular sites and download speed from Cloudflare, Fastly and HOSTKEY test CDNs, plus TV model, firmware and network info. English and Russian UI. No proxy or server needed.",
+  "category": "tools",
+  "repo": "numbereleven-a/inet-speed-old-tizen",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "inet-speed-old-tizen-.*[.]zip$", "extract": "[.]wgt$", "output_name": "inet-speed-old-tizen.wgt" }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "RetroArch",
+  "description": "RetroArch (libretro WebAssembly) for Samsung Tizen 6.5+ TVs: remote-driven launcher, gamepad support, ROMs from a USB drive or a network folder. Emulator cores are downloaded on first start, so the TV needs internet access.",
+  "category": "games",
+  "repo": "Sype0/retroarch-tizen",
+  "source": "release",
+  "branch": "main",
+  "output_name": "RetroArch.wgt"
+}

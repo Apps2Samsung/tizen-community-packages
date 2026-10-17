@@ -1,0 +1,9 @@
+{
+  "name": "Camera PiP",
+  "description": "Doorbell and driveway cameras on a Samsung Tizen TV: pops up on a trigger (Home Assistant or any webhook), plays through the hardware decoder so the app behind it keeps running, and fires actions like opening the gate from the remote. Needs go2rtc or another HLS/MJPEG source; cameras are configured at build time.",
+  "category": "casting",
+  "repo": "dzikus/tizen-camera-pip",
+  "source": "release",
+  "branch": "main",
+  "output_name": "CameraPip.wgt"
+}

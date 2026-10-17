@@ -1,0 +1,11 @@
+{
+  "name": "Simple TV Player",
+  "description": "Minimal jQuery and hls.js channel player for Samsung Tizen 6.0+ TVs. Plays the M3U8 channel list served by the author's API (free-to-air Brazilian channels), navigated with the remote arrows.",
+  "category": "iptv",
+  "repo": "RandoMixs/simple-tv-player",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "TV-Player.wgt", "output_name": "Simple-TV-Player.wgt" }
+  ]
+}
