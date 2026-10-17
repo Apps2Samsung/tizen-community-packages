@@ -367,30 +367,16 @@ def inventory(root_dir, kind, add):
     return {"files": total, "by_extension": dict(by_ext.most_common()), "native": natives}
 
 
-def run_clamav(pkg_dir, files):
-    """One clamscan over the whole directory of packages.
+# Parsers for file types that never occur in a Tizen package (mail, Office,
+# PDF, Flash, Hangul) are disabled: they probe every file and cost minutes on a
+# full bundle for nothing. HTML/JS normalization stays on: that is where the
+# script-malware signatures apply.
+CLAMSCAN_FLAGS = ["--no-summary", "--infected", "--max-filesize=400M", "--max-scansize=1000M", "--max-files=100000",
+                  "--scan-mail=no", "--scan-ole2=no", "--scan-pdf=no", "--scan-swf=no", "--scan-xmldocs=no", "--scan-hwp3=no"]
 
-    clamscan loads the full signature database (~3.6M signatures, 10-20s) on
-    every invocation, so scanning per package is prohibitively slow. It unpacks
-    zip archives itself, so the .wgt/.tpk files are scanned directly and hits
-    are attributed to the package they were found in. Returns {file: status}.
-    """
-    if not shutil.which("clamscan"):
-        return {f: {"status": "not-run", "reason": "clamscan not installed"} for f in files}
-    cmd = ["clamscan", "--no-summary", "--infected", "--max-filesize=400M", "--max-scansize=1000M", "--max-files=100000"]
-    if os.environ.get("CLAMAV_DB"):
-        cmd.append("--database=" + os.environ["CLAMAV_DB"])
-    try:
-        r = subprocess.run(cmd + [os.path.join(pkg_dir, f) for f in files], capture_output=True, text=True, timeout=1800)
-    except subprocess.SubprocessError as e:
-        return {f: {"status": "error", "reason": str(e)} for f in files}
-    if r.returncode == 0:
-        return {f: {"status": "clean"} for f in files}
-    if r.returncode != 1:
-        reason = (r.stderr or r.stdout).strip()[:500]
-        return {f: {"status": "error", "reason": reason} for f in files}
-    out = {f: {"status": "clean"} for f in files}
-    for line in r.stdout.splitlines():
+
+def _parse_clamscan(stdout, pkg_dir, files, out):
+    for line in stdout.splitlines():
         line = line.strip()
         if not line.endswith("FOUND"):
             continue
@@ -402,7 +388,67 @@ def run_clamav(pkg_dir, files):
             if name == f or path.startswith(os.path.join(pkg_dir, f)):
                 out[f] = {"status": "infected", "hits": out[f].get("hits", []) + [sig.strip()]}
                 break
+
+
+def run_clamav(pkg_dir, files, jobs=1):
+    """clamscan over a set of packages, in `jobs` size-balanced parallel chunks.
+
+    clamscan loads the full signature database (~3.6M signatures, 5-20s) per
+    invocation and then scans at only a few MB/s, so the work is split into a
+    few chunks balanced by file size rather than one call per package. It
+    unpacks zip archives itself, so the .wgt/.tpk files are scanned directly
+    and hits are attributed to the package they were found in.
+    Returns {file: status}.
+    """
+    if not files:
+        return {}
+    if not shutil.which("clamscan"):
+        return {f: {"status": "not-run", "reason": "clamscan not installed"} for f in files}
+    cmd = ["clamscan"] + CLAMSCAN_FLAGS
+    if os.environ.get("CLAMAV_DB"):
+        cmd.append("--database=" + os.environ["CLAMAV_DB"])
+    # Greedy balancing: biggest file first into the currently lightest chunk.
+    jobs = max(1, min(jobs, len(files)))
+    chunks = [[] for _ in range(jobs)]
+    load = [0] * jobs
+    for f in sorted(files, key=lambda f: -os.path.getsize(os.path.join(pkg_dir, f))):
+        i = load.index(min(load))
+        chunks[i].append(f)
+        load[i] += os.path.getsize(os.path.join(pkg_dir, f))
+    procs = []
+    for chunk in chunks:
+        if chunk:
+            procs.append((chunk, subprocess.Popen(cmd + [os.path.join(pkg_dir, f) for f in chunk],
+                                                  stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)))
+    out = {}
+    for chunk, p in procs:
+        try:
+            stdout, stderr = p.communicate(timeout=1800)
+        except subprocess.TimeoutExpired:
+            p.kill()
+            out.update({f: {"status": "error", "reason": "clamscan timed out"} for f in chunk})
+            continue
+        if p.returncode in (0, 1):
+            out.update({f: {"status": "clean"} for f in chunk})
+            if p.returncode == 1:
+                _parse_clamscan(stdout, pkg_dir, chunk, out)
+        else:
+            reason = (stderr or stdout).strip()[:500]
+            out.update({f: {"status": "error", "reason": reason} for f in chunk})
     return out
+
+
+def clamav_db_version():
+    """Best-effort label of the signature set in use (for the verdict cache)."""
+    db = os.environ.get("CLAMAV_DB") or "/var/lib/clamav"
+    parts = []
+    for name in ("main", "daily", "bytecode"):
+        for ext in (".cld", ".cvd"):
+            path = os.path.join(db, name + ext)
+            if os.path.isfile(path):
+                parts.append(f"{name}:{os.path.getsize(path)}:{int(os.path.getmtime(path))}")
+                break
+    return ",".join(parts) or "unknown"
 
 
 def finalize(result):
@@ -518,6 +564,8 @@ def main():
     ap.add_argument("--fail-on", choices=["critical", "warn", "never"], default="critical")
     ap.add_argument("--quarantine", metavar="DIR", help="move packages with critical findings here instead of leaving them in DIR")
     ap.add_argument("--no-clamav", action="store_true")
+    ap.add_argument("--clamav-jobs", type=int, default=max(1, os.cpu_count() or 1), help="parallel clamscan processes (default: CPU count)")
+    ap.add_argument("--clamav-cache", metavar="FILE", help="JSON file of ClamAV verdicts keyed by sha256; packages already in it are not rescanned, new verdicts are added")
     args = ap.parse_args()
 
     files = sorted(f for f in os.listdir(args.dir) if f.lower().endswith((".wgt", ".tpk")))
@@ -530,9 +578,38 @@ def main():
             r = fut.result()
             print(f"scanned {f}: {r['level']}", flush=True)
             results.append(r)
+    clam_cached = 0
     if not args.no_clamav and files:
-        print("clamscan over the whole bundle ...", flush=True)
-        clam = run_clamav(args.dir, files)
+        cache = {}
+        if args.clamav_cache and os.path.isfile(args.clamav_cache):
+            try:
+                with open(args.clamav_cache) as fh:
+                    cache = json.load(fh)
+            except (OSError, ValueError):
+                cache = {}
+        clam = {}
+        to_scan = []
+        for r in results:
+            hit = cache.get(r["sha256"]) if isinstance(cache, dict) else None
+            if hit and hit.get("status") in ("clean", "infected"):
+                clam[r["file"]] = dict(hit, cached=True)
+                clam_cached += 1
+            else:
+                to_scan.append(r["file"])
+        if to_scan:
+            print(f"clamscan: {len(to_scan)} package(s) to scan, {clam_cached} verdict(s) from cache, {args.clamav_jobs} parallel ...", flush=True)
+            fresh = run_clamav(args.dir, to_scan, jobs=args.clamav_jobs)
+            clam.update(fresh)
+            dbv = clamav_db_version()
+            for r in results:
+                v = fresh.get(r["file"])
+                if v and v.get("status") in ("clean", "infected"):
+                    cache[r["sha256"]] = dict(v, db=dbv)
+            if args.clamav_cache:
+                with open(args.clamav_cache, "w") as fh:
+                    json.dump(cache, fh)
+        else:
+            print(f"clamscan: all {clam_cached} verdict(s) from cache.", flush=True)
         for r in results:
             r["clamav"] = clam.get(r["file"], {"status": "error", "reason": "no result"})
             for sig in r["clamav"].get("hits", []):
@@ -555,7 +632,7 @@ def main():
     clam = "not run"
     statuses = {r.get("clamav", {}).get("status") for r in results}
     if statuses and statuses <= {"clean", "infected"}:
-        clam = "ran on every package"
+        clam = "ran on every package" + (f" ({clam_cached} verdict(s) reused from an earlier scan of the identical file)" if clam_cached else "")
     elif "clean" in statuses or "infected" in statuses:
         clam = "ran on some packages"
     elif "skipped" in statuses:

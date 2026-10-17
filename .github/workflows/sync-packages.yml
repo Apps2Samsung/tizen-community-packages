@@ -539,6 +539,17 @@ jobs:
           key: clamav-db-${{ steps.week.outputs.week }}
           restore-keys: clamav-db-
 
+      - name: Restore ClamAV verdict cache
+        # ClamAV scans at a few MB/s and the bundle is ~600MB, so verdicts are
+        # cached per file hash: a daily run only scans packages that changed.
+        # The key rolls over with the definitions cache, so everything is
+        # rescanned against fresh signatures once a week.
+        uses: actions/cache@v4
+        with:
+          path: clamav-verdicts.json
+          key: clamav-verdicts-${{ steps.week.outputs.week }}-${{ github.run_id }}
+          restore-keys: clamav-verdicts-${{ steps.week.outputs.week }}-
+
       - uses: actions/download-artifact@v4
         with:
           pattern: built-wgts-*
@@ -603,7 +614,8 @@ jobs:
           CLAMAV_DB: ${{ github.workspace }}/clamav-db
         run: |
           python3 -I scripts/scan-packages.py final_wgts \
-            --json final_wgts/scan.json --md final_wgts/scan-report.md --quarantine quarantine
+            --json final_wgts/scan.json --md final_wgts/scan-report.md --quarantine quarantine \
+            --clamav-cache clamav-verdicts.json --clamav-jobs 4
           cat final_wgts/scan-report.md >> "$GITHUB_STEP_SUMMARY"
           if [ -d quarantine ] && [ -n "$(ls -A quarantine)" ]; then
             echo "::error title=Quarantined::Dropped from this bundle after the security scan: $(ls quarantine | tr '\n' ' ')"
