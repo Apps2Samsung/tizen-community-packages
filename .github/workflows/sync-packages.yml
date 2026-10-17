@@ -558,6 +558,38 @@ jobs:
           echo "Final WGT files:"
           ls -l final_wgts
 
+      - name: Install ClamAV
+        # Known-malware signatures for the scan below. ~1-2 min; never fatal.
+        run: |
+          sudo apt-get update -qq >/dev/null
+          sudo apt-get install -y -qq clamav >/dev/null
+          sudo systemctl stop clamav-freshclam 2>/dev/null || true
+          sudo freshclam --quiet || echo "::warning title=ClamAV::Could not refresh virus definitions; scanning with the installed set."
+
+      - name: Security scan
+        # Mechanical scan of every file about to ship (see scripts/scan-packages.py):
+        # privileges, hosts referenced, signatures, obfuscation / miner signatures,
+        # ClamAV. Packages with a critical finding are moved to quarantine/ and
+        # dropped from the bundle; everything else ships, with the report attached
+        # to the release and shown in the job summary.
+        run: |
+          python3 -I scripts/scan-packages.py final_wgts \
+            --json final_wgts/scan.json --md final_wgts/scan-report.md --quarantine quarantine
+          cat final_wgts/scan-report.md >> "$GITHUB_STEP_SUMMARY"
+          if [ -d quarantine ] && [ -n "$(ls -A quarantine)" ]; then
+            echo "::error title=Quarantined::Dropped from this bundle after the security scan: $(ls quarantine | tr '\n' ' ')"
+          fi
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: security-scan
+          path: |
+            final_wgts/scan-report.md
+            final_wgts/scan.json
+            quarantine/
+          if-no-files-found: ignore
+
       - name: Build catalog.json
         # Per-file index (category, group, variant) that Apps2Samsung reads from
         # this release to filter the app list. Only files that made the bundle.
@@ -586,8 +618,13 @@ jobs:
             final_wgts/*.wgt
             final_wgts/*.tpk
             final_wgts/catalog.json
+            final_wgts/scan-report.md
+            final_wgts/scan.json
           body: |
             Automated community bundle.
+
+            Every file in this bundle went through the [automated security scan](../../blob/main/README.md#-security-scanning);
+            the result is attached as `scan-report.md` (privileges, hosts, signatures, ClamAV).
 
             **Changes since last bundle:**
             ${{ needs.detect-changes.outputs.changes_summary }}

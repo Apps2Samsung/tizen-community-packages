@@ -89,6 +89,58 @@ jobs:
       - name: Catalog compiles cleanly
         run: bash scripts/build-catalog.sh packages "$RUNNER_TEMP/catalog.json"
 
+      - name: Security scan of new or changed packages
+        # Downloads the current upstream artifact for every release/direct manifest
+        # the PR adds or changes and runs scripts/scan-packages.py on it, so the
+        # privileges, hosts and signatures of a new app are in the job summary
+        # before anyone merges. Downloads are untrusted data: unzipped and read
+        # in their own directory, never executed. Build-sourced apps are scanned
+        # by the sync once they are compiled.
+        if: github.event_name == 'pull_request_target'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          api() { curl -fsSL -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" "$@"; }
+          mkdir -p _scan
+          changed=$(git diff --name-only HEAD pr -- 'packages/*.json' || true)
+          for f in $changed; do
+            [ -f "$f" ] || continue
+            src=$(jq -r '.source' "$f"); repo=$(jq -r '.repo' "$f")
+            [ "$(jq -r '.enabled // true' "$f")" = "true" ] || continue
+            if [ "$src" = "direct" ]; then
+              out=$(jq -r '.output_name' "$f")
+              curl -fsSL -o "_scan/$out" "$(jq -r '.url' "$f")" || { echo "::warning file=$f::download failed"; continue; }
+              bash scripts/unwrap-zip.sh "_scan/$out" "$(jq -r '.extract // ""' "$f")"
+            elif [ "$src" = "release" ]; then
+              json=$(api "https://api.github.com/repos/$repo/releases/latest" 2>/dev/null || echo '')
+              if [ -z "$(echo "$json" | jq -r '(.assets // [])[0].browser_download_url // empty' 2>/dev/null)" ]; then
+                json=$(api "https://api.github.com/repos/$repo/releases?per_page=20" 2>/dev/null | jq '[.[] | select(.prerelease==true and .draft==false)][0]' 2>/dev/null || echo 'null')
+              fi
+              if [ "$(jq -r 'has("assets")' "$f")" = "true" ]; then
+                n=$(jq -r '.assets | length' "$f")
+                for i in $(seq 0 $((n - 1))); do
+                  m=$(jq -r ".assets[$i].match" "$f"); out=$(jq -r ".assets[$i].output_name" "$f"); ex=$(jq -r ".assets[$i].extract // \"\"" "$f")
+                  url=$(echo "$json" | jq -r --arg m "$m" '(.assets // [])[] | select(.name == $m) | .browser_download_url' | head -n 1)
+                  [ -n "$url" ] || url=$(echo "$json" | jq -r --arg m "$m" '(.assets // [])[] | select(.name | test($m)) | .browser_download_url' | head -n 1)
+                  [ -n "$url" ] || { echo "::warning file=$f::no release asset matches '$m' - nothing to scan"; continue; }
+                  curl -fsSL -o "_scan/$out" "$url" && bash scripts/unwrap-zip.sh "_scan/$out" "$ex"
+                done
+              else
+                out=$(jq -r '.output_name' "$f"); ex=$(jq -r '.extract // ""' "$f")
+                url=$(echo "$json" | jq -r '(.assets // [])[] | .browser_download_url // empty' | head -n 1)
+                [ -n "$url" ] || { echo "::warning file=$f::no release asset found - nothing to scan"; continue; }
+                curl -fsSL -o "_scan/$out" "$url" && bash scripts/unwrap-zip.sh "_scan/$out" "$ex"
+              fi
+            fi
+          done
+          if [ -z "$(ls -A _scan)" ]; then
+            echo "No release/direct packages changed in this PR - nothing to scan."
+            exit 0
+          fi
+          python3 -I scripts/scan-packages.py _scan --md scan-report.md --json scan.json --no-clamav --fail-on critical
+          { echo "## Security scan of packages changed in this PR"; echo; cat scan-report.md; } >> "$GITHUB_STEP_SUMMARY"
+
       - name: Reachability (warnings only)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

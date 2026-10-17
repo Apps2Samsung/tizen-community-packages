@@ -1,0 +1,79 @@
+name: Scan Release Packages
+
+# On-demand security scan of an already published community bundle, or of the
+# latest one. Same scanner the sync runs before publishing
+# (scripts/scan-packages.py); this lets anyone re-run it, with fresh ClamAV
+# definitions, against any release and read the report in the job summary.
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag to scan (e.g. community-123). Empty = latest release.'
+        type: string
+        default: ''
+      attach:
+        description: 'Attach scan-report.md / scan.json to that release (replaces existing)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write   # only used to attach the report when attach=true
+
+jobs:
+  scan:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Download release packages
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ inputs.tag }}
+        run: |
+          set -e
+          if [ -z "$TAG" ]; then
+            TAG=$(gh release view --repo "$GITHUB_REPOSITORY" --json tagName -q .tagName)
+          fi
+          echo "TAG=$TAG" >> "$GITHUB_ENV"
+          echo "Scanning release $TAG"
+          # Downloaded packages are untrusted data: they go in their own directory
+          # and are only ever unzipped and read, never executed.
+          mkdir -p _scan
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --dir _scan -p '*.wgt' -p '*.tpk'
+          ls -l _scan
+
+      - name: Install ClamAV
+        run: |
+          sudo apt-get update -qq >/dev/null
+          sudo apt-get install -y -qq clamav >/dev/null
+          sudo systemctl stop clamav-freshclam 2>/dev/null || true
+          sudo freshclam --quiet || echo "::warning title=ClamAV::Could not refresh virus definitions; scanning with the installed set."
+
+      - name: Security scan
+        run: |
+          python3 -I scripts/scan-packages.py _scan --json scan.json --md scan-report.md --fail-on never
+          { echo "## Release \`$TAG\`"; echo; cat scan-report.md; } >> "$GITHUB_STEP_SUMMARY"
+          # Surface critical hits as a failed job, but only after the report is written.
+          if python3 -I -c 'import json,sys; sys.exit(any(p["level"]=="critical" for p in json.load(open("scan.json"))["packages"]))'; then
+            echo "No critical findings."
+          else
+            echo "::error title=Critical findings::At least one package in $TAG has a critical finding - see the summary."
+            exit 1
+          fi
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: security-scan-${{ env.TAG }}
+          path: |
+            scan-report.md
+            scan.json
+
+      - name: Attach report to the release
+        if: ${{ inputs.attach && always() }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload "$TAG" --repo "$GITHUB_REPOSITORY" --clobber scan-report.md scan.json
