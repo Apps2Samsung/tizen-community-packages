@@ -16,6 +16,7 @@
 - [What Is This?](#-what-is-this)
 - [Current Packages](#-current-packages)
 - [Contributing & Requesting Apps](#-contributing--requesting-apps)
+- [Security Scanning](#-security-scanning)
 - [Disclaimer](#️-disclaimer)
 - [Additional Note](#-additional-note)
 - [License](#-license)
@@ -160,6 +161,43 @@ Requests for these get closed as `wontfix`. It isn't gatekeeping — they simply
 > 🏨 **Hospitality / hotel TVs (`HG…` models):** side-loading needs developer mode, which is enabled from the
 > Smart Hub **Apps** screen — hospitality firmware doesn't expose it. Nothing in this repo can be installed on
 > those sets until the TV is taken out of hospitality mode.
+
+---
+
+## 🔍 Security Scanning
+
+Nobody on this project reads the source of every app in the bundle, and we don't pretend to. What we
+do instead is run the same **automated scan** over every package, every time, and publish the result:
+
+- **Before a PR is merged** — the [validate workflow](.github/workflows/validate-packages.yml) downloads
+  the upstream artifact of each new or changed package and scans it, so the maintainer sees what the app
+  asks for before it lands in the catalog.
+- **Before every release** — the [sync workflow](.github/workflows/sync-packages.yml) scans every file in
+  the bundle. Packages with a critical finding are dropped from that bundle. The report ships with the
+  release as `scan-report.md` (and machine-readable `scan.json`) next to the packages.
+- **On demand** — [Scan Release Packages](../../actions/workflows/scan-release.yml) re-scans any published
+  bundle with fresh virus definitions.
+
+The scanner is [`scripts/scan-packages.py`](scripts/scan-packages.py). For each `.wgt` / `.tpk` it reports:
+
+| Check | What it tells you |
+|-------|-------------------|
+| **Privileges** | Every `tizen:privilege` the app requests, with partner/platform-level ones flagged and camera, microphone, storage and app-launch privileges called out. |
+| **Hosts referenced** | Every hostname and public IP mentioned in the app's HTML/JS, plus any `<script src>` that loads code from the network at runtime. |
+| **Signatures** | Who signed the package (author and distributor certificate subjects), when it carries a signature. |
+| **Background behaviour** | Services that start at TV boot, background-support, any-origin network access. |
+| **Code smells** | Known JavaScript packers/obfuscators, `eval`/`new Function`, native binaries inside a web app, a package nested inside a package. |
+| **Known malware** | ClamAV with current definitions, and a short list of crypto-miner signatures. |
+
+What it can't do: tell you whether the app's *logic* is benign. A Tizen web app runs sandboxed in the TV's web
+runtime and can only do what its privileges allow, but within those limits the scan only shows you *what*
+an app can reach, not *why*. Read the report, look at the upstream repository, and if something looks off,
+[open an issue](../../issues). To check a bundle yourself:
+
+```bash
+gh release download --repo Apps2Samsung/tizen-community-packages -p '*.wgt' -p '*.tpk' -D bundle
+python3 scripts/scan-packages.py bundle --md scan-report.md
+```
 
 ---
 
