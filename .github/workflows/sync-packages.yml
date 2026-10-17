@@ -594,6 +594,33 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  # Tell Apps2Samsung a new bundle is out, so its resolved catalog
+  # (apps2samsung.com/catalog/resolved.json, the file the installer reads
+  # instead of the GitHub API) refreshes right away rather than at its next
+  # half-hour cron tick. Needs A2S_DISPATCH_TOKEN: a fine-grained PAT with
+  # Contents read/write on Apps2Samsung/Apps2Samsung (GITHUB_TOKEN cannot
+  # reach another repo). Without it this just warns; the cron still catches up.
+  notify-apps2samsung:
+    runs-on: ubuntu-24.04
+    needs: [publish-release]
+    if: ${{ !cancelled() && needs.publish-release.result == 'success' }}
+    steps:
+      - name: Dispatch community-release to Apps2Samsung/Apps2Samsung
+        env:
+          GH_TOKEN: ${{ secrets.A2S_DISPATCH_TOKEN }}
+          TAG: "community-${{ github.run_number }}"
+        run: |
+          set -euo pipefail
+          if [ -z "${GH_TOKEN:-}" ]; then
+            echo "::warning::A2S_DISPATCH_TOKEN is not set; Apps2Samsung will pick up $TAG on its next scheduled snapshot instead."
+            exit 0
+          fi
+          gh api --method POST repos/Apps2Samsung/Apps2Samsung/dispatches \
+            -f event_type=community-release \
+            -f "client_payload[repo]=${GITHUB_REPOSITORY}" \
+            -f "client_payload[tag]=${TAG}"
+          echo "Dispatched community-release for $TAG."
+
   update-state:
     runs-on: ubuntu-24.04
     needs: [detect-changes, publish-release]
