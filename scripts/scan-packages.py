@@ -144,6 +144,29 @@ def sha256_file(path):
     return h.hexdigest()
 
 
+SIGNATURE_FILES = {"author-signature.xml", "signature1.xml", "signature2.xml"}
+
+
+def content_hash(path):
+    """Hash of a package's contents ignoring its signature files and timestamps.
+
+    Packages built by the sync are re-signed with a fresh certificate on every
+    run, so their sha256 never repeats even when nothing changed. ClamAV
+    verdicts are keyed on this instead: entry names, sizes and CRCs of
+    everything except the signature XML files.
+    """
+    try:
+        with zipfile.ZipFile(path) as z:
+            h = hashlib.sha256()
+            for zi in sorted(z.infolist(), key=lambda i: i.filename):
+                if zi.filename in SIGNATURE_FILES or zi.is_dir():
+                    continue
+                h.update(f"{zi.filename}\0{zi.file_size}\0{zi.CRC:08x}\n".encode())
+            return "content:" + h.hexdigest()
+    except (zipfile.BadZipFile, OSError):
+        return None
+
+
 def is_text_file(path):
     return os.path.splitext(path)[1].lower() in TEXT_EXT
 
@@ -466,6 +489,7 @@ def scan_package(path):
 
     name = os.path.basename(path)
     result = {"file": name, "size": os.path.getsize(path), "sha256": sha256_file(path)}
+    result["content_hash"] = content_hash(path) or result["sha256"]
     kind = "tpk" if name.lower().endswith(".tpk") else "wgt"
     tmp = tempfile.mkdtemp(prefix="pkgscan-")
     try:
@@ -590,7 +614,7 @@ def main():
         clam = {}
         to_scan = []
         for r in results:
-            hit = cache.get(r["sha256"]) if isinstance(cache, dict) else None
+            hit = cache.get(r["content_hash"]) if isinstance(cache, dict) else None
             if hit and hit.get("status") in ("clean", "infected"):
                 clam[r["file"]] = dict(hit, cached=True)
                 clam_cached += 1
@@ -604,7 +628,7 @@ def main():
             for r in results:
                 v = fresh.get(r["file"])
                 if v and v.get("status") in ("clean", "infected"):
-                    cache[r["sha256"]] = dict(v, db=dbv)
+                    cache[r["content_hash"]] = dict(v, db=dbv)
             if args.clamav_cache:
                 with open(args.clamav_cache, "w") as fh:
                     json.dump(cache, fh)
