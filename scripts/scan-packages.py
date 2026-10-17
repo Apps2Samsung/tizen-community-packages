@@ -372,7 +372,10 @@ def run_clamav(root_dir, add):
     if not shutil.which("clamscan"):
         return {"status": "not-run", "reason": "clamscan not installed"}
     try:
-        r = subprocess.run(["clamscan", "-r", "--no-summary", "--infected", root_dir], capture_output=True, text=True, timeout=900)
+        cmd = ["clamscan", "-r", "--no-summary", "--infected"]
+        if os.environ.get("CLAMAV_DB"):
+            cmd.append("--database=" + os.environ["CLAMAV_DB"])
+        r = subprocess.run(cmd + [root_dir], capture_output=True, text=True, timeout=900)
     except subprocess.SubprocessError as e:
         return {"status": "error", "reason": str(e)}
     if r.returncode == 0:

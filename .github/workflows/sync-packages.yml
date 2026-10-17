@@ -42,11 +42,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install jq
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y jq curl
-
       - name: Compile manifests
         run: bash scripts/build-manifests.sh
 
@@ -170,23 +165,23 @@ jobs:
           path: new_last_seen.json
 
   prepare:
+    # Only makes sure the Tizen Studio Web CLI is in the actions cache. On a hit
+    # this is a few-second lookup; every build-matrix leg then restores the SDK
+    # straight from cache instead of pulling a 400MB artifact. On a miss it
+    # installs once and saves, so the matrix never installs in parallel.
     runs-on: ubuntu-24.04
     needs: detect-changes
     if: needs.detect-changes.outputs.has_changes == 'true'
     steps:
       - uses: actions/checkout@v4
 
-      - name: Restore Tizen SDK cache
+      - name: Look up Tizen SDK cache
         id: tizen-sdk-cache
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: tizen-studio
           key: tizen-web-sdk-4.0
-
-      - name: Install base dependencies
-        run: |
-          sudo apt-get update
-          sudo DEBIAN_FRONTEND=noninteractive NEEDRESTART_MODE=a apt-get -o DPkg::Lock::Timeout=120 install -y --no-install-recommends wget zip git jq nodejs npm expect curl unzip
+          lookup-only: true
 
       - name: Install Tizen Studio Web CLI
         if: steps.tizen-sdk-cache.outputs.cache-hit != 'true'
@@ -206,45 +201,6 @@ jobs:
           path: tizen-studio
           key: tizen-web-sdk-4.0
 
-      - name: Create signing certificate
-        run: |
-          mkdir -p tizen-studio-data/keystore/author tizen-studio-data/profile
-          ./tizen-studio/tools/ide/bin/tizen certificate \
-            -a "$CERT_NAME" -p "$CERT_PASSWORD" \
-            -c NL -s Community -ct World \
-            -o "$CERT_NAME" -n "$CERT_NAME" \
-            -e community@example.org -f "$CERT_NAME"
-          ./tizen-studio/tools/ide/bin/tizen security-profiles add \
-            -n "$CERT_NAME" \
-            -a "./tizen-studio-data/keystore/author/${CERT_NAME}.p12" \
-            -p "$CERT_PASSWORD"
-          ./tizen-studio/tools/ide/bin/tizen cli-config \
-            "profiles.path=./tizen-studio-data/profile/profiles.xml"
-
-      - name: Create expect script
-        run: |
-          printf '%s\n' \
-            '#!/usr/bin/expect -f' \
-            'set timeout 300' \
-            'set build_dir [lindex $argv 0]' \
-            'spawn $env(TIZEN_PATH)/tools/ide/bin/tizen package -t wgt -s CommunityPack -- $build_dir' \
-            'expect {' \
-            '  "Author password:" { send "$env(CERT_PASSWORD)\r"; exp_continue }' \
-            '  "Distributor1 password:" { send "$env(CERT_PASSWORD)\r"; exp_continue }' \
-            '  eof' \
-            '}' \
-            > package.exp
-          chmod +x package.exp
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: tizen-studio-artifact
-          path: tizen-studio/
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: package-exp-artifact
-          path: package.exp
 
   generate-matrix-build:
     runs-on: ubuntu-24.04
@@ -285,14 +241,20 @@ jobs:
         include: ${{ fromJson(needs.generate-matrix-build.outputs.matrix).include }}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
+      - name: Restore Tizen SDK from cache
+        uses: actions/cache/restore@v4
         with:
-          name: tizen-studio-artifact
           path: tizen-studio
-      - uses: actions/download-artifact@v4
+          key: tizen-web-sdk-4.0
+          fail-on-cache-miss: true
+      - name: Restore build cache
+        # Per-package scratch space that pre_build may reuse across runs for
+        # expensive, pinned inputs (e.g. the jellyfin-web build at a fixed tag).
+        # Keyed on the manifest, so editing pre_build starts from scratch.
+        uses: actions/cache@v4
         with:
-          name: package-exp-artifact
-          path: .
+          path: ${{ runner.temp }}/build-cache
+          key: build-cache-${{ matrix.repo_id }}-${{ hashFiles(format('packages/{0}.json', replace(matrix.repo, '/', '__'))) }}
       # PR #59: upstream apps increasingly require Node 24 (e.g. jellyfin-web).
       # This is the job that actually runs npm / pre_build, so it belongs here,
       # not in prepare (which never touches node).
@@ -303,6 +265,35 @@ jobs:
 
       - name: Fix Tizen Studio permissions
         run: chmod -R +x tizen-studio
+      - name: Create signing certificate
+        run: |
+          mkdir -p tizen-studio-data/keystore/author tizen-studio-data/profile
+          ./tizen-studio/tools/ide/bin/tizen certificate \
+            -a "$CERT_NAME" -p "$CERT_PASSWORD" \
+            -c NL -s Community -ct World \
+            -o "$CERT_NAME" -n "$CERT_NAME" \
+            -e community@example.org -f "$CERT_NAME"
+          ./tizen-studio/tools/ide/bin/tizen security-profiles add \
+            -n "$CERT_NAME" \
+            -a "./tizen-studio-data/keystore/author/${CERT_NAME}.p12" \
+            -p "$CERT_PASSWORD"
+          ./tizen-studio/tools/ide/bin/tizen cli-config \
+            "profiles.path=./tizen-studio-data/profile/profiles.xml"
+
+      - name: Create expect script
+        run: |
+          printf '%s\n' \
+            '#!/usr/bin/expect -f' \
+            'set timeout 300' \
+            'set build_dir [lindex $argv 0]' \
+            'spawn $env(TIZEN_PATH)/tools/ide/bin/tizen package -t wgt -s CommunityPack -- $build_dir' \
+            'expect {' \
+            '  "Author password:" { send "$env(CERT_PASSWORD)\r"; exp_continue }' \
+            '  "Distributor1 password:" { send "$env(CERT_PASSWORD)\r"; exp_continue }' \
+            '  eof' \
+            '}' \
+            > package.exp
+          chmod +x package.exp
       # apt on a fresh runner can block for a long time (dpkg lock held by
       # unattended-upgrades, stalled mirror). Try the image's existing index
       # first, retry with a refresh, and never let this step eat the job budget.
@@ -328,9 +319,10 @@ jobs:
           OVERLAY: ${{ matrix.overlay }}
           PROJECT_PATH: ${{ matrix.project_path }}
           HOST: ${{ matrix.host }}
+          BUILD_CACHE: ${{ runner.temp }}/build-cache
         run: |
           set -e
-          mkdir -p build wgt_files
+          mkdir -p build wgt_files "$BUILD_CACHE"
           cd build
           case "$HOST" in
             gitlab) clone_url="https://gitlab.com/${{ matrix.repo }}.git" ;;
@@ -374,20 +366,15 @@ jobs:
         with:
           name: built-wgts-${{ matrix.repo_id }}
           path: wgt_files/
+          compression-level: 0   # .wgt files are already zips
 
   external-downloads:
+    # Independent of the build matrix, so it runs alongside it.
     runs-on: ubuntu-24.04
-    needs: tizen-build
-    # One broken upstream build must not sink the whole bundle: run as long as
-    # the build matrix actually ran (success or partial failure), not if skipped/cancelled.
-    if: ${{ !cancelled() && (needs.tizen-build.result == 'success' || needs.tizen-build.result == 'failure') }}
+    needs: detect-changes
+    if: needs.detect-changes.outputs.has_changes == 'true'
     steps:
       - uses: actions/checkout@v4
-
-      - name: Install jq & curl
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y jq curl git unzip
 
       - name: Compile manifests
         run: bash scripts/build-manifests.sh
@@ -518,6 +505,7 @@ jobs:
         with:
           name: external-wgts
           path: external_wgts/
+          compression-level: 0   # already-compressed packages
 
   publish-release:
     runs-on: ubuntu-24.04
@@ -525,6 +513,27 @@ jobs:
     if: ${{ !cancelled() && needs.external-downloads.result == 'success' && (needs.tizen-build.result == 'success' || needs.tizen-build.result == 'failure') }}
     steps:
       - uses: actions/checkout@v4
+
+      - name: Start ClamAV install (background)
+        # apt runs while the artifacts download below; "Wait for ClamAV" joins it.
+        run: |
+          sudo -E setsid nohup sh -c '
+            apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -qq install -y --no-install-recommends clamav
+            systemctl stop clamav-freshclam 2>/dev/null; systemctl disable clamav-freshclam 2>/dev/null
+            echo CLAMAV_INSTALL_DONE' > "$RUNNER_TEMP/clamav-install.log" 2>&1 &
+
+      - name: Cache key for this week
+        id: week
+        run: echo "week=$(date -u +%G-W%V)" >> "$GITHUB_OUTPUT"
+
+      - name: Restore ClamAV database cache
+        # One cache entry per ISO week; freshclam then only pulls the daily deltas.
+        uses: actions/cache@v4
+        with:
+          path: clamav-db
+          key: clamav-db-${{ steps.week.outputs.week }}
+          restore-keys: clamav-db-
+
       - uses: actions/download-artifact@v4
         with:
           pattern: built-wgts-*
@@ -558,13 +567,23 @@ jobs:
           echo "Final WGT files:"
           ls -l final_wgts
 
-      - name: Install ClamAV
-        # Known-malware signatures for the scan below. ~1-2 min; never fatal.
+      - name: Wait for ClamAV and refresh definitions
+        # Never fatal: without ClamAV the scan still runs, the report says so.
         run: |
-          sudo apt-get update -qq >/dev/null
-          sudo apt-get install -y -qq clamav >/dev/null
-          sudo systemctl stop clamav-freshclam 2>/dev/null || true
-          sudo freshclam --quiet || echo "::warning title=ClamAV::Could not refresh virus definitions; scanning with the installed set."
+          for i in $(seq 1 60); do
+            grep -q CLAMAV_INSTALL_DONE "$RUNNER_TEMP/clamav-install.log" 2>/dev/null && break
+            sleep 3
+          done
+          if ! command -v clamscan >/dev/null; then
+            echo "::warning title=ClamAV::Install did not finish; scanning without it."
+            tail -n 20 "$RUNNER_TEMP/clamav-install.log" || true
+            exit 0
+          fi
+          mkdir -p clamav-db
+          printf 'DatabaseMirror database.clamav.net\nDatabaseDirectory %s\nDatabaseOwner %s\n' "$PWD/clamav-db" "$(id -un)" > "$RUNNER_TEMP/freshclam.conf"
+          freshclam --config-file="$RUNNER_TEMP/freshclam.conf" --datadir="$PWD/clamav-db" \
+            || echo "::warning title=ClamAV::Could not refresh virus definitions; scanning with the cached set."
+          ls -l clamav-db
 
       - name: Security scan
         # Mechanical scan of every file about to ship (see scripts/scan-packages.py):
@@ -572,6 +591,8 @@ jobs:
         # ClamAV. Packages with a critical finding are moved to quarantine/ and
         # dropped from the bundle; everything else ships, with the report attached
         # to the release and shown in the job summary.
+        env:
+          CLAMAV_DB: ${{ github.workspace }}/clamav-db
         run: |
           python3 -I scripts/scan-packages.py final_wgts \
             --json final_wgts/scan.json --md final_wgts/scan-report.md --quarantine quarantine
