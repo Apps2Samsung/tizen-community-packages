@@ -1,0 +1,9 @@
+{
+  "name": "FreeSerf",
+  "description": "An open-source recreation of The Settlers 1 (Serf City) compiled to WebAssembly for Samsung Tizen TVs.",
+  "category": "games",
+  "repo": "dos-ise/freeserf-tizen",
+  "source": "release",
+  "branch": "release",
+  "output_name": "FreeSerf.wgt"
+}
