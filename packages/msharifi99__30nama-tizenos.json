@@ -1,0 +1,11 @@
+{
+  "name": "30nama",
+  "description": "Unofficial 30nama.com client for Samsung Tizen TVs.",
+  "category": "streaming",
+  "repo": "msharifi99/30nama-tizenos",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "^30nama-v[0-9.]+[.]wgt$", "output_name": "30nama.wgt" }
+  ]
+}
