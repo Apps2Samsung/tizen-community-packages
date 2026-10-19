@@ -1,7 +1,7 @@
 # 🌐 Tizen Community Packages
 [![Sync Tizen Community Packages](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml/badge.svg)](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Packages](https://img.shields.io/badge/packages-77-blue.svg)](#-current-packages)
+[![Packages](https://img.shields.io/badge/packages-81-blue.svg)](#-current-packages)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-green.svg)](../../issues)
 [![Tizen](https://img.shields.io/badge/Platform-Tizen-lightgrey.svg)](https://www.tizen.org/)
 [![Community](https://img.shields.io/badge/Community-Driven-orange.svg)](#)
@@ -39,6 +39,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 
 | 🧩 Application | 🏷️ Category | 📝 Description | 🔗 Repository | ⚙️ Version |
 |----------------|-------------|----------------|------------------|------------|
+| **30nama** | Streaming | Unofficial 30nama.com client for Samsung Tizen TVs. | [msharifi99](https://github.com/msharifi99/30nama-tizenos) | `v1.1.0` |
 | **AirTizen** | Casting & cameras | AirPlay receiver for Samsung Tizen TV — stream audio/video to older Samsung TVs. | [MrHumanRebel](https://github.com/MrHumanRebel/airtizen) | `v2.2.28` |
 | **AniLiberty** | Streaming | Unofficial AniLibria anime client for Samsung Tizen TV. | [CoreDip](https://github.com/CoreDip/anilibria-tizen-wgt) | `v1.1.0` |
 | **AniUltimatium** | Streaming | Anime streaming app for Samsung Tizen TVs. | [AdvaithAvinash](https://github.com/AdvaithAvinash/AniUltimatium) | `Beta-v1.12` |
@@ -71,6 +72,8 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **KickTV** | Streaming | Kick.com streaming client for Samsung Tizen TVs. | [corekill](https://github.com/corekill/kick-tv-tizen) | `v2.2.2` |
 | **Kodi** | Media servers & players | Unofficial WebAssembly port of Kodi for Samsung Tizen TVs (alpha). | [Ricrdsson1](https://github.com/Ricrdsson1/kodi-tizen-wasm) | `Alpha-0.0.7` |
 | **Kodi-TeX** | Media servers & players | Kodi TeX web interface ported to Samsung Tizen. | [PatrickSt1991](https://github.com/PatrickSt1991/tex-tizen) | `tex-tizen-v1.3.0-2026-06-09-0952` |
+| **KROMA** | Media servers & players | Client for KROMA, a self-hosted direct-play media server for your NAS. Needs your own KROMA server. | [kromatv](https://github.com/kromatv/kroma) | `v0.1.38` |
+| **Lampa** | Streaming | Free movie and TV catalogue with info, new releases and trailers. Can be extended with user plugins. | [yumata](https://github.com/yumata/lampa) | `v1.4.1` |
 | **Moonlight** | Games & emulators | Open-source client for NVIDIA GameStream and Sunshine. | [OneLiberty](https://github.com/OneLiberty/moonlight-chrome-tizen) | `v1.2.1` |
 | **Moonlight (No Gamemode)** | Games & emulators | Open-source client for NVIDIA GameStream and Sunshine with gamemode disabled. | [MrPhaze62](https://github.com/MrPhaze62/moonlight-chrome-tizen-no-gamemode) | `samsung_wasm-21031261929` |
 | **Moonlight (ToypoodleGaming)** | Games & emulators | Moonlight NVIDIA GameStream / Sunshine client (ToypoodleGaming fork). | [toypoodlegaming](https://github.com/toypoodlegaming/moonlight-chrome-tizen) | `samsung_wasm-21031332442` |
@@ -94,6 +97,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **SamSUCKS** | Media servers & players | Fast from-scratch Plex client for Samsung Tizen 6.5+ TVs: smooth scrolling, hardware AVPlay playback with direct play, instant search, audio/subtitle picker and up-next autoplay. Plain JavaScript, no framework. | [rfaile313](https://github.com/rfaile313/samsucks) | `6b00e92` |
 | **SeanimeTV** | Streaming | Unofficial Seanime client for Samsung Tizen TVs with torrent streaming and AVPlay playback. | [ihiqhaim](https://github.com/ihiqhaim/SeanimeTV-Tizen) | `4da9288` |
 | **Simple TV Player** | IPTV & Live TV | Minimal jQuery and hls.js channel player for Samsung Tizen 6.0+ TVs. Plays the M3U8 channel list served by the author's API (free-to-air Brazilian channels), navigated with the remote arrows. | [RandoMixs](https://github.com/RandoMixs/simple-tv-player) | `0.0.1` |
+| **Snake** | Games & emulators | Snake game for Samsung Tizen TVs, played with the remote. | [pvk689](https://github.com/pvk689/snake-game-tizen) | `62ccffc` |
 | **Sonance3** | Media servers & players | A music player for Samsung Tizen TVs, built to stream from your self-hosted Navidrome or Subsonic-compatible server. | [MrSimmo](https://github.com/MrSimmo/sonance3) | `v3.14` |
 | **Sportlink Club Viewer** | Other | Solution for sports clubs to display match information in real time and in a clear, organized way on screens throughout the club! | [PatrickSt1991](https://github.com/PatrickSt1991/Sportlink.Club.Info.Viewer) | `v1.1.0` |
 | **StreamVault** | IPTV & Live TV | IPTV streaming app for Samsung Tizen TVs built with React, TypeScript, and Zustand. | [StreamVault](https://github.com/christopherklint97/streamvault) | `wgt-v1.0.0-39066361899-1` |
