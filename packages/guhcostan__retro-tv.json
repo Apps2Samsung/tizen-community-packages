@@ -1,0 +1,11 @@
+{
+  "name": "RetroTV",
+  "description": "Retro game console for Samsung Tizen 5.0+ TVs: WebAssembly emulator cores downloaded on first use, games copied over the LAN from the project's companion server on a PC, or streamed from that PC. Portuguese UI.",
+  "category": "games",
+  "repo": "guhcostan/retro-tv",
+  "source": "build",
+  "branch": "main",
+  "project_path": "app",
+  "skip_npm": true,
+  "output_name": "RetroTV.wgt"
+}

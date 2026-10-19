@@ -1,0 +1,10 @@
+{
+  "name": "TV Clock",
+  "description": "Simple clock and screen saver for Samsung Tizen 6.0+ TVs.",
+  "category": "other",
+  "repo": "anandhuremanan/samsung-tizen-clock-app",
+  "source": "build",
+  "branch": "main",
+  "project_path": "app",
+  "output_name": "TV-Clock.wgt"
+}
