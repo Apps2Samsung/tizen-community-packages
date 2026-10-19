@@ -1,0 +1,11 @@
+{
+  "name": "Apex TV",
+  "description": "Independent F1 TV client for Samsung Tizen 6.0+. Sign in with your own F1 TV subscription. English and Lithuanian menus.",
+  "category": "streaming",
+  "repo": "Pajuodelis/apex-tv",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "^Apex-TV[.]wgt$", "output_name": "Apex-TV.wgt" }
+  ]
+}
