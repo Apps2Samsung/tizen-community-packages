@@ -1,7 +1,7 @@
 # 🌐 Tizen Community Packages
 [![Sync Tizen Community Packages](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml/badge.svg)](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Packages](https://img.shields.io/badge/packages-75-blue.svg)](#-current-packages)
+[![Packages](https://img.shields.io/badge/packages-77-blue.svg)](#-current-packages)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-green.svg)](../../issues)
 [![Tizen](https://img.shields.io/badge/Platform-Tizen-lightgrey.svg)](https://www.tizen.org/)
 [![Community](https://img.shields.io/badge/Community-Driven-orange.svg)](#)
@@ -41,7 +41,8 @@ Please check the [Releases](../../releases) page for version-specific details.
 |----------------|-------------|----------------|------------------|------------|
 | **AirTizen** | Casting & cameras | AirPlay receiver for Samsung Tizen TV — stream audio/video to older Samsung TVs. | [MrHumanRebel](https://github.com/MrHumanRebel/airtizen) | `v2.2.28` |
 | **AniLiberty** | Streaming | Unofficial AniLibria anime client for Samsung Tizen TV. | [CoreDip](https://github.com/CoreDip/anilibria-tizen-wgt) | `v1.1.0` |
-| **AniUltimatium** | Streaming | Anime streaming app for Samsung Tizen TVs. | [AdvaithAvinash](https://github.com/AdvaithAvinash/AniUltimatium) | `stable-v1.11` |
+| **AniUltimatium** | Streaming | Anime streaming app for Samsung Tizen TVs. | [AdvaithAvinash](https://github.com/AdvaithAvinash/AniUltimatium) | `Beta-v1.12` |
+| **Apex TV** | Streaming | Independent F1 TV client for Samsung Tizen 6.0+. Sign in with your own F1 TV subscription. English and Lithuanian menus. | [Pajuodelis](https://github.com/Pajuodelis/apex-tv) | `v0.5.11` |
 | **App Manager** | Tools & system | Alternative launcher for Samsung Tizen TVs: lists installed third-party and sideloaded apps in one grid to launch them, or hide them from Smart Hub without uninstalling. | [no-cover](https://github.com/no-cover/appmanager) | `1.0.3` |
 | **AquaPlay IPTV** | IPTV & Live TV | Lightweight IPTV player for M3U and Xtream playlists, with a full guide, catch-up and setup from your phone | [AquaPlay IPTV](https://github.com/AquaPlayIPTV/aquaplay-samsung) | `v1.0.49` |
 | **Beam-TV** | Media servers & players | Open-source USB and DLNA media player for Samsung Tizen TVs — subtitles, resume playback, remote navigation, and a local companion server. | [TAGISWILD](https://github.com/TAGISWILD/beam-tv) | `v1.0.1` |
@@ -55,6 +56,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **FCast** | Casting & cameras | FCast is an open source protocol that enables wireless streaming of audio and video content between devices. | [futo-org](https://github.com/futo-org/FCastReceiver) | `Wed, 08 Oct 2025 17:07:02 GMT` |
 | **Fladder** | Media servers & players | Jellyfin client for Samsung Tizen TV, built with Flutter (native .tpk). | [popdollar](https://github.com/popdollar/Fladder-Tizen) | `Tizen` |
 | **Flixor-Tizen** | Media servers & players | Modern cross-platform Plex client. Ported to Tizen OS. | [Flixor-Tizen](https://github.com/PatrickSt1991/flixor-tizen) | `v1.0.1-2026-07-24-1215` |
+| **FLOH IPTV** | IPTV & Live TV | A fast IPTV player for Samsung TVs. You enter the M3U link of your own provider. | [kingflooow](https://github.com/kingflooow/floh-iptv) | `v1.4.1` |
 | **FreeSerf** | Games & emulators | An open-source recreation of The Settlers 1 (Serf City) compiled to WebAssembly for Samsung Tizen TVs. | [dos-ise](https://github.com/dos-ise/freeserf-tizen) | `v1.0` |
 | **GameBoy-Emulator** | Games & emulators | A Game Boy (DMG) emulator. | [dos-ise](https://github.com/dos-ise/GB-EMU_Tizen) | `v1.2` |
 | **go2rtc** | Casting & cameras | Watch the cameras of a go2rtc server (standalone or embedded in Frigate): camera grid with previews and full-screen live view. | [Edsol](https://github.com/Edsol/go2rtc-tizen) | `v0.1.0` |
@@ -67,7 +69,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Jellyfin + Bonfire** | Media servers & players | Official Jellyfin Tizen client patched with the Bonfire loader for multi-user profile switching. Requires the Bonfire plugin on your Jellyfin server. | [jellyfin](https://github.com/jellyfin/jellyfin-tizen) | `31408c1` |
 | **Kick TV 2.0** | Streaming | Kick live streams and public archives for Samsung Tizen TVs. | [janrydzewski](https://github.com/janrydzewski/kick-tv-2.0) | `v2.0.1` |
 | **KickTV** | Streaming | Kick.com streaming client for Samsung Tizen TVs. | [corekill](https://github.com/corekill/kick-tv-tizen) | `v2.2.2` |
-| **Kodi** | Media servers & players | Unofficial WebAssembly port of Kodi for Samsung Tizen TVs (alpha). | [Ricrdsson1](https://github.com/Ricrdsson1/kodi-tizen-wasm) | `Alpha-0.0.6` |
+| **Kodi** | Media servers & players | Unofficial WebAssembly port of Kodi for Samsung Tizen TVs (alpha). | [Ricrdsson1](https://github.com/Ricrdsson1/kodi-tizen-wasm) | `Alpha-0.0.7` |
 | **Kodi-TeX** | Media servers & players | Kodi TeX web interface ported to Samsung Tizen. | [PatrickSt1991](https://github.com/PatrickSt1991/tex-tizen) | `tex-tizen-v1.3.0-2026-06-09-0952` |
 | **Moonlight** | Games & emulators | Open-source client for NVIDIA GameStream and Sunshine. | [OneLiberty](https://github.com/OneLiberty/moonlight-chrome-tizen) | `v1.2.1` |
 | **Moonlight (No Gamemode)** | Games & emulators | Open-source client for NVIDIA GameStream and Sunshine with gamemode disabled. | [MrPhaze62](https://github.com/MrPhaze62/moonlight-chrome-tizen-no-gamemode) | `samsung_wasm-21031261929` |
