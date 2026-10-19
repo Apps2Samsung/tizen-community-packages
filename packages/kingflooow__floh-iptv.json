@@ -1,0 +1,11 @@
+{
+  "name": "FLOH IPTV",
+  "description": "A fast IPTV player for Samsung TVs. You enter the M3U link of your own provider.",
+  "category": "iptv",
+  "repo": "kingflooow/floh-iptv",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "^FLOH-IPTV[.]wgt$", "output_name": "FLOH-IPTV.wgt" }
+  ]
+}
