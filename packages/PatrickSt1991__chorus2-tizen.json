@@ -3,10 +3,11 @@
   "description": "Chorus2-Tizen (Kodi) Samsung Tizen.",
   "category": "media",
   "group": "Kodi",
-  "variant": "Chorus2 web UI",
   "repo": "PatrickSt1991/chorus2-tizen",
   "repo_label": "Chorus2-Tizen",
   "source": "release",
   "branch": "release",
-  "output_name": "Kodi-Chorus.wgt"
+  "assets": [
+    { "match": "^Chorus2-Tizen[.]wgt$", "variant": "Chorus2 web UI", "output_name": "Kodi-Chorus.wgt" }
+  ]
 }

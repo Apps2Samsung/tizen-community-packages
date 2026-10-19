@@ -5,5 +5,7 @@
   "repo": "PatrickSt1991/Sportlink.Club.Info.Viewer",
   "source": "release",
   "branch": "release",
-  "output_name": "Sportlink-Club-Viewer.wgt"
+  "assets": [
+    { "match": "^Sportlink-Club-Viewer-.*[.]wgt$", "output_name": "Sportlink-Club-Viewer.wgt" }
+  ]
 }

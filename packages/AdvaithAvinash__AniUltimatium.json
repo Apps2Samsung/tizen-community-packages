@@ -5,5 +5,7 @@
   "repo": "AdvaithAvinash/AniUltimatium",
   "source": "release",
   "branch": "main",
-  "output_name": "AniUltimatium.wgt"
+  "assets": [
+    { "match": "^Aniultimatium[.]wgt$", "output_name": "AniUltimatium.wgt" }
+  ]
 }
