@@ -96,6 +96,10 @@ jobs:
         # before anyone merges. Downloads are untrusted data: unzipped and read
         # in their own directory, never executed. Build-sourced apps are scanned
         # by the sync once they are compiled.
+        # Two things fail the PR here rather than only warning: a single output_name on a
+        # release with several assets (the sync always takes the first one, e.g. a Windows
+        # zip or an APK), and a download with no config.xml / tizen-manifest.xml (a package
+        # that can never install, whatever picked it).
         if: github.event_name == 'pull_request_target'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -103,11 +107,12 @@ jobs:
           set -e
           api() { curl -fsSL -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" "$@"; }
           mkdir -p _scan
+          failed=0
           changed=$(git diff --name-only HEAD pr -- 'packages/*.json' || true)
           for f in $changed; do
             [ -f "$f" ] || continue
             src=$(jq -r '.source' "$f"); repo=$(jq -r '.repo' "$f")
-            [ "$(jq -r '.enabled // true' "$f")" = "true" ] || continue
+            [ "$(jq -r '.enabled != false' "$f")" = "true" ] || continue
             if [ "$src" = "direct" ]; then
               out=$(jq -r '.output_name' "$f")
               curl -fsSL -o "_scan/$out" "$(jq -r '.url' "$f")" || { echo "::warning file=$f::download failed"; continue; }
@@ -128,6 +133,13 @@ jobs:
                 done
               else
                 out=$(jq -r '.output_name' "$f"); ex=$(jq -r '.extract // ""' "$f")
+                count=$(echo "$json" | jq -r '(.assets // []) | length')
+                if [ "${count:-0}" -gt 1 ]; then
+                  names=$(echo "$json" | jq -r '[(.assets // [])[].name] | join(", ")')
+                  echo "::error file=$f,title=Ambiguous release asset::The latest release of $repo has $count assets ($names). A single output_name always downloads the first one. Use assets[] with a match for the .wgt/.tpk instead (see packages/README.md)."
+                  failed=1
+                  continue
+                fi
                 url=$(echo "$json" | jq -r '(.assets // [])[] | .browser_download_url // empty' | head -n 1)
                 [ -n "$url" ] || { echo "::warning file=$f::no release asset found - nothing to scan"; continue; }
                 curl -fsSL -o "_scan/$out" "$url" && bash scripts/unwrap-zip.sh "_scan/$out" "$ex"
@@ -136,10 +148,16 @@ jobs:
           done
           if [ -z "$(ls -A _scan)" ]; then
             echo "No release/direct packages changed in this PR - nothing to scan."
-            exit 0
+            exit $failed
           fi
-          python3 -I scripts/scan-packages.py _scan --md scan-report.md --json scan.json --no-clamav --fail-on critical
+          python3 -I scripts/scan-packages.py _scan --md scan-report.md --json scan.json --no-clamav --fail-on critical || failed=1
           { echo "## Security scan of packages changed in this PR"; echo; cat scan-report.md; } >> "$GITHUB_STEP_SUMMARY"
+          not_tizen=$(jq -r '.packages[] | select(any(.findings[]?; .code == "no-manifest" or .code == "bad-manifest" or .code == "no-app-id")) | .file' scan.json)
+          for p in $not_tizen; do
+            echo "::error title=Not a Tizen package::$p has no usable config.xml / tizen-manifest.xml, so it will not install. Check that the manifest picks the right release asset (assets[] + match), or set extract if upstream ships a zip."
+            failed=1
+          done
+          exit $failed
 
       - name: Reachability (warnings only)
         env:
