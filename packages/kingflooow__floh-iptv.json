@@ -5,5 +5,7 @@
   "repo": "kingflooow/floh-iptv",
   "source": "release",
   "branch": "main",
-  "output_name": "FLOH-IPTV.wgt"
+  "assets": [
+    { "match": "^FLOH-IPTV[.]wgt$", "output_name": "FLOH-IPTV.wgt" }
+  ]
 }
