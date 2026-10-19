@@ -1,0 +1,11 @@
+{
+  "name": "Ambient TV",
+  "description": "Ambient dashboard for Samsung Tizen 5.5+ TVs: clock, weather, calendar, Google Photos slideshow and daily quotes. Google Photos and calendar need the project's optional companion service on your LAN.",
+  "category": "other",
+  "repo": "Bryan-Cee/Ambient",
+  "source": "build",
+  "branch": "main",
+  "pre_build": "npm run build",
+  "project_path": "dist",
+  "output_name": "AmbientTV.wgt"
+}

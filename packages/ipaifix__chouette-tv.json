@@ -1,0 +1,10 @@
+{
+  "name": "Chouette TV",
+  "description": "IPTV player for Samsung Tizen 2.3+ TVs: Xtream and M3U sources, EPG, favourites, profiles and resume. Ships with no channels; connect your own source in Settings. French UI.",
+  "category": "iptv",
+  "repo": "ipaifix/chouette-tv",
+  "source": "build",
+  "branch": "main",
+  "project_path": "app",
+  "output_name": "Chouette-TV.wgt"
+}

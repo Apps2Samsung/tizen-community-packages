@@ -1,0 +1,12 @@
+{
+  "name": "Copenhagen Weather",
+  "description": "Current conditions, hourly and 7-day forecast for Copenhagen on Samsung Tizen 6.0+ TVs. Open-Meteo data, no API key and no account.",
+  "category": "other",
+  "repo": "cocodedk/copenhagen-weather-tv",
+  "source": "build",
+  "branch": "main",
+  "skip_npm": true,
+  "pre_build": "rm -rf tizen-stage && mkdir tizen-stage && cp -R config.xml index.html icon.png css js tizen-stage/",
+  "project_path": "tizen-stage",
+  "output_name": "Copenhagen-Weather.wgt"
+}
