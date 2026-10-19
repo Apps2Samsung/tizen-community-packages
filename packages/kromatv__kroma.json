@@ -1,0 +1,11 @@
+{
+  "name": "KROMA",
+  "description": "Client for KROMA, a self-hosted direct-play media server for your NAS. Needs your own KROMA server.",
+  "category": "media",
+  "repo": "kromatv/kroma",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "^KROMA-tizen-[0-9.]+[.]wgt$", "output_name": "KROMA.wgt" }
+  ]
+}
