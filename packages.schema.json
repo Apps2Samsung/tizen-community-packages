@@ -54,6 +54,34 @@
           "extract": { "type": "string", "minLength": 1, "description": "This asset is a zip wrapper; extract the entry matching this exact name or regex." }
         }
       }
+    },
+    "user_settings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file", "fields"],
+      "description": "Optional. Values the user must supply before install (e.g. a per-user API key). Apps2Samsung asks for them and writes them into file inside the package before re-signing. Copied into catalog.json.",
+      "properties": {
+        "help_url": { "type": "string", "pattern": "^https://", "description": "Page that explains where to get the values. Shown as a link above the form." },
+        "file": { "type": "string", "pattern": "^[A-Za-z0-9_./-]+$", "not": { "pattern": "(^/|\\.\\.)" }, "description": "Path of the file to patch, relative to the package root (for build, relative to project_path)." },
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["key", "label", "type", "find", "replace"],
+            "properties": {
+              "key": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$", "description": "Stable id; Apps2Samsung stores the value under it per app." },
+              "label": { "type": "string", "minLength": 1, "description": "Field label in the form." },
+              "type": { "enum": ["number", "text"], "description": "number = digits only, written as-is; text = written with quotes and backslashes escaped." },
+              "required": { "type": "boolean", "default": true },
+              "pattern": { "type": "string", "minLength": 1, "description": "Optional regex the value must match." },
+              "find": { "type": "string", "minLength": 1, "description": "Exact text in file that is replaced. The install fails if it is missing." },
+              "replace": { "type": "string", "pattern": "\\{value\\}", "description": "Replacement text; {value} is the user's value." }
+            }
+          }
+        }
+      }
     }
   },
   "allOf": [
