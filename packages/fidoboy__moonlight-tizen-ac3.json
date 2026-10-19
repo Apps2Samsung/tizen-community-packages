@@ -11,12 +11,12 @@
   "assets": [
     {
       "match": "Moonlight.wgt",
-      "variant": "fidoboy · Dolby",
+      "variant": "fidoboy · Enhanced · Dolby",
       "output_name": "Moonlight-AC3-fidoboy.wgt"
     },
     {
       "match": "Moonlight-ForceGM.wgt",
-      "variant": "fidoboy · Dolby ForceGM",
+      "variant": "fidoboy · Enhanced · Dolby · ForceGM",
       "output_name": "Moonlight-AC3-fidoboy-ForceGM.wgt"
     }
   ]
