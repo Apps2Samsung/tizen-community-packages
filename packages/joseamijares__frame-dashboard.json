@@ -18,7 +18,7 @@
         "label": "Dashboard URL (your deployment, including the read key)",
         "type": "text",
         "required": true,
-        "pattern": "^https?://",
+        "pattern": "^https?://[^\\s'\\\"\\\\]+$",
         "find": "window.DASHBOARD_URL = \"\";",
         "replace": "window.DASHBOARD_URL = \"{value}\";"
       }
