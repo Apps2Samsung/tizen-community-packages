@@ -1,0 +1,12 @@
+{
+  "name": "Aerial Screensaver",
+  "description": "Apple TV Aerial screensavers: 115 videos streamed from Apple's CDN and decoded in hardware as HEVC 4K via AVPlay.",
+  "category": "media",
+  "repo": "jeancarlos/aerial-tizen",
+  "source": "build",
+  "branch": "main",
+  "project_path": ".",
+  "skip_npm": true,
+  "pre_build": "mkdir -p preload && bash tools/make-thumbs.sh || echo 'Thumbnails skipped - transitions will fade'",
+  "output_name": "AerialScreensaver.wgt"
+}
