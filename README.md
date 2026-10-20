@@ -1,7 +1,7 @@
 # 🌐 Tizen Community Packages
 [![Sync Tizen Community Packages](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml/badge.svg)](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Packages](https://img.shields.io/badge/packages-97-blue.svg)](#-current-packages)
+[![Packages](https://img.shields.io/badge/packages-98-blue.svg)](#-current-packages)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-green.svg)](../../issues)
 [![Tizen](https://img.shields.io/badge/Platform-Tizen-lightgrey.svg)](https://www.tizen.org/)
 [![Community](https://img.shields.io/badge/Community-Driven-orange.svg)](#)
@@ -41,6 +41,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 |----------------|-------------|----------------|------------------|------------|
 | **/dev/null on TV** | Other | Big-screen client for dev-null.sh, the social network for developers: the commit log of the people you add, drawn as a git graph, with ambient modes. Read-only public API, no login. | [HelgeSverre](https://github.com/HelgeSverre/devnull-tv) | `8bc5f09` |
 | **30nama** | Streaming | Unofficial 30nama.com client for Samsung Tizen TVs. | [msharifi99](https://github.com/msharifi99/30nama-tizenos) | `v1.1.0` |
+| **AIOStreams** | Streaming | Tizen build of AIOStreams, the all-in-one Stremio super-addon for debrid and Usenet sources. | [thomasrtg](https://github.com/thomasrtg/AIOStreams) | `tizen6-v0.4.0-beta.1` |
 | **AirTizen** | Casting & cameras | AirPlay receiver for Samsung Tizen TV — stream audio/video to older Samsung TVs. | [MrHumanRebel](https://github.com/MrHumanRebel/airtizen) | `v2.2.28` |
 | **Ambient TV** | Other | Ambient dashboard for Samsung Tizen 5.5+ TVs: clock, weather, calendar, Google Photos slideshow and daily quotes. Google Photos and calendar need the project's optional companion service on your LAN. | [Bryan-Cee](https://github.com/Bryan-Cee/Ambient) | `73bc869` |
 | **AmorecoFlix** | Media servers & players | Personal Netflix-style player for a USB drive plugged into the TV: posters, synopses, continue watching, next episode, skip intro, audio and subtitle choice. No server needed; PowerShell scripts in the repo organise the library on a PC. Portuguese UI. | [Pablitorox](https://github.com/Pablitorox/AmorecoFlix) | `be7c97c` |
