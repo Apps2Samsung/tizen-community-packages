@@ -5,5 +5,10 @@
   "repo": "Hamza-Boulila/aetherflix",
   "source": "release",
   "branch": "main",
-  "output_name": "AetherFlix.wgt"
+  "assets": [
+    {
+      "match": "AetherFlix[.]wgt$",
+      "output_name": "AetherFlix.wgt"
+    }
+  ]
 }
