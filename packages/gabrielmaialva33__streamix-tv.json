@@ -1,0 +1,11 @@
+{
+  "name": "Streamix TV",
+  "description": "A cinematic 10-foot streaming client for Samsung Tizen.",
+  "category": "streaming",
+  "repo": "gabrielmaialva33/streamix-tv",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "Streamix-.*[.]wgt$", "output_name": "StreamixTV.wgt" }
+  ]
+}
