@@ -1,0 +1,11 @@
+{
+  "name": "AmorecoFlix",
+  "description": "Personal Netflix-style player for a USB drive plugged into the TV: posters, synopses, continue watching, next episode, skip intro, audio and subtitle choice. No server needed; PowerShell scripts in the repo organise the library on a PC. Portuguese UI.",
+  "category": "media",
+  "repo": "Pablitorox/AmorecoFlix",
+  "source": "build",
+  "branch": "master",
+  "pre_build": "rm -rf tizen-stage && mkdir tizen-stage && cp -R config.xml index.html app.js style.css icon.png js fonts tizen-stage/",
+  "project_path": "tizen-stage",
+  "output_name": "AmorecoFlix.wgt"
+}

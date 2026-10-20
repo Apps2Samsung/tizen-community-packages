@@ -1,0 +1,9 @@
+{
+  "name": "Sendspin Cinema",
+  "description": "Minimal cinema-style Sendspin player for Music Assistant on Samsung Tizen 3.0+ TVs: album art with adaptive accent colours, set up from the TV screen. Needs a Music Assistant server.",
+  "category": "media",
+  "repo": "zonya/sendspin-cinema-tizen",
+  "source": "build",
+  "branch": "main",
+  "output_name": "Sendspin-Cinema.wgt"
+}

@@ -5,5 +5,7 @@
   "repo": "corekill/kick-tv-tizen",
   "source": "release",
   "branch": "release",
-  "output_name": "KickTV.wgt"
+  "assets": [
+    { "match": "^KickTV[.]wgt$", "output_name": "KickTV.wgt" }
+  ]
 }

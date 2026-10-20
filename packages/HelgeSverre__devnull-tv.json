@@ -1,0 +1,10 @@
+{
+  "name": "/dev/null on TV",
+  "description": "Big-screen client for dev-null.sh, the social network for developers: the commit log of the people you add, drawn as a git graph, with ambient modes. Read-only public API, no login.",
+  "category": "other",
+  "repo": "HelgeSverre/devnull-tv",
+  "source": "build",
+  "branch": "main",
+  "project_path": "app",
+  "output_name": "DevNull-TV.wgt"
+}

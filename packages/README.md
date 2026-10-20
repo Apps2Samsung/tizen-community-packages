@@ -124,7 +124,10 @@ and distinctive within the group: the fork or author, the Tizen version range, o
 The most common type. The build pulls the artifact from the repo's latest GitHub Release on
 `branch`.
 
-**One artifact** — name it with `output_name`:
+**One artifact** — name it with `output_name`. This only works when the release has **exactly one
+asset**: the build downloads the first asset it finds, so a release that also ships an `.apk`, a zip
+or a checksum file would hand you the wrong file. The PR check rejects a single `output_name` on a
+release with several assets; use `assets[]` with a `match` (below) instead.
 
 ```json
 {
@@ -349,7 +352,9 @@ schema-checked, so removing the line is all it takes to bring the app back.
 - The fields match your `source` (see the table above) — the schema rejects mismatches, e.g. `url`
   on a `release`, or both `output_name` and `assets` on the same `release`.
 - `output_name` ends in `.wgt` or `.tpk`.
+- For a `release`: if the upstream release has more than one asset, you used `assets[]` with a `match`.
 - The app is open-source / redistributable, and tested on at least one Tizen device or emulator.
 
-The PR bot validates against [`../packages.schema.json`](../packages.schema.json) automatically —
-a green check means it's ready.
+The PR bot validates against [`../packages.schema.json`](../packages.schema.json) automatically, and
+downloads the file your manifest picks: it fails if that file has no `config.xml` /
+`tizen-manifest.xml` (not an installable Tizen package). A green check means it's ready.

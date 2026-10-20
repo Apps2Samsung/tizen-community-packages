@@ -1,0 +1,11 @@
+{
+  "name": "Lampa",
+  "description": "Free movie and TV catalogue with info, new releases and trailers. Can be extended with user plugins.",
+  "category": "streaming",
+  "repo": "yumata/lampa",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "lampa_v1.9.1.wgt", "output_name": "Lampa.wgt" }
+  ]
+}

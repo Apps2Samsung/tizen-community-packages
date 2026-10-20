@@ -3,9 +3,10 @@
   "description": "Moonlight NVIDIA GameStream / Sunshine client (ToypoodleGaming fork).",
   "category": "games",
   "group": "Moonlight",
-  "variant": "ToypoodleGaming",
   "repo": "toypoodlegaming/moonlight-chrome-tizen",
   "source": "release",
   "branch": "release",
-  "output_name": "Moonlight-Chrome-ToypoodleGaming.wgt"
+  "assets": [
+    { "match": "^Moonlight[.]wgt$", "variant": "ToypoodleGaming", "output_name": "Moonlight-Chrome-ToypoodleGaming.wgt" }
+  ]
 }

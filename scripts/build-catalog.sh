@@ -7,6 +7,7 @@
 # several assets[] folds by itself (group = name), anything else stands alone.
 # "variant" labels a file inside its group; it defaults to the file name.
 # Disabled packages are left out, like everywhere else downstream.
+# "user_settings" is copied through as-is when the package declares it.
 #
 # Usage: scripts/build-catalog.sh [packages-dir] [out-file] [shipped-dir]   (run from the repo root)
 # With shipped-dir, entries whose file is not in that directory are dropped, so
@@ -42,7 +43,7 @@ jq -s '
         variant,
         repo: $p.repo,
         host: ($p.host // "github")
-      });
+      } + (if $p.user_settings then { user_settings: $p.user_settings } else {} end));
   {
     schemaVersion: 1,
     categories: {

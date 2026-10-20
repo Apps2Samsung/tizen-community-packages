@@ -1,0 +1,27 @@
+{
+  "name": "Frame Dashboard",
+  "description": "Daily dashboard for the Samsung Frame TV: a public-domain painting beside your calendar, focus and tasks. Thin shell around your own deployment of the hosted dashboard; its URL is written into the package on install.",
+  "category": "other",
+  "repo": "joseamijares/frame-dashboard",
+  "source": "build",
+  "branch": "main",
+  "project_path": "tizen",
+  "skip_npm": true,
+  "pre_build": "printf 'window.DASHBOARD_URL = \"\";\\n' > tizen/dashboard-url.js",
+  "output_name": "Frame-Dashboard.wgt",
+  "user_settings": {
+    "help_url": "https://github.com/joseamijares/frame-dashboard#readme",
+    "file": "dashboard-url.js",
+    "fields": [
+      {
+        "key": "dashboard_url",
+        "label": "Dashboard URL (your deployment, including the read key)",
+        "type": "text",
+        "required": true,
+        "pattern": "^https?://[^\\s'\\\"\\\\]+$",
+        "find": "window.DASHBOARD_URL = \"\";",
+        "replace": "window.DASHBOARD_URL = \"{value}\";"
+      }
+    ]
+  }
+}
