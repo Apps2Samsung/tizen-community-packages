@@ -1,0 +1,11 @@
+{
+  "name": "Phlix",
+  "description": "Samsung Tizen TV client for Phlix Media Server with HLS streaming and spatial navigation.",
+  "category": "media",
+  "repo": "detain/phlix-tizen-client",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "phlix-tizen.*[.]wgt$", "output_name": "Phlix.wgt" }
+  ]
+}
