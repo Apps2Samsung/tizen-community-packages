@@ -1,0 +1,12 @@
+{
+  "name": "Shmup Cup",
+  "description": "A side-scrolling shoot-'em-up written for the TV remote: nine zones, two ships, sixteen routes and a boss at the end of each.",
+  "category": "games",
+  "repo": "detain/shmup-cup",
+  "source": "build",
+  "branch": "v1.x",
+  "project_path": "apps/tizen/dist",
+  "skip_npm": true,
+  "pre_build": "npm i -g pnpm@12 && ELECTRON_SKIP_BINARY_DOWNLOAD=1 pnpm install --frozen-lockfile && pnpm --filter @shmup/tizen build",
+  "output_name": "ShmupCup.wgt"
+}
