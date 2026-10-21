@@ -354,6 +354,11 @@ schema-checked, so removing the line is all it takes to bring the app back.
 - `output_name` ends in `.wgt` or `.tpk`.
 - For a `release`: if the upstream release has more than one asset, you used `assets[]` with a `match`.
 - The app is open-source / redistributable, and tested on at least one Tizen device or emulator.
+- The app isn't offered already: not by another manifest in this folder (search for the repo and the
+  name, in any case), and not by Apps2Samsung itself, which lists Jellyfin, Moonfin, Litefin and
+  TizenTube on its own from its
+  [`third-party-apps.json`](https://github.com/Apps2Samsung/Apps2Samsung/blob/main/third-party-apps.json).
+  The PR check rejects both.
 
 The PR bot validates against [`../packages.schema.json`](../packages.schema.json) automatically, and
 downloads the file your manifest picks: it fails if that file has no `config.xml` /
