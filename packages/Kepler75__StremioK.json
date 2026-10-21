@@ -1,0 +1,9 @@
+{
+  "name": "StremioK",
+  "description": "From-scratch Stremio-addon streaming client for Samsung Tizen 3.0+ TVs: catalogs, sources and subtitles from the addons you add, Trakt sync, IPTV from your M3U playlists, YouTube and USB playback. Hosts no media; needs stream addons that return direct HTTP/HLS URLs.",
+  "category": "streaming",
+  "repo": "Kepler75/StremioK",
+  "source": "release",
+  "branch": "main",
+  "output_name": "StremioK.wgt"
+}

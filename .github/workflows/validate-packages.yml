@@ -83,6 +83,19 @@ jobs:
           print(f"OK â€” {len(repos)} manifests, {len(outputs)} unique output names.")
           PY
 
+      - name: Not already in the catalog
+        # A repo or display name that another manifest already carries (any case),
+        # or that Apps2Samsung lists on its own from its hardcoded
+        # third-party-apps.json (Jellyfin, Moonfin, TizenTube, ...). Errors for the
+        # manifests this PR touches, warnings for the rest.
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request_target" ]; then
+            # shellcheck disable=SC2046
+            python3 -I scripts/check-duplicates.py --changed $(git diff --name-only HEAD pr -- 'packages/*.json' || true)
+          else
+            python3 -I scripts/check-duplicates.py
+          fi
+
       - name: Manifests compile cleanly
         run: bash scripts/build-manifests.sh
 
