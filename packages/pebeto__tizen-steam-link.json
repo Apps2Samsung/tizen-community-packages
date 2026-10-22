@@ -1,0 +1,12 @@
+{
+  "name": "Tizen Steam Link",
+  "description": "Unofficial Steam Link client for Samsung Tizen 5.5+ TVs: streams games from Steam on a PC or Steam Deck, with the TV's hardware decoder and controllers, keyboard and mouse passed through.",
+  "category": "games",
+  "repo": "pebeto/tizen-steam-link",
+  "repo_label": "pebeto",
+  "source": "release",
+  "branch": "master",
+  "assets": [
+    { "match": "^TizenSteamLink-[0-9.]+[.]wgt$", "output_name": "TizenSteamLink.wgt" }
+  ]
+}
