@@ -1,0 +1,12 @@
+{
+  "name": "Arn0 Launcher",
+  "description": "Minimal remote-friendly home screen for Samsung TVs: a clock, your apps, your consoles and rotating wallpapers.",
+  "category": "other",
+  "repo": "NelsonEU/arn0-tv",
+  "source": "build",
+  "branch": "main",
+  "project_path": "src",
+  "skip_npm": true,
+  "pre_build": "node scripts/build-marks.mjs",
+  "output_name": "Arn0Launcher.wgt"
+}
