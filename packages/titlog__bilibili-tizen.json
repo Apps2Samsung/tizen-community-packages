@@ -1,11 +1,14 @@
 {
   "name": "bilibili",
-  "description": "Unofficial bilibili client for Samsung Tizen 7+ TVs, driven entirely by the remote: QR sign-in with multiple accounts, continue-watching row, 1080p H.265 playback with scrubbing previews and search. Talks to bilibili directly, no backend or proxy.",
+  "description": "Unofficial bilibili client for Samsung TVs, driven entirely by the remote: QR sign-in with multiple accounts, continue-watching row, danmaku, search, live, up to 1080p H.265 (4K with premium). Installs on Tizen 3.0+; tested on Tizen 5.5 and 9.0, playback on older sets not confirmed yet. Updates itself. Talks to bilibili directly, no backend or proxy.",
   "category": "streaming",
   "repo": "titlog/bilibili-tizen",
   "source": "release",
   "branch": "master",
   "assets": [
-    { "match": "bilibili-tizen-.*[.]wgt$", "output_name": "Bilibili.wgt" }
+    {
+      "match": "bilibili-tizen-.*[.]wgt$",
+      "output_name": "Bilibili.wgt"
+    }
   ]
 }

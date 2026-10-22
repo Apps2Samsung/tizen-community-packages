@@ -1,36 +1,14 @@
 {
   "name": "Telegram Videos",
-  "description": "Plays the videos in your Telegram groups and channels; QR sign-in. Needs your own Telegram API ID and hash (my.telegram.org).",
+  "description": "Plays the videos in your Telegram groups and channels on Samsung Tizen 6.0+ TVs: QR sign-in, several accounts, MP4 and MKV streamed while downloading, audio tracks and subtitles, search across chats. Chinese and English UI. Updates itself.",
   "category": "streaming",
   "repo": "titlog/telegram-tizen",
-  "source": "build",
+  "source": "release",
   "branch": "master",
-  "project_path": "app",
-  "skip_npm": true,
-  "pre_build": "cd build && npm ci --no-audit --no-fund && mkdir -p out && npx esbuild src/worker.js --bundle --format=iife --target=chrome120 --loader:.wasm=binary --minify --legal-comments=none --log-level=warning --outfile=out/worker.bundle.txt && npx esbuild src/entry.js --bundle --format=iife --target=chrome120 --loader:.wasm=binary --loader:.txt=text --minify --legal-comments=none --log-level=warning --outfile=../app/js/tg.bundle.js && cd .. && touch app/js/sites.local.js",
-  "output_name": "Telegram-Videos.wgt",
-  "user_settings": {
-    "help_url": "https://my.telegram.org/apps",
-    "file": "js/config.js",
-    "fields": [
-      {
-        "key": "api_id",
-        "label": "Telegram API ID",
-        "type": "number",
-        "required": true,
-        "pattern": "^[0-9]{1,12}$",
-        "find": "var TG_API_ID = 0;",
-        "replace": "var TG_API_ID = {value};"
-      },
-      {
-        "key": "api_hash",
-        "label": "Telegram API hash",
-        "type": "text",
-        "required": true,
-        "pattern": "^[0-9a-f]{32}$",
-        "find": "var TG_API_HASH = \"\";",
-        "replace": "var TG_API_HASH = \"{value}\";"
-      }
-    ]
-  }
+  "assets": [
+    {
+      "match": "telegram-tizen-.*[.]wgt$",
+      "output_name": "Telegram-Videos.wgt"
+    }
+  ]
 }
