@@ -1,0 +1,14 @@
+{
+  "name": "Douyin (抖音)",
+  "description": "Unofficial Douyin client for Samsung Tizen 6.0+ TVs, driven by the remote: Featured, Following and For You feeds, QR sign-in, your history, likes and favourites, creator pages, collections and comments. Updates itself. Talks to Douyin directly, no backend or proxy. Chinese UI.",
+  "category": "streaming",
+  "repo": "titlog/douyin-tizen",
+  "source": "release",
+  "branch": "master",
+  "assets": [
+    {
+      "match": "douyin-tizen-.*[.]wgt$",
+      "output_name": "Douyin.wgt"
+    }
+  ]
+}
