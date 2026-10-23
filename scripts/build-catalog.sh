@@ -11,7 +11,12 @@
 #
 # Usage: scripts/build-catalog.sh [packages-dir] [out-file] [shipped-dir]   (run from the repo root)
 # With shipped-dir, entries whose file is not in that directory are dropped, so
-# the catalog never lists a build that failed and did not make the bundle.
+# the catalog never lists a build that failed and did not make the bundle, and
+# each remaining entry gets "version", "app_id" and "package_id" read from the
+# manifest inside its file (scripts/package-info.py): the version the TV will
+# report once installed, and the ids Apps2Samsung matches installed apps on
+# (Apps2Samsung/Apps2Samsung#820). Fields are left out, never empty, when a
+# manifest does not carry them.
 set -euo pipefail
 
 PKG_DIR="${1:-packages}"
@@ -63,6 +68,13 @@ if [ -n "$SHIPPED_DIR" ]; then
   shipped=$(cd "$SHIPPED_DIR" && ls -1 2>/dev/null | jq -R . | jq -s .)
   tmp=$(mktemp)
   jq --argjson shipped "$shipped" '.apps |= map(select(.file as $f | $shipped | index($f)))' "$OUT" > "$tmp" && mv "$tmp" "$OUT"
+
+  # What each file says about itself: version + ids from its manifest.
+  info=$(mktemp)
+  python3 "$(dirname "$0")/package-info.py" "$SHIPPED_DIR" > "$info"
+  jq --slurpfile info "$info" '.apps |= map(. + ($info[0][.file] // {}))' "$OUT" > "$tmp" && mv "$tmp" "$OUT"
+  rm -f "$info"
+  echo "Manifest info for $(jq '[.apps[] | select(.version)] | length' "$OUT") of $(jq '.apps | length' "$OUT") files"
 fi
 
 echo "Wrote $OUT: $(jq '.apps | length' "$OUT") files, $(jq '[.apps[] | .group // .file] | unique | length' "$OUT") apps"
