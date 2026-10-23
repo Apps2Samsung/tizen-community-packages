@@ -1,0 +1,65 @@
+{
+  "name": "TizenAmbilight",
+  "description": "Real-frame ambilight: reads the TV's own video plane in memory and drives a WLED strip over UDP. While a streaming app's DRM withholds the plane, falls back to the TV's built-in RGB measurement (coarser and slower). Headless background service (.tpk); no Hyperion/HyperHDR needed.",
+  "category": "tools",
+  "repo": "RitwickVerma/TizenAmbilight",
+  "source": "release",
+  "branch": "master",
+  "assets": [
+    {
+      "match": "\\.tpk$",
+      "output_name": "TizenAmbilight.tpk"
+    }
+  ],
+  "user_settings": {
+    "help_url": "https://github.com/RitwickVerma/TizenAmbilight#configuration",
+    "file": "res/config.json",
+    "fields": [
+      {
+        "key": "wled_ip",
+        "label": "WLED controller IP address (e.g. 192.168.1.50)",
+        "type": "text",
+        "required": true,
+        "pattern": "^[0-9]{1,3}(\\.[0-9]{1,3}){3}$",
+        "find": "\"wledIp\": \"\"",
+        "replace": "\"wledIp\": \"{value}\""
+      },
+      {
+        "key": "led_count",
+        "label": "Number of LEDs on the strip (max 490)",
+        "type": "number",
+        "required": true,
+        "pattern": "^[0-9]{1,3}$",
+        "find": "\"ledCount\": 0,",
+        "replace": "\"ledCount\": {value},"
+      },
+      {
+        "key": "map_offset",
+        "label": "Where the strip's first LED sits: LEDs counted clockwise from the screen's top-left corner, seen from the front (0 = it starts at the top-left corner)",
+        "type": "number",
+        "required": true,
+        "pattern": "^[0-9]{1,3}$",
+        "find": "\"mapOffset\": 0,",
+        "replace": "\"mapOffset\": {value},"
+      },
+      {
+        "key": "map_reverse",
+        "label": "Does the strip run counter-clockwise, seen from the front? 0 = no (clockwise), 1 = yes",
+        "type": "number",
+        "required": true,
+        "pattern": "^[01]$",
+        "find": "\"mapReverse\": 0,",
+        "replace": "\"mapReverse\": {value},"
+      },
+      {
+        "key": "ppi_zones",
+        "label": "Optional. Only used while the picture is DRM-protected (e.g. a streaming app): how many spots round the screen edge are measured. 24 is a good default; fewer = each spot updates faster but the colour is coarser (4-73). Leave the default if unsure",
+        "type": "number",
+        "required": false,
+        "pattern": "^([4-9]|[1-6][0-9]|7[0-3])$",
+        "find": "\"ppiZones\": 24,",
+        "replace": "\"ppiZones\": {value},"
+      }
+    ]
+  }
+}
