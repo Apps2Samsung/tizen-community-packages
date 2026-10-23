@@ -37,15 +37,19 @@ def load_scanner():
 
 
 def package_info(scanner, path):
-    name = os.path.basename(path)
-    kind = "tpk" if name.lower().endswith(".tpk") else "wgt"
-    manifest_name = "tizen-manifest.xml" if kind == "tpk" else "config.xml"
+    # By what the package holds, not by its extension: a native package shipped with a .wgt name
+    # (Kodi-Samsung.wgt in community-714) has tizen-manifest.xml and no config.xml, and the TV
+    # installs it fine, so its version and ids are read all the same.
     try:
         with zipfile.ZipFile(path) as z:
-            try:
-                data = z.read(manifest_name)
-            except KeyError:
+            names = set(z.namelist())
+            if "config.xml" in names:
+                kind, manifest_name = "wgt", "config.xml"
+            elif "tizen-manifest.xml" in names:
+                kind, manifest_name = "tpk", "tizen-manifest.xml"
+            else:
                 return {}
+            data = z.read(manifest_name)
     except zipfile.BadZipFile:
         return {}
 
