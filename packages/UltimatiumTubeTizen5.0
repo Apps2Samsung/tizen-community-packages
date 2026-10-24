@@ -1,0 +1,14 @@
+
+{
+  "name": "UltimatiumTube (Tizen 5.0)",
+  "description": "UltimatiumTube for Samsung Tizen 5.0 TVs.",
+  "repo": "AdvaithAvinash/UltimatiumTube",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    {
+      "match": "UltimatiumTubetizen5.0.wgt",
+      "output_name": "UltimatiumTube-Tizen50.wgt"
+    }
+  ]
+}
