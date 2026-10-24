@@ -1,0 +1,13 @@
+{
+  "name": "Moonfin",
+  "description": "Premium Jellyfin and Emby client for Samsung Tizen TVs with hardware-accelerated playback and lossless audio passthrough.",
+  "category": "media",
+  "repo": "Moonfin-Client/Smart-TV",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "Moonfin_Tizen_Regular_v.*[.]wgt$", "variant": "Tizen 3.0+ (Regular)", "output_name": "Moonfin-Regular.wgt" },
+    { "match": "Moonfin_Tizen_Oblong_v.*[.]wgt$", "variant": "Tizen 3.0+ (Oblong)", "output_name": "Moonfin-Oblong.wgt" },
+    { "match": "Moonfin_Tizen_Legacy_v.*[.]wgt$", "variant": "Tizen 2.4 (Legacy)", "output_name": "Moonfin-Legacy.wgt" }
+  ]
+}

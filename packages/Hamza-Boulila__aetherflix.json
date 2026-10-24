@@ -1,0 +1,14 @@
+{
+  "name": "AetherFlix",
+  "description": "An open-source universal streaming platform for Smart TVs with TMDB metadata.",
+  "category": "streaming",
+  "repo": "Hamza-Boulila/aetherflix",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    {
+      "match": "AetherFlix[.]wgt$",
+      "output_name": "AetherFlix.wgt"
+    }
+  ]
+}

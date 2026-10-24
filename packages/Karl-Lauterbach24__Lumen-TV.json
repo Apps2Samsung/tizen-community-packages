@@ -1,0 +1,11 @@
+{
+  "name": "Lumen TV",
+  "description": "Receiver app for Lumen, plays Blu-ray, DVD and files from a computer or USB.",
+  "category": "media",
+  "repo": "Karl-Lauterbach24/Lumen-TV",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "LumenTV-.*-tizen.*[.]wgt$", "output_name": "LumenTV.wgt" }
+  ]
+}
