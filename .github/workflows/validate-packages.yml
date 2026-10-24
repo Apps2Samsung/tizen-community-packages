@@ -17,10 +17,12 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      # Base branch checkout: trusted schema, scripts and workflow.
+      # Base branch checkout: trusted schema, scripts and workflow. Full history
+      # so the step below can find the PR's merge base with main.
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+          fetch-depth: 0
 
       # Overlay ONLY the manifests the PR itself adds, changes or deletes,
       # measured against its merge base with main. Everything else keeps main's
