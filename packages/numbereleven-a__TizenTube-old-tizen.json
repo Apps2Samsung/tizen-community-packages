@@ -1,0 +1,11 @@
+{
+  "name": "TizenTube Old Tizen",
+  "description": "Standalone YouTube with SponsorBlock for older Samsung TVs (Tizen 2.4 and 3.0). Runs entirely on the TV, no companion server needed.",
+  "category": "streaming",
+  "repo": "numbereleven-a/TizenTube-old-tizen",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "TizenTube-old-tizen-v.*[.]zip$", "extract": "[.]wgt$", "output_name": "TizenTube-old-tizen.wgt" }
+  ]
+}
