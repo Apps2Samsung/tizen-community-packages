@@ -1,7 +1,7 @@
 # 🌐 Tizen Community Packages
 [![Sync Tizen Community Packages](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml/badge.svg)](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Packages](https://img.shields.io/badge/packages-105-blue.svg)](#-current-packages)
+[![Packages](https://img.shields.io/badge/packages-107-blue.svg)](#-current-packages)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-green.svg)](../../issues)
 [![Tizen](https://img.shields.io/badge/Platform-Tizen-lightgrey.svg)](https://www.tizen.org/)
 [![Community](https://img.shields.io/badge/Community-Driven-orange.svg)](#)
@@ -42,12 +42,12 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **/dev/null on TV** | Other | Big-screen client for dev-null.sh, the social network for developers: the commit log of the people you add, drawn as a git graph, with ambient modes. Read-only public API, no login. | [HelgeSverre](https://github.com/HelgeSverre/devnull-tv) | `8bc5f09` |
 | **30nama** | Streaming | Unofficial 30nama.com client for Samsung Tizen TVs. | [msharifi99](https://github.com/msharifi99/30nama-tizenos) | `v1.2.1` |
 | **AIOStreams** | Streaming | Tizen build of AIOStreams, the all-in-one Stremio super-addon for debrid and Usenet sources. | [thomasrtg](https://github.com/thomasrtg/AIOStreams) | `tizen6-v0.4.0-beta.1` |
-| **AirTizen** | Casting & cameras | AirPlay receiver for Samsung Tizen TV — stream audio/video to older Samsung TVs. | [MrHumanRebel](https://github.com/MrHumanRebel/airtizen) | `v2.2.32` |
+| **AirTizen** | Casting & cameras | AirPlay receiver for Samsung Tizen TV — stream audio/video to older Samsung TVs. | [MrHumanRebel](https://github.com/MrHumanRebel/airtizen) | `v2.2.34` |
 | **Ambient TV** | Other | Ambient dashboard for Samsung Tizen 5.5+ TVs: clock, weather, calendar, Google Photos slideshow and daily quotes. Google Photos and calendar need the project's optional companion service on your LAN. | [Bryan-Cee](https://github.com/Bryan-Cee/Ambient) | `73bc869` |
 | **AmorecoFlix** | Media servers & players | Personal Netflix-style player for a USB drive plugged into the TV: posters, synopses, continue watching, next episode, skip intro, audio and subtitle choice. No server needed; PowerShell scripts in the repo organise the library on a PC. Portuguese UI. | [Pablitorox](https://github.com/Pablitorox/AmorecoFlix) | `be7c97c` |
 | **AniLiberty** | Streaming | Unofficial AniLibria anime client for Samsung Tizen TV. | [CoreDip](https://github.com/CoreDip/anilibria-tizen-wgt) | `v1.1.0` |
 | **AniUltimatium** | Streaming | Anime streaming app for Samsung Tizen TVs. | [AdvaithAvinash](https://github.com/AdvaithAvinash/AniUltimatium) | `stable-v1.14` |
-| **Apex TV** | Streaming | Independent F1 TV client for Samsung Tizen 6.0+. Sign in with your own F1 TV subscription. English and Lithuanian menus. | [Pajuodelis](https://github.com/Pajuodelis/apex-tv) | `v0.5.11` |
+| **Apex TV** | Streaming | Independent F1 TV client for Samsung Tizen 6.0+. Sign in with your own F1 TV subscription. English and Lithuanian menus. | [Pajuodelis](https://github.com/Pajuodelis/apex-tv) | `v0.5.12` |
 | **App Manager** | Tools & system | Alternative launcher for Samsung Tizen TVs: lists installed third-party and sideloaded apps in one grid to launch them, or hide them from Smart Hub without uninstalling. | [no-cover](https://github.com/no-cover/appmanager) | `1.0.3` |
 | **AquaPlay IPTV** | IPTV & Live TV | Lightweight IPTV player for M3U and Xtream playlists, with a full guide, catch-up and setup from your phone | [AquaPlay IPTV](https://github.com/AquaPlayIPTV/aquaplay-samsung) | `v1.0.50` |
 | **Arn0 Launcher** | Other | Minimal remote-friendly home screen for Samsung TVs: a clock, your apps, your consoles and rotating wallpapers. | [NelsonEU](https://github.com/NelsonEU/arn0-tv) | `b35c292` |
@@ -99,7 +99,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **PlayerAVPlay** | Media servers & players | AVPlayer app | [yadPe](https://github.com/yadPe/PlayerAVPlay) | `latest` |
 | **Prairie** | Media servers & players | Flutter client for the self-hosted Prairie media server (native .tpk): multi-server registry with LAN discovery, profiles with PIN, Quick Connect sign-in and AVPlay playback. | [Prairie-Server](https://github.com/Prairie-Server/prairie-smarttv) | `v0.5.4` |
 | **React IPTV** | IPTV & Live TV | IPTV player for Samsung Tizen TV, built with React. | [anandsimmy](https://github.com/anandsimmy/react-iptv) | `7a7dcc2` |
-| **Reelo** | Streaming | TV client for the Reelo service: films and series with a remote-first interface, family profiles and library sync between devices (Russian UI). | [Reelo](https://github.com/ihovsky/Reelo) | `Fri, 23 Oct 2026 17:00:25 GMT` |
+| **Reelo** | Streaming | TV client for the Reelo service: films and series with a remote-first interface, family profiles and library sync between devices (Russian UI). | [Reelo](https://github.com/ihovsky/Reelo) | `Sat, 24 Oct 2026 05:55:36 GMT` |
 | **Reiverr** | Media servers & players | A clean combined interface for Jellyfin, TMDB, Radarr and Sonarr, as well as a replacement to Overseerr. | [aleksilassila](https://github.com/aleksilassila/reiverr) | `dbdd50d` |
 | **Reolink Viewer** | Casting & cameras | Watch a Reolink camera or NVR on your TV: enter its local IP and login, press Start. Plays the camera's H.264 FLV stream over the LAN, or H.265 main streams over RTSP through a relay inside the app (2018+ TVs). No cloud or helper box. | [Apps2Samsung](https://github.com/Apps2Samsung/ReolinkViewer) | `v1.1.0` |
 | **RetroArch** | Games & emulators | RetroArch (libretro WebAssembly) for Samsung Tizen 6.5+ TVs: remote-driven launcher, gamepad support, ROMs from a USB drive or a network folder. Emulator cores are downloaded on first start, so the TV needs internet access. | [Sype0](https://github.com/Sype0/retroarch-tizen) | `v0.3.2` |
@@ -127,6 +127,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **TizenAmbilight** | Tools & system | Real-frame ambilight: reads the TV's own video plane in memory and drives a WLED strip over UDP. While a streaming app's DRM withholds the plane, falls back to the TV's built-in RGB measurement (coarser and slower). Headless background service (.tpk); no Hyperion/HyperHDR needed. | [RitwickVerma](https://github.com/RitwickVerma/TizenAmbilight) | `v1.0.0` |
 | **TizenBrew** | Tools & system | A way to experience modded websites and you can install newer apps without fighting with Tizen Studio. | [reisxd](https://github.com/reisxd/TizenBrew) | `v2.0.5` |
 | **TizenFeed** | Other | News / RSS feed sample app for Tizen TV. | [judithsirera](https://github.com/judithsirera/TizenFeed) | `8c42b51` |
+| **TizenTube Old Tizen** | Streaming | Standalone YouTube with SponsorBlock for older Samsung TVs (Tizen 2.4 and 3.0). Runs entirely on the TV, no companion server needed. | [numbereleven-a](https://github.com/numbereleven-a/TizenTube-old-tizen) | `v2.3.21` |
 | **TizenTVAudioRecorder** | Other | HTML5 Audio Recorder (kalaoke App). | [TizenTVWebApp](https://github.com/TizenTVWebApp/TizenTVAudioRecorder) | `latest` |
 | **TizenUtility** | Tools & system | System utility for Samsung Tizen TVs: detailed device, firmware and network info, plus a launcher for hidden built-in Samsung apps that are not reachable from the normal UI. | [no-cover](https://github.com/no-cover/tizenutility) | `1.1.1` |
 | **Torr Streaming** | Tools & system | Runs TorrServer as a background service on the TV itself, so local web apps can stream torrents directly without a separate box. Hybrid .NET package with a small launcher widget; Tizen 4.0+. | [no-cover](https://github.com/no-cover/torr-streaming) | `1.0.0` |
@@ -136,6 +137,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **TVapp** | IPTV & Live TV | Enable seamless playback of HLS/m3u8 streams as channels. | [KaashDev](https://github.com/KaashDev/TVapp) | `latest` |
 | **TVideoPlayer** | Media servers & players | Tizen TV HTML video player based on videojs. | [TizenTVWebApp](https://github.com/TizenTVWebApp/TVideoPlayer) | `latest` |
 | **Twitch** | Streaming | Twitch client for Samsung Smart TVs 2015 and newer models. | [fgl27](https://github.com/fgl27/smarttv-twitch) | `ca31512` |
+| **Twitch Old Tizen** | Streaming | Twitch client for older Samsung Tizen TVs (2.4/3.0) with 720p/1080p playback fixes for channels that enable 1440p, plus device-code sign-in. | [numbereleven-a](https://github.com/numbereleven-a/smarttv-twitch-old-tizen) | `4.1.2` |
 | **UniFi Cameras** | Casting & cameras | Live camera grid for UniFi Protect or any RTSP cameras on Samsung Tizen 6.0+ TVs, D-pad to go fullscreen. Needs the project's restreamer (ffmpeg and Python) on an always-on LAN host; its address is written into the package on install. | [xtantaudio](https://github.com/xtantaudio/unifi-cameras-on-tizen) | `2f7f8c0` |
 | **VeloVistrix** | Media servers & players | Read-only PhotoPrism viewer for Samsung Tizen 5.0+ TVs, driven by the remote: albums, places, calendar, labels and folders from your own server, with slideshow. Sign in with an app password, or straight in if the server runs in public mode. | [zephy-lee](https://github.com/zephy-lee/velovistrix-tizen) | `d136678` |
 | **Velvet TV** | Media servers & players | Big-screen TV client for the Velvet self-hosted music server. | [aroundmyroom](https://github.com/aroundmyroom/Velvet) | `c0d278d` |
