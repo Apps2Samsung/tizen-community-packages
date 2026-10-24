@@ -22,16 +22,33 @@ jobs:
         with:
           persist-credentials: false
 
-      # Overlay ONLY the PR's manifests. They are read by jq / check-jsonschema /
-      # python json.load, never executed.
-      - name: Take packages/ from the PR
+      # Overlay ONLY the manifests the PR itself adds, changes or deletes,
+      # measured against its merge base with main. Everything else keeps main's
+      # copy: a fork branched before a schema change (e.g. the required
+      # category field) must not fail on the manifests it never touched.
+      # The files are read by jq / check-jsonschema / python json.load, never
+      # executed. The list of added/changed manifests is reused by the steps
+      # below (the "Not already in the catalog" and security-scan steps).
+      - name: Take the PR's changed manifests
         if: github.event_name == 'pull_request_target'
         run: |
           set -e
           git fetch --no-tags origin "pull/${{ github.event.pull_request.number }}/head:pr"
-          rm -rf packages
-          git checkout pr -- packages
-          echo "Validating manifests from PR #${{ github.event.pull_request.number }} (${{ github.event.pull_request.head.sha }})"
+          base=$(git merge-base HEAD pr)
+          echo "Validating PR #${{ github.event.pull_request.number }} (${{ github.event.pull_request.head.sha }}), merge base $base"
+          # --no-renames: a renamed manifest is a delete plus an add.
+          git diff --no-renames --name-only --diff-filter=AM "$base" pr -- packages/ > "$RUNNER_TEMP/pr-changed"
+          git diff --no-renames --name-only --diff-filter=D  "$base" pr -- packages/ > "$RUNNER_TEMP/pr-deleted"
+          if [ -s "$RUNNER_TEMP/pr-changed" ]; then
+            echo "Added/changed:"; sed 's/^/  /' "$RUNNER_TEMP/pr-changed"
+            xargs -d '\n' git checkout pr -- < "$RUNNER_TEMP/pr-changed"
+          fi
+          if [ -s "$RUNNER_TEMP/pr-deleted" ]; then
+            echo "Deleted:"; sed 's/^/  /' "$RUNNER_TEMP/pr-deleted"
+            xargs -d '\n' rm -f -- < "$RUNNER_TEMP/pr-deleted"
+          fi
+          # Later steps read this list; only manifests (packages/*.json) count.
+          grep -E '^packages/[^/]+\.json$' "$RUNNER_TEMP/pr-changed" > "$RUNNER_TEMP/pr-manifests" || true
 
       - uses: actions/setup-python@v5
         with:
@@ -49,6 +66,14 @@ jobs:
           import json, glob, os, sys
           errors = []
           repos, outputs = {}, {}
+
+          # Only *.json manifests (and the README) belong in packages/. Anything
+          # else - typically a manifest saved without the .json extension - would
+          # pass every check below and never be synced.
+          for name in sorted(os.listdir("packages")):
+              if name != "README.md" and not name.endswith(".json"):
+                  errors.append(f"{name}: not a manifest; files in packages/ must be named owner__repo.json")
+
           for path in sorted(glob.glob("packages/*.json")):
               doc = json.load(open(path))
               repo = doc["repo"]
@@ -91,7 +116,7 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" = "pull_request_target" ]; then
             # shellcheck disable=SC2046
-            python3 -I scripts/check-duplicates.py --changed $(git diff --name-only HEAD pr -- 'packages/*.json' || true)
+            python3 -I scripts/check-duplicates.py --changed $(cat "$RUNNER_TEMP/pr-manifests")
           else
             python3 -I scripts/check-duplicates.py
           fi
@@ -121,7 +146,7 @@ jobs:
           api() { curl -fsSL -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" "$@"; }
           mkdir -p _scan
           failed=0
-          changed=$(git diff --name-only HEAD pr -- 'packages/*.json' || true)
+          changed=$(cat "$RUNNER_TEMP/pr-manifests")
           for f in $changed; do
             [ -f "$f" ] || continue
             src=$(jq -r '.source' "$f"); repo=$(jq -r '.repo' "$f")
