@@ -1,0 +1,11 @@
+{
+  "name": "TV Dashboard",
+  "description": "A calm remote-first home screen: weather and news as a short letter, an app rack, and an ambient art gallery.",
+  "category": "other",
+  "repo": "lvndry/tv-dashboard",
+  "source": "build",
+  "branch": "main",
+  "project_path": "app/dist",
+  "pre_build": "npm run build",
+  "output_name": "TV-Dashboard.wgt"
+}

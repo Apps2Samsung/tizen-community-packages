@@ -1,0 +1,14 @@
+{
+  "name": "Streamix TV",
+  "description": "Cinematic 10-foot TV client for the self-hosted Streamix platform. Needs your own Streamix server.",
+  "category": "streaming",
+  "repo": "gabrielmaialva33/streamix-tv",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    {
+      "match": "Streamix-.*[.]wgt$",
+      "output_name": "StreamixTV.wgt"
+    }
+  ]
+}
