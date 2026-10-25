@@ -1,6 +1,6 @@
 {
   "name": "Xtream IPTV Player",
-  "description": "A modern IPTV player for Samsung Tizen TVs with Xtream API protocol support.",
+  "description": "IPTV player for Samsung Tizen TVs with Xtream API support: live TV, movies and series. Bring your own Xtream subscription.",
   "category": "iptv",
   "repo": "dearbulut/tizen-xtream-iptv",
   "source": "build",
