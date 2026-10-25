@@ -1,0 +1,15 @@
+{
+  "name": "StashZen",
+  "description": "A Stash client for Samsung Tizen TVs. Firm grip, steady strokes, and a happy ending in every scene. ",
+  "category": "media",
+  "repo": "Stashified/StashZen",
+  "repo_label": "StashZen",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    {
+      "match": "StashZen-.*[.]wgt$",
+      "output_name": "StashZen.wgt"
+    }
+  ]
+}
