@@ -2,6 +2,7 @@
   "name": "StashZen",
   "description": "A Stash client for Samsung Tizen TVs. Firm grip, steady strokes, and a happy ending in every scene. ",
   "category": "media",
+  "adult": true,
   "repo": "Stashified/StashZen",
   "repo_label": "StashZen",
   "source": "release",
