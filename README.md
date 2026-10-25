@@ -1,7 +1,7 @@
 # 🌐 Tizen Community Packages
 [![Sync Tizen Community Packages](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml/badge.svg)](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Packages](https://img.shields.io/badge/packages-107-blue.svg)](#-current-packages)
+[![Packages](https://img.shields.io/badge/packages-108-blue.svg)](#-current-packages)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-green.svg)](../../issues)
 [![Tizen](https://img.shields.io/badge/Platform-Tizen-lightgrey.svg)](https://www.tizen.org/)
 [![Community](https://img.shields.io/badge/Community-Driven-orange.svg)](#)
@@ -146,6 +146,17 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Wall** | Other | Digital photo frame for Samsung Tizen TVs: give it the URL of a ZIP of images, it downloads them and runs a configurable slideshow, with a background service that auto-starts it on boot. | [no-cover](https://github.com/no-cover/wall) | `1.0.0` |
 | **YouTube Dummy** | Streaming | Lightweight wrapper around youtube.com/tv that injects the TizenTube userscript (ad-free, SponsorBlock), handles remote-control navigation and exits cleanly back to Smart Hub. | [no-cover](https://github.com/no-cover/youtube-dummy) | `1.0.0` |
 | **YouTube for Tizen** | Streaming | Ad-free YouTube for Samsung TVs, running in Samsung's own Cobalt engine with SponsorBlock, DeArrow and preferred-quality settings. Tizen 5.5+ build plus a separate widget for Tizen 5.0. Requires a Samsung partner certificate. | [SushyDev](https://github.com/SushyDev/tizen-youtube) | `v1.5.1` |
+
+<!-- adult-packages -->
+<details>
+<summary>🔞 <b>Adult (18+)</b> — 1 package(s). Hidden in Apps2Samsung until you turn on its 18+ toggle.</summary>
+
+| 🧩 Application | 🏷️ Category | 📝 Description | 🔗 Repository | ⚙️ Version |
+|----------------|-------------|----------------|------------------|------------|
+| **StashZen** | Media servers & players | A Stash client for Samsung Tizen TVs. Firm grip, steady strokes, and a happy ending in every scene.  | [StashZen](https://github.com/Stashified/StashZen) | `v0.37.1` |
+
+</details>
+<!-- /adult-packages -->
 
 > 💡 Want your app listed here? See the [Contributing](#-contributing--requesting-apps) section below.
 
