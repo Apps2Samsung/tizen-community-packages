@@ -731,7 +731,10 @@ jobs:
           # the gear Version column comes from .github/state/last_seen.json.
           # Manifests with "enabled": false are retired - the sync no longer
           # ships them, so they are left out of the table and the badge count.
-          # Everything outside the table is left untouched.
+          # Manifests with "adult": true go into a collapsed 18+ section right
+          # after the table (between the ADULT_OPEN / ADULT_CLOSE markers), which
+          # is rewritten, or removed when no adult package is enabled.
+          # Everything else outside the table is left untouched.
           import json, glob, re, pathlib
 
           STATE = pathlib.Path(".github/state/last_seen.json")
@@ -760,7 +763,9 @@ jobs:
               "other": "Other",
           }
 
-          def table():
+          ADULT_OPEN, ADULT_CLOSE = "<!-- adult-packages -->", "<!-- /adult-packages -->"
+
+          def rows():
               ver = version_map()
               items = []
               for path in glob.glob("packages/*.json"):
@@ -774,23 +779,55 @@ jobs:
                       d["name"], CATEGORY.get(d.get("category"), "Other"), d["description"],
                       f"[{label}](https://{forge}/{repo})",
                       ver.get(repo.lower(), "\u2014"),
+                      d.get("adult") is True,
                   ))
               items.sort(key=lambda r: r[0].lower())
-              rows = ["| \U0001F9E9 Application | \U0001F3F7\ufe0f Category | \U0001F4DD Description | \U0001F517 Repository | \u2699\ufe0f Version |",
-                      "|----------------|-------------|----------------|------------------|------------|"]
-              rows += [f"| **{n}** | {c} | {d} | {link} | `{v}` |" for n, c, d, link, v in items]
-              return rows
+              return items
+
+          def table(items):
+              out = ["| \U0001F9E9 Application | \U0001F3F7\ufe0f Category | \U0001F4DD Description | \U0001F517 Repository | \u2699\ufe0f Version |",
+                     "|----------------|-------------|----------------|------------------|------------|"]
+              out += [f"| **{n}** | {c} | {d} | {link} | `{v}` |" for n, c, d, link, v, _ in items]
+              return out
+
+          def adult_section(items):
+              # Collapsed by default, so the page itself stays safe to open anywhere.
+              if not items:
+                  return []
+              return [ADULT_OPEN,
+                      "<details>",
+                      f"<summary>\U0001F51E <b>Adult (18+)</b> \u2014 {len(items)} package(s). "
+                      "Hidden in Apps2Samsung until you turn on its 18+ toggle.</summary>",
+                      "",
+                      *table(items),
+                      "",
+                      "</details>",
+                      ADULT_CLOSE]
 
           def main():
+              items = rows()
+              general = [r for r in items if not r[5]]
+              adult = [r for r in items if r[5]]
               lines = README.read_text().splitlines()
               out, i, n = [], 0, len(lines)
               while i < n:
                   line = lines[i]
                   if line.lstrip().startswith("|") and "Application" in line and "Repository" in line:
-                      out.extend(table())
+                      out.extend(table(general))
                       i += 1                                   # skip old header
                       while i < n and lines[i].lstrip().startswith("|"):
                           i += 1                               # skip old separator + rows
+                      # Drop a previous adult section (blank lines + markers) before writing the new one.
+                      j = i
+                      while j < n and not lines[j].strip():
+                          j += 1
+                      if j < n and lines[j].strip() == ADULT_OPEN:
+                          while j < n and lines[j].strip() != ADULT_CLOSE:
+                              j += 1
+                          i = j + 1
+                      if adult:
+                          out.append("")
+                          out.extend(adult_section(adult))
                       continue
                   out.append(line)
                   i += 1

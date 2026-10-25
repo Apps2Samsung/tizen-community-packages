@@ -176,6 +176,11 @@ Your app should be:
 
 > Just want to *suggest* an app without packaging it yourself? Use the **Request an App** option above.
 
+> 🔞 **Adult (18+) apps** are accepted under the same rules, with `"adult": true` in the manifest. They ship in the
+> bundle like any other package, but Apps2Samsung hides them until the user turns on its 18+ toggle, and this README
+> lists them in a collapsed section under the table instead of the table itself. Keep the `name` and `description`
+> plain: they are the only thing shown before the user opts in.
+
 > ⚠️ **Important:**  
 > We can only include applications that are **open-source** and **freely distributable**.  
 > Please make sure you have the legal right to redistribute any software you contribute.
