@@ -46,6 +46,7 @@ Examples: `PatrickSt1991/flixor-tizen` → `packages/PatrickSt1991__flixor-tizen
 | `output_name` | string | Filename inside the bundle. Must end in `.wgt` or `.tpk`. Required for every type **except** a `release` that uses `assets[]`. |
 | `extract` | string | Only when upstream ships the package **inside a `.zip`**. Entry name or regex to pull out of the archive — see [Zip-wrapped downloads](#-zip-wrapped-downloads). |
 | `enabled` | boolean | `false` retires the package without deleting the file — see [Retiring a package](#-retiring-a-package). Defaults to `true`. |
+| `adult` | boolean | `true` marks an 18+ app: hidden in Apps2Samsung until the user turns on its 18+ toggle, listed in a collapsed README section — see [Adult (18+) apps](#-adult-18-apps). Defaults to `false`. |
 | `host` | enum | `github` (default) or `gitlab`. Where `repo` lives. `gitlab` is only supported for `source: "build"` — see [GitLab-hosted projects](#-gitlab-hosted-projects). |
 
 ### Which fields go with which `source`
@@ -317,6 +318,42 @@ Use when the `.wgt`/`.tpk` is hosted at a stable absolute URL (including one com
 
 ---
 
+## 🔞 Adult (18+) apps
+
+An app whose content is for adults only — pornography or other sexually explicit material — is
+accepted under the same rules as everything else (open-source, redistributable, scanned), but must
+carry `"adult": true`:
+
+```json
+{
+  "name": "StashZen",
+  "description": "A Stash client for Samsung Tizen TVs.",
+  "category": "media",
+  "adult": true,
+  "repo": "Stashified/StashZen",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "StashZen-.*[.]wgt$", "output_name": "StashZen.wgt" }
+  ]
+}
+```
+
+What the flag does:
+
+- **Apps2Samsung** reads `adult: true` on every file of the package in `catalog.json` and hides those
+  entries (and any group one of them belongs to) until the user turns on the 18+ toggle in its
+  settings. The toggle is off by default.
+- **The README** lists the package in a collapsed *Adult (18+)* section right under the main table,
+  not in the table itself.
+- **The bundle** is unchanged: the file is built, scanned and shipped like any other package.
+
+`adult` is independent of `category`: still give the app the category that says what it *is* (a
+Stash client is `media`, an adult IPTV player is `iptv`). Keep `name` and `description` plain —
+they are the only text a user sees before opting in, and they land in a public README.
+
+---
+
 ## 🚫 Retiring a package
 
 To stop shipping an app without deleting its manifest — upstream went away, the fix was merged
@@ -349,6 +386,7 @@ schema-checked, so removing the line is all it takes to bring the app back.
 - File is named `packages/<owner>__<repo>.json`.
 - `name` and `description` contain no `|` or newlines (they land in a Markdown table).
 - `category` is one of the seven values above; if the app belongs with an existing one, set the same `group`.
+- Adult-only content? Set `"adult": true` and keep `name` / `description` plain.
 - The fields match your `source` (see the table above) — the schema rejects mismatches, e.g. `url`
   on a `release`, or both `output_name` and `assets` on the same `release`.
 - `output_name` ends in `.wgt` or `.tpk`.

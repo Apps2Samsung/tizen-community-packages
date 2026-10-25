@@ -27,6 +27,7 @@
     },
     "repo_label": { "type": "string", "minLength": 1, "pattern": "^[^|\n]+$", "description": "Optional link text for the README Repository column. Defaults to the repo owner." },
     "enabled": { "type": "boolean", "default": true, "description": "Set to false to retire the package without deleting this file: it is skipped by the sync (not built, downloaded, or shipped in the release) and left out of the README table. Absent means true." },
+    "adult": { "type": "boolean", "default": false, "description": "Set to true for an app whose content is for adults only (18+): pornography or other sexually explicit material. The package ships like any other, but catalog.json carries adult: true on each of its files so Apps2Samsung hides it until the user turns on the 18+ toggle, and the README lists it in a collapsed section instead of the main table. Absent means false. Independent of category: an adult app still gets the category that says what it is (a media-server client, an IPTV player)." },
     "source": {
       "enum": ["build", "release", "direct"],
       "description": "build = compiled from source with Tizen Studio; release = prebuilt .wgt from GitHub Releases; direct = downloaded from a fixed URL."

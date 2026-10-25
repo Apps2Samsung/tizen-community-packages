@@ -127,6 +127,8 @@ body:
           required: false
         - label: "Virus/malware-free to the best of my knowledge"
           required: true
+        - label: "This app is for adults only (18+) — it will be hidden in Apps2Samsung until the user opts in"
+          required: false
 
   - type: textarea
     id: notes
