@@ -1,0 +1,12 @@
+{
+  "name": "Shutter",
+  "description": "Unofficial Synology Photos slideshow for Samsung TVs: all photos, favorites, an album or Shared Space, with crossfades, pan/zoom and a clock. Talks to your NAS directly on the LAN (DSM 7).",
+  "category": "media",
+  "repo": "khanh-ly/shutter",
+  "source": "build",
+  "branch": "main",
+  "project_path": ".",
+  "skip_npm": true,
+  "pre_build": "rm -rf docs dev .claude README.md",
+  "output_name": "Shutter.wgt"
+}
