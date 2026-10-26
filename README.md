@@ -1,7 +1,7 @@
 # 🌐 Tizen Community Packages
 [![Sync Tizen Community Packages](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml/badge.svg)](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Packages](https://img.shields.io/badge/packages-118-blue.svg)](#-current-packages)
+[![Packages](https://img.shields.io/badge/packages-119-blue.svg)](#-current-packages)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-green.svg)](../../issues)
 [![Tizen](https://img.shields.io/badge/Platform-Tizen-lightgrey.svg)](https://www.tizen.org/)
 [![Community](https://img.shields.io/badge/Community-Driven-orange.svg)](#)
@@ -69,7 +69,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **FCast** | Casting & cameras | FCast is an open source protocol that enables wireless streaming of audio and video content between devices. | [futo-org](https://github.com/futo-org/FCastReceiver) | `Wed, 08 Oct 2025 17:07:02 GMT` |
 | **Fladder** | Media servers & players | Jellyfin client for Samsung Tizen TV, built with Flutter (native .tpk). | [popdollar](https://github.com/popdollar/Fladder-Tizen) | `Tizen` |
 | **Flixor-Tizen** | Media servers & players | Modern cross-platform Plex client. Ported to Tizen OS. | [Flixor-Tizen](https://github.com/PatrickSt1991/flixor-tizen) | `v1.0.1-2026-07-24-1215` |
-| **FLOH IPTV** | IPTV & Live TV | A fast IPTV player for Samsung TVs. You enter the M3U link of your own provider. | [kingflooow](https://github.com/kingflooow/floh-iptv) | `v1.4.1` |
+| **FLOH IPTV** | IPTV & Live TV | A fast IPTV player for Samsung TVs. You enter the M3U link of your own provider. | [kingflooow](https://github.com/kingflooow/floh-iptv) | `v1.6.0` |
 | **Frame Dashboard** | Other | Daily dashboard for the Samsung Frame TV: a public-domain painting beside your calendar, focus and tasks. Thin shell around your own deployment of the hosted dashboard; its URL is written into the package on install. | [joseamijares](https://github.com/joseamijares/frame-dashboard) | `b4fbf67` |
 | **Free My TV** | Other | Fast, ad-free home screen with your app shelf, weather, sunset-based day/night theme and a photo screensaver. | [simbasjungles](https://github.com/simbasjungles/free-my-tv) | `v1.2.0` |
 | **FreeSerf** | Games & emulators | An open-source recreation of The Settlers 1 (Serf City) compiled to WebAssembly for Samsung Tizen TVs. | [dos-ise](https://github.com/dos-ise/freeserf-tizen) | `v1.0` |
@@ -94,6 +94,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Moonlight (ToypoodleGaming)** | Games & emulators | Moonlight NVIDIA GameStream / Sunshine client (ToypoodleGaming fork). | [toypoodlegaming](https://github.com/toypoodlegaming/moonlight-chrome-tizen) | `samsung_wasm-21031332442` |
 | **Moonlight Enhanced (AC-3)** | Games & emulators | Open-source Moonlight client for Tizen OS with optional support for Dolby Digital and Dolby Digital Plus (stereo and 5.1) optical-audio and HDMI passthrough. | [fidoboy](https://github.com/fidoboy/moonlight-tizen-ac3) | `v1.0.7` |
 | **Moonlight-Tizen** | Games & emulators | Open-source client for NVIDIA GameStream and Sunshine Tizen OS 5.5 or higher. | [BrightCraft](https://github.com/brightcraft/moonlight-tizen) | `v1.19.0` |
+| **Nhà Mình** | Other | Apple TV-style home screen for Samsung Tizen TVs: your installed apps, a YouTube shelf, weather, a lunar calendar, news, gold and exchange rates, Bing wallpapers and a family photo screensaver. A background service brings it back when you leave an app or wake the TV. Set up from your phone. Vietnamese UI. | [meocong](https://github.com/meocong/prj-tv-samsung) | `v1.2.0` |
 | **Nuvio** | Streaming | TV-first streaming UI for Samsung Tizen. | [NuvioMedia](https://github.com/NuvioMedia/NuvioWeb) | `1.2.9` |
 | **Nuvio Native Legacy** | Streaming | Unofficial native C/SDL2 Nuvio client, fast on older TVs. Native .tpk per Tizen version (4.0-5.5, 6.0, 6.5-7, 8-9) plus a WebAssembly .wgt for Tizen 5.5+. | [iqui27](https://github.com/iqui27/nuvio-native-legacy) | `v2.0.8` |
 | **OpenIPTV** | IPTV & Live TV | Privacy focused IPTV player for Samsung Tizen TVs with extended M3U playlists, favourites and search. | [shayanline](https://github.com/shayanline/OpenIPTV) | `1.9.3` |
