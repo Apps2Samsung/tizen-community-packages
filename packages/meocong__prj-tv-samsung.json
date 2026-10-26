@@ -1,6 +1,6 @@
 {
   "name": "Nhà Mình",
-  "description": "Apple TV-style home screen for Samsung Tizen TVs: your installed apps, a YouTube shelf, weather, a lunar calendar, news, gold and exchange rates, Bing wallpapers and a family photo screensaver. A background service brings it back when you leave an app or wake the TV. Set up from your phone. Vietnamese UI.",
+  "description": "Apple TV-style home screen for Samsung Tizen TVs: your installed apps, a YouTube shelf, weather, a lunar calendar, news, an English word of the day read aloud, Bing wallpapers and a family photo screensaver. A background service brings it back when you leave an app or wake the TV. Set up from your phone. English and Vietnamese UI.",
   "category": "other",
   "repo": "meocong/prj-tv-samsung",
   "source": "release",
