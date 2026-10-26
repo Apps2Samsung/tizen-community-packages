@@ -47,6 +47,8 @@ Examples: `PatrickSt1991/flixor-tizen` → `packages/PatrickSt1991__flixor-tizen
 | `extract` | string | Only when upstream ships the package **inside a `.zip`**. Entry name or regex to pull out of the archive — see [Zip-wrapped downloads](#-zip-wrapped-downloads). |
 | `enabled` | boolean | `false` retires the package without deleting the file — see [Retiring a package](#-retiring-a-package). Defaults to `true`. |
 | `adult` | boolean | `true` marks an 18+ app: hidden in Apps2Samsung until the user turns on its 18+ toggle, listed in a collapsed README section — see [Adult (18+) apps](#-adult-18-apps). Defaults to `false`. |
+| `flags` | array | `["root"]` for a package that gains root on the TV. Apps2Samsung asks for confirmation before installing it, see [Root packages](#-root-packages). |
+| `user_settings` | object | Values the user fills in before install, written into the package before re-signing, see [User settings](#%EF%B8%8F-user-settings). |
 | `host` | enum | `github` (default) or `gitlab`. Where `repo` lives. `gitlab` is only supported for `source: "build"` — see [GitLab-hosted projects](#-gitlab-hosted-projects). |
 
 ### Which fields go with which `source`
@@ -354,6 +356,89 @@ they are the only text a user sees before opting in, and they land in a public R
 
 ---
 
+## ⚙️ User settings
+
+A package that needs a per-user value (an API key, a server URL, a port) declares a
+`user_settings` block. Apps2Samsung shows a form before installing, stores the answers per app (and
+prefills them on update), and writes them into the package before it re-signs it.
+
+When the value goes into **one file**, set `file` and give every field a `find` / `replace`:
+
+```json
+"user_settings": {
+  "help_url": "https://github.com/joseamijares/frame-dashboard#readme",
+  "file": "dashboard-url.js",
+  "fields": [
+    {
+      "key": "dashboard_url",
+      "label": "Dashboard URL",
+      "type": "text",
+      "find": "window.DASHBOARD_URL = \"\";",
+      "replace": "window.DASHBOARD_URL = \"{value}\";"
+    }
+  ]
+}
+```
+
+When a value lands in **several places or files**, leave `file` out and give every field a
+`targets` list instead. Every target is applied:
+
+```json
+"user_settings": {
+  "fields": [
+    {
+      "key": "port",
+      "label": "Dashboard port",
+      "type": "number",
+      "required": false,
+      "default": "8099",
+      "min": 1024,
+      "max": 65535,
+      "disallow": [8001, 8002, 26101],
+      "targets": [
+        { "file": "config.xml", "find": "http://127.0.0.1:8099", "replace": "http://127.0.0.1:{value}" },
+        { "file": "service/main.js", "find": "|| 8099;", "replace": "|| {value};" }
+      ]
+    }
+  ]
+}
+```
+
+The two forms don't mix: either `file` plus `find` / `replace` on every field, or `targets` on
+every field and no `file`.
+
+| Field key | Notes |
+|-----------|-------|
+| `key` | Stable id (`a-z`, `0-9`, `_`). The stored value is kept under it, so don't rename it later. |
+| `label` | Shown in the form. |
+| `type` | `number` (written as-is) or `text` (quotes and backslashes escaped). |
+| `required` | Defaults to `true`. |
+| `pattern` | Regex the value must match. |
+| `default` | Written when the field is optional and left empty, so every `find` is always replaced. |
+| `min`, `max`, `disallow` | `number` only. Inclusive range, and values the form rejects. |
+| `find`, `replace` | Exact text to replace and its replacement; `replace` must contain `{value}`. |
+| `targets` | `[{ file, find, replace }]`, same rules per entry. |
+
+Paths are relative to the package root (for `build`, relative to `project_path`), with no leading
+`/` and no `..`. Each `find` must be in its file: when upstream changes the text, the install fails
+instead of handing the TV an unpatched package.
+
+---
+
+## 🔓 Root packages
+
+A package that gains root on the TV (an on-boot service plus a root agent started through the TV's
+own SDB) must carry `"flags": ["root"]`. Before installing it, Apps2Samsung tells the user that:
+
+- the package gains root and runs a background service from boot;
+- after install, Developer Mode **Host PC IP** must be set to `127.0.0.1` and the TV restarted;
+- while it is `127.0.0.1`, no PC (Apps2Samsung included) can reach the TV over SDB, so updates and
+  other installs need Host PC IP set back to the PC first.
+
+Put the Host PC IP step in the `description` too: older Apps2Samsung versions don't know the flag.
+
+---
+
 ## 🚫 Retiring a package
 
 To stop shipping an app without deleting its manifest — upstream went away, the fix was merged
@@ -387,6 +472,7 @@ schema-checked, so removing the line is all it takes to bring the app back.
 - `name` and `description` contain no `|` or newlines (they land in a Markdown table).
 - `category` is one of the seven values above; if the app belongs with an existing one, set the same `group`.
 - Adult-only content? Set `"adult": true` and keep `name` / `description` plain.
+- Gains root on the TV? Set `"flags": ["root"]`.
 - The fields match your `source` (see the table above) — the schema rejects mismatches, e.g. `url`
   on a `release`, or both `output_name` and `assets` on the same `release`.
 - `output_name` ends in `.wgt` or `.tpk`.

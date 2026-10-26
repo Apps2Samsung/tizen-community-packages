@@ -56,34 +56,76 @@
         }
       }
     },
+    "flags": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "enum": ["root"] },
+      "description": "Optional. Install-time properties Apps2Samsung warns about before installing. root = the package gains root on the TV and runs a service from boot; after install the user sets Developer Mode Host PC IP to 127.0.0.1 and restarts, which locks every PC (Apps2Samsung included) out of SDB until it is set back. Copied onto each of the package's files in catalog.json."
+    },
     "user_settings": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["file", "fields"],
-      "description": "Optional. Values the user must supply before install (e.g. a per-user API key). Apps2Samsung asks for them and writes them into file inside the package before re-signing. Copied into catalog.json.",
+      "required": ["fields"],
+      "description": "Optional. Values the user supplies before install (e.g. a per-user API key, a port). Apps2Samsung asks for them and writes them into the package before re-signing. Two forms, not mixed: file + find/replace on every field (one file), or targets on every field and no file (several files). Copied into catalog.json.",
       "properties": {
         "help_url": { "type": "string", "pattern": "^https://", "description": "Page that explains where to get the values. Shown as a link above the form." },
-        "file": { "type": "string", "pattern": "^[A-Za-z0-9_./-]+$", "not": { "pattern": "(^/|\\.\\.)" }, "description": "Path of the file to patch, relative to the package root (for build, relative to project_path)." },
+        "file": { "$ref": "#/$defs/package_path", "description": "Path of the file to patch, relative to the package root (for build, relative to project_path). Required when the fields use find/replace, absent when they use targets." },
         "fields": {
           "type": "array",
           "minItems": 1,
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["key", "label", "type", "find", "replace"],
+            "required": ["key", "label", "type"],
             "properties": {
               "key": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$", "description": "Stable id; Apps2Samsung stores the value under it per app." },
               "label": { "type": "string", "minLength": 1, "description": "Field label in the form." },
               "type": { "enum": ["number", "text"], "description": "number = digits only, written as-is; text = written with quotes and backslashes escaped." },
               "required": { "type": "boolean", "default": true },
               "pattern": { "type": "string", "minLength": 1, "description": "Optional regex the value must match." },
+              "default": { "type": "string", "minLength": 1, "description": "Optional. Written instead when the field is not required and the user leaves it empty, so every find is always replaced. Must itself pass the field's own checks." },
+              "min": { "type": "integer", "description": "number only. Smallest accepted value, inclusive." },
+              "max": { "type": "integer", "description": "number only. Largest accepted value, inclusive." },
+              "disallow": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "integer" }, "description": "number only. Values the form rejects (e.g. ports the TV itself uses)." },
               "find": { "type": "string", "minLength": 1, "description": "Exact text in file that is replaced. The install fails if it is missing." },
-              "replace": { "type": "string", "pattern": "\\{value\\}", "description": "Replacement text; {value} is the user's value." }
-            }
+              "replace": { "$ref": "#/$defs/replace" },
+              "targets": {
+                "type": "array",
+                "minItems": 1,
+                "description": "Every place the value goes, when it lands in more than one spot or file. All are applied; the install fails if any find is missing. Used instead of file + find/replace.",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["file", "find", "replace"],
+                  "properties": {
+                    "file": { "$ref": "#/$defs/package_path" },
+                    "find": { "type": "string", "minLength": 1, "description": "Exact text in file that is replaced." },
+                    "replace": { "$ref": "#/$defs/replace" }
+                  }
+                }
+              }
+            },
+            "if": { "properties": { "type": { "const": "text" } } },
+            "then": { "not": { "anyOf": [ { "required": ["min"] }, { "required": ["max"] }, { "required": ["disallow"] } ] } }
           }
         }
-      }
+      },
+      "oneOf": [
+        {
+          "required": ["file"],
+          "properties": { "fields": { "items": { "required": ["find", "replace"], "not": { "required": ["targets"] } } } }
+        },
+        {
+          "not": { "required": ["file"] },
+          "properties": { "fields": { "items": { "required": ["targets"], "not": { "anyOf": [ { "required": ["find"] }, { "required": ["replace"] } ] } } } }
+        }
+      ]
     }
+  },
+  "$defs": {
+    "package_path": { "type": "string", "pattern": "^[A-Za-z0-9_./-]+$", "not": { "pattern": "(^/|\\.\\.)" }, "description": "Path inside the package, relative to its root (for build, relative to project_path). No leading / and no .." },
+    "replace": { "type": "string", "pattern": "\\{value\\}", "description": "Replacement text; {value} is the user's value." }
   },
   "allOf": [
     {
