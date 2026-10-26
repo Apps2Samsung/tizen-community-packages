@@ -1,0 +1,10 @@
+{
+  "name": "OsmTwich",
+  "description": "Unofficial Twitch client for Samsung Tizen TV.",
+  "category": "streaming",
+  "repo": "josepvarela/OsmTwichPlayer",
+  "repo_label": "OsmTwichPlayer",
+  "source": "release",
+  "branch": "release",
+  "output_name": "OsmTwich.wgt"
+}
