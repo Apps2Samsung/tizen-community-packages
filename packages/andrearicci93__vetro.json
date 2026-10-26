@@ -1,0 +1,35 @@
+{
+  "name": "Vetro",
+  "description": "TV management dashboard with root integration: app inventory, controls and diagnostics in your browser. After install, set Developer Mode Host PC IP to 127.0.0.1 and restart.",
+  "category": "tools",
+  "flags": ["root"],
+  "repo": "andrearicci93/vetro",
+  "source": "build",
+  "branch": "main",
+  "project_path": "vetro-pkg",
+  "skip_npm": true,
+  "pre_build": "node -e \"const r=require('./rooting/build.cjs'),a=require('./app/build.cjs');require('fs').writeFileSync('vetro.zip',a.zip(r.collectIntegration()))\" && mkdir -p vetro-pkg && cd vetro-pkg && unzip -q ../vetro.zip",
+  "output_name": "Vetro.wgt",
+  "user_settings": {
+    "help_url": "https://github.com/andrearicci93/vetro/blob/main/app/docs/INSTALLATION.md",
+    "fields": [
+      {
+        "key": "port",
+        "label": "Dashboard port (default 8099; change it if tizen-youtube is installed)",
+        "type": "number",
+        "required": false,
+        "default": "8099",
+        "min": 1024,
+        "max": 65535,
+        "disallow": [8001, 8002, 26101],
+        "targets": [
+          { "file": "config.xml", "find": "<access origin=\"http://127.0.0.1:8099\" subdomains=\"false\"/>", "replace": "<access origin=\"http://127.0.0.1:{value}\" subdomains=\"false\"/>" },
+          { "file": "index.html", "find": "var BASE = 'http://127.0.0.1:8099';", "replace": "var BASE = 'http://127.0.0.1:{value}';" },
+          { "file": "index.html", "find": "Dashboard at <code>http://&lt;TV&gt;:8099/</code>", "replace": "Dashboard at <code>http://&lt;TV&gt;:{value}/</code>" },
+          { "file": "index.html", "find": "did not answer on port 8099.", "replace": "did not answer on port {value}." },
+          { "file": "service/main.js", "find": "|| buildInfo.port || 8099;", "replace": "|| buildInfo.port || {value};" }
+        ]
+      }
+    ]
+  }
+}
