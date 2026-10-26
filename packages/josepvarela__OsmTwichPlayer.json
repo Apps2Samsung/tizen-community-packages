@@ -1,6 +1,7 @@
 {
   "name": "OsmTwich",
   "description": "Cliente no oficial de Twitch para Samsung Tizen TV.",
+  "category": "streaming",
   "repo": "josepvarela/OsmTwichPlayer",
   "repo_label": "OsmTwichPlayer",
   "source": "release",
