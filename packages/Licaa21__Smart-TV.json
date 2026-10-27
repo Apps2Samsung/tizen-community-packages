@@ -1,0 +1,11 @@
+{
+  "name": "Moonfin (Lica fork)",
+  "description": "Fork of the Moonfin Jellyfin/Emby client with extra features: Emby Connect sign-in, an EPUB reader with bookmarks and themes, Forgot PIN, remembered audio/subtitle picks per title and more.",
+  "category": "media",
+  "repo": "Licaa21/Smart-TV",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "Moonfin_Tizen_Regular_.*_Lica_Fork_.*[.]wgt$", "output_name": "Moonfin-Lica-Fork.wgt" }
+  ]
+}
