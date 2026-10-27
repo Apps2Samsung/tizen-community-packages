@@ -1,7 +1,7 @@
 # 🌐 Tizen Community Packages
 [![Sync Tizen Community Packages](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml/badge.svg)](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Packages](https://img.shields.io/badge/packages-121-blue.svg)](#-current-packages)
+[![Packages](https://img.shields.io/badge/packages-122-blue.svg)](#-current-packages)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-green.svg)](../../issues)
 [![Tizen](https://img.shields.io/badge/Platform-Tizen-lightgrey.svg)](https://www.tizen.org/)
 [![Community](https://img.shields.io/badge/Community-Driven-orange.svg)](#)
@@ -46,7 +46,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **AIOStreams** | Streaming | Tizen build of AIOStreams, the all-in-one Stremio super-addon for debrid and Usenet sources. | [thomasrtg](https://github.com/thomasrtg/AIOStreams) | `tizen6-v0.7.0-beta.1` |
 | **AirTizen** | Casting & cameras | AirPlay receiver for Samsung Tizen TV — stream audio/video to older Samsung TVs. | [MrHumanRebel](https://github.com/MrHumanRebel/airtizen) | `v2.2.34` |
 | **Ambient TV** | Other | Ambient dashboard for Samsung Tizen 5.5+ TVs: clock, weather, calendar, Google Photos slideshow and daily quotes. Google Photos and calendar need the project's optional companion service on your LAN. | [Bryan-Cee](https://github.com/Bryan-Cee/Ambient) | `73bc869` |
-| **AmorecoFlix** | Media servers & players | Personal Netflix-style player for a USB drive plugged into the TV: posters, synopses, continue watching, next episode, skip intro, audio and subtitle choice. No server needed; PowerShell scripts in the repo organise the library on a PC. Portuguese UI. | [Pablitorox](https://github.com/Pablitorox/AmorecoFlix) | `be7c97c` |
+| **AmorecoFlix** | Media servers & players | Personal Netflix-style player for a USB drive plugged into the TV: posters, synopses, continue watching, next episode, skip intro, audio and subtitle choice. No server needed; PowerShell scripts in the repo organise the library on a PC. Portuguese UI. | [Pablitorox](https://github.com/Pablitorox/AmorecoFlix) | `05ec679` |
 | **AniLiberty** | Streaming | Unofficial AniLibria anime client for Samsung Tizen TV. | [CoreDip](https://github.com/CoreDip/anilibria-tizen-wgt) | `v1.1.0` |
 | **AniUltimatium** | Streaming | Anime streaming app for Samsung Tizen TVs. | [AdvaithAvinash](https://github.com/AdvaithAvinash/AniUltimatium) | `stable-v1.15` |
 | **Apex TV** | Streaming | Independent F1 TV client for Samsung Tizen 6.0+. Sign in with your own F1 TV subscription. English and Lithuanian menus. | [Pajuodelis](https://github.com/Pajuodelis/apex-tv) | `v0.5.12` |
@@ -56,7 +56,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Baobab Signage** | Other | Player for Baobab, open-source local digital signage: plays the playlist your own Baobab server on the LAN assigns to this screen. Server URL and screen key are written into the package on install. | [Gonqas](https://github.com/Gonqas/baobab) | `6ee8491` |
 | **Beam-TV** | Media servers & players | Open-source USB and DLNA media player for Samsung Tizen TVs — subtitles, resume playback, remote navigation, and a local companion server. | [TAGISWILD](https://github.com/TAGISWILD/beam-tv) | `v1.0.1` |
 | **bilibili** | Streaming | Unofficial bilibili client for Samsung TVs, driven entirely by the remote: QR sign-in with multiple accounts, continue-watching row, danmaku, search, live, up to 1080p H.265 (4K with premium). Installs on Tizen 3.0+; tested on Tizen 5.5 and 9.0, playback on older sets not confirmed yet. Updates itself. Talks to bilibili directly, no backend or proxy. | [titlog](https://github.com/titlog/bilibili-tizen) | `v1.4.10` |
-| **Bisnor** | Streaming | Open-source Persian movie and series client (experimental Tizen TV build): browse, search and play titles from the IranFlix catalogue with AVPlay. Persian UI. | [nikan48g](https://github.com/nikan48g/Bisnor) | `144879e` |
+| **Bisnor** | Streaming | Open-source Persian movie and series client (experimental Tizen TV build): browse, search and play titles from the IranFlix catalogue with AVPlay. Persian UI. | [nikan48g](https://github.com/nikan48g/Bisnor) | `8e53e59` |
 | **Camera PiP** | Casting & cameras | Doorbell and driveway cameras on a Samsung Tizen TV: pops up on a trigger (Home Assistant or any webhook), plays through the hardware decoder so the app behind it keeps running, and fires actions like opening the gate from the remote. Needs go2rtc or another HLS/MJPEG source; cameras are configured at build time. | [dzikus](https://github.com/dzikus/tizen-camera-pip) | `v1.2.0` |
 | **Chiaki-Tizen** | Games & emulators | An open source PlayStation remote play project serving as the next-generation of Chiaki. | [Chiaki-Tizen](https://github.com/Trent407/chiaki-tizen) | `v0.2.0` |
 | **Chorus2-Tizen** | Media servers & players | Chorus2-Tizen (Kodi) Samsung Tizen. | [Chorus2-Tizen](https://github.com/PatrickSt1991/chorus2-tizen) | `tizen-v21.x-1.0.1-2026-05-21-1443` |
@@ -83,12 +83,13 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **IPTV Manager** | IPTV & Live TV | IPTV manager for Samsung Tizen TV with Xtream Codes support and HLS playback. | [matifDreamIt](https://github.com/matifDreamIt/IPTV-Tizen-TV) | `d8eb66b` |
 | **Jellyfin + Bonfire** | Media servers & players | Official Jellyfin Tizen client patched with the Bonfire loader for multi-user profile switching. Requires the Bonfire plugin on your Jellyfin server. | [jellyfin](https://github.com/jellyfin/jellyfin-tizen) | `31408c1` |
 | **Kick TV 2.0** | Streaming | Kick live streams and public archives for Samsung Tizen TVs. | [janrydzewski](https://github.com/janrydzewski/kick-tv-2.0) | `v2.0.1` |
-| **KickTV** | Streaming | Kick.com streaming client for Samsung Tizen TVs. | [corekill](https://github.com/corekill/kick-tv-tizen) | `v2.2.3` |
+| **KickTV** | Streaming | Kick.com streaming client for Samsung Tizen TVs. | [corekill](https://github.com/corekill/kick-tv-tizen) | `v2.3.0` |
 | **Kodi** | Media servers & players | Unofficial WebAssembly port of Kodi for Samsung Tizen TVs (alpha). | [Ricrdsson1](https://github.com/Ricrdsson1/kodi-tizen-wasm) | `Alpha-0.0.8` |
 | **Kodi-TeX** | Media servers & players | Kodi TeX web interface ported to Samsung Tizen. | [PatrickSt1991](https://github.com/PatrickSt1991/tex-tizen) | `tex-tizen-v1.3.0-2026-06-09-0952` |
 | **KROMA** | Media servers & players | Client for KROMA, a self-hosted direct-play media server for your NAS. Needs your own KROMA server. | [kromatv](https://github.com/kromatv/kroma) | `v0.1.38` |
 | **Lampa** | Streaming | Free movie and TV catalogue with info, new releases and trailers. Can be extended with user plugins. | [yumata](https://github.com/yumata/lampa) | `v1.4.1` |
 | **Lumen TV** | Media servers & players | Receiver app for Lumen, plays Blu-ray, DVD and files from a computer or USB. | [Karl-Lauterbach24](https://github.com/Karl-Lauterbach24/Lumen-TV) | `v1.17.1` |
+| **Moonfin (Lica fork)** | Media servers & players | Fork of the Moonfin Jellyfin/Emby client with extra features: Emby Connect sign-in, an EPUB reader with bookmarks and themes, Forgot PIN, remembered audio/subtitle picks per title and more. | [Licaa21](https://github.com/Licaa21/Smart-TV) | `fork-v1.7.0` |
 | **Moonlight** | Games & emulators | Open-source client for NVIDIA GameStream and Sunshine. | [OneLiberty](https://github.com/OneLiberty/moonlight-chrome-tizen) | `v1.2.1` |
 | **Moonlight (No Gamemode)** | Games & emulators | Open-source client for NVIDIA GameStream and Sunshine with gamemode disabled. | [MrPhaze62](https://github.com/MrPhaze62/moonlight-chrome-tizen-no-gamemode) | `samsung_wasm-21031261929` |
 | **Moonlight (ToypoodleGaming)** | Games & emulators | Moonlight NVIDIA GameStream / Sunshine client (ToypoodleGaming fork). | [toypoodlegaming](https://github.com/toypoodlegaming/moonlight-chrome-tizen) | `samsung_wasm-21031332442` |
@@ -153,7 +154,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **VeloVistrix** | Media servers & players | Read-only PhotoPrism viewer for Samsung Tizen 5.0+ TVs, driven by the remote: albums, places, calendar, labels and folders from your own server, with slideshow. Sign in with an app password, or straight in if the server runs in public mode. | [zephy-lee](https://github.com/zephy-lee/velovistrix-tizen) | `d136678` |
 | **Velvet TV** | Media servers & players | Big-screen TV client for the Velvet self-hosted music server. | [aroundmyroom](https://github.com/aroundmyroom/Velvet) | `31e71cc` |
 | **Vemm** | Media servers & players | Unofficial Plex-compatible media player for Samsung Tizen TVs with AVPlay playback, Direct Play and server transcoding. | [somefosterkid](https://github.com/somefosterkid/vemm) | `preview-0.9.0` |
-| **Vetro** | Tools & system | TV management dashboard with root integration: app inventory, controls and diagnostics in your browser. After install, set Developer Mode Host PC IP to 127.0.0.1 and restart. | [andrearicci93](https://github.com/andrearicci93/vetro) | `28d1d43` |
+| **Vetro** | Tools & system | TV management dashboard with root integration: app inventory, controls and diagnostics in your browser. After install, set Developer Mode Host PC IP to 127.0.0.1 and restart. | [andrearicci93](https://github.com/andrearicci93/vetro) | `fa2d652` |
 | **VexonTV** | IPTV & Live TV | Live TV player for Samsung Tizen TVs: M3U, Xtream Codes and Stalker portals, provider EPG and a remote-first interface. | [VexonTV](https://github.com/DvzZDev/VexonTV) | `9aa670e` |
 | **Wall** | Other | Digital photo frame for Samsung Tizen TVs: give it the URL of a ZIP of images, it downloads them and runs a configurable slideshow, with a background service that auto-starts it on boot. | [no-cover](https://github.com/no-cover/wall) | `1.0.0` |
 | **Xtream IPTV Player** | IPTV & Live TV | IPTV player for Samsung Tizen TVs with Xtream API support: live TV, movies and series. Bring your own Xtream subscription. | [dearbulut](https://github.com/dearbulut/tizen-xtream-iptv) | `7fd43a0` |
@@ -166,7 +167,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 
 | 🧩 Application | 🏷️ Category | 📝 Description | 🔗 Repository | ⚙️ Version |
 |----------------|-------------|----------------|------------------|------------|
-| **StashZen** | Media servers & players | A Stash client for Samsung Tizen TVs. Firm grip, steady strokes, and a happy ending in every scene.  | [StashZen](https://github.com/Stashified/StashZen) | `v0.37.2` |
+| **StashZen** | Media servers & players | A Stash client for Samsung Tizen TVs. Firm grip, steady strokes, and a happy ending in every scene.  | [StashZen](https://github.com/Stashified/StashZen) | `v0.38.0` |
 
 </details>
 <!-- /adult-packages -->
