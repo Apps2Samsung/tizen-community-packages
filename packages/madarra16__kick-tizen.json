@@ -1,0 +1,11 @@
+{
+  "name": "Kick",
+  "description": "Unofficial Kick client modeled on the official TV app: live streams, chat, rewind, clips and 10 languages.",
+  "category": "streaming",
+  "repo": "madarra16/kick-tizen",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "^Kick-.*[.]wgt$", "output_name": "Kick.wgt" }
+  ]
+}
