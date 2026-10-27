@@ -1,7 +1,7 @@
 # 🌐 Tizen Community Packages
 [![Sync Tizen Community Packages](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml/badge.svg)](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Packages](https://img.shields.io/badge/packages-122-blue.svg)](#-current-packages)
+[![Packages](https://img.shields.io/badge/packages-123-blue.svg)](#-current-packages)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-green.svg)](../../issues)
 [![Tizen](https://img.shields.io/badge/Platform-Tizen-lightgrey.svg)](https://www.tizen.org/)
 [![Community](https://img.shields.io/badge/Community-Driven-orange.svg)](#)
@@ -145,6 +145,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **TubeArchivist TV** | Media servers & players | 10-foot client for your self-hosted TubeArchivist: pair from your phone, never type on the remote. Needs the project's gateway and transcoder containers on your LAN; the gateway URL is written into the package on install. | [raykholo](https://github.com/raykholo/tubearchivist-tv) | `3cb035f` |
 | **TV Clock** | Other | Simple clock and screen saver for Samsung Tizen 6.0+ TVs. | [anandhuremanan](https://github.com/anandhuremanan/samsung-tizen-clock-app) | `1b9ad6f` |
 | **TV Dashboard** | Other | A calm remote-first home screen: weather and news as a short letter, an app rack, and an ambient art gallery. | [lvndry](https://github.com/lvndry/tv-dashboard) | `47d604c` |
+| **TV-Store** | Tools & system | The Apps2Samsung catalog on the TV itself: browse with the remote and install apps natively through the set's own developer connection, with no PC or phone in the loop after a one-time arming from the Apps2Samsung 3.0 (or newer) toolbox. Needs Developer Mode with the Host PC IP set to the TV's own address. | [Apps2Samsung](https://github.com/Apps2Samsung/TV-Store) | `v0.3.5` |
 | **TVapp** | IPTV & Live TV | Enable seamless playback of HLS/m3u8 streams as channels. | [KaashDev](https://github.com/KaashDev/TVapp) | `latest` |
 | **TVideoPlayer** | Media servers & players | Tizen TV HTML video player based on videojs. | [TizenTVWebApp](https://github.com/TizenTVWebApp/TVideoPlayer) | `latest` |
 | **Twitch** | Streaming | Twitch client for Samsung Smart TVs 2015 and newer models. | [fgl27](https://github.com/fgl27/smarttv-twitch) | `ca31512` |
