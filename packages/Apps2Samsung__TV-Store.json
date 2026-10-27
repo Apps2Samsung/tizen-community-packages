@@ -1,10 +1,10 @@
 {
   "name": "TV-Store",
-  "description": "The Apps2Samsung catalog on the TV itself: browse with the remote and install apps natively through the set's own developer connection, with no PC or phone in the loop after a one-time arming from the Apps2Samsung toolbox. Needs Developer Mode with the Host PC IP set to the TV's own address.",
+  "description": "The Apps2Samsung catalog on the TV itself: browse with the remote and install apps natively through the set's own developer connection, with no PC or phone in the loop after a one-time arming from the Apps2Samsung 3.0 (or newer) toolbox. Needs Developer Mode with the Host PC IP set to the TV's own address.",
   "category": "tools",
   "repo": "Apps2Samsung/TV-Store",
   "repo_label": "Apps2Samsung",
-  "enabled": false,
+  "enabled": true,
   "source": "release",
   "branch": "main",
   "output_name": "TV-Store.wgt"
