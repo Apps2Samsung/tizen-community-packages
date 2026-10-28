@@ -1,0 +1,12 @@
+{
+  "name": "TorrStream",
+  "description": "Movies and TV shows through TorrServer, with TMDB catalogs and audio and subtitle track names read on the TV. Works with a TorrServer on your network or MonoServer on the TV itself.",
+  "category": "streaming",
+  "repo": "cash94/TorrStream-Tizen",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "TorrStream-Tizen.wgt", "variant": "TorrStream", "output_name": "TorrStream.wgt" },
+    { "match": "TorrStream-ffprobe.wgt", "variant": "ffprobe add-on (Tizen 6+)", "output_name": "TorrStream-ffprobe.wgt" }
+  ]
+}
