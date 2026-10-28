@@ -43,6 +43,9 @@ jobs:
       # `carry` are copied over unchanged from the `prev_tag` release.
       rebuild: ${{ steps.check.outputs.rebuild }}
       carry: ${{ steps.check.outputs.carry }}
+      # {repo: {tag, files}}: the recent bundle that can stand in for a
+      # refreshed package when its refresh comes up short.
+      fallback: ${{ steps.check.outputs.fallback }}
       prev_tag: ${{ steps.check.outputs.prev_tag }}
       matrix: ${{ steps.check.outputs.matrix }}
       build_count: ${{ steps.check.outputs.build_count }}
@@ -182,11 +185,13 @@ jobs:
           done < <(echo "$pkgs" | jq -c '.[]')
 
           # --- Previous bundle: what it already ships ---
-          prev=$(api "https://api.github.com/repos/$GITHUB_REPOSITORY/releases?per_page=20" 2>/dev/null \
-            | jq -c '[.[] | select(.draft == false and (.tag_name | startswith("community-")))][0] // empty' || true)
-          prev_tag=$(echo "$prev" | jq -r '.tag_name // empty')
-          prev_files=$(echo "$prev" | jq -c '[(.assets // [])[].name]')
-          [ -n "$prev_files" ] || prev_files='[]'
+          # Recent bundles, newest first, as [{tag, files}].
+          bundles=$(api "https://api.github.com/repos/$GITHUB_REPOSITORY/releases?per_page=20" 2>/dev/null \
+            | jq -c '[.[] | select(.draft == false and (.tag_name | startswith("community-")))
+                       | {tag: .tag_name, files: [(.assets // [])[].name]}]' || true)
+          [ -n "$bundles" ] || bundles='[]'
+          prev_tag=$(echo "$bundles" | jq -r '.[0].tag // empty')
+          prev_files=$(echo "$bundles" | jq -c '.[0].files // []')
 
           # --- Full or incremental ---
           full=""
@@ -217,14 +222,22 @@ jobs:
             rebuild=$(echo "$pkgs" | jq -c '[.[].repo]')
           else
             # Changed packages, plus any whose files the previous bundle lacks
-            # (failed build, skipped asset, quarantined). The latter never start
-            # a run on their own, they just get retried whenever one happens.
-            rebuild=$(echo "$pkgs" | jq -c --arg dirty "$dirty" --argjson have "$prev_files" '
+            # (skipped asset, quarantined) or only has from an older version
+            # (stale:<repo>, see publish-release). Those never start a run on
+            # their own, they just get retried whenever one happens.
+            rebuild=$(echo "$pkgs" | jq -c --arg dirty "$dirty" --argjson have "$prev_files" \
+                --argjson stale "$(echo "$old_state" | jq -c '[keys[] | select(startswith("stale:")) | .[6:]]')" '
               ($dirty | split("\n") | map(select(. != ""))) as $d
-              | [ .[] | select((.repo as $r | $d | index($r))
+              | [ .[] | select((.repo as $r | ($d | index($r)) or ($stale | index($r)))
                     or any(.files[]; . == null or (. as $f | $have | index($f) | not)))
                   | .repo ]')
           fi
+          # Newest recent bundle that has all of a refreshed package's files,
+          # so an app already missing from the last bundle can still come back.
+          fallback=$(echo "$pkgs" | jq -c --argjson r "$rebuild" --argjson bundles "$bundles" '
+            [.[] | select(.repo as $x | $r | index($x)) | . as $p
+             | ([$bundles[] | select(. as $b | all($p.files[]; . as $f | $b.files | index($f)))][0].tag) as $tag
+             | select($tag) | {key: .repo, value: {tag: $tag, files: .files}}] | from_entries')
           carry=$(echo "$pkgs" | jq -c --argjson r "$rebuild" \
             '[.[] | select(.repo as $x | $r | index($x) | not) | .files[]] | unique')
           matrix=$(jq -c --argjson r "$rebuild" \
@@ -260,6 +273,7 @@ jobs:
           {
             echo "rebuild=$rebuild"
             echo "carry=$carry"
+            echo "fallback=$fallback"
             echo "prev_tag=$prev_tag"
             echo "matrix=$matrix"
             echo "build_count=$build_count"
@@ -683,10 +697,52 @@ jobs:
           # A short bundle would silently drop apps for every user; fail instead.
           [ "$got" -eq "$want" ] || { echo "::error::Expected $want files from $PREV_TAG, got $got"; exit 1; }
 
+      - name: Keep previous files where the refresh came up short
+        # A failed build or a new upstream release without the expected asset
+        # would drop the app from the bundle. Ship what the last good bundle had
+        # instead (all of the package's files, so variants stay one version),
+        # and record the package as stale:<repo> so every later run retries it.
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FALLBACK: ${{ needs.detect-changes.outputs.fallback }}
+        run: |
+          set -e
+          mkdir -p fallback
+          [ -n "$FALLBACK" ] || FALLBACK='{}'
+          stale='{}'
+          while IFS= read -r p; do
+            repo=$(echo "$p" | jq -r '.key')
+            tag=$(echo "$p" | jq -r '.value.tag')
+            short=false
+            while IFS= read -r f; do
+              ls built/*/"$f" "external/$f" 2>/dev/null | grep -q . || short=true
+            done < <(echo "$p" | jq -r '.value.files[]')
+            [ "$short" = "true" ] || continue
+            args=()
+            while IFS= read -r f; do
+              rm -f built/*/"$f" "external/$f"
+              args+=(-p "$f")
+            done < <(echo "$p" | jq -r '.value.files[]')
+            if gh release download "$tag" -D fallback "${args[@]}"; then
+              echo "::warning title=Kept previous version::$repo did not refresh - shipping its files from $tag."
+              stale=$(echo "$stale" | jq --arg k "stale:$repo" --arg v "$tag" '. + {($k): $v}')
+            else
+              echo "::warning title=Package dropped::$repo did not refresh and could not be taken from $tag."
+            fi
+          done < <(echo "$FALLBACK" | jq -c 'to_entries[]')
+          echo "$stale" > stale.json
+          cat stale.json
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stale-packages
+          path: stale.json
+
       - name: Merge all wgt files
         run: |
           mkdir -p final_wgts
           cp carried/* final_wgts/ 2>/dev/null || true
+          cp fallback/* final_wgts/ 2>/dev/null || true
           cp built/**/*.wgt final_wgts/ 2>/dev/null || true
           cp external/*.wgt final_wgts/ 2>/dev/null || true
           cp external/*.tpk final_wgts/ 2>/dev/null || true
@@ -842,12 +898,19 @@ jobs:
         with:
           name: last-seen-state
           path: .state-download
+      - uses: actions/download-artifact@v4
+        with:
+          name: stale-packages
+          path: .state-download
 
       - name: Apply new state
+        # stale:<repo> marks a package shipped from an older bundle this run;
+        # detect-changes retries it until a refresh succeeds and drops the key.
         run: |
           set -e
           mkdir -p .github/state
-          mv .state-download/new_last_seen.json .github/state/last_seen.json
+          jq -s '.[0] + .[1]' .state-download/new_last_seen.json .state-download/stale.json \
+            > .github/state/last_seen.json
 
       - name: Render README package table
         run: python3 -I scripts/render-readme.py
