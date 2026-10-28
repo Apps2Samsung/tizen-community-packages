@@ -39,6 +39,13 @@ jobs:
     outputs:
       has_changes: ${{ steps.check.outputs.has_changes }}
       changes_summary: ${{ steps.check.outputs.changes_summary }}
+      # Incremental runs: only `rebuild` is built / downloaded, the files in
+      # `carry` are copied over unchanged from the `prev_tag` release.
+      rebuild: ${{ steps.check.outputs.rebuild }}
+      carry: ${{ steps.check.outputs.carry }}
+      prev_tag: ${{ steps.check.outputs.prev_tag }}
+      matrix: ${{ steps.check.outputs.matrix }}
+      build_count: ${{ steps.check.outputs.build_count }}
     steps:
       - uses: actions/checkout@v4
 
@@ -49,8 +56,9 @@ jobs:
         id: check
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # Push (merged PR) always rebuilds: an edited manifest isn't an upstream change.
-          FORCE: ${{ github.event_name == 'push' || inputs.force == true }}
+          FORCE: ${{ inputs.force == true }}
+          EVENT: ${{ github.event_name }}
+          BEFORE: ${{ github.event.before }}
         run: |
           set -e
           STATE_FILE=".github/state/last_seen.json"
@@ -60,6 +68,8 @@ jobs:
           new_state='{}'
           summary=""
           has_changes="false"
+          # Repos whose upstream or manifest changed, one per line.
+          dirty=""
 
           api() {
             curl -fsSL -H "Authorization: Bearer $GH_TOKEN" \
@@ -89,6 +99,7 @@ jobs:
             if [ "$old_val" != "$sha" ]; then
               summary="${summary}"$'\n'"- build $repo ($branch) -> ${sha:0:7}"
               has_changes="true"
+              dirty="$dirty$repo"$'\n'
             fi
           done < <(jq -c 'to_entries[]' repos-build.json)
 
@@ -112,6 +123,7 @@ jobs:
             if [ "$old_val" != "$tag" ]; then
               summary="${summary}"$'\n'"- release $repo -> $tag"
               has_changes="true"
+              dirty="$dirty$repo"$'\n'
             fi
           done < <(jq -c '.releases | to_entries[]' repos-sync.json)
 
@@ -134,14 +146,101 @@ jobs:
             if [ "$old_val" != "$fingerprint" ]; then
               summary="${summary}"$'\n'"- direct $repo -> $fingerprint"
               has_changes="true"
+              dirty="$dirty$repo"$'\n'
             fi
           done < <(jq -c '.direct | to_entries[]' repos-sync.json)
 
+          # --- Every package: the files it ships and its config fingerprint ---
+          pkgs=$(jq -nc --slurpfile b repos-build.json --slurpfile s repos-sync.json '
+            [ ($b[0] | to_entries[] | {repo: .key, cfg: .value, overlay: (.value.overlay // ""),
+                files: [.value.output_name]}),
+              ($s[0].releases | to_entries[] | {repo: .key, cfg: .value, overlay: "",
+                files: (if .value.assets then [.value.assets[].output_name] else [.value.output_name] end)}),
+              ($s[0].direct | to_entries[] | {repo: .key, cfg: .value, overlay: "",
+                files: [.value.output_name // ((.key | split("/") | last) + ".wgt")]}) ]')
+
+          # Config fingerprint = compiled manifest entry + overlay files, so an
+          # edited manifest rebuilds just that package. Name / description /
+          # category are not in the compiled entry: they only feed catalog.json,
+          # which every release regenerates anyway.
+          had_config=$(echo "$old_state" | jq 'any(keys[]; startswith("config:"))')
+          while IFS= read -r p; do
+            repo=$(echo "$p" | jq -r '.repo')
+            overlay=$(echo "$p" | jq -r '.overlay')
+            cfg=$( { echo "$p" | jq -c '.cfg'
+                     if [ -n "$overlay" ] && [ -d "apps/$overlay" ]; then
+                       (cd "apps/$overlay" && find . -type f -print0 | sort -z | xargs -0 sha256sum)
+                     fi; } | sha256sum | cut -c1-16)
+            key="config:$repo"
+            new_state=$(echo "$new_state" | jq --arg k "$key" --arg v "$cfg" '. + {($k): $v}')
+            old_val=$(echo "$old_state" | jq -r --arg k "$key" '.[$k] // empty')
+            if [ "$old_val" != "$cfg" ]; then
+              [ "$had_config" = "true" ] && summary="${summary}"$'\n'"- config $repo"
+              has_changes="true"
+              dirty="$dirty$repo"$'\n'
+            fi
+          done < <(echo "$pkgs" | jq -c '.[]')
+
+          # --- Previous bundle: what it already ships ---
+          prev=$(api "https://api.github.com/repos/$GITHUB_REPOSITORY/releases?per_page=20" 2>/dev/null \
+            | jq -c '[.[] | select(.draft == false and (.tag_name | startswith("community-")))][0] // empty' || true)
+          prev_tag=$(echo "$prev" | jq -r '.tag_name // empty')
+          prev_files=$(echo "$prev" | jq -c '[(.assets // [])[].name]')
+          [ -n "$prev_files" ] || prev_files='[]'
+
+          # --- Full or incremental ---
+          full=""
           if [ "$FORCE" = "true" ]; then
-            echo "Force flag set - treating as changed"
-            has_changes="true"
-            summary="${summary}"$'\n'"(forced via ${{ github.event_name }})"
+            full="forced via workflow_dispatch"
+          elif [ -z "$prev_tag" ]; then
+            full="no previous community release to reuse"
+          elif [ "$had_config" != "true" ]; then
+            full="package config fingerprints initialised"
+          elif [ "$EVENT" = "push" ]; then
+            # The scripts shape what gets built and shipped, so a change there
+            # rebuilds everything. Unknown diff (new branch, API error) does too.
+            changed_files=$(api "https://api.github.com/repos/$GITHUB_REPOSITORY/compare/$BEFORE...$GITHUB_SHA" 2>/dev/null \
+              | jq -r '.files[].filename' || echo "scripts/?")
+            if [ -z "$changed_files" ] || echo "$changed_files" | grep -q '^scripts/'; then
+              full="scripts/ changed"
+            fi
           fi
+          if [ "$EVENT" = "push" ]; then
+            # A merged PR always publishes, so metadata-only edits reach catalog.json.
+            has_changes="true"
+            summary="${summary}"$'\n'"(push to main)"
+          fi
+          if [ -n "$full" ]; then
+            echo "Full rebuild: $full"
+            has_changes="true"
+            summary="${summary}"$'\n'"(full rebuild: $full)"
+            rebuild=$(echo "$pkgs" | jq -c '[.[].repo]')
+          else
+            # Changed packages, plus any whose files the previous bundle lacks
+            # (failed build, skipped asset, quarantined). The latter never start
+            # a run on their own, they just get retried whenever one happens.
+            rebuild=$(echo "$pkgs" | jq -c --arg dirty "$dirty" --argjson have "$prev_files" '
+              ($dirty | split("\n") | map(select(. != ""))) as $d
+              | [ .[] | select((.repo as $r | $d | index($r))
+                    or any(.files[]; . == null or (. as $f | $have | index($f) | not)))
+                  | .repo ]')
+          fi
+          carry=$(echo "$pkgs" | jq -c --argjson r "$rebuild" \
+            '[.[] | select(.repo as $x | $r | index($x) | not) | .files[]] | unique')
+          matrix=$(jq -c --argjson r "$rebuild" \
+            '{include: [to_entries[] | select(.key as $k | $r | index($k)) | {
+              repo: .key,
+              repo_id: (.key | gsub("/"; "-")),
+              manifest: ("packages/" + (.key | gsub("/"; "__")) + ".json"),
+              branch: .value.branch,
+              project_path: (.value.project_path // "."),
+              output_name: (.value.output_name // ""),
+              skip_npm: (.value.skip_npm // false),
+              pre_build: (.value.pre_build // ""),
+              overlay: (.value.overlay // ""),
+              host: (.value.host // "github")
+            }]}' repos-build.json)
+          build_count=$(echo "$matrix" | jq '.include | length')
 
           echo "$new_state" | jq '.' > new_last_seen.json
 
@@ -149,8 +248,22 @@ jobs:
           cat new_last_seen.json
           echo "--- summary ---"
           echo "${summary:-No changes.}"
+          echo "--- plan ---"
+          echo "Rebuild/download $(echo "$rebuild" | jq length) of $(echo "$pkgs" | jq length) packages ($build_count builds): $(echo "$rebuild" | jq -r 'join(", ")')"
+          echo "Reuse $(echo "$carry" | jq length) files from ${prev_tag:-(none)}"
+          {
+            echo "### Sync plan"
+            echo "Rebuild/download **$(echo "$rebuild" | jq length)** of $(echo "$pkgs" | jq length) packages, reuse **$(echo "$carry" | jq length)** files from \`${prev_tag:-none}\`."
+          } >> "$GITHUB_STEP_SUMMARY"
 
           echo "has_changes=$has_changes" >> "$GITHUB_OUTPUT"
+          {
+            echo "rebuild=$rebuild"
+            echo "carry=$carry"
+            echo "prev_tag=$prev_tag"
+            echo "matrix=$matrix"
+            echo "build_count=$build_count"
+          } >> "$GITHUB_OUTPUT"
           {
             echo "changes_summary<<__END__"
             echo "${summary:-No changes.}"
@@ -171,7 +284,7 @@ jobs:
     # installs once and saves, so the matrix never installs in parallel.
     runs-on: ubuntu-24.04
     needs: detect-changes
-    if: needs.detect-changes.outputs.has_changes == 'true'
+    if: needs.detect-changes.outputs.has_changes == 'true' && needs.detect-changes.outputs.build_count != '0'
     steps:
       - uses: actions/checkout@v4
 
@@ -202,36 +315,12 @@ jobs:
           key: tizen-web-sdk-4.0
 
 
-  generate-matrix-build:
-    runs-on: ubuntu-24.04
-    needs: detect-changes
-    if: needs.detect-changes.outputs.has_changes == 'true'
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
-    steps:
-      - uses: actions/checkout@v4
-      - name: Compile manifests
-        run: bash scripts/build-manifests.sh
-      - id: set-matrix
-        run: |
-          matrix=$(jq -c \
-            '{include: [to_entries[] | {
-              repo: .key,
-              repo_id: (.key | gsub("/"; "-")),
-              manifest: ("packages/" + (.key | gsub("/"; "__")) + ".json"),
-              branch: .value.branch,
-              project_path: (.value.project_path // "."),
-              output_name: (.value.output_name // ""),
-              skip_npm: (.value.skip_npm // false),
-              pre_build: (.value.pre_build // ""),
-              overlay: (.value.overlay // ""),
-              host: (.value.host // "github")
-            }]}' repos-build.json)
-          echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
-
   tizen-build:
     runs-on: ubuntu-24.04
-    needs: [prepare, generate-matrix-build]
+    needs: [detect-changes, prepare]
+    # Skipped when nothing built-from-source needs a rebuild (an empty matrix
+    # is an error); publish-release accepts that.
+    if: needs.detect-changes.outputs.build_count != '0'
     # A hung upstream build (npm, pre_build, packaging) must not hold the whole
     # release for GitHub's 6h default. A timeout counts as a failed leg, and the
     # release still ships the rest.
@@ -239,7 +328,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include: ${{ fromJson(needs.generate-matrix-build.outputs.matrix).include }}
+        include: ${{ fromJson(needs.detect-changes.outputs.matrix).include }}
     steps:
       - uses: actions/checkout@v4
       - name: Restore Tizen SDK from cache
@@ -406,6 +495,7 @@ jobs:
         if: ${{ steps.config.outputs.config != '' }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REBUILD: ${{ needs.detect-changes.outputs.rebuild }}
         run: |
           set -e
           api() {
@@ -413,7 +503,8 @@ jobs:
               -H "Accept: application/vnd.github+json" "$@"
           }
           CFG="${{ steps.config.outputs.config }}"
-          repos=$(jq -r '.releases | to_entries[] | .key' "$CFG")
+          # Only what detect-changes picked; the rest is reused from the previous bundle.
+          repos=$(jq -r --argjson r "$REBUILD" '.releases | keys[] | select(. as $k | $r | index($k))' "$CFG")
 
           # A single dead/renamed/asset-less upstream must not break the whole catalog sync -
           # collect skips and warn, don't `exit 1`.
@@ -498,9 +589,11 @@ jobs:
 
       - name: Download direct WGT URLs
         if: ${{ steps.config.outputs.config != '' }}
+        env:
+          REBUILD: ${{ needs.detect-changes.outputs.rebuild }}
         run: |
           CFG="${{ steps.config.outputs.config }}"
-          jq -r '.direct | to_entries[] | "\(.key) \(.value.url // .value) \(.value.output_name // "") \(.value.extract // "")"' "$CFG" |
+          jq -r --argjson r "$REBUILD" '.direct | to_entries[] | select(.key as $k | $r | index($k)) | "\(.key) \(.value.url // .value) \(.value.output_name // "") \(.value.extract // "")"' "$CFG" |
           while read -r repo url outname extract; do
             [ -n "$repo" ] || continue
             if [ -z "$outname" ] || [ "$outname" = "null" ]; then
@@ -515,11 +608,12 @@ jobs:
           name: external-wgts
           path: external_wgts/
           compression-level: 0   # already-compressed packages
+          if-no-files-found: ignore   # nothing external to refresh this run
 
   publish-release:
     runs-on: ubuntu-24.04
     needs: [detect-changes, tizen-build, external-downloads]
-    if: ${{ !cancelled() && needs.external-downloads.result == 'success' && (needs.tizen-build.result == 'success' || needs.tizen-build.result == 'failure') }}
+    if: ${{ !cancelled() && needs.external-downloads.result == 'success' && contains(fromJson('["success","failure","skipped"]'), needs.tizen-build.result) }}
     steps:
       - uses: actions/checkout@v4
 
@@ -563,12 +657,36 @@ jobs:
           path: built
       - uses: actions/download-artifact@v4
         with:
-          name: external-wgts
+          # pattern, not name: the artifact is absent when nothing external changed.
+          pattern: external-wgts
           path: external
+          merge-multiple: true
+
+      - name: Carry over unchanged packages
+        # Packages whose upstream and manifest did not change ship the exact
+        # file from the previous bundle instead of being rebuilt / re-downloaded.
+        # Identical bytes also keep their cached ClamAV verdict.
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PREV_TAG: ${{ needs.detect-changes.outputs.prev_tag }}
+          CARRY: ${{ needs.detect-changes.outputs.carry }}
+        run: |
+          set -e
+          mkdir -p carried
+          want=$(echo "$CARRY" | jq length)
+          [ "$want" -gt 0 ] || { echo "Nothing to carry over."; exit 0; }
+          args=()
+          while IFS= read -r f; do args+=(-p "$f"); done < <(echo "$CARRY" | jq -r '.[]')
+          gh release download "$PREV_TAG" -D carried "${args[@]}"
+          got=$(ls carried | wc -l)
+          echo "Carried $got of $want files from $PREV_TAG"
+          # A short bundle would silently drop apps for every user; fail instead.
+          [ "$got" -eq "$want" ] || { echo "::error::Expected $want files from $PREV_TAG, got $got"; exit 1; }
 
       - name: Merge all wgt files
         run: |
           mkdir -p final_wgts
+          cp carried/* final_wgts/ 2>/dev/null || true
           cp built/**/*.wgt final_wgts/ 2>/dev/null || true
           cp external/*.wgt final_wgts/ 2>/dev/null || true
           cp external/*.tpk final_wgts/ 2>/dev/null || true
