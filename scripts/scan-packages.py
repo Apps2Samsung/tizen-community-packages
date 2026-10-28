@@ -357,7 +357,7 @@ def scan_code(root_dir, add):
     return {"text_files": text_files, "hosts": dict(hosts.most_common()), "public_ips": dict(ips), "remote_scripts": sorted(remote_scripts), "minified": minified}
 
 
-def inventory(root_dir, kind, add):
+def inventory(root_dir, kind, add, manifest):
     by_ext, total, natives, nested = Counter(), 0, [], []
     for dp, _dn, fns in os.walk(root_dir):
         for fn in fns:
@@ -379,7 +379,13 @@ def inventory(root_dir, kind, add):
             except OSError:
                 pass
     if nested:
-        add("critical", "nested-package", "contains another package: " + ", ".join(nested))
+        # Only an app that may install packages can do anything with the inner
+        # one. A real package (its manifest parsed) without a packagemanager
+        # privilege just carries dead weight, e.g. a previous build zipped in
+        # by the packager. Zip wrappers have no manifest and stay critical.
+        installer = "privileges" not in manifest or any(
+            p.startswith("http://tizen.org/privilege/packagemanager.") for p in manifest["privileges"])
+        add("critical" if installer else "warn", "nested-package", "contains another package: " + ", ".join(nested))
     if kind == "wgt":
         compiled = tuple((".wasm", ".nexe", ".pexe"))
         real = [n for n in natives if not n.endswith(compiled)]
@@ -513,7 +519,7 @@ def scan_package(path):
         # Signer subjects are reported when present. Unsigned packages are normal
         # here (signing happens at install time), so their absence is not a finding.
         result["signers"] = signer_subjects(tmp)
-        result["inventory"] = inventory(tmp, kind, add)
+        result["inventory"] = inventory(tmp, kind, add, manifest)
         result["code"] = scan_code(tmp, add)
         result["clamav"] = {"status": "skipped"}
     finally:
