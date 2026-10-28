@@ -576,17 +576,25 @@ jobs:
           # A .wgt is itself a zip, so a zip *wrapping* a .wgt copies in here
           # unnoticed and ships an uninstallable file. Drop those rather than
           # exiting, so one bad upstream cannot sink the whole bundle.
+          # A file with its own manifest at the root is a real package even if
+          # it carries a stray .wgt (Simple TV Player ships its previous build
+          # inside); that one ships as-is.
           command -v unzip >/dev/null || sudo apt-get install -y unzip
           for f in final_wgts/*.wgt final_wgts/*.tpk; do
             [ -e "$f" ] || continue
-            if unzip -Z1 "$f" 2>/dev/null | grep -qiE '\.(wgt|tpk)$'; then
-              echo "::warning title=Nested archive::$(basename "$f") contains a .wgt/.tpk - it is a zip wrapper, not a package. Set \"extract\" in its manifest. Dropping it from this bundle."
-              rm -f "$f"
-            else
-              case "$f" in *.tpk) manifest=tizen-manifest.xml ;; *) manifest=config.xml ;; esac
-              if ! unzip -Z1 "$f" 2>/dev/null | grep -qx "$manifest"; then
-                echo "::warning title=No $manifest::$(basename "$f") has no $manifest at its root - it may not be a valid package."
+            case "$f" in *.tpk) manifest=tizen-manifest.xml ;; *) manifest=config.xml ;; esac
+            entries=$(unzip -Z1 "$f" 2>/dev/null || true)
+            has_manifest=false
+            echo "$entries" | grep -qx "$manifest" && has_manifest=true
+            if echo "$entries" | grep -qiE '\.(wgt|tpk)$'; then
+              if [ "$has_manifest" = "true" ]; then
+                echo "::warning title=Nested archive::$(basename "$f") has a .wgt/.tpk inside next to its own $manifest - shipping it as a package, the inner file is just dead weight."
+              else
+                echo "::warning title=Nested archive::$(basename "$f") contains a .wgt/.tpk - it is a zip wrapper, not a package. Set \"extract\" in its manifest. Dropping it from this bundle."
+                rm -f "$f"
               fi
+            elif [ "$has_manifest" != "true" ]; then
+              echo "::warning title=No $manifest::$(basename "$f") has no $manifest at its root - it may not be a valid package."
             fi
           done
 
