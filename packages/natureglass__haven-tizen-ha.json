@@ -1,0 +1,36 @@
+{
+  "name": "Haven",
+  "description": "Home Assistant powered home screen: sensors, lights and scenes by room, weather, live cameras, a Jellyfin client and music from Home Assistant's media folder. Your Home Assistant address and token are written into the package on install.",
+  "category": "other",
+  "repo": "natureglass/haven-tizen-ha",
+  "source": "build",
+  "branch": "main",
+  "project_path": "app",
+  "skip_npm": true,
+  "pre_build": "printf 'window.HAVEN_SHELL_CONFIG = { base: \"\", haToken: \"\", haUrl: \"\" };\\n' > app/shell-config.js",
+  "output_name": "Haven.wgt",
+  "user_settings": {
+    "help_url": "https://github.com/natureglass/haven-tizen-ha#readme",
+    "file": "shell-config.js",
+    "fields": [
+      {
+        "key": "ha_address",
+        "label": "Home Assistant address, for example http://192.168.1.10:8123",
+        "type": "text",
+        "required": true,
+        "pattern": "^https?://[A-Za-z0-9.-]+(:[0-9]+)?$",
+        "find": "base: \"\"",
+        "replace": "base: \"{value}/local/haven/\""
+      },
+      {
+        "key": "ha_token",
+        "label": "Home Assistant long-lived access token (your profile, Security tab)",
+        "type": "text",
+        "required": true,
+        "pattern": "^[A-Za-z0-9._-]+$",
+        "find": "haToken: \"\"",
+        "replace": "haToken: \"{value}\""
+      }
+    ]
+  }
+}
