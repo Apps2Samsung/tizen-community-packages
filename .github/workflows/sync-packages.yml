@@ -113,7 +113,7 @@ jobs:
             if [ -n "$prefix" ]; then
               # Monorepo: the Tizen build has its own tags, /releases/latest belongs to another component.
               json=$(api "https://api.github.com/repos/$repo/releases?per_page=100" 2>/dev/null || echo '[]')
-              tag=$(echo "$json" | jq -r --arg p "$prefix" '[.[] | select(.draft==false and (.tag_name | startswith($p)))][0].tag_name // empty')
+              tag=$(echo "$json" | jq -r --arg p "$prefix" '[.[] | select(.draft==false and (.tag_name | startswith($p)))] | (map(select(.prerelease==false))[0] // .[0]) | .tag_name // empty')
             else
               json=$(api "https://api.github.com/repos/$repo/releases/latest" 2>/dev/null || echo '')
               tag=$(echo "$json" | jq -r '.tag_name // empty')
@@ -543,7 +543,7 @@ jobs:
               # Monorepo: newest non-draft release whose tag starts with release_tag_prefix.
               echo "  Using newest release tagged '$tag_prefix*' for $repo"
               list_json=$(api "https://api.github.com/repos/$repo/releases?per_page=100" 2>/dev/null || echo '[]')
-              json=$(echo "$list_json" | jq --arg p "$tag_prefix" '[.[] | select(.draft==false and (.tag_name | startswith($p)))][0]' 2>/dev/null || echo 'null')
+              json=$(echo "$list_json" | jq --arg p "$tag_prefix" '[.[] | select(.draft==false and (.tag_name | startswith($p)))] | (map(select(.prerelease==false))[0] // .[0])' 2>/dev/null || echo 'null')
             else
               # 1) Try /releases/latest (non-prerelease, non-draft).
               json=$(api "$latest_api" 2>/dev/null || echo '')

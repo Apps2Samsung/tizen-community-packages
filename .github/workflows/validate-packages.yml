@@ -160,7 +160,7 @@ jobs:
             elif [ "$src" = "release" ]; then
               tag_prefix=$(jq -r '.release_tag_prefix // ""' "$f")
               if [ -n "$tag_prefix" ]; then
-                json=$(api "https://api.github.com/repos/$repo/releases?per_page=100" 2>/dev/null | jq --arg p "$tag_prefix" '[.[] | select(.draft==false and (.tag_name | startswith($p)))][0]' 2>/dev/null || echo 'null')
+                json=$(api "https://api.github.com/repos/$repo/releases?per_page=100" 2>/dev/null | jq --arg p "$tag_prefix" '[.[] | select(.draft==false and (.tag_name | startswith($p)))] | (map(select(.prerelease==false))[0] // .[0])' 2>/dev/null || echo 'null')
               else
                 json=$(api "https://api.github.com/repos/$repo/releases/latest" 2>/dev/null || echo '')
                 if [ -z "$(echo "$json" | jq -r '(.assets // [])[0].browser_download_url // empty' 2>/dev/null)" ]; then

@@ -39,7 +39,7 @@
     "overlay": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$", "description": "build only. Name of a directory under apps/ whose contents are copied over the project before packaging (e.g. a config.xml the upstream doesn't ship)." },
     "url": { "type": "string", "pattern": "^https?://", "description": "direct only. Absolute URL to the .wgt." },
     "output_name": { "type": "string", "pattern": "\\.(wgt|tpk)$", "description": "Filename inside the bundle. Required unless using assets[]." },
-    "release_tag_prefix": { "type": "string", "minLength": 1, "pattern": "^[A-Za-z0-9._/-]+$", "description": "release only. For a monorepo whose Tizen build is released under its own tags (e.g. \"smart-tv-v\" for smart-tv-v0.7.0) while GitHub's \"latest\" points at another component. Use the newest non-draft release whose tag starts with this prefix instead of /releases/latest. Absent means the usual latest, then newest prerelease." },
+    "release_tag_prefix": { "type": "string", "minLength": 1, "pattern": "^[A-Za-z0-9._/-]+$", "description": "release only. For a monorepo whose Tizen build is released under its own tags (e.g. \"smart-tv-v\" for smart-tv-v0.7.0) while GitHub's \"latest\" points at another component. Use the newest stable release whose tag starts with this prefix (a prerelease only if none is stable) instead of /releases/latest. Absent means the usual latest, then newest prerelease." },
     "extract": { "type": "string", "minLength": 1, "description": "release/direct only. The downloaded asset is a zip wrapper; extract the entry matching this exact name or regex and use that as the package. Use when upstream ships the .wgt inside a .zip." },
     "assets": {
       "type": "array",
