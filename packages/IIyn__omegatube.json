@@ -1,0 +1,12 @@
+{
+  "name": "OmegaTube",
+  "description": "Ad-free YouTube client with SponsorBlock and a native 4K player (Tizen 6+).",
+  "category": "streaming",
+  "repo": "IIyn/omegatube",
+  "repo_label": "OmegaTube",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "^OmegaTube[.]tpk$", "output_name": "OmegaTube.tpk" }
+  ]
+}
