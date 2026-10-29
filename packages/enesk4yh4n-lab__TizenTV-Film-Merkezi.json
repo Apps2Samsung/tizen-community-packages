@@ -1,0 +1,15 @@
+{
+  "name": "Film Merkezi",
+  "description": "Remote-controlled Turkish/English film and series browser with multiple site providers, watchlist and HTML5/AVPlay playback. Some providers may expose adult content; Tizen 3.0 target, newer-TV compatibility varies.",
+  "category": "streaming",
+  "adult": true,
+  "repo": "enesk4yh4n-lab/TizenTV-Film-Merkezi",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    {
+      "match": "^Film-Merkezi-TV-[0-9]+[.][0-9]+[.][0-9]+-public[.]wgt$",
+      "output_name": "Film-Merkezi.wgt"
+    }
+  ]
+}
