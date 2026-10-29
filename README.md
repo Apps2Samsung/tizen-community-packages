@@ -1,7 +1,7 @@
 # 🌐 Tizen Community Packages
 [![Sync Tizen Community Packages](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml/badge.svg)](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Packages](https://img.shields.io/badge/packages-130-blue.svg)](#-current-packages)
+[![Packages](https://img.shields.io/badge/packages-132-blue.svg)](#-current-packages)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-green.svg)](../../issues)
 [![Tizen](https://img.shields.io/badge/Platform-Tizen-lightgrey.svg)](https://www.tizen.org/)
 [![Community](https://img.shields.io/badge/Community-Driven-orange.svg)](#)
@@ -40,13 +40,14 @@ Please check the [Releases](../../releases) page for version-specific details.
 <!-- packages:start -->
 
 <details>
-<summary><b>🎬 Streaming</b> (32)</summary>
+<summary><b>🎬 Streaming</b> (33)</summary>
 
 | 🧩 Application | 📝 Description | ⚙️ Version |
 |----------------|----------------|------------|
 | **30nama**<br>[msharifi99](https://github.com/msharifi99/30nama-tizenos) | Unofficial 30nama.com client for Samsung Tizen TVs. | `v1.2.1` |
 | **AetherFlix**<br>[Hamza-Boulila](https://github.com/Hamza-Boulila/aetherflix) | Open-source universal streaming platform for Smart TVs with TMDB metadata. | `v1.0.0` |
-| **AIOStreams**<br>[thomasrtg](https://github.com/thomasrtg/AIOStreams) | Tizen build of AIOStreams, the all-in-one Stremio super-addon for debrid and Usenet sources. | `tizen6-v0.7.0-beta.1` |
+| **AIOStreams**<br>[Viren070](https://github.com/Viren070/AIOStreams) | Tizen build of AIOStreams, the all-in-one Stremio super-addon for debrid and Usenet sources. | `smart-tv-v0.7.0` |
+| **AIOStreams (thomasrtg)**<br>[thomasrtg](https://github.com/thomasrtg/AIOStreams) | Tizen 6 build of AIOStreams, the all-in-one Stremio super-addon for debrid and Usenet sources. | `tizen6-v0.7.0-beta.1` |
 | **AniLiberty**<br>[CoreDip](https://github.com/CoreDip/anilibria-tizen-wgt) | Unofficial AniLibria anime client for Samsung Tizen TV. | `v1.1.0` |
 | **AniLiberty TV**<br>[BrainFix](https://github.com/BrainFix/AniLiberty-TV-Tizen) | Unofficial AniLiberty anime client for Samsung Tizen 6.0+ TVs with streaming, watch history, favorites, and account sync. | `v1.0.0` |
 | **AniUltimatium**<br>[AdvaithAvinash](https://github.com/AdvaithAvinash/AniUltimatium) | Anime streaming app for Samsung Tizen TVs. | `stable-v1.15` |
@@ -61,7 +62,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Lampa**<br>[yumata](https://github.com/yumata/lampa) | Free movie and TV catalogue with info, new releases and trailers. | `v1.4.1` |
 | **Nuvio**<br>[NuvioMedia](https://github.com/NuvioMedia/NuvioTVSmart) | TV-first streaming UI for Samsung Tizen. | `1.2.10` |
 | **Nuvio Native Legacy**<br>[iqui27](https://github.com/iqui27/nuvio-native-legacy) | Unofficial native C/SDL2 Nuvio client, fast on older TVs. | `v2.0.8` |
-| **OmegaTube**<br>[OmegaTube](https://github.com/IIyn/omegatube) | Ad-free YouTube client with SponsorBlock and a native 4K player (Tizen 6+). | `v1.2.0` |
+| **OmegaTube**<br>[OmegaTube](https://github.com/IIyn/omegatube) | Ad-free YouTube client with SponsorBlock and a native 4K player (Tizen 6+). | `v1.2.1` |
 | **OsmTwich**<br>[OsmTwichPlayer](https://github.com/josepvarela/OsmTwichPlayer) | Unofficial Twitch client for Samsung Tizen TV. | `v1.0.69` |
 | **Reelo**<br>[Reelo](https://github.com/ihovsky/Reelo) | TV client for the Reelo service: films and series with a remote-first interface, family profiles and library sync between devices (Russian UI). | `Thu, 29 Oct 2026 12:26:28 GMT` |
 | **SeanimeTV**<br>[ihiqhaim](https://github.com/ihiqhaim/SeanimeTV-Tizen) | Unofficial Seanime client for Samsung Tizen TVs with torrent streaming and AVPlay playback. | `4da9288` |
@@ -80,7 +81,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 </details>
 
 <details>
-<summary><b>📼 Media servers & players</b> (28)</summary>
+<summary><b>📼 Media servers & players</b> (29)</summary>
 
 | 🧩 Application | 📝 Description | ⚙️ Version |
 |----------------|----------------|------------|
@@ -104,6 +105,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Reiverr**<br>[aleksilassila](https://github.com/aleksilassila/reiverr) | A clean combined interface for Jellyfin, TMDB, Radarr and Sonarr, as well as a replacement to Overseerr. | `dbdd50d` |
 | **SamSUCKS**<br>[rfaile313](https://github.com/rfaile313/samsucks) | Fast from-scratch Plex client for Samsung Tizen 6.5+ TVs: smooth scrolling, hardware AVPlay playback with direct play, instant search, audio/subtitle picker and up-next autoplay. | `6b00e92` |
 | **Sendspin Cinema**<br>[zonya](https://github.com/zonya/sendspin-cinema-tizen) | Minimal cinema-style Sendspin player for Music Assistant on Samsung Tizen 3.0+ TVs: album art with adaptive accent colours, set up from the TV screen. | `0eabc15` |
+| **Shutter**<br>[khanh-ly](https://github.com/khanh-ly/shutter) | Unofficial Synology Photos slideshow for Samsung TVs: all photos, favorites, an album or Shared Space, with crossfades, pan/zoom and a clock. | `32df354` |
 | **Sonance3**<br>[MrSimmo](https://github.com/MrSimmo/sonance3) | A music player for Samsung Tizen TVs, built to stream from your self-hosted Navidrome or Subsonic-compatible server. | `v3.15` |
 | **tacplayer**<br>[sfsdffesfsfg-cloud](https://github.com/sfsdffesfsfg-cloud/tacplayer) | Custom Jellyfin Tizen client with cinematic red UI for Samsung TV | `v0.1.0` |
 | **Tessel**<br>[PatrickSt1991](https://github.com/PatrickSt1991/tessel-tizen-tv) | Media player for Samsung TVs: SMB shares, USB drives, network streams and subtitles, with an optional transcode server (formerly VLC-Tizen-tv). | `v1.33.0-20261028-1300` |
