@@ -54,14 +54,14 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Bisnor**<br>[nikan48g](https://github.com/nikan48g/Bisnor) | Open-source Persian movie and series client (experimental Tizen TV build): browse, search and play titles from the IranFlix catalogue with AVPlay. | `6cf99f4` |
 | **Crunchyroll**<br>[jhassan8](https://github.com/jhassan8/crunchyroll-tizen) | Unofficial Crunchyroll client for Samsung Tizen TVs with anime streaming support. | `latest` |
 | **Douyin (抖音)**<br>[titlog](https://github.com/titlog/douyin-tizen) | Unofficial Douyin client for Samsung Tizen 6.0+ TVs, driven by the remote: Featured, Following and For You feeds, QR sign-in, your history, likes and favourites, creator pages, collections and comments. | `v1.4.5` |
-| **Kick**<br>[madarra16](https://github.com/madarra16/kick-tizen) | Unofficial Kick client modeled on the official TV app: live streams, chat, rewind, clips and 10 languages. | `v1.0.0` |
+| **Kick**<br>[madarra16](https://github.com/madarra16/kick-tizen) | Unofficial Kick client modeled on the official TV app: live streams, chat, rewind, clips and 10 languages. | `v1.2.0` |
 | **Kick TV 2.0**<br>[janrydzewski](https://github.com/janrydzewski/kick-tv-2.0) | Kick live streams and public archives for Samsung Tizen TVs. | `v2.0.1` |
 | **KickTV**<br>[corekill](https://github.com/corekill/kick-tv-tizen) | Kick.com streaming client for Samsung Tizen TVs. | `v2.3.0` |
 | **Lampa**<br>[yumata](https://github.com/yumata/lampa) | Free movie and TV catalogue with info, new releases and trailers. | `v1.4.1` |
-| **Nuvio**<br>[NuvioMedia](https://github.com/NuvioMedia/NuvioWeb) | TV-first streaming UI for Samsung Tizen. | `1.2.9` |
+| **Nuvio**<br>[NuvioMedia](https://github.com/NuvioMedia/NuvioTVSmart) | TV-first streaming UI for Samsung Tizen. | `1.2.10` |
 | **Nuvio Native Legacy**<br>[iqui27](https://github.com/iqui27/nuvio-native-legacy) | Unofficial native C/SDL2 Nuvio client, fast on older TVs. | `v2.0.8` |
-| **OsmTwich**<br>[OsmTwichPlayer](https://github.com/josepvarela/OsmTwichPlayer) | Unofficial Twitch client for Samsung Tizen TV. | `v1.0.67` |
-| **Reelo**<br>[Reelo](https://github.com/ihovsky/Reelo) | TV client for the Reelo service: films and series with a remote-first interface, family profiles and library sync between devices (Russian UI). | `Wed, 28 Oct 2026 11:37:05 GMT` |
+| **OsmTwich**<br>[OsmTwichPlayer](https://github.com/josepvarela/OsmTwichPlayer) | Unofficial Twitch client for Samsung Tizen TV. | `v1.0.69` |
+| **Reelo**<br>[Reelo](https://github.com/ihovsky/Reelo) | TV client for the Reelo service: films and series with a remote-first interface, family profiles and library sync between devices (Russian UI). | `Wed, 28 Oct 2026 23:38:37 GMT` |
 | **SeanimeTV**<br>[ihiqhaim](https://github.com/ihiqhaim/SeanimeTV-Tizen) | Unofficial Seanime client for Samsung Tizen TVs with torrent streaming and AVPlay playback. | `4da9288` |
 | **Streamix TV**<br>[gabrielmaialva33](https://github.com/gabrielmaialva33/streamix-tv) | Cinematic 10-foot TV client for the self-hosted Streamix platform. | `v1.0.027` |
 | **Stremio (Tizen 4)**<br>[Apps2Samsung](https://github.com/Apps2Samsung/tizen-community-packages) | Stremio media center packaged for Tizen 4.0 devices. | `latest` |
@@ -82,7 +82,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 
 | 🧩 Application | 📝 Description | ⚙️ Version |
 |----------------|----------------|------------|
-| **Aerial Screensaver**<br>[jeancarlos](https://github.com/jeancarlos/aerial-tizen) | Apple TV Aerial screensavers: 115 videos streamed from Apple's CDN and decoded in hardware as HEVC 4K via AVPlay. | `c30c0c9` |
+| **Aerial Screensaver**<br>[jeancarlos](https://github.com/jeancarlos/aerial-tizen) | Apple TV Aerial screensavers: 115 videos streamed from Apple's CDN and decoded in hardware as HEVC 4K via AVPlay. | `5deceda` |
 | **AmorecoFlix**<br>[Pablitorox](https://github.com/Pablitorox/AmorecoFlix) | Personal Netflix-style player for a USB drive plugged into the TV: posters, synopses, continue watching, next episode, skip intro, audio and subtitle choice. | `05ec679` |
 | **Beam-TV**<br>[TAGISWILD](https://github.com/TAGISWILD/beam-tv) | Open-source USB and DLNA media player for Samsung Tizen TVs — subtitles, resume playback, remote navigation, and a local companion server. | `v1.0.1` |
 | **Chorus2-Tizen**<br>[Chorus2-Tizen](https://github.com/PatrickSt1991/chorus2-tizen) | Chorus2-Tizen (Kodi) Samsung Tizen. | `tizen-v21.x-1.0.1-2026-05-21-1443` |
@@ -108,7 +108,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **TubeArchivist TV**<br>[raykholo](https://github.com/raykholo/tubearchivist-tv) | 10-foot client for your self-hosted TubeArchivist: pair from your phone, never type on the remote. | `3cb035f` |
 | **TVideoPlayer**<br>[TizenTVWebApp](https://github.com/TizenTVWebApp/TVideoPlayer) | Tizen TV HTML video player based on videojs. | `latest` |
 | **VeloVistrix**<br>[zephy-lee](https://github.com/zephy-lee/velovistrix-tizen) | Read-only PhotoPrism viewer for Samsung Tizen 5.0+ TVs, driven by the remote: albums, places, calendar, labels and folders from your own server, with slideshow. | `d136678` |
-| **Velvet TV**<br>[aroundmyroom](https://github.com/aroundmyroom/Velvet) | Big-screen TV client for the Velvet self-hosted music server. | `7897987` |
+| **Velvet TV**<br>[aroundmyroom](https://github.com/aroundmyroom/Velvet) | Big-screen TV client for the Velvet self-hosted music server. | `777892f` |
 | **Vemm**<br>[somefosterkid](https://github.com/somefosterkid/vemm) | Unofficial Plex-compatible media player for Samsung Tizen TVs with AVPlay playback, Direct Play and server transcoding. | `preview-0.9.0` |
 
 </details>
@@ -193,8 +193,8 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **TizenBrew**<br>[reisxd](https://github.com/reisxd/TizenBrew) | A way to experience modded websites and you can install newer apps without fighting with Tizen Studio. | `v2.0.5` |
 | **TizenUtility**<br>[no-cover](https://github.com/no-cover/tizenutility) | System utility for Samsung Tizen TVs: detailed device, firmware and network info, plus a launcher for hidden built-in Samsung apps that are not reachable from the normal UI. | `1.1.1` |
 | **Torr Streaming**<br>[no-cover](https://github.com/no-cover/torr-streaming) | Runs TorrServer as a background service on the TV itself, so local web apps can stream torrents directly without a separate box. | `1.0.0` |
-| **TV-Store**<br>[Apps2Samsung](https://github.com/Apps2Samsung/TV-Store) | The Apps2Samsung catalog on the TV itself: browse with the remote and install apps natively through the set's own developer connection, with no PC or phone in the loop after a one-time arming from the Apps2Samsung 3.0 (or newer) toolbox. | `v0.3.8` |
-| **Vetro**<br>[andrearicci93](https://github.com/andrearicci93/vetro) | TV management dashboard with root integration: app inventory, controls and diagnostics in your browser. | `b05a374` |
+| **TV-Store**<br>[Apps2Samsung](https://github.com/Apps2Samsung/TV-Store) | The Apps2Samsung catalog on the TV itself: browse with the remote and install apps natively through the set's own developer connection, with no PC or phone in the loop after a one-time arming from the Apps2Samsung 3.0 (or newer) toolbox. | `v0.3.9` |
+| **Vetro**<br>[andrearicci93](https://github.com/andrearicci93/vetro) | TV management dashboard with root integration: app inventory, controls and diagnostics in your browser. | `8f8ec15` |
 
 </details>
 
@@ -208,8 +208,8 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Arn0 Launcher**<br>[NelsonEU](https://github.com/NelsonEU/arn0-tv) | Minimal remote-friendly home screen for Samsung TVs: a clock, your apps, your consoles and rotating wallpapers. | `b35c292` |
 | **Baobab Signage**<br>[Gonqas](https://github.com/Gonqas/baobab) | Player for Baobab, open-source local digital signage: plays the playlist your own Baobab server on the LAN assigns to this screen. | `6ee8491` |
 | **Copenhagen Weather**<br>[cocodedk](https://github.com/cocodedk/copenhagen-weather-tv) | Current conditions, hourly and 7-day forecast for Copenhagen on Samsung Tizen 6.0+ TVs. | `1a934d6` |
-| **Frame Dashboard**<br>[joseamijares](https://github.com/joseamijares/frame-dashboard) | Daily dashboard for the Samsung Frame TV: a public-domain painting beside your calendar, focus and tasks. | `c7b4a31` |
-| **Free My TV**<br>[simbasjungles](https://github.com/simbasjungles/free-my-tv) | Fast, ad-free home screen with your app shelf, weather, sunset-based day/night theme and a photo screensaver. | `v1.2.0` |
+| **Frame Dashboard**<br>[joseamijares](https://github.com/joseamijares/frame-dashboard) | Daily dashboard for the Samsung Frame TV: a public-domain painting beside your calendar, focus and tasks. | `8cc81fe` |
+| **Free My TV**<br>[simbasjungles](https://github.com/simbasjungles/free-my-tv) | Fast, ad-free home screen with your app shelf, weather, sunset-based day/night theme and a photo screensaver. | `v1.3.0` |
 | **Haven**<br>[natureglass](https://github.com/natureglass/haven-tizen-ha) | Home Assistant powered home screen: sensors, lights and scenes by room, weather, live cameras, a Jellyfin client and music from Home Assistant's media folder. | `18ffa3e` |
 | **Nhà Mình**<br>[meocong](https://github.com/meocong/prj-tv-samsung) | Apple TV-style home screen for Samsung Tizen TVs: your installed apps, a YouTube shelf, weather, a lunar calendar, news, an English word of the day read aloud, Bing wallpapers and a family photo screensaver. | `v1.4.0` |
 | **Sportlink Club Viewer**<br>[PatrickSt1991](https://github.com/PatrickSt1991/Sportlink.Club.Info.Viewer) | Solution for sports clubs to display match information in real time and in a clear, organized way on screens throughout the club! | `v1.1.0` |
@@ -226,7 +226,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 
 | 🧩 Application | 📝 Description | ⚙️ Version |
 |----------------|----------------|------------|
-| **StashZen**<br>[StashZen](https://github.com/Stashified/StashZen) | A Stash client for Samsung Tizen TVs. | `v0.38.1` |
+| **StashZen**<br>[StashZen](https://github.com/Stashified/StashZen) | A Stash client for Samsung Tizen TVs. | `v0.39.0` |
 
 </details>
 
