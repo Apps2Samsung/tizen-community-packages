@@ -5,7 +5,7 @@
   "build:Gonqas/baobab@main": "6ee8491cb332d45772451eb8d7aa036f92b1c32e",
   "build:HelgeSverre/devnull-tv@main": "8bc5f09fc5cb5f5e315bed77ff4ee78881fd6cc0",
   "build:NelsonEU/arn0-tv@main": "b35c292e5bc63648cb8fef576bf5eacd9ea488d1",
-  "build:Pablitorox/AmorecoFlix@master": "05ec679668f1d9091434d3f9a06400e75da1762d",
+  "build:Pablitorox/AmorecoFlix@master": "e6212b35df62414067626cb2419576ad266c6e5b",
   "build:aleksilassila/reiverr@master": "dbdd50dfa8366a0c311b21ba513aabbbc0f28c87",
   "build:anandhuremanan/samsung-tizen-clock-app@main": "1b9ad6fa9000c477039367f6dac6bdac7b7f3f6f",
   "build:anandsimmy/react-iptv@main": "7a7dcc285e374676a2197d70d9d1c443f2b35fa2",
@@ -253,5 +253,5 @@
   "config:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:MrSimmo/sonance3": "community-743"
+  "stale:MrSimmo/sonance3": "community-744"
 }
