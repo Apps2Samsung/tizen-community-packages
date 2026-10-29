@@ -109,11 +109,18 @@ jobs:
           # --- Release-based repos (track latest tag) ---
           while IFS= read -r entry; do
             repo=$(echo "$entry" | jq -r '.key')
-            json=$(api "https://api.github.com/repos/$repo/releases/latest" 2>/dev/null || echo '')
-            tag=$(echo "$json" | jq -r '.tag_name // empty')
-            if [ -z "$tag" ]; then
-              json=$(api "https://api.github.com/repos/$repo/releases?per_page=20" 2>/dev/null || echo '[]')
-              tag=$(echo "$json" | jq -r '[.[] | select(.prerelease==true and .draft==false)][0].tag_name // empty')
+            prefix=$(echo "$entry" | jq -r '.value.release_tag_prefix // empty')
+            if [ -n "$prefix" ]; then
+              # Monorepo: the Tizen build has its own tags, /releases/latest belongs to another component.
+              json=$(api "https://api.github.com/repos/$repo/releases?per_page=100" 2>/dev/null || echo '[]')
+              tag=$(echo "$json" | jq -r --arg p "$prefix" '[.[] | select(.draft==false and (.tag_name | startswith($p)))][0].tag_name // empty')
+            else
+              json=$(api "https://api.github.com/repos/$repo/releases/latest" 2>/dev/null || echo '')
+              tag=$(echo "$json" | jq -r '.tag_name // empty')
+              if [ -z "$tag" ]; then
+                json=$(api "https://api.github.com/repos/$repo/releases?per_page=20" 2>/dev/null || echo '[]')
+                tag=$(echo "$json" | jq -r '[.[] | select(.prerelease==true and .draft==false)][0].tag_name // empty')
+              fi
             fi
             if [ -z "$tag" ]; then
               echo "WARN: no releases for $repo - keeping previous state"
@@ -530,20 +537,29 @@ jobs:
 
             echo "Fetching release for $repo ..."
 
-            # 1) Try /releases/latest (non-prerelease, non-draft).
-            json=$(api "$latest_api" 2>/dev/null || echo '')
+            tag_prefix=$(jq -r ".releases[\"$repo\"].release_tag_prefix // \"\"" "$CFG")
 
-            # 2) Probe whether /latest actually gave us a usable URL.
-            #    Note: relying on a count is fragile because `jq` on empty
-            #    input exits 0 with no output, so the `|| echo 0` fallback
-            #    never fires. Probing for an actual URL avoids that.
-            probe_url=$(echo "$json" | jq -r '(.assets // [])[] | .browser_download_url // empty' 2>/dev/null | head -n 1 || echo '')
+            if [ -n "$tag_prefix" ]; then
+              # Monorepo: newest non-draft release whose tag starts with release_tag_prefix.
+              echo "  Using newest release tagged '$tag_prefix*' for $repo"
+              list_json=$(api "https://api.github.com/repos/$repo/releases?per_page=100" 2>/dev/null || echo '[]')
+              json=$(echo "$list_json" | jq --arg p "$tag_prefix" '[.[] | select(.draft==false and (.tag_name | startswith($p)))][0]' 2>/dev/null || echo 'null')
+            else
+              # 1) Try /releases/latest (non-prerelease, non-draft).
+              json=$(api "$latest_api" 2>/dev/null || echo '')
 
-            # 3) Fall back to newest non-draft prerelease if /latest had nothing.
-            if [ -z "$probe_url" ]; then
-              echo "  No /latest assets for $repo, falling back to newest prerelease..."
-              list_json=$(api "$list_api" 2>/dev/null || echo '[]')
-              json=$(echo "$list_json" | jq '[.[] | select(.prerelease==true and .draft==false)][0]' 2>/dev/null || echo 'null')
+              # 2) Probe whether /latest actually gave us a usable URL.
+              #    Note: relying on a count is fragile because `jq` on empty
+              #    input exits 0 with no output, so the `|| echo 0` fallback
+              #    never fires. Probing for an actual URL avoids that.
+              probe_url=$(echo "$json" | jq -r '(.assets // [])[] | .browser_download_url // empty' 2>/dev/null | head -n 1 || echo '')
+
+              # 3) Fall back to newest non-draft prerelease if /latest had nothing.
+              if [ -z "$probe_url" ]; then
+                echo "  No /latest assets for $repo, falling back to newest prerelease..."
+                list_json=$(api "$list_api" 2>/dev/null || echo '[]')
+                json=$(echo "$list_json" | jq '[.[] | select(.prerelease==true and .draft==false)][0]' 2>/dev/null || echo 'null')
+              fi
             fi
 
             # Decide: new-style (.assets array) or legacy (.output_name single).

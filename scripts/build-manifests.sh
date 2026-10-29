@@ -47,7 +47,8 @@ jq -s '
           key: .repo,
           value: ({ branch }
                    + (if has("assets")  then { assets }  else { output_name } end)
-                   + (if has("extract") then { extract } else {} end))
+                   + (if has("extract") then { extract } else {} end)
+                   + (if has("release_tag_prefix") then { release_tag_prefix } else {} end))
         })
       | from_entries
     ),

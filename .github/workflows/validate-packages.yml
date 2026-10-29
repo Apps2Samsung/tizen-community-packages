@@ -158,9 +158,14 @@ jobs:
               curl -fsSL -o "_scan/$out" "$(jq -r '.url' "$f")" || { echo "::warning file=$f::download failed"; continue; }
               bash scripts/unwrap-zip.sh "_scan/$out" "$(jq -r '.extract // ""' "$f")"
             elif [ "$src" = "release" ]; then
-              json=$(api "https://api.github.com/repos/$repo/releases/latest" 2>/dev/null || echo '')
-              if [ -z "$(echo "$json" | jq -r '(.assets // [])[0].browser_download_url // empty' 2>/dev/null)" ]; then
-                json=$(api "https://api.github.com/repos/$repo/releases?per_page=20" 2>/dev/null | jq '[.[] | select(.prerelease==true and .draft==false)][0]' 2>/dev/null || echo 'null')
+              tag_prefix=$(jq -r '.release_tag_prefix // ""' "$f")
+              if [ -n "$tag_prefix" ]; then
+                json=$(api "https://api.github.com/repos/$repo/releases?per_page=100" 2>/dev/null | jq --arg p "$tag_prefix" '[.[] | select(.draft==false and (.tag_name | startswith($p)))][0]' 2>/dev/null || echo 'null')
+              else
+                json=$(api "https://api.github.com/repos/$repo/releases/latest" 2>/dev/null || echo '')
+                if [ -z "$(echo "$json" | jq -r '(.assets // [])[0].browser_download_url // empty' 2>/dev/null)" ]; then
+                  json=$(api "https://api.github.com/repos/$repo/releases?per_page=20" 2>/dev/null | jq '[.[] | select(.prerelease==true and .draft==false)][0]' 2>/dev/null || echo 'null')
+                fi
               fi
               if [ "$(jq -r 'has("assets")' "$f")" = "true" ]; then
                 n=$(jq -r '.assets | length' "$f")
