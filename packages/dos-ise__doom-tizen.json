@@ -5,5 +5,8 @@
   "repo": "dos-ise/doom-tizen",
   "source": "release",
   "branch": "release",
-  "output_name": "Doom.wgt"
+  "assets": [
+    { "match": "Doom.wgt", "variant": "Tizen 6+", "output_name": "Doom.wgt" },
+    { "match": "Doom-tizen55.wgt", "variant": "Tizen 5.5", "output_name": "Doom-tizen55.wgt" }
+  ]
 }
