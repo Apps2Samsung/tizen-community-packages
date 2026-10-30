@@ -12,7 +12,7 @@ The manifest is the same thing the TV reads at install, so the version here is
 the one the TV's app list shows afterwards. A GitHub tag is not involved at all.
 
 Usage:
-  package-info.py DIR            prints {"<file>": {"version": ..., "app_id": ..., "package_id": ...}, ...}
+  package-info.py DIR            prints {"<file>": {"version": ..., "app_id": ..., "package_id": ..., "required_version": ...}, ...}
 
 Only the manifest entry is taken out of the zip, nothing is executed. A package
 without a readable manifest gets an empty object, and the catalog entry simply
@@ -73,6 +73,11 @@ def package_info(scanner, path):
         value = manifest.get(key)
         if isinstance(value, str) and value.strip():
             info[key] = value.strip()
+    # The platform the package asks for: required_version on <tizen:application> in a web
+    # package, api-version on <manifest> in a native one. Same meaning, one catalog key.
+    required = manifest.get("required_version") if kind == "wgt" else manifest.get("api_version")
+    if isinstance(required, str) and required.strip():
+        info["required_version"] = required.strip()
     return info
 
 

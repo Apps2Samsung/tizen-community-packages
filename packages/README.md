@@ -1,4 +1,4 @@
-# 📦 `packages/` — one JSON file per app
+# 📦 `packages/`: one JSON file per app
 
 Every app in the community bundle is defined by **a single JSON file in this folder**. A PR bot
 validates each file against [`../packages.schema.json`](../packages.schema.json); the build then
@@ -32,9 +32,9 @@ Examples: `PatrickSt1991/flixor-tizen` → `packages/PatrickSt1991__flixor-tizen
 |-------|------|-------|
 | `name` | string | Display name in the README table. No `\|` or newlines. |
 | `description` | string | One-line description for the README table. No `\|` or newlines. |
-| `category` | enum | Where the app shows up when the Apps2Samsung list is filtered — see [Category, group and variant](#%EF%B8%8F-category-group-and-variant). |
+| `category` | enum | Where the app shows up when the Apps2Samsung list is filtered: see [Category, group and variant](#%EF%B8%8F-category-group-and-variant). |
 | `repo` | string | `owner/repo` on the forge named by `host` (GitHub by default). Used as the manifest key, the README link, and (for `build`/`release`) the API target. |
-| `source` | enum | One of `release`, `build`, `direct` — see below. |
+| `source` | enum | One of `release`, `build`, `direct`: see below. |
 
 ### Optional (any type)
 
@@ -44,13 +44,13 @@ Examples: `PatrickSt1991/flixor-tizen` → `packages/PatrickSt1991__flixor-tizen
 | `group` | string | Folds this package into one Apps2Samsung entry together with every other package that names the same group (the Moonlight forks). A package with several `assets[]` folds by itself. |
 | `variant` | string | Label for this package's file inside its group, e.g. `OneLiberty · Chrome`. Single-file packages only; with `assets[]` put `variant` on each asset entry. Defaults to the file name. |
 | `output_name` | string | Filename inside the bundle. Must end in `.wgt` or `.tpk`. Required for every type **except** a `release` that uses `assets[]`. |
-| `extract` | string | Only when upstream ships the package **inside a `.zip`**. Entry name or regex to pull out of the archive — see [Zip-wrapped downloads](#-zip-wrapped-downloads). |
+| `extract` | string | Only when upstream ships the package **inside a `.zip`**. Entry name or regex to pull out of the archive: see [Zip-wrapped downloads](#-zip-wrapped-downloads). |
 | `release_tag_prefix` | string | `release` only. For a monorepo that releases the Tizen build under its own tags while GitHub's "latest" points at another component (e.g. `smart-tv-v` for `smart-tv-v0.7.0`). Uses the newest stable release whose tag starts with this prefix (a prerelease only if none is stable) instead of `/releases/latest`. |
-| `enabled` | boolean | `false` retires the package without deleting the file — see [Retiring a package](#-retiring-a-package). Defaults to `true`. |
-| `adult` | boolean | `true` marks an 18+ app: hidden in Apps2Samsung until the user turns on its 18+ toggle, listed in a collapsed README section — see [Adult (18+) apps](#-adult-18-apps). Defaults to `false`. |
+| `enabled` | boolean | `false` retires the package without deleting the file: see [Retiring a package](#-retiring-a-package). Defaults to `true`. |
+| `adult` | boolean | `true` marks an 18+ app: hidden in Apps2Samsung until the user turns on its 18+ toggle, listed in a collapsed README section: see [Adult (18+) apps](#-adult-18-apps). Defaults to `false`. |
 | `flags` | array | `["root"]` for a package that gains root on the TV. Apps2Samsung asks for confirmation before installing it, see [Root packages](#-root-packages). |
 | `user_settings` | object | Values the user fills in before install, written into the package before re-signing, see [User settings](#%EF%B8%8F-user-settings). |
-| `host` | enum | `github` (default) or `gitlab`. Where `repo` lives. `gitlab` is only supported for `source: "build"` — see [GitLab-hosted projects](#-gitlab-hosted-projects). |
+| `host` | enum | `github` (default) or `gitlab`. Where `repo` lives. `gitlab` is only supported for `source: "build"`: see [GitLab-hosted projects](#-gitlab-hosted-projects). |
 
 ### Which fields go with which `source`
 
@@ -68,7 +68,7 @@ Examples: `PatrickSt1991/flixor-tizen` → `packages/PatrickSt1991__flixor-tizen
 | `overlay` | ❌ | ⬜ optional | ❌ |
 | `host` | ❌ | ⬜ optional | ❌ |
 
-For a `release`, `output_name` and `assets[]` are **mutually exclusive** — use exactly one. With
+For a `release`, `output_name` and `assets[]` are **mutually exclusive**: use exactly one. With
 `assets[]`, put `extract` on the individual asset entry rather than at the top level.
 
 ---
@@ -122,14 +122,27 @@ needs a `variant` per asset:
 Without a `variant` the picker shows the file name without its extension. Keep variant labels short
 and distinctive within the group: the fork or author, the Tizen version range, or what differs.
 
+### What `catalog.json` carries
+
+Every community release ships a `catalog.json` next to its packages, one entry per shipped file.
+Each entry copies the manifest's `name`, `description`, `category`, `group`, `variant`, `repo`,
+`adult`, `flags` and `user_settings`, and adds what the package says about itself, read from its own
+`config.xml` or `tizen-manifest.xml` when the bundle is assembled
+([`../scripts/package-info.py`](../scripts/package-info.py)): `version`, `app_id`, `package_id` and
+`required_version` (the `required_version` of a `.wgt`, the `api-version` of a `.tpk`). Apps2Samsung
+compares `version` with what the TV reports after an install. TV-Store labels an app whose
+`required_version` is newer than the TV it runs on and does not push it, because the TV would refuse
+it with `install failed[118, -19]` (TV-Store#44). None of these come from the manifest in this
+folder; they are read from the package itself.
+
 ---
 
-## 🚀 `source: "release"` — prebuilt `.wgt`/`.tpk` from GitHub Releases
+## 🚀 `source: "release"`: prebuilt `.wgt`/`.tpk` from GitHub Releases
 
 The most common type. The build pulls the artifact from the repo's latest GitHub Release on
 `branch`.
 
-**One artifact** — name it with `output_name`. This only works when the release has **exactly one
+**One artifact**: name it with `output_name`. This only works when the release has **exactly one
 asset**: the build downloads the first asset it finds, so a release that also ships an `.apk`, a zip
 or a checksum file would hand you the wrong file. The PR check rejects a single `output_name` on a
 release with several assets; use `assets[]` with a `match` (below) instead.
@@ -146,7 +159,7 @@ release with several assets; use `assets[]` with a `match` (below) instead.
 }
 ```
 
-**Pick the artifact by pattern** — when the release asset name varies (e.g. carries a version),
+**Pick the artifact by pattern**: when the release asset name varies (e.g. carries a version),
 use `assets[]` with a `match` (an exact asset name **or a regex** tested against each release asset
 name) and the `output_name` to save it as:
 
@@ -163,7 +176,7 @@ name) and the `output_name` to save it as:
 }
 ```
 
-**Multiple artifacts from one release** — list several entries (e.g. per-Tizen-version builds):
+**Multiple artifacts from one release**: list several entries (e.g. per-Tizen-version builds):
 
 ```json
 {
@@ -188,7 +201,7 @@ name) and the `output_name` to save it as:
 
 Some upstreams publish their `.wgt` **inside a `.zip`** instead of as a bare release asset. Without
 `extract` the sync would download that zip and simply rename it to `output_name`, producing a
-zip-of-a-`.wgt` that installs on nothing — and it fails *silently*, because a `.wgt` is itself a zip,
+zip-of-a-`.wgt` that installs on nothing, and it fails *silently*, because a `.wgt` is itself a zip,
 so no glob or copy downstream notices.
 
 Set `extract` to the entry name (or a regex) to pull out of the archive:
@@ -220,7 +233,7 @@ any `.wgt`/`.tpk` that turns out to contain another `.wgt`/`.tpk`.
 
 ---
 
-## 🔨 `source: "build"` — compiled from source with Tizen Studio
+## 🔨 `source: "build"`: compiled from source with Tizen Studio
 
 Use when there's no prebuilt release and the app is a Tizen web project the CI can package.
 
@@ -230,7 +243,7 @@ Use when there's no prebuilt release and the app is a Tizen web project the CI c
 | `project_path` | Subdirectory containing the Tizen web project. Defaults to `"."`. |
 | `skip_npm` | `true` to skip the automatic `npm install` (for projects with no `package.json`, or that vendor their deps). |
 | `pre_build` | Shell command run **before** packaging (e.g. build the web bundle). |
-| `overlay` | Name of a directory under [`../apps/`](../apps/) whose contents are copied over the project before packaging — e.g. a `config.xml` the upstream repo doesn't ship. |
+| `overlay` | Name of a directory under [`../apps/`](../apps/) whose contents are copied over the project before packaging, e.g. a `config.xml` the upstream repo doesn't ship. |
 
 **Minimal build** (project lives in `app/`, no npm):
 
@@ -262,7 +275,7 @@ Use when there's no prebuilt release and the app is a Tizen web project the CI c
 }
 ```
 
-**Build with an overlay** (copies `apps/react-iptv/` over the checked-out project — e.g. to supply a
+**Build with an overlay** (copies `apps/react-iptv/` over the checked-out project, e.g. to supply a
 `config.xml`):
 
 ```json
@@ -299,12 +312,12 @@ named `packages/<owner>__<repo>.json`.
 }
 ```
 
-Only `source: "build"` supports `host: "gitlab"` for now — GitLab Releases and the Package Registry are
+Only `source: "build"` supports `host: "gitlab"` for now: GitLab Releases and the Package Registry are
 not wired up, so a `release` or `direct` manifest must not set `host`.
 
 ---
 
-## 🔗 `source: "direct"` — a fixed URL
+## 🔗 `source: "direct"`: a fixed URL
 
 Use when the `.wgt`/`.tpk` is hosted at a stable absolute URL (including one committed under
 [`../apps/`](../apps/) in this repo). Requires `url` + `output_name`; no `branch`.
@@ -324,7 +337,7 @@ Use when the `.wgt`/`.tpk` is hosted at a stable absolute URL (including one com
 
 ## 🔞 Adult (18+) apps
 
-An app whose content is for adults only — pornography or other sexually explicit material — is
+An app whose content is for adults only (pornography or other sexually explicit material) is
 accepted under the same rules as everything else (open-source, redistributable, scanned), but must
 carry `"adult": true`:
 
@@ -353,7 +366,7 @@ What the flag does:
 - **The bundle** is unchanged: the file is built, scanned and shipped like any other package.
 
 `adult` is independent of `category`: still give the app the category that says what it *is* (a
-Stash client is `media`, an adult IPTV player is `iptv`). Keep `name` and `description` plain —
+Stash client is `media`, an adult IPTV player is `iptv`). Keep `name` and `description` plain :
 they are the only text a user sees before opting in, and they land in a public README.
 
 ---
@@ -443,8 +456,8 @@ Put the Host PC IP step in the `description` too: older Apps2Samsung versions do
 
 ## 🚫 Retiring a package
 
-To stop shipping an app without deleting its manifest — upstream went away, the fix was merged
-upstream, the fork is superseded — set `enabled` to `false`:
+To stop shipping an app without deleting its manifest (upstream went away, the fix was merged
+upstream, the fork is superseded), set `enabled` to `false`:
 
 ```json
 {
@@ -475,7 +488,7 @@ schema-checked, so removing the line is all it takes to bring the app back.
 - `category` is one of the seven values above; if the app belongs with an existing one, set the same `group`.
 - Adult-only content? Set `"adult": true` and keep `name` / `description` plain.
 - Gains root on the TV? Set `"flags": ["root"]`.
-- The fields match your `source` (see the table above) — the schema rejects mismatches, e.g. `url`
+- The fields match your `source` (see the table above): the schema rejects mismatches, e.g. `url`
   on a `release`, or both `output_name` and `assets` on the same `release`.
 - `output_name` ends in `.wgt` or `.tpk`.
 - For a `release`: if the upstream release has more than one asset, you used `assets[]` with a `match`.
