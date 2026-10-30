@@ -40,7 +40,7 @@
   "release:AdvaithAvinash/UltimatiumTube": "beta-v1.02",
   "release:Apps2Samsung/Overscan": "build-363c881",
   "release:Apps2Samsung/ReolinkViewer": "v1.1.0",
-  "release:Apps2Samsung/TV-Store": "v0.3.11",
+  "release:Apps2Samsung/TV-Store": "v0.3.12",
   "release:AquaPlayIPTV/aquaplay-samsung": "v1.0.51",
   "release:BrainFix/AniLiberty-TV-Tizen": "v1.0.0",
   "release:CoreDip/anilibria-tizen-wgt": "v1.1.0",
@@ -263,5 +263,5 @@
   "config:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:MrSimmo/sonance3": "community-752"
+  "stale:MrSimmo/sonance3": "community-753"
 }
