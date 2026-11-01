@@ -49,6 +49,7 @@ Examples: `PatrickSt1991/flixor-tizen` → `packages/PatrickSt1991__flixor-tizen
 | `enabled` | boolean | `false` retires the package without deleting the file: see [Retiring a package](#-retiring-a-package). Defaults to `true`. |
 | `adult` | boolean | `true` marks an 18+ app: hidden in Apps2Samsung until the user turns on its 18+ toggle, listed in a collapsed README section: see [Adult (18+) apps](#-adult-18-apps). Defaults to `false`. |
 | `flags` | array | `["root"]` for a package that gains root on the TV. Apps2Samsung asks for confirmation before installing it, see [Root packages](#-root-packages). |
+| `cert_level` | enum | `"partner"` for an app that only works when signed with a Samsung Partner certificate. Apps2Samsung and TV-Store then sign it with the user's Partner certificate, see [Partner certificate](#-partner-certificate). Defaults to `"public"`. |
 | `user_settings` | object | Values the user fills in before install, written into the package before re-signing, see [User settings](#%EF%B8%8F-user-settings). |
 | `host` | enum | `github` (default) or `gitlab`. Where `repo` lives. `gitlab` is only supported for `source: "build"`: see [GitLab-hosted projects](#-gitlab-hosted-projects). |
 
@@ -453,6 +454,31 @@ own SDB) must carry `"flags": ["root"]`. Before installing it, Apps2Samsung tell
 Put the Host PC IP step in the `description` too: older Apps2Samsung versions don't know the flag.
 
 ---
+
+## 🔏 Partner certificate
+
+A sideloaded app is signed with the user's own Samsung certificate, Public by default. Tizen
+ignores a privilege the certificate does not cover, so an app that uses partner-level rights (DRM
+playback, Samsung sign-in, a VPN) or hooks into a Samsung native package installs fine when signed
+Public and then fails at launch or at the call. Mark such a package:
+
+```json
+{
+  "name": "YouTube for Tizen",
+  "category": "streaming",
+  "cert_level": "partner",
+  ...
+}
+```
+
+- **Apps2Samsung** signs it with the user's Partner certificate, creating one after a Samsung
+  sign-in when there is none yet.
+- **TV-Store** signs it with the Partner certificate the TV was armed with, and when the TV holds
+  none, says so instead of installing a copy that will not work.
+
+`cert_level` is copied onto each of the package's files in `catalog.json`. Leave it out for
+everything else: a Public certificate is what nearly every app needs, and asking for Partner
+without need costs the user a second certificate.
 
 ## 🚫 Retiring a package
 

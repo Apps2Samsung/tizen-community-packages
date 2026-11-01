@@ -13,6 +13,8 @@
 # its 18+ toggle (a group is adult when any of its files is). Left out when false.
 # "flags" (e.g. ["root"]) is copied onto each of the package's files when the
 # package declares it, so Apps2Samsung can warn before installing.
+# "cert_level": "partner" is copied onto each of the package's files when the
+# package declares it, so Apps2Samsung and TV-Store sign it with a Partner certificate.
 #
 # Usage: scripts/build-catalog.sh [packages-dir] [out-file] [shipped-dir]   (run from the repo root)
 # With shipped-dir, entries whose file is not in that directory are dropped, so
@@ -55,7 +57,8 @@ jq -s '
         host: ($p.host // "github")
       } + (if $p.user_settings then { user_settings: $p.user_settings } else {} end)
         + (if $p.adult == true then { adult: true } else {} end)
-        + (if $p.flags then { flags: $p.flags } else {} end));
+        + (if $p.flags then { flags: $p.flags } else {} end)
+        + (if $p.cert_level == "partner" then { cert_level: "partner" } else {} end));
   {
     schemaVersion: 1,
     categories: {
