@@ -57,6 +57,10 @@
         }
       }
     },
+    "cert_level": {
+      "enum": ["public", "partner"],
+      "description": "Optional. The Samsung certificate level the app needs to work: \"partner\" for an app that uses partner-level rights (DRM playback, Samsung sign-in, a VPN) or hooks into a Samsung native package and so fails at launch when signed with a Public certificate. Apps2Samsung and TV-Store then sign it with the user's Partner certificate. Copied onto each of the package's files in catalog.json. Defaults to \"public\"."
+    },
     "flags": {
       "type": "array",
       "minItems": 1,
