@@ -9,7 +9,7 @@
   "build:aleksilassila/reiverr@master": "dbdd50dfa8366a0c311b21ba513aabbbc0f28c87",
   "build:anandhuremanan/samsung-tizen-clock-app@main": "1b9ad6fa9000c477039367f6dac6bdac7b7f3f6f",
   "build:anandsimmy/react-iptv@main": "7a7dcc285e374676a2197d70d9d1c443f2b35fa2",
-  "build:andrearicci93/vetro@main": "21bff2d72ff9e60b96d2cc55f5e1330865abc4bb",
+  "build:andrearicci93/vetro@main": "52b02b4cf575aae64af149b77de400c873fc14fc",
   "build:aroundmyroom/Velvet@main": "777892f10ac1483c91ffe261a8214b3990b8445b",
   "build:cocodedk/copenhagen-weather-tv@main": "1a934d6e7b4ab3ac51cb9f4582bf895d616f30e4",
   "build:dearbulut/tizen-xtream-iptv@main": "7fd43a02aae7b53eb2fbd6aff8541b7724a285ad",
@@ -263,5 +263,5 @@
   "config:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:MrSimmo/sonance3": "community-755"
+  "stale:MrSimmo/sonance3": "community-756"
 }
