@@ -1,0 +1,11 @@
+{
+  "name": "SubTizen",
+  "description": "Subsonic music client for Navidrome, Airsonic, Gonic and Subsonic: Apple Music-style UI, server playlists, search and synced lyrics. Built for Tizen 2.4 (2016 TVs) and up.",
+  "category": "media",
+  "repo": "therosaer/SubTizen",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "^SubTizen[.]wgt$", "output_name": "SubTizen.wgt" }
+  ]
+}
