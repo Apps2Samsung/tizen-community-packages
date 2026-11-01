@@ -116,6 +116,7 @@
   "release:somefosterkid/vemm": "preview-0.9.0",
   "release:sverrirs/ruv-app-samsung": "2026.08.25-2350",
   "release:sverrirs/ruv-live-samsung": "2026.08.25",
+  "release:therosaer/SubTizen": "v1.0.1",
   "release:thomasrtg/AIOStreams": "tizen6-v0.7.0-beta.1",
   "release:titlog/bilibili-tizen": "v1.4.14",
   "release:titlog/douyin-tizen": "v1.4.6",
@@ -248,6 +249,7 @@
   "config:somefosterkid/vemm": "940793bec0fa87b5",
   "config:sverrirs/ruv-app-samsung": "5513008340ed5428",
   "config:sverrirs/ruv-live-samsung": "a0f535f6561d505e",
+  "config:therosaer/SubTizen": "f4a8a0314017e3f9",
   "config:thomasrtg/AIOStreams": "92270cc862fe4f56",
   "config:titlog/bilibili-tizen": "9114acf12f07c827",
   "config:titlog/douyin-tizen": "f210492b6aeb4b91",
@@ -263,5 +265,5 @@
   "config:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:MrSimmo/sonance3": "community-756"
+  "stale:MrSimmo/sonance3": "community-757"
 }
