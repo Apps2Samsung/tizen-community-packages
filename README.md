@@ -50,7 +50,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **AIOStreams (thomasrtg)**<br>[thomasrtg](https://github.com/thomasrtg/AIOStreams) | Tizen 6 build of AIOStreams, the all-in-one Stremio super-addon for debrid and Usenet sources. | `tizen6-v0.7.0-beta.1` |
 | **AniLiberty**<br>[CoreDip](https://github.com/CoreDip/anilibria-tizen-wgt) | Unofficial AniLibria anime client for Samsung Tizen TV. | `v1.1.0` |
 | **AniLiberty TV**<br>[BrainFix](https://github.com/BrainFix/AniLiberty-TV-Tizen) | Unofficial AniLiberty anime client for Samsung Tizen 6.0+ TVs with streaming, watch history, favorites, and account sync. | `v1.0.1` |
-| **AniUltimatium**<br>[AdvaithAvinash](https://github.com/AdvaithAvinash/AniUltimatium) | Anime streaming app for Samsung Tizen TVs. | `v1.16` |
+| **AniUltimatium**<br>[AdvaithAvinash](https://github.com/AdvaithAvinash/AniUltimatium) | Anime streaming app for Samsung Tizen TVs. | `stable-v1.19` |
 | **Apex TV**<br>[Pajuodelis](https://github.com/Pajuodelis/apex-tv) | Independent F1 TV client for Samsung Tizen 6.0+. | `v0.5.12` |
 | **bilibili**<br>[titlog](https://github.com/titlog/bilibili-tizen) | Unofficial bilibili client for Samsung TVs, driven entirely by the remote: QR sign-in with multiple accounts, continue-watching row, danmaku, search, live, up to 1080p H.265 (4K with premium). | `v1.4.14` |
 | **Bisnor**<br>[nikan48g](https://github.com/nikan48g/Bisnor) | Open-source Persian movie and series client (experimental Tizen TV build): browse, search and play titles from the IranFlix catalogue with AVPlay. | `43a7a97` |
@@ -64,7 +64,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Nuvio Native Legacy**<br>[iqui27](https://github.com/iqui27/nuvio-native-legacy) | Unofficial native C/SDL2 Nuvio client, fast on older TVs. | `v2.0.8` |
 | **OmegaTube**<br>[OmegaTube](https://github.com/IIyn/omegatube) | Ad-free YouTube client with SponsorBlock and a native 4K player (Tizen 6+). | `v1.3.4` |
 | **OsmTwich**<br>[OsmTwichPlayer](https://github.com/josepvarela/OsmTwichPlayer) | Unofficial Twitch client for Samsung Tizen TV. | `v1.0.70` |
-| **Reelo**<br>[Reelo](https://github.com/ihovsky/Reelo) | TV client for the Reelo service: films and series with a remote-first interface, family profiles and library sync between devices (Russian UI). | `Sun, 01 Nov 2026 00:01:46 GMT` |
+| **Reelo**<br>[Reelo](https://github.com/ihovsky/Reelo) | TV client for the Reelo service: films and series with a remote-first interface, family profiles and library sync between devices (Russian UI). | `Sun, 01 Nov 2026 12:42:33 GMT` |
 | **SeanimeTV**<br>[ihiqhaim](https://github.com/ihiqhaim/SeanimeTV-Tizen) | Unofficial Seanime client for Samsung Tizen TVs with torrent streaming and AVPlay playback. | `4da9288` |
 | **Streamix TV**<br>[gabrielmaialva33](https://github.com/gabrielmaialva33/streamix-tv) | Cinematic 10-foot TV client for the self-hosted Streamix platform. | `v1.0.027` |
 | **Stremio (Tizen 4)**<br>[Apps2Samsung](https://github.com/Apps2Samsung/tizen-community-packages) | Stremio media center packaged for Tizen 4.0 devices. | `latest` |
@@ -109,7 +109,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Sonance3**<br>[MrSimmo](https://github.com/MrSimmo/sonance3) | A music player for Samsung Tizen TVs, built to stream from your self-hosted Navidrome or Subsonic-compatible server. | `v3.15` |
 | **SubTizen**<br>[therosaer](https://github.com/therosaer/SubTizen) | Subsonic music client for Navidrome, Airsonic, Gonic and Subsonic: Apple Music-style UI, server playlists, search and synced lyrics. | `v1.0.1` |
 | **tacplayer**<br>[sfsdffesfsfg-cloud](https://github.com/sfsdffesfsfg-cloud/tacplayer) | Custom Jellyfin Tizen client with cinematic red UI for Samsung TV | `v0.1.0` |
-| **Tessel**<br>[PatrickSt1991](https://github.com/PatrickSt1991/tessel-tizen-tv) | Media player for Samsung TVs: SMB shares, USB drives, network streams and subtitles, with an optional transcode server (formerly VLC-Tizen-tv). | `v1.33.0-20261028-1300` |
+| **Tessel**<br>[PatrickSt1991](https://github.com/PatrickSt1991/tessel-tizen-tv) | Media player for Samsung TVs: SMB shares, USB drives, network streams and subtitles, with an optional transcode server (formerly VLC-Tizen-tv). | `v1.33.1-20261101-1412` |
 | **TubeArchivist TV**<br>[raykholo](https://github.com/raykholo/tubearchivist-tv) | 10-foot client for your self-hosted TubeArchivist: pair from your phone, never type on the remote. | `3cb035f` |
 | **TVideoPlayer**<br>[TizenTVWebApp](https://github.com/TizenTVWebApp/TVideoPlayer) | Tizen TV HTML video player based on videojs. | `latest` |
 | **VeloVistrix**<br>[zephy-lee](https://github.com/zephy-lee/velovistrix-tizen) | Read-only PhotoPrism viewer for Samsung Tizen 5.0+ TVs, driven by the remote: albums, places, calendar, labels and folders from your own server, with slideshow. | `d136678` |
@@ -151,7 +151,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Chiaki-Tizen**<br>[Chiaki-Tizen](https://github.com/Trent407/chiaki-tizen) | An open source PlayStation remote play project serving as the next-generation of Chiaki. | `v0.2.0` |
 | **Doom**<br>[dos-ise](https://github.com/dos-ise/doom-tizen) | Doom for Samsung Tizen TVs, based on Chocolate Doom and WebAssembly. | `v1.15` |
 | **FreeSerf**<br>[dos-ise](https://github.com/dos-ise/freeserf-tizen) | An open-source recreation of The Settlers 1 (Serf City) compiled to WebAssembly for Samsung Tizen TVs. | `v1.0` |
-| **GameBoy-Emulator**<br>[dos-ise](https://github.com/dos-ise/GB-EMU_Tizen) | A Game Boy (DMG) emulator. | `v1.2` |
+| **GameBoy-Emulator**<br>[dos-ise](https://github.com/dos-ise/GB-EMU_Tizen) | A Game Boy (DMG) emulator. | `v1.2.1` |
 | **Moonlight**<br>[OneLiberty](https://github.com/OneLiberty/moonlight-chrome-tizen) | Open-source client for NVIDIA GameStream and Sunshine. | `v1.2.1` |
 | **Moonlight (No Gamemode)**<br>[MrPhaze62](https://github.com/MrPhaze62/moonlight-chrome-tizen-no-gamemode) | Open-source client for NVIDIA GameStream and Sunshine with gamemode disabled. | `samsung_wasm-21031261929` |
 | **Moonlight (ToypoodleGaming)**<br>[toypoodlegaming](https://github.com/toypoodlegaming/moonlight-chrome-tizen) | Moonlight NVIDIA GameStream / Sunshine client (ToypoodleGaming fork). | `samsung_wasm-21031332442` |
@@ -161,7 +161,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **RetroTV**<br>[guhcostan](https://github.com/guhcostan/retro-tv) | Retro game console for Samsung Tizen 5.0+ TVs: WebAssembly emulator cores downloaded on first use, games copied over the LAN from the project's companion server on a PC, or streamed from that PC. | `062fb72` |
 | **Shmup Cup**<br>[detain](https://github.com/detain/shmup-cup) | A side-scrolling shoot-'em-up written for the TV remote: nine zones, two ships, sixteen routes and a boss at the end of each. | `ef6605c` |
 | **Snake**<br>[pvk689](https://github.com/pvk689/snake-game-tizen) | Snake game for Samsung Tizen TVs, played with the remote. | `62ccffc` |
-| **Tizen Steam Link**<br>[pebeto](https://github.com/pebeto/tizen-steam-link) | Unofficial Steam Link client for Samsung Tizen 5.5+ TVs: streams games from Steam on a PC or Steam Deck, with the TV's hardware decoder and controllers, keyboard and mouse passed through. | `v0.3.1` |
+| **Tizen Steam Link**<br>[pebeto](https://github.com/pebeto/tizen-steam-link) | Unofficial Steam Link client for Samsung Tizen 5.5+ TVs: streams games from Steam on a PC or Steam Deck, with the TV's hardware decoder and controllers, keyboard and mouse passed through. | `v0.3.2` |
 | **TransportTycoonDeluxe**<br>[dos-ise](https://github.com/dos-ise/openttd-tizen) | OpenTTD is an open source simulation game based upon Transport Tycoon Deluxe. | `Release` |
 
 </details>
