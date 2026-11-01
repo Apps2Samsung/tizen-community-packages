@@ -2,6 +2,7 @@
   "name": "YouTube for Tizen",
   "description": "Ad-free YouTube for Samsung TVs, running in Samsung's own Cobalt engine with SponsorBlock, DeArrow and preferred-quality settings. Tizen 5.5+ build plus a separate widget for Tizen 5.0. Requires a Samsung partner certificate.",
   "category": "streaming",
+  "cert_level": "partner",
   "repo": "SushyDev/tizen-youtube",
   "source": "release",
   "branch": "main",
