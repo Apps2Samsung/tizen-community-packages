@@ -1,0 +1,51 @@
+{
+  "name": "opencream TV",
+  "description": "A calm home screen for Samsung TVs with your own Xtream Codes IPTV built in: live TV, films, series, guide search. No channels included.",
+  "category": "iptv",
+  "repo": "opencream-ai/opencream-tv",
+  "source": "release",
+  "branch": "main",
+  "output_name": "opencream-tv.wgt",
+  "user_settings": {
+    "help_url": "https://github.com/opencream-ai/opencream-tv/blob/main/INSTALL.md",
+    "file": "js/config.local.js",
+    "fields": [
+      {
+        "key": "server",
+        "label": "IPTV server address (Xtream Codes), several separated by commas",
+        "type": "text",
+        "required": false,
+        "default": "__OCTV_SERVER__",
+        "find": "servers: \"__OCTV_SERVER__\",",
+        "replace": "servers: \"{value}\","
+      },
+      {
+        "key": "username",
+        "label": "IPTV username",
+        "type": "text",
+        "required": false,
+        "default": "__OCTV_USER__",
+        "find": "user: \"__OCTV_USER__\",",
+        "replace": "user: \"{value}\","
+      },
+      {
+        "key": "password",
+        "label": "IPTV password (stored by Apps2Samsung on this computer)",
+        "type": "text",
+        "required": false,
+        "default": "__OCTV_PASS__",
+        "find": "pass: \"__OCTV_PASS__\",",
+        "replace": "pass: \"{value}\","
+      },
+      {
+        "key": "video_servers",
+        "label": "Optional: servers that deliver video, if your provider names them",
+        "type": "text",
+        "required": false,
+        "default": "__OCTV_BACKUPS__",
+        "find": "streamServers: \"__OCTV_BACKUPS__\"",
+        "replace": "streamServers: \"{value}\""
+      }
+    ]
+  }
+}
