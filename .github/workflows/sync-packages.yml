@@ -2,8 +2,12 @@ name: Sync Tizen Community Packages
 
 on:
   schedule:
-    # 04:00 UTC daily - 05:00 CET (winter) / 06:00 CEST (summer) in Brussel
-    - cron: '23 2 * * *' 
+    # Every two hours, at an odd minute: GitHub delays schedules that fire on
+    # the hour. A run that finds nothing new only costs the detect-changes
+    # job (about a minute and ~160 API calls on the 1000/hour repo budget),
+    # so an upstream release lands in a bundle within two hours instead of
+    # the next night.
+    - cron: '23 */2 * * *'
   # A merged PR is a push to main. Bot commits made with GITHUB_TOKEN never
   # trigger workflows, so the state/README commit below can't loop.
   push:
@@ -910,6 +914,10 @@ jobs:
     if: ${{ !cancelled() && needs.publish-release.result == 'success' && needs.detect-changes.outputs.has_changes == 'true' }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Full history: the commit below is rebased onto whatever landed on
+          # main while this run was busy, which a shallow clone cannot do.
+          fetch-depth: 0
       - uses: actions/download-artifact@v4
         with:
           name: last-seen-state
@@ -939,7 +947,23 @@ jobs:
           git add .github/state/last_seen.json README.md
           if git diff --cached --quiet; then
             echo "Nothing to commit."
-          else
-            git commit -m "chore: update state + README versions [skip ci]"
-            git push
+            exit 0
           fi
+          git commit -m "chore: update state + README versions [skip ci]"
+          # A PR merged while this run was busy makes a plain push fail with
+          # "fetch first", the bundle is then published but its state is not
+          # recorded, and the next run rebuilds and republishes the same
+          # packages. Rebase onto the new main instead: only this job writes
+          # last_seen.json and the README table is generated, so the rebase is
+          # clean, and the merged manifest gets its own run (already queued
+          # behind this one) that re-renders the table with it included.
+          for attempt in 1 2 3 4 5; do
+            if git pull --rebase origin main && git push origin HEAD:main; then
+              exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            echo "Push attempt $attempt failed, retrying."
+            sleep $((attempt * 5))
+          done
+          echo "::error::Could not push the state commit after 5 attempts."
+          exit 1
