@@ -11,5 +11,28 @@
       "match": "^ImmichTV-.*-unsigned\\.wgt$",
       "output_name": "ImmichTV.wgt"
     }
-  ]
+  ],
+  "user_settings": {
+    "help_url": "https://github.com/rfsmason/immich-tv-for-samsung#required-api-key-permissions",
+    "file": "scripts/install-preset.js",
+    "fields": [
+      {
+        "key": "server_url",
+        "label": "Immich server URL",
+        "type": "text",
+        "required": false,
+        "pattern": "^https?://\\S+$",
+        "find": "serverUrl: \"\"",
+        "replace": "serverUrl: \"{value}\""
+      },
+      {
+        "key": "api_key",
+        "label": "Immich API key (read-only recommended)",
+        "type": "text",
+        "required": false,
+        "find": "apiKey: \"\"",
+        "replace": "apiKey: \"{value}\""
+      }
+    ]
+  }
 }
