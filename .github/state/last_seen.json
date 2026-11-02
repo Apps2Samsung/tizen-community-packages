@@ -54,9 +54,9 @@
   "release:MrPhaze62/moonlight-chrome-tizen-no-gamemode": "samsung_wasm-21031261929",
   "release:MrSimmo/sonance3": "v3.15",
   "release:Nur-allhi/en-tvplayer": "v3.2.0",
-  "release:NuvioMedia/NuvioTVSmart": "1.3.3",
+  "release:NuvioMedia/NuvioTVSmart": "1.3.5",
   "release:OneLiberty/moonlight-chrome-tizen": "v1.2.1",
-  "release:Pajuodelis/apex-tv": "v0.5.13",
+  "release:Pajuodelis/apex-tv": "v0.5.14",
   "release:PatrickSt1991/Sportlink.Club.Info.Viewer": "v1.1.0",
   "release:PatrickSt1991/chorus2-tizen": "tizen-v21.x-1.0.1-2026-05-21-1443",
   "release:PatrickSt1991/flixor-tizen": "v1.0.1-2026-07-24-1215",
@@ -112,7 +112,7 @@
   "release:popdollar/Fladder-Tizen": "Tizen",
   "release:reisxd/HyperTizen": "v1.0.0",
   "release:reisxd/TizenBrew": "v2.0.5",
-  "release:rfsmason/immich-tv-for-samsung": "v0.1.0-beta.1",
+  "release:rfsmason/immich-tv-for-samsung": "v0.1.1-beta.2",
   "release:sanwhere/sky-iptv-tizen": "v1.1.1",
   "release:sfsdffesfsfg-cloud/tacplayer": "v0.1.0",
   "release:shayanline/OpenIPTV": "1.9.3",
@@ -273,5 +273,5 @@
   "config:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:MrSimmo/sonance3": "community-766"
+  "stale:MrSimmo/sonance3": "community-767"
 }
