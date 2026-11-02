@@ -61,7 +61,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Kick TV 2.0**<br>[janrydzewski](https://github.com/janrydzewski/kick-tv-2.0) | Kick live streams and public archives for Samsung Tizen TVs. | `v2.0.1` |
 | **KickTV**<br>[corekill](https://github.com/corekill/kick-tv-tizen) | Kick.com streaming client for Samsung Tizen TVs. | `v2.3.0` |
 | **Lampa**<br>[yumata](https://github.com/yumata/lampa) | Free movie and TV catalogue with info, new releases and trailers. | `v1.4.1` |
-| **Nuvio**<br>[NuvioMedia](https://github.com/NuvioMedia/NuvioTVSmart) | TV-first streaming UI for Samsung Tizen. | `1.3.1` |
+| **Nuvio**<br>[NuvioMedia](https://github.com/NuvioMedia/NuvioTVSmart) | TV-first streaming UI for Samsung Tizen. | `1.3.3` |
 | **Nuvio Native Legacy**<br>[iqui27](https://github.com/iqui27/nuvio-native-legacy) | Unofficial native C/SDL2 Nuvio client, fast on older TVs. | `v2.0.8` |
 | **OmegaTube**<br>[OmegaTube](https://github.com/IIyn/omegatube) | Ad-free YouTube client with SponsorBlock and a native 4K player (Tizen 6+). | `v1.3.4` |
 | **OsmTwich**<br>[OsmTwichPlayer](https://github.com/josepvarela/OsmTwichPlayer) | Unofficial Twitch client for Samsung Tizen TV. | `v1.0.71` |
@@ -201,7 +201,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **TizenBrew**<br>[reisxd](https://github.com/reisxd/TizenBrew) | A way to experience modded websites and you can install newer apps without fighting with Tizen Studio. | `v2.0.5` |
 | **TizenUtility**<br>[no-cover](https://github.com/no-cover/tizenutility) | System utility for Samsung Tizen TVs: detailed device, firmware and network info, plus a launcher for hidden built-in Samsung apps that are not reachable from the normal UI. | `1.1.1` |
 | **Torr Streaming**<br>[no-cover](https://github.com/no-cover/torr-streaming) | Runs TorrServer as a background service on the TV itself, so local web apps can stream torrents directly without a separate box. | `1.0.0` |
-| **TV-Store**<br>[Apps2Samsung](https://github.com/Apps2Samsung/TV-Store) | The Apps2Samsung catalog on the TV itself: browse with the remote and install apps natively through the set's own developer connection, with no PC or phone in the loop after a one-time arming from the Apps2Samsung 3.0 (or newer) toolbox. | `v0.3.14` |
+| **TV-Store**<br>[Apps2Samsung](https://github.com/Apps2Samsung/TV-Store) | The Apps2Samsung catalog on the TV itself: browse with the remote and install apps natively through the set's own developer connection, with no PC or phone in the loop after a one-time arming from the Apps2Samsung 3.0 (or newer) toolbox. | `v0.3.16` |
 | **Vetro**<br>[andrearicci93](https://github.com/andrearicci93/vetro) | TV management dashboard with root integration: app inventory, controls and diagnostics in your browser. | `52b02b4` |
 
 </details>

@@ -40,7 +40,7 @@
   "release:AdvaithAvinash/UltimatiumTube": "stable-v1.02",
   "release:Apps2Samsung/Overscan": "build-363c881",
   "release:Apps2Samsung/ReolinkViewer": "v1.1.0",
-  "release:Apps2Samsung/TV-Store": "v0.3.14",
+  "release:Apps2Samsung/TV-Store": "v0.3.16",
   "release:AquaPlayIPTV/aquaplay-samsung": "v1.0.51",
   "release:BrainFix/AniLiberty-TV-Tizen": "v1.0.1",
   "release:CoreDip/anilibria-tizen-wgt": "v1.1.0",
@@ -54,7 +54,7 @@
   "release:MrPhaze62/moonlight-chrome-tizen-no-gamemode": "samsung_wasm-21031261929",
   "release:MrSimmo/sonance3": "v3.15",
   "release:Nur-allhi/en-tvplayer": "v3.2.0",
-  "release:NuvioMedia/NuvioTVSmart": "1.3.1",
+  "release:NuvioMedia/NuvioTVSmart": "1.3.3",
   "release:OneLiberty/moonlight-chrome-tizen": "v1.2.1",
   "release:Pajuodelis/apex-tv": "v0.5.13",
   "release:PatrickSt1991/Sportlink.Club.Info.Viewer": "v1.1.0",
@@ -269,5 +269,5 @@
   "config:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:MrSimmo/sonance3": "community-762"
+  "stale:MrSimmo/sonance3": "community-764"
 }
