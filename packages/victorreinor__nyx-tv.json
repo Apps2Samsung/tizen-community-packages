@@ -1,0 +1,11 @@
+{
+  "name": "Nyx",
+  "description": "IPTV player for your own Xtream or M3U playlist with a simple, remote-first interface. Opens in under a second and never lags, even with 40,000 titles on an entry-level TV. 8-day guide, resume for movies and series, SD to 4K in one channel.",
+  "category": "iptv",
+  "repo": "victorreinor/nyx-tv",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "^nyx[.]wgt$", "output_name": "Nyx.wgt" }
+  ]
+}
