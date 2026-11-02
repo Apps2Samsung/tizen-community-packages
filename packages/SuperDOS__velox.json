@@ -1,0 +1,9 @@
+{
+  "name": "Velox",
+  "description": "Fast Plex client: opens in about a second, smooth scrolling, hardware playback. Tested on Tizen 6.0.",
+  "category": "media",
+  "repo": "SuperDOS/velox",
+  "source": "release",
+  "branch": "main",
+  "output_name": "velox.wgt"
+}
