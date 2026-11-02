@@ -1,0 +1,11 @@
+{
+  "name": "Tizen OS Ambilight",
+  "description": "DIY ambilight: reads the screen-edge colors from the TV's video processor and streams them to an ESP32 LED controller or HyperHDR; the launcher shows whether your TV supports capture.",
+  "category": "tools",
+  "repo": "exzos28/tizen-os-ambilight",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "^ambilight-tv-v.*[.]wgt$", "output_name": "TizenOsAmbilight.wgt" }
+  ]
+}
