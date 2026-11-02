@@ -1,0 +1,15 @@
+{
+  "name": "Immich TV",
+  "description": "Read-only Immich photo and video client for Samsung TVs: timeline, albums, people, memories, search, slideshows.",
+  "category": "media",
+  "repo": "rfsmason/immich-tv-for-samsung",
+  "repo_label": "Immich TV for Samsung",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    {
+      "match": "^ImmichTV-.*-unsigned\\.wgt$",
+      "output_name": "ImmichTV.wgt"
+    }
+  ]
+}
