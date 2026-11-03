@@ -46,7 +46,7 @@
   "release:CoreDip/anilibria-tizen-wgt": "v1.1.0",
   "release:Edsol/go2rtc-tizen": "v0.1.0",
   "release:Hamza-Boulila/aetherflix": "v1.1.0",
-  "release:IIyn/omegatube": "v1.3.4",
+  "release:IIyn/omegatube": "v1.4.0",
   "release:Karl-Lauterbach24/Lumen-TV": "v1.17.1",
   "release:Kepler75/StremioK": "v2.2.6",
   "release:Licaa21/Smart-TV": "fork-v1.9.9",
@@ -275,5 +275,5 @@
   "config:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:MrSimmo/sonance3": "community-770"
+  "stale:MrSimmo/sonance3": "community-771"
 }
