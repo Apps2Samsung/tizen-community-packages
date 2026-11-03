@@ -117,7 +117,7 @@
   "release:sfsdffesfsfg-cloud/tacplayer": "v0.1.0",
   "release:shayanline/OpenIPTV": "1.9.3",
   "release:simbasjungles/free-my-tv": "v1.3.0",
-  "release:somefosterkid/vemm": "preview-0.9.0",
+  "release:somefosterkid/vemm": "preview-0.10.0",
   "release:sverrirs/ruv-app-samsung": "2026.08.25-2350",
   "release:sverrirs/ruv-live-samsung": "2026.08.25",
   "release:therosaer/SubTizen": "v1.0.1",
@@ -126,6 +126,7 @@
   "release:titlog/douyin-tizen": "v1.4.6",
   "release:titlog/telegram-tizen": "v1.2.6",
   "release:toypoodlegaming/moonlight-chrome-tizen": "samsung_wasm-21031332442",
+  "release:victorreinor/nyx-tv": "v1.4.1",
   "release:yumata/lampa": "v1.4.1",
   "direct:Apps2Samsung/tizen-community-packages": "etag:\"76c7abc2fc40f84b17ac2acf306749e29bf1461541ceb65d5600f2f5e6555842\"|mod:|len:3130441",
   "direct:KaashDev/TVapp": "etag:\"fb2c8f15fdce92231027555f26245016e87050b2173c8af340805c37fd8cd3af\"|mod:|len:979034",
@@ -263,6 +264,7 @@
   "config:titlog/douyin-tizen": "f210492b6aeb4b91",
   "config:titlog/telegram-tizen": "38d448de69f16ca8",
   "config:toypoodlegaming/moonlight-chrome-tizen": "ccae73e62fd220db",
+  "config:victorreinor/nyx-tv": "ed8bbc8f6b9b71b8",
   "config:yumata/lampa": "c22db37b6eba7991",
   "config:Apps2Samsung/tizen-community-packages": "ddd29c308be438d0",
   "config:KaashDev/TVapp": "8b70a432757fe0ce",
@@ -273,5 +275,5 @@
   "config:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:MrSimmo/sonance3": "community-769"
+  "stale:MrSimmo/sonance3": "community-770"
 }
