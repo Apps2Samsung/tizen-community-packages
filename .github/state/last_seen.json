@@ -49,7 +49,7 @@
   "release:IIyn/omegatube": "v1.3.4",
   "release:Karl-Lauterbach24/Lumen-TV": "v1.17.1",
   "release:Kepler75/StremioK": "v2.2.6",
-  "release:Licaa21/Smart-TV": "fork-v1.9.8",
+  "release:Licaa21/Smart-TV": "fork-v1.9.9",
   "release:MrHumanRebel/airtizen": "v2.2.34",
   "release:MrPhaze62/moonlight-chrome-tizen-no-gamemode": "samsung_wasm-21031261929",
   "release:MrSimmo/sonance3": "v3.15",
@@ -97,7 +97,7 @@
   "release:kromatv/kroma": "v0.1.38",
   "release:madarra16/kick-tizen": "v1.3.0",
   "release:meocong/prj-tv-samsung": "v1.4.0",
-  "release:msharifi99/30nama-tizenos": "v1.2.1",
+  "release:msharifi99/30nama-tizenos": "v1.3.0",
   "release:no-cover/appmanager": "1.0.3",
   "release:no-cover/tizendebugapp": "1.0.0",
   "release:no-cover/tizenutility": "1.1.1",
@@ -273,5 +273,5 @@
   "config:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:MrSimmo/sonance3": "community-768"
+  "stale:MrSimmo/sonance3": "community-769"
 }
