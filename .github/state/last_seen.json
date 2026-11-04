@@ -48,7 +48,7 @@
   "release:Hamza-Boulila/aetherflix": "v1.1.0",
   "release:IIyn/omegatube": "v1.4.1",
   "release:Karl-Lauterbach24/Lumen-TV": "v1.17.1",
-  "release:Kepler75/StremioK": "v2.2.7",
+  "release:Kepler75/StremioK": "v2.2.8",
   "release:Licaa21/Smart-TV": "fork-v2.0.0",
   "release:MrHumanRebel/airtizen": "v2.2.34",
   "release:MrPhaze62/moonlight-chrome-tizen-no-gamemode": "samsung_wasm-21031261929",
@@ -93,7 +93,7 @@
   "release:iqui27/nuvio-native-legacy": "v2.0.8",
   "release:janrydzewski/kick-tv-2.0": "v2.0.1",
   "release:josepvarela/OsmTwichPlayer": "v1.0.71",
-  "release:kingflooow/floh-iptv": "v1.6.0",
+  "release:kingflooow/floh-iptv": "v1.7.0",
   "release:kromatv/kroma": "v0.1.38",
   "release:madarra16/kick-tizen": "v1.3.0",
   "release:meocong/prj-tv-samsung": "v1.4.0",
@@ -277,5 +277,5 @@
   "config:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:MrSimmo/sonance3": "community-776"
+  "stale:MrSimmo/sonance3": "community-777"
 }
