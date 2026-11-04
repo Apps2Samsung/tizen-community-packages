@@ -48,7 +48,7 @@
   "release:Hamza-Boulila/aetherflix": "v1.1.0",
   "release:IIyn/omegatube": "v1.4.0",
   "release:Karl-Lauterbach24/Lumen-TV": "v1.17.1",
-  "release:Kepler75/StremioK": "v2.2.6",
+  "release:Kepler75/StremioK": "v2.2.7",
   "release:Licaa21/Smart-TV": "fork-v2.0.0",
   "release:MrHumanRebel/airtizen": "v2.2.34",
   "release:MrPhaze62/moonlight-chrome-tizen-no-gamemode": "samsung_wasm-21031261929",
@@ -68,7 +68,7 @@
   "release:RandoMixs/simple-tv-player": "0.0.1",
   "release:Ricrdsson1/kodi-tizen-wasm": "Alpha-0.0.8",
   "release:RitwickVerma/TizenAmbilight": "v1.0.0",
-  "release:Stashified/StashZen": "v0.42.0",
+  "release:Stashified/StashZen": "v0.43.0",
   "release:SuperDOS/velox": "v1.1.0",
   "release:SushyDev/tizen-youtube": "v1.5.1",
   "release:Sype0/retroarch-tizen": "v0.3.2",
@@ -127,7 +127,7 @@
   "release:titlog/douyin-tizen": "v1.4.6",
   "release:titlog/telegram-tizen": "v1.2.6",
   "release:toypoodlegaming/moonlight-chrome-tizen": "samsung_wasm-21031332442",
-  "release:victorreinor/nyx-tv": "v1.4.1",
+  "release:victorreinor/nyx-tv": "v1.4.2",
   "release:yumata/lampa": "v1.4.1",
   "direct:Apps2Samsung/tizen-community-packages": "etag:\"76c7abc2fc40f84b17ac2acf306749e29bf1461541ceb65d5600f2f5e6555842\"|mod:|len:3130441",
   "direct:KaashDev/TVapp": "etag:\"fb2c8f15fdce92231027555f26245016e87050b2173c8af340805c37fd8cd3af\"|mod:|len:979034",
@@ -277,5 +277,5 @@
   "config:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:MrSimmo/sonance3": "community-773"
+  "stale:MrSimmo/sonance3": "community-774"
 }
