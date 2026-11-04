@@ -61,7 +61,7 @@
   "release:PatrickSt1991/chorus2-tizen": "tizen-v21.x-1.0.1-2026-05-21-1443",
   "release:PatrickSt1991/flixor-tizen": "v1.0.1-2026-07-24-1215",
   "release:PatrickSt1991/tailscale-tizen": "tpk-f3a7b39",
-  "release:PatrickSt1991/tessel-tizen-tv": "v1.33.2-20261104-0841",
+  "release:PatrickSt1991/tessel-tizen-tv": "v1.34.0-20261104-1122",
   "release:PatrickSt1991/tex-tizen": "tex-tizen-v1.3.0-2026-06-09-0952",
   "release:PelagicaApp/pelagica": "4.14.0",
   "release:Prairie-Server/prairie-smarttv": "v0.5.4",
@@ -75,7 +75,7 @@
   "release:TAGISWILD/beam-tv": "v1.0.1",
   "release:Trent407/chiaki-tizen": "v0.2.0",
   "release:Viren070/AIOStreams": "smart-tv-v0.8.0",
-  "release:brightcraft/moonlight-tizen": "v1.19.0",
+  "release:brightcraft/moonlight-tizen": "v1.20.0",
   "release:cash94/MonoServer": "v1.0.35",
   "release:cash94/TorrStream-Tizen": "v1.1.4",
   "release:christopherklint97/streamvault": "wgt-v1.0.0-39066361899-1",
@@ -104,7 +104,7 @@
   "release:no-cover/torr-streaming": "1.0.0",
   "release:no-cover/wall": "1.0.0",
   "release:no-cover/youtube-dummy": "1.0.0",
-  "release:numbereleven-a/TizenTube-old-tizen": "v2.4.1",
+  "release:numbereleven-a/TizenTube-old-tizen": "v2.5.0",
   "release:numbereleven-a/inet-speed-old-tizen": "v1.1.1",
   "release:numbereleven-a/smarttv-twitch-old-tizen": "4.1.4",
   "release:opencream-ai/opencream-tv": "v0.1.1",
@@ -277,6 +277,5 @@
   "config:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:IIyn/omegatube": "community-775",
-  "stale:MrSimmo/sonance3": "community-775"
+  "stale:MrSimmo/sonance3": "community-776"
 }
