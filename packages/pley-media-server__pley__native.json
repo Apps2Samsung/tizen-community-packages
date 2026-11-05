@@ -1,0 +1,13 @@
+{
+  "name": "Pley (native)",
+  "description": "Native C#/NUI build of the Pley client for Tizen 9 TVs, from the samsung-native releases. Still catching up with the web app. Needs a Pley server.",
+  "category": "media",
+  "group": "Pley",
+  "repo": "pley-media-server/pley",
+  "source": "release",
+  "release_tag_prefix": "samsung-native-",
+  "branch": "master",
+  "assets": [
+    { "match": "^pley-samsung-native-.*[.]tpk$", "variant": "Native (Tizen 9)", "output_name": "Pley-native.tpk" }
+  ]
+}
