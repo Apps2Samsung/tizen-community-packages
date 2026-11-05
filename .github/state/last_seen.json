@@ -37,7 +37,7 @@
   "build:zephy-lee/velovistrix-tizen@main": "d13667833b1896c1eef5ce78b92307387476d172",
   "build:zonya/sendspin-cinema-tizen@main": "0eabc155e1dd37f9baa30ea2c688100537f5fd78",
   "release:AdvaithAvinash/AniUltimatium": "stable-v1.20",
-  "release:AdvaithAvinash/UltimatiumTube": "beta-v1.05",
+  "release:AdvaithAvinash/UltimatiumTube": "stable-v1.05",
   "release:Apps2Samsung/Overscan": "build-363c881",
   "release:Apps2Samsung/ReolinkViewer": "v1.1.0",
   "release:Apps2Samsung/TV-Store": "v0.3.20",
@@ -279,5 +279,5 @@
   "config:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:MrSimmo/sonance3": "community-780"
+  "stale:MrSimmo/sonance3": "community-781"
 }
