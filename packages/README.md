@@ -22,6 +22,19 @@ packages/<owner>__<repo>.json
 Examples: `PatrickSt1991/flixor-tizen` → `packages/PatrickSt1991__flixor-tizen.json`;
 `Apps2Samsung/Overscan` → `packages/Apps2Samsung__Overscan.json`.
 
+One repo can carry **one manifest per `source`** when the same app ships in two forms, e.g. a web
+app built from source next to a native `.tpk` taken from the repo's releases. The second manifest
+is a variant of the first, so both set the same `group` (see
+[Category, group and variant](#%EF%B8%8F-category-group-and-variant)), and it gets a suffix:
+
+```
+packages/<owner>__<repo>__<suffix>.json      e.g. packages/pley-media-server__pley__native.json
+```
+
+The suffix is lowercase letters, digits and dashes. The `build` manifest always keeps the plain
+name; only a `release` or `direct` one can take the suffix. The PR check rejects two manifests of
+one repo with the same `source`, or without a shared `group`.
+
 ---
 
 ## 🧩 Fields
@@ -94,7 +107,8 @@ to filter the app list and to fold variants of the same app into one entry.
 
 **`group`** folds packages together. Every package that names the same group becomes one entry in the
 Apps2Samsung app list, and its files are offered in a variant picker. Use it when several repos ship
-the same app (forks, a web and a native build):
+the same app (forks), or when one repo ships it in two forms from two manifests (a web app built from
+source and a native build from its releases, see [File name](#%EF%B8%8F-file-name)):
 
 ```json
 {
@@ -509,7 +523,8 @@ schema-checked, so removing the line is all it takes to bring the app back.
 
 ## ✅ Before you open the PR
 
-- File is named `packages/<owner>__<repo>.json`.
+- File is named `packages/<owner>__<repo>.json` (a second manifest of the same repo, with another
+  `source` and the same `group`: `packages/<owner>__<repo>__<suffix>.json`).
 - `name` and `description` contain no `|` or newlines (they land in a Markdown table).
 - `category` is one of the seven values above; if the app belongs with an existing one, set the same `group`.
 - Adult-only content? Set `"adult": true` and keep `name` / `description` plain.

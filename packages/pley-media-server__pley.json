@@ -2,6 +2,8 @@
   "name": "Pley",
   "description": "Client for the Pley media server: movies, shows, music and live TV with a guide, played through the TV's own player (AVPlay). Needs a Pley server. Tizen 4.0+.",
   "category": "media",
+  "group": "Pley",
+  "variant": "Web app (Tizen 4.0+)",
   "repo": "pley-media-server/pley",
   "source": "build",
   "branch": "master",

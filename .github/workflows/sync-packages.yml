@@ -75,7 +75,7 @@ jobs:
           new_state='{}'
           summary=""
           has_changes="false"
-          # Repos whose upstream or manifest changed, one per line.
+          # Packages (<source>:<repo>) whose upstream or manifest changed, one per line.
           dirty=""
 
           api() {
@@ -106,7 +106,7 @@ jobs:
             if [ "$old_val" != "$sha" ]; then
               summary="${summary}"$'\n'"- build $repo ($branch) -> ${sha:0:7}"
               has_changes="true"
-              dirty="$dirty$repo"$'\n'
+              dirty="${dirty}build:$repo"$'\n'
             fi
           done < <(jq -c 'to_entries[]' repos-build.json)
 
@@ -137,7 +137,7 @@ jobs:
             if [ "$old_val" != "$tag" ]; then
               summary="${summary}"$'\n'"- release $repo -> $tag"
               has_changes="true"
-              dirty="$dirty$repo"$'\n'
+              dirty="${dirty}release:$repo"$'\n'
             fi
           done < <(jq -c '.releases | to_entries[]' repos-sync.json)
 
@@ -160,17 +160,21 @@ jobs:
             if [ "$old_val" != "$fingerprint" ]; then
               summary="${summary}"$'\n'"- direct $repo -> $fingerprint"
               has_changes="true"
-              dirty="$dirty$repo"$'\n'
+              dirty="${dirty}direct:$repo"$'\n'
             fi
           done < <(jq -c '.direct | to_entries[]' repos-sync.json)
 
           # --- Every package: the files it ships and its config fingerprint ---
+          # id = <source>:<repo>: a repo may carry one manifest per source (a
+          # native .tpk from releases beside a web app built from source), so
+          # everything per package (dirty, rebuild, config:, stale:, fallback) is
+          # keyed on the id, so a missing release asset never rebuilds the web app.
           pkgs=$(jq -nc --slurpfile b repos-build.json --slurpfile s repos-sync.json '
-            [ ($b[0] | to_entries[] | {repo: .key, cfg: .value, overlay: (.value.overlay // ""),
+            [ ($b[0] | to_entries[] | {id: ("build:" + .key), repo: .key, cfg: .value, overlay: (.value.overlay // ""),
                 files: [.value.output_name]}),
-              ($s[0].releases | to_entries[] | {repo: .key, cfg: .value, overlay: "",
+              ($s[0].releases | to_entries[] | {id: ("release:" + .key), repo: .key, cfg: .value, overlay: "",
                 files: (if .value.assets then [.value.assets[].output_name] else [.value.output_name] end)}),
-              ($s[0].direct | to_entries[] | {repo: .key, cfg: .value, overlay: "",
+              ($s[0].direct | to_entries[] | {id: ("direct:" + .key), repo: .key, cfg: .value, overlay: "",
                 files: [.value.output_name // ((.key | split("/") | last) + ".wgt")]}) ]')
 
           # Config fingerprint = compiled manifest entry + overlay files, so an
@@ -179,19 +183,21 @@ jobs:
           # which every release regenerates anyway.
           had_config=$(echo "$old_state" | jq 'any(keys[]; startswith("config:"))')
           while IFS= read -r p; do
+            id=$(echo "$p" | jq -r '.id')
             repo=$(echo "$p" | jq -r '.repo')
             overlay=$(echo "$p" | jq -r '.overlay')
             cfg=$( { echo "$p" | jq -c '.cfg'
                      if [ -n "$overlay" ] && [ -d "apps/$overlay" ]; then
                        (cd "apps/$overlay" && find . -type f -print0 | sort -z | xargs -0 sha256sum)
                      fi; } | sha256sum | cut -c1-16)
-            key="config:$repo"
+            key="config:$id"
             new_state=$(echo "$new_state" | jq --arg k "$key" --arg v "$cfg" '. + {($k): $v}')
             old_val=$(echo "$old_state" | jq -r --arg k "$key" '.[$k] // empty')
             if [ "$old_val" != "$cfg" ]; then
-              [ "$had_config" = "true" ] && summary="${summary}"$'\n'"- config $repo"
+              # A package seen before: a new one is already listed by its build / release / direct line.
+              [ -n "$old_val" ] && summary="${summary}"$'\n'"- config $id"
               has_changes="true"
-              dirty="$dirty$repo"$'\n'
+              dirty="$dirty$id"$'\n'
             fi
           done < <(echo "$pkgs" | jq -c '.[]')
 
@@ -230,29 +236,29 @@ jobs:
             echo "Full rebuild: $full"
             has_changes="true"
             summary="${summary}"$'\n'"(full rebuild: $full)"
-            rebuild=$(echo "$pkgs" | jq -c '[.[].repo]')
+            rebuild=$(echo "$pkgs" | jq -c '[.[].id]')
           else
             # Changed packages, plus any whose files the previous bundle lacks
             # (skipped asset, quarantined) or only has from an older version
-            # (stale:<repo>, see publish-release). Those never start a run on
+            # (stale:<id>, see publish-release). Those never start a run on
             # their own, they just get retried whenever one happens.
             rebuild=$(echo "$pkgs" | jq -c --arg dirty "$dirty" --argjson have "$prev_files" \
                 --argjson stale "$(echo "$old_state" | jq -c '[keys[] | select(startswith("stale:")) | .[6:]]')" '
               ($dirty | split("\n") | map(select(. != ""))) as $d
-              | [ .[] | select((.repo as $r | ($d | index($r)) or ($stale | index($r)))
+              | [ .[] | select((.id as $i | ($d | index($i)) or ($stale | index($i)))
                     or any(.files[]; . == null or (. as $f | $have | index($f) | not)))
-                  | .repo ]')
+                  | .id ]')
           fi
           # Newest recent bundle that has all of a refreshed package's files,
           # so an app already missing from the last bundle can still come back.
           fallback=$(echo "$pkgs" | jq -c --argjson r "$rebuild" --argjson bundles "$bundles" '
-            [.[] | select(.repo as $x | $r | index($x)) | . as $p
+            [.[] | select(.id as $x | $r | index($x)) | . as $p
              | ([$bundles[] | select(. as $b | all($p.files[]; . as $f | $b.files | index($f)))][0].tag) as $tag
-             | select($tag) | {key: .repo, value: {tag: $tag, files: .files}}] | from_entries')
+             | select($tag) | {key: .id, value: {tag: $tag, files: .files}}] | from_entries')
           carry=$(echo "$pkgs" | jq -c --argjson r "$rebuild" \
-            '[.[] | select(.repo as $x | $r | index($x) | not) | .files[]] | unique')
+            '[.[] | select(.id as $x | $r | index($x) | not) | .files[]] | unique')
           matrix=$(jq -c --argjson r "$rebuild" \
-            '{include: [to_entries[] | select(.key as $k | $r | index($k)) | {
+            '{include: [to_entries[] | select(("build:" + .key) as $k | $r | index($k)) | {
               repo: .key,
               repo_id: (.key | gsub("/"; "-")),
               manifest: ("packages/" + (.key | gsub("/"; "__")) + ".json"),
@@ -529,7 +535,7 @@ jobs:
           }
           CFG="${{ steps.config.outputs.config }}"
           # Only what detect-changes picked; the rest is reused from the previous bundle.
-          repos=$(jq -r --argjson r "$REBUILD" '.releases | keys[] | select(. as $k | $r | index($k))' "$CFG")
+          repos=$(jq -r --argjson r "$REBUILD" '.releases | keys[] | select(("release:" + .) as $k | $r | index($k))' "$CFG")
 
           # A single dead/renamed/asset-less upstream must not break the whole catalog sync -
           # collect skips and warn, don't `exit 1`.
@@ -627,7 +633,7 @@ jobs:
           REBUILD: ${{ needs.detect-changes.outputs.rebuild }}
         run: |
           CFG="${{ steps.config.outputs.config }}"
-          jq -r --argjson r "$REBUILD" '.direct | to_entries[] | select(.key as $k | $r | index($k)) | "\(.key) \(.value.url // .value) \(.value.output_name // "") \(.value.extract // "")"' "$CFG" |
+          jq -r --argjson r "$REBUILD" '.direct | to_entries[] | select(("direct:" + .key) as $k | $r | index($k)) | "\(.key) \(.value.url // .value) \(.value.output_name // "") \(.value.extract // "")"' "$CFG" |
           while read -r repo url outname extract; do
             [ -n "$repo" ] || continue
             if [ -z "$outname" ] || [ "$outname" = "null" ]; then
@@ -721,7 +727,7 @@ jobs:
         # A failed build or a new upstream release without the expected asset
         # would drop the app from the bundle. Ship what the last good bundle had
         # instead (all of the package's files, so variants stay one version),
-        # and record the package as stale:<repo> so every later run retries it.
+        # and record the package as stale:<id> so every later run retries it.
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FALLBACK: ${{ needs.detect-changes.outputs.fallback }}
@@ -731,7 +737,7 @@ jobs:
           [ -n "$FALLBACK" ] || FALLBACK='{}'
           stale='{}'
           while IFS= read -r p; do
-            repo=$(echo "$p" | jq -r '.key')
+            id=$(echo "$p" | jq -r '.key')
             tag=$(echo "$p" | jq -r '.value.tag')
             short=false
             while IFS= read -r f; do
@@ -744,10 +750,10 @@ jobs:
               args+=(-p "$f")
             done < <(echo "$p" | jq -r '.value.files[]')
             if gh release download "$tag" -D fallback "${args[@]}"; then
-              echo "::warning title=Kept previous version::$repo did not refresh - shipping its files from $tag."
-              stale=$(echo "$stale" | jq --arg k "stale:$repo" --arg v "$tag" '. + {($k): $v}')
+              echo "::warning title=Kept previous version::$id did not refresh - shipping its files from $tag."
+              stale=$(echo "$stale" | jq --arg k "stale:$id" --arg v "$tag" '. + {($k): $v}')
             else
-              echo "::warning title=Package dropped::$repo did not refresh and could not be taken from $tag."
+              echo "::warning title=Package dropped::$id did not refresh and could not be taken from $tag."
             fi
           done < <(echo "$FALLBACK" | jq -c 'to_entries[]')
           echo "$stale" > stale.json
@@ -928,7 +934,7 @@ jobs:
           path: .state-download
 
       - name: Apply new state
-        # stale:<repo> marks a package shipped from an older bundle this run;
+        # stale:<id> marks a package shipped from an older bundle this run;
         # detect-changes retries it until a refresh succeeds and drops the key.
         run: |
           set -e

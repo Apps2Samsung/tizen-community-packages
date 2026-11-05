@@ -65,7 +65,7 @@ jobs:
       - name: Structural checks (filenames, uniqueness)
         run: |
           python3 - <<'PY'
-          import json, glob, os, sys
+          import json, glob, os, re, sys
           errors = []
           repos, outputs = {}, {}
 
@@ -79,17 +79,29 @@ jobs:
           for path in sorted(glob.glob("packages/*.json")):
               doc = json.load(open(path))
               repo = doc["repo"]
-
-              # filename must match the repo slug: owner/repo -> owner__repo.json
-              expected = repo.replace("/", "__") + ".json"
+              source = doc["source"]
               actual = os.path.basename(path)
-              if actual != expected:
-                  errors.append(f"{actual}: filename must be '{expected}' (derived from repo '{repo}')")
 
-              # one manifest per repo
-              if repo in repos:
-                  errors.append(f"{actual}: repo '{repo}' already defined in {repos[repo]}")
-              repos[repo] = actual
+              # filename is the repo slug: owner/repo -> owner__repo.json. A second
+              # manifest for the same repo (another source of the same app, e.g. a
+              # native .tpk from releases beside a web app built from source) adds
+              # a suffix: owner__repo__<suffix>.json. The build manifest keeps the
+              # plain name: the sync's build matrix derives it from the repo.
+              base = repo.replace("/", "__")
+              plain = actual == base + ".json"
+              suffixed = re.fullmatch(re.escape(base) + r"__[a-z0-9]+(?:-[a-z0-9]+)*\.json", actual) is not None
+              if not plain and not (suffixed and source != "build"):
+                  errors.append(f"{actual}: filename must be '{base}.json' (derived from repo '{repo}'), "
+                                f"or '{base}__<suffix>.json' for a second release/direct manifest of that repo")
+
+              # one manifest per repo and source; several manifests of one repo are
+              # variants of one app, so they must share a group.
+              for other in repos.get(repo, []):
+                  if other["source"] == source:
+                      errors.append(f"{actual}: a '{source}' manifest for repo '{repo}' already exists: {other['file']}")
+                  if not doc.get("group") or doc.get("group") != other["group"]:
+                      errors.append(f"{actual}: repo '{repo}' is also packaged by {other['file']}; both must set the same 'group'")
+              repos.setdefault(repo, []).append({"file": actual, "source": source, "group": doc.get("group")})
 
               # output_name must be unique across the whole bundle (top-level + assets)
               names = []
@@ -107,7 +119,7 @@ jobs:
               for e in errors:
                   print(f"::error::  {e}")
               sys.exit(1)
-          print(f"OK â€” {len(repos)} manifests, {len(outputs)} unique output names.")
+          print(f"OK â€” {sum(len(v) for v in repos.values())} manifests, {len(outputs)} unique output names.")
           PY
 
       - name: Not already in the catalog
