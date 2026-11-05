@@ -1,0 +1,13 @@
+{
+  "name": "Lobby",
+  "description": "Home screen for Samsung TVs with your Emby server's Continue Watching, Live TV and teams, and Seerr's trending titles.",
+  "category": "media",
+  "repo": "CtznSniiips/Lobby",
+  "repo_label": "Lobby",
+  "source": "build",
+  "branch": "main",
+  "project_path": "app",
+  "skip_npm": true,
+  "overlay": "lobby",
+  "output_name": "Lobby.wgt"
+}
