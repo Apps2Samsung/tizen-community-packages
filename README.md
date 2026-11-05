@@ -1,7 +1,7 @@
 # 🌐 Tizen Community Packages
 [![Sync Tizen Community Packages](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml/badge.svg)](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Packages](https://img.shields.io/badge/packages-139-blue.svg)](#-current-packages)
+[![Packages](https://img.shields.io/badge/packages-140-blue.svg)](#-current-packages)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-green.svg)](../../issues)
 [![Tizen](https://img.shields.io/badge/Platform-Tizen-lightgrey.svg)](https://www.tizen.org/)
 [![Community](https://img.shields.io/badge/Community-Driven-orange.svg)](#)
@@ -53,7 +53,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **AniUltimatium**<br>[AdvaithAvinash](https://github.com/AdvaithAvinash/AniUltimatium) | Anime streaming app for Samsung Tizen TVs. | `stable-v1.20` |
 | **Apex TV**<br>[Pajuodelis](https://github.com/Pajuodelis/apex-tv) | Independent F1 TV client for Samsung Tizen 6.0+. | `v0.5.14` |
 | **bilibili**<br>[titlog](https://github.com/titlog/bilibili-tizen) | Unofficial bilibili client for Samsung TVs, driven entirely by the remote: QR sign-in with multiple accounts, continue-watching row, danmaku, search, live, up to 1080p H.265 (4K with premium). | `v1.4.14` |
-| **Bisnor**<br>[nikan48g](https://github.com/nikan48g/Bisnor) | Open-source Persian movie and series client (experimental Tizen TV build): browse, search and play titles from the IranFlix catalogue with AVPlay. | `a9ce047` |
+| **Bisnor**<br>[nikan48g](https://github.com/nikan48g/Bisnor) | Open-source Persian movie and series client (experimental Tizen TV build): browse, search and play titles from the IranFlix catalogue with AVPlay. | `c22e869` |
 | **Crunchyroll**<br>[jhassan8](https://github.com/jhassan8/crunchyroll-tizen) | Unofficial Crunchyroll client for Samsung Tizen TVs with anime streaming support. | `latest` |
 | **Douyin (抖音)**<br>[titlog](https://github.com/titlog/douyin-tizen) | Unofficial Douyin client for Samsung Tizen 6.0+ TVs, driven by the remote: Featured, Following and For You feeds, QR sign-in, your history, likes and favourites, creator pages, collections and comments. | `v1.4.6` |
 | **Film Merkezi**<br>[enesk4yh4n-lab](https://github.com/enesk4yh4n-lab/TizenTV-Film-Merkezi) | Turkish/English film and series browser with multiple providers, watchlist and HTML5/AVPlay playback. | `v1.1.7` |
@@ -83,7 +83,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 </details>
 
 <details>
-<summary><b>📼 Media servers & players</b> (32)</summary>
+<summary><b>📼 Media servers & players</b> (33)</summary>
 
 | 🧩 Application | 📝 Description | ⚙️ Version |
 |----------------|----------------|------------|
@@ -96,6 +96,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Immich TV**<br>[Immich TV for Samsung](https://github.com/rfsmason/immich-tv-for-samsung) | Read-only Immich photo and video client for Samsung TVs: timeline, albums, people, memories, search, slideshows. | `v0.1.1-beta.2` |
 | **ImmiTV**<br>[xHiqhAim](https://gitlab.com/xHiqhAim/immitv) | Lightweight Immich photo and video client for Samsung Tizen 4.0 TVs: remote-control navigation, hardware-accelerated AVPlay video playback and a month-based timeline. | `142e6ae` |
 | **Jellyfin + Bonfire**<br>[jellyfin](https://github.com/jellyfin/jellyfin-tizen) | Official Jellyfin Tizen client patched with the Bonfire loader for multi-user profile switching. | `31408c1` |
+| **JellyLean**<br>[MaCHeaMaRoBi](https://github.com/MaCHeaMaRoBi/JellyLean) | Fast, lightweight Jellyfin client without jellyfin-web: AVPlay playback with transcode fallback, Quick Connect, subtitles, SyncPlay and skip intro. | `v1.0.1` |
 | **Kodi**<br>[Ricrdsson1](https://github.com/Ricrdsson1/kodi-tizen-wasm) | Unofficial WebAssembly port of Kodi for Samsung Tizen TVs (alpha). | `Alpha-0.0.8` |
 | **Kodi-TeX**<br>[PatrickSt1991](https://github.com/PatrickSt1991/tex-tizen) | Kodi TeX web interface ported to Samsung Tizen. | `tex-tizen-v1.3.0-2026-06-09-0952` |
 | **KROMA**<br>[kromatv](https://github.com/kromatv/kroma) | Client for KROMA, a self-hosted direct-play media server for your NAS. | `v0.1.38` |
@@ -112,7 +113,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Sonance3**<br>[MrSimmo](https://github.com/MrSimmo/sonance3) | A music player for Samsung Tizen TVs, built to stream from your self-hosted Navidrome or Subsonic-compatible server. | `v3.15` |
 | **SubTizen**<br>[therosaer](https://github.com/therosaer/SubTizen) | Subsonic music client for Navidrome, Airsonic, Gonic and Subsonic: Apple Music-style UI, server playlists, search and synced lyrics. | `v1.0.1` |
 | **tacplayer**<br>[sfsdffesfsfg-cloud](https://github.com/sfsdffesfsfg-cloud/tacplayer) | Custom Jellyfin Tizen client with cinematic red UI for Samsung TV | `v0.1.0` |
-| **Tessel**<br>[PatrickSt1991](https://github.com/PatrickSt1991/tessel-tizen-tv) | Media player for Samsung TVs: SMB shares, USB drives, network streams and subtitles, with an optional transcode server (formerly VLC-Tizen-tv). | `v1.34.0-20261104-1122` |
+| **Tessel**<br>[PatrickSt1991](https://github.com/PatrickSt1991/tessel-tizen-tv) | Media player for Samsung TVs: SMB shares, USB drives, network streams and subtitles, with an optional transcode server (formerly VLC-Tizen-tv). | `v1.35.0-20261105-0948` |
 | **TubeArchivist TV**<br>[raykholo](https://github.com/raykholo/tubearchivist-tv) | 10-foot client for your self-hosted TubeArchivist: pair from your phone, never type on the remote. | `3cb035f` |
 | **TVideoPlayer**<br>[TizenTVWebApp](https://github.com/TizenTVWebApp/TVideoPlayer) | Tizen TV HTML video player based on videojs. | `latest` |
 | **VeloVistrix**<br>[zephy-lee](https://github.com/zephy-lee/velovistrix-tizen) | Read-only PhotoPrism viewer for Samsung Tizen 5.0+ TVs, driven by the remote: albums, places, calendar, labels and folders from your own server, with slideshow. | `d136678` |

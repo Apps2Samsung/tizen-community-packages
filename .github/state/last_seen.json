@@ -27,7 +27,7 @@
   "build:lvndry/tv-dashboard@main": "d2b0c479ca5c4b30f33b67e9ef602d92c2ce3be2",
   "build:matifDreamIt/IPTV-Tizen-TV@main": "d8eb66b9874d54a225cf584824544925e7dd521f",
   "build:natureglass/haven-tizen-ha@main": "18ffa3e8143b71b6a0677e36cb46470370ba1b19",
-  "build:nikan48g/Bisnor@main": "a9ce047c35cb5d7d1b4f691a82a057ad898300b7",
+  "build:nikan48g/Bisnor@main": "c22e8695c597634b3f8274b527787239744d4a1e",
   "build:pvk689/snake-game-tizen@master": "62ccffcf53fd72d482bd943c865cd55e8dbf6c54",
   "build:raykholo/tubearchivist-tv@main": "3cb035faf4d9e630761cee288513929fb993af41",
   "build:rfaile313/samsucks@main": "6b00e926e163a3154dd1993a26b47482d61ebf40",
@@ -50,6 +50,7 @@
   "release:Karl-Lauterbach24/Lumen-TV": "v1.17.1",
   "release:Kepler75/StremioK": "v2.2.8",
   "release:Licaa21/Smart-TV": "fork-v2.0.0",
+  "release:MaCHeaMaRoBi/JellyLean": "v1.0.1",
   "release:MrHumanRebel/airtizen": "v2.2.34",
   "release:MrPhaze62/moonlight-chrome-tizen-no-gamemode": "samsung_wasm-21031261929",
   "release:MrSimmo/sonance3": "v3.15",
@@ -61,7 +62,7 @@
   "release:PatrickSt1991/chorus2-tizen": "tizen-v21.x-1.0.1-2026-05-21-1443",
   "release:PatrickSt1991/flixor-tizen": "v1.0.1-2026-07-24-1215",
   "release:PatrickSt1991/tailscale-tizen": "tpk-f3a7b39",
-  "release:PatrickSt1991/tessel-tizen-tv": "v1.34.0-20261104-1122",
+  "release:PatrickSt1991/tessel-tizen-tv": "v1.35.0-20261105-0948",
   "release:PatrickSt1991/tex-tizen": "tex-tizen-v1.3.0-2026-06-09-0952",
   "release:PelagicaApp/pelagica": "4.14.0",
   "release:Prairie-Server/prairie-smarttv": "v0.5.4",
@@ -189,6 +190,7 @@
   "config:Karl-Lauterbach24/Lumen-TV": "697b0f30da413d3b",
   "config:Kepler75/StremioK": "994e1c75ba84c371",
   "config:Licaa21/Smart-TV": "d129bf524c5c352a",
+  "config:MaCHeaMaRoBi/JellyLean": "064955e207bc2805",
   "config:MrHumanRebel/airtizen": "302f64a46c64cc46",
   "config:MrPhaze62/moonlight-chrome-tizen-no-gamemode": "0e7408e04ebd8eb3",
   "config:MrSimmo/sonance3": "ccee04bdfd36355e",
@@ -277,5 +279,5 @@
   "config:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:MrSimmo/sonance3": "community-778"
+  "stale:MrSimmo/sonance3": "community-779"
 }
