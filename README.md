@@ -65,7 +65,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Nuvio Native Legacy**<br>[iqui27](https://github.com/iqui27/nuvio-native-legacy) | Unofficial native C/SDL2 Nuvio client, fast on older TVs. | `v2.0.8` |
 | **OmegaTube**<br>[OmegaTube](https://github.com/IIyn/omegatube) | Ad-free YouTube client with SponsorBlock and a native 4K player (Tizen 6+). | `v1.4.1` |
 | **OsmTwich**<br>[OsmTwichPlayer](https://github.com/josepvarela/OsmTwichPlayer) | Unofficial Twitch client for Samsung Tizen TV. | `v1.0.71` |
-| **Reelo**<br>[Reelo](https://github.com/ihovsky/Reelo) | TV client for the Reelo service: films and series with a remote-first interface, family profiles and library sync between devices (Russian UI). | `Wed, 04 Nov 2026 00:56:22 GMT` |
+| **Reelo**<br>[Reelo](https://github.com/ihovsky/Reelo) | TV client for the Reelo service: films and series with a remote-first interface, family profiles and library sync between devices (Russian UI). | `Thu, 05 Nov 2026 12:53:43 GMT` |
 | **SeanimeTV**<br>[ihiqhaim](https://github.com/ihiqhaim/SeanimeTV-Tizen) | Unofficial Seanime client for Samsung Tizen TVs with torrent streaming and AVPlay playback. | `4da9288` |
 | **Spelunkr**<br>[pedr](https://github.com/pedr/spelunkrtv-tizen-app) | Unofficial spelunkr.tv client: 24/7 synchronized channels of Internet Archive video, driven by the remote, with a fix that lets Samsung's player seek in archive.org videos. | `v1.1.0` |
 | **Streamix TV**<br>[gabrielmaialva33](https://github.com/gabrielmaialva33/streamix-tv) | Cinematic 10-foot TV client for the self-hosted Streamix platform. | `v1.0.027` |
@@ -76,7 +76,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **TorrStream**<br>[cash94](https://github.com/cash94/TorrStream-Tizen) | Movies and TV shows through TorrServer, with TMDB catalogs and audio and subtitle track names read on the TV. | `v1.1.4` |
 | **Twitch**<br>[fgl27](https://github.com/fgl27/smarttv-twitch) | Twitch client for Samsung Smart TVs 2015 and newer models. | `ca31512` |
 | **Twitch Old Tizen**<br>[numbereleven-a](https://github.com/numbereleven-a/smarttv-twitch-old-tizen) | Twitch client for older Samsung Tizen TVs (2.4/3.0) with 720p/1080p playback fixes for channels that enable 1440p, plus device-code sign-in. | `4.1.4` |
-| **UltimatiumTube**<br>[AdvaithAvinash](https://github.com/AdvaithAvinash/UltimatiumTube) | Ad-free YouTube for Samsung Tizen 5.0 and 5.5 TVs. | `stable-v1.03` |
+| **UltimatiumTube**<br>[AdvaithAvinash](https://github.com/AdvaithAvinash/UltimatiumTube) | Ad-free YouTube for Samsung Tizen 5.0 and 5.5 TVs. | `beta-v1.05` |
 | **YouTube Dummy**<br>[no-cover](https://github.com/no-cover/youtube-dummy) | Lightweight wrapper around youtube.com/tv that injects the TizenTube userscript (ad-free, SponsorBlock), handles remote-control navigation and exits cleanly back to Smart Hub. | `1.0.0` |
 | **YouTube for Tizen**<br>[SushyDev](https://github.com/SushyDev/tizen-youtube) | Ad-free YouTube for Samsung TVs, running in Samsung's own Cobalt engine with SponsorBlock, DeArrow and preferred-quality settings. | `v1.5.1` |
 
@@ -118,7 +118,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **TVideoPlayer**<br>[TizenTVWebApp](https://github.com/TizenTVWebApp/TVideoPlayer) | Tizen TV HTML video player based on videojs. | `latest` |
 | **VeloVistrix**<br>[zephy-lee](https://github.com/zephy-lee/velovistrix-tizen) | Read-only PhotoPrism viewer for Samsung Tizen 5.0+ TVs, driven by the remote: albums, places, calendar, labels and folders from your own server, with slideshow. | `d136678` |
 | **Velox**<br>[SuperDOS](https://github.com/SuperDOS/velox) | Fast Plex client: opens in about a second, smooth scrolling, hardware playback. | `v1.1.0` |
-| **Velvet TV**<br>[aroundmyroom](https://github.com/aroundmyroom/Velvet) | Big-screen TV client for the Velvet self-hosted music server. | `777892f` |
+| **Velvet TV**<br>[aroundmyroom](https://github.com/aroundmyroom/Velvet) | Big-screen TV client for the Velvet self-hosted music server. | `c2e2133` |
 | **Vemm**<br>[somefosterkid](https://github.com/somefosterkid/vemm) | Unofficial Plex-compatible media player for Samsung Tizen TVs with AVPlay playback, Direct Play and server transcoding. | `preview-0.10.0` |
 
 </details>
@@ -135,7 +135,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **HackTV**<br>[kosmodrey](https://github.com/kosmodrey/hackTV) | IPTV client for Samsung Tizen TVs. | `bf27ba9` |
 | **IPTV Manager**<br>[matifDreamIt](https://github.com/matifDreamIt/IPTV-Tizen-TV) | IPTV manager for Samsung Tizen TV with Xtream Codes support and HLS playback. | `d8eb66b` |
 | **Nyx**<br>[victorreinor](https://github.com/victorreinor/nyx-tv) | IPTV player for your own Xtream or M3U playlist with a simple, remote-first interface. | `v1.4.2` |
-| **opencream TV**<br>[opencream-ai](https://github.com/opencream-ai/opencream-tv) | A calm home screen for Samsung TVs with your own Xtream Codes IPTV built in: live TV, films, series, guide search. | `v0.1.1` |
+| **opencream TV**<br>[opencream-ai](https://github.com/opencream-ai/opencream-tv) | A calm home screen for Samsung TVs with your own Xtream Codes IPTV built in: live TV, films, series, guide search. | `v0.1.2` |
 | **OpenIPTV**<br>[shayanline](https://github.com/shayanline/OpenIPTV) | Privacy focused IPTV player for Samsung Tizen TVs with extended M3U playlists, favourites and search. | `1.9.3` |
 | **OTTplay FOSS**<br>[prog4food](https://github.com/prog4food/ottplay-foss-thin-clients) | FOSS OTT / IPTV thin client for Tizen. | `Sat, 21 Jan 2023 15:15:16 GMT` |
 | **React IPTV**<br>[anandsimmy](https://github.com/anandsimmy/react-iptv) | IPTV player for Samsung Tizen TV, built with React. | `7a7dcc2` |
@@ -162,14 +162,14 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Moonlight**<br>[OneLiberty](https://github.com/OneLiberty/moonlight-chrome-tizen) | Open-source client for NVIDIA GameStream and Sunshine. | `v1.2.1` |
 | **Moonlight (No Gamemode)**<br>[MrPhaze62](https://github.com/MrPhaze62/moonlight-chrome-tizen-no-gamemode) | Open-source client for NVIDIA GameStream and Sunshine with gamemode disabled. | `samsung_wasm-21031261929` |
 | **Moonlight (ToypoodleGaming)**<br>[toypoodlegaming](https://github.com/toypoodlegaming/moonlight-chrome-tizen) | Moonlight NVIDIA GameStream / Sunshine client (ToypoodleGaming fork). | `samsung_wasm-21031332442` |
-| **Moonlight Enhanced (AC-3)**<br>[fidoboy](https://github.com/fidoboy/moonlight-tizen-ac3) | Open-source Moonlight client for Tizen OS with optional support for Dolby Digital and Dolby Digital Plus (stereo and 5.1) optical-audio and HDMI passthrough. | `v1.1.0` |
+| **Moonlight Enhanced (AC-3)**<br>[fidoboy](https://github.com/fidoboy/moonlight-tizen-ac3) | Open-source Moonlight client for Tizen OS with optional support for Dolby Digital and Dolby Digital Plus (stereo and 5.1) optical-audio and HDMI passthrough. | `v1.2.0` |
 | **Moonlight-Tizen**<br>[BrightCraft](https://github.com/brightcraft/moonlight-tizen) | Open-source client for NVIDIA GameStream and Sunshine Tizen OS 5.5 or higher. | `v1.20.0` |
 | **RetroArch**<br>[Sype0](https://github.com/Sype0/retroarch-tizen) | RetroArch (libretro WebAssembly) for Samsung Tizen 6.5+ TVs: remote-driven launcher, gamepad support, ROMs from a USB drive or a network folder. | `v0.3.2` |
 | **RetroTV**<br>[guhcostan](https://github.com/guhcostan/retro-tv) | Retro game console for Samsung Tizen 5.0+ TVs: WebAssembly emulator cores downloaded on first use, games copied over the LAN from the project's companion server on a PC, or streamed from that PC. | `062fb72` |
 | **Shmup Cup**<br>[detain](https://github.com/detain/shmup-cup) | A side-scrolling shoot-'em-up written for the TV remote: nine zones, two ships, sixteen routes and a boss at the end of each. | `ef6605c` |
 | **Snake**<br>[pvk689](https://github.com/pvk689/snake-game-tizen) | Snake game for Samsung Tizen TVs, played with the remote. | `62ccffc` |
 | **Tizen Steam Link**<br>[pebeto](https://github.com/pebeto/tizen-steam-link) | Unofficial Steam Link client for Samsung Tizen 5.5+ TVs: streams games from Steam on a PC or Steam Deck, with the TV's hardware decoder and controllers, keyboard and mouse passed through. | `v0.3.2` |
-| **TransportTycoonDeluxe**<br>[dos-ise](https://github.com/dos-ise/openttd-tizen) | OpenTTD is an open source simulation game based upon Transport Tycoon Deluxe. | `Release` |
+| **TransportTycoonDeluxe**<br>[dos-ise](https://github.com/dos-ise/openttd-tizen) | OpenTTD is an open source simulation game based upon Transport Tycoon Deluxe. | `v15.3` |
 
 </details>
 
@@ -206,7 +206,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **TizenBrew**<br>[reisxd](https://github.com/reisxd/TizenBrew) | A way to experience modded websites and you can install newer apps without fighting with Tizen Studio. | `v2.0.5` |
 | **TizenUtility**<br>[no-cover](https://github.com/no-cover/tizenutility) | System utility for Samsung Tizen TVs: detailed device, firmware and network info, plus a launcher for hidden built-in Samsung apps that are not reachable from the normal UI. | `1.1.1` |
 | **Torr Streaming**<br>[no-cover](https://github.com/no-cover/torr-streaming) | Runs TorrServer as a background service on the TV itself, so local web apps can stream torrents directly without a separate box. | `1.0.0` |
-| **TV-Store**<br>[Apps2Samsung](https://github.com/Apps2Samsung/TV-Store) | The Apps2Samsung catalog on the TV itself: browse with the remote and install apps natively through the set's own developer connection, with no PC or phone in the loop after a one-time arming from the Apps2Samsung 3.0 (or newer) toolbox. | `v0.3.18` |
+| **TV-Store**<br>[Apps2Samsung](https://github.com/Apps2Samsung/TV-Store) | The Apps2Samsung catalog on the TV itself: browse with the remote and install apps natively through the set's own developer connection, with no PC or phone in the loop after a one-time arming from the Apps2Samsung 3.0 (or newer) toolbox. | `v0.3.20` |
 | **Vetro**<br>[andrearicci93](https://github.com/andrearicci93/vetro) | TV management dashboard with root integration: app inventory, controls and diagnostics in your browser. | `52b02b4` |
 
 </details>
