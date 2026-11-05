@@ -1,6 +1,6 @@
 {
   "name": "Sonance3",
-  "description": "A music player for Samsung Tizen TVs, built to stream from your self-hosted Navidrome or Subsonic-compatible server.",
+  "description": "A music player for Samsung Tizen TVs, built to stream from your self-hosted Jellyfin, Navidrome or Subsonic-compatible server.",
   "category": "media",
   "repo": "MrSimmo/sonance3",
   "source": "release",
