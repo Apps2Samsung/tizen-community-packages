@@ -1,0 +1,11 @@
+{
+  "name": "JellyLean",
+  "description": "Fast, lightweight Jellyfin client without jellyfin-web: AVPlay playback with transcode fallback, Quick Connect, subtitles, SyncPlay and skip intro. Runs on older TVs too (Tizen 3.0+).",
+  "category": "media",
+  "repo": "MaCHeaMaRoBi/JellyLean",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "^JellyLean[.]wgt$", "output_name": "JellyLean.wgt" }
+  ]
+}
