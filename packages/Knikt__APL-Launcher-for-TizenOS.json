@@ -1,0 +1,48 @@
+{
+  "name": "APL Launcher",
+  "description": "Apple-TV-style home screen: Top Shelf, glass dock, Control Center over any app, Settings and Sources. Needs Vetro on a rooted screen and Tizen 7 or newer: after install, open it and choose Settings › Remote and Devices › Set Up the Remote Buttons. Optional TMDB, YouTube and Fanart.tv keys are written into the package on install.",
+  "category": "tools",
+  "repo": "Knikt/APL-Launcher-for-TizenOS",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    {
+      "match": "^apl-launcher-full-v.*[.]wgt$",
+      "output_name": "APLLauncher.wgt"
+    }
+  ],
+  "cert_level": "partner",
+  "user_settings": {
+    "help_url": "https://github.com/Knikt/APL-Launcher-for-TizenOS/blob/main/docs/installation.md#optional-api-keys",
+    "file": "res/wgt/js/keys.local.js",
+    "fields": [
+      {
+        "key": "tmdb",
+        "label": "TMDB API key (v3), for the live Top Shelf; optional",
+        "type": "text",
+        "required": false,
+        "pattern": "^[A-Za-z0-9]+$",
+        "find": "tmdb: \"\",",
+        "replace": "tmdb: \"{value}\","
+      },
+      {
+        "key": "youtube",
+        "label": "YouTube Data API v3 key, for TizenTube's Top Shelf; optional",
+        "type": "text",
+        "required": false,
+        "pattern": "^[A-Za-z0-9_-]+$",
+        "find": "youtube: \"\",",
+        "replace": "youtube: \"{value}\","
+      },
+      {
+        "key": "fanart",
+        "label": "Fanart.tv API key, for textless HD backgrounds; optional",
+        "type": "text",
+        "required": false,
+        "pattern": "^[A-Za-z0-9]+$",
+        "find": "fanart: \"\",",
+        "replace": "fanart: \"{value}\","
+      }
+    ]
+  }
+}
