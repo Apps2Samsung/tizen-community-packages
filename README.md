@@ -349,7 +349,7 @@ This is a **community-driven project** and is **not officially affiliated with o
 
 ## 📝 Additional Note
 
-You need to make a Samsung Certificate (Tools > Certficate Manager) to run any of the packages listed above. In case you're having any issues, refer to [Connection Guide](https://developer.samsung.com/smarttv/develop/getting-started/using-sdk/tv-device.html).
+You need to make a Samsung Certificate (Tools > Certificate Manager) to run any of the packages listed above. In case you're having any issues, refer to [Connection Guide](https://developer.samsung.com/smarttv/develop/getting-started/using-sdk/tv-device.html).
 
 ---
 
