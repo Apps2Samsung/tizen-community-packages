@@ -1,7 +1,7 @@
 {
   "name": "Lobby",
-  "description": "Home screen for Samsung TVs with your Emby server's Continue Watching, Live TV and teams, and Seerr's trending titles.",
-  "category": "media",
+  "description": "Home screen for Samsung TVs with your Emby (or Jellyfin) server's Continue Watching, Live TV and teams, and Seerr's trending titles.",
+  "category": "other",
   "repo": "CtznSniiips/Lobby",
   "repo_label": "Lobby",
   "source": "build",
