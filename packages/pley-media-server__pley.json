@@ -1,0 +1,12 @@
+{
+  "name": "Pley",
+  "description": "Client for the Pley media server: movies, shows, music and live TV with a guide, played through the TV's own player (AVPlay). Needs a Pley server. Tizen 4.0+.",
+  "category": "media",
+  "repo": "pley-media-server/pley",
+  "source": "build",
+  "branch": "master",
+  "project_path": "apps/tizen/dist",
+  "skip_npm": true,
+  "pre_build": "npm i -g bun@1.4.4 && bun install --frozen-lockfile && cd apps/tizen && bun scripts/build.mjs",
+  "output_name": "Pley.wgt"
+}
