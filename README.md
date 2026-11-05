@@ -45,7 +45,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | 🧩 Application | 📝 Description | ⚙️ Version |
 |----------------|----------------|------------|
 | **30nama**<br>[msharifi99](https://github.com/msharifi99/30nama-tizenos) | Unofficial 30nama.com client for Samsung Tizen TVs. | `v1.3.0` |
-| **AetherFlix**<br>[Hamza-Boulila](https://github.com/Hamza-Boulila/aetherflix) | Open-source universal streaming platform for Smart TVs with TMDB metadata. | `v1.1.0` |
+| **AetherFlix**<br>[Hamza-Boulila](https://github.com/Hamza-Boulila/aetherflix) | Open-source universal streaming platform for Smart TVs with TMDB metadata. | `v1.2.0` |
 | **AIOStreams**<br>[Viren070](https://github.com/Viren070/AIOStreams) | Tizen build of AIOStreams, the all-in-one Stremio super-addon for debrid and Usenet sources. | `smart-tv-v0.8.0` |
 | **AIOStreams (thomasrtg)**<br>[thomasrtg](https://github.com/thomasrtg/AIOStreams) | Tizen 6 build of AIOStreams, the all-in-one Stremio super-addon for debrid and Usenet sources. | `tizen6-v0.7.0-beta.1` |
 | **AniLiberty**<br>[CoreDip](https://github.com/CoreDip/anilibria-tizen-wgt) | Unofficial AniLibria anime client for Samsung Tizen TV. | `v1.1.0` |
@@ -53,7 +53,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **AniUltimatium**<br>[AdvaithAvinash](https://github.com/AdvaithAvinash/AniUltimatium) | Anime streaming app for Samsung Tizen TVs. | `stable-v1.20` |
 | **Apex TV**<br>[Pajuodelis](https://github.com/Pajuodelis/apex-tv) | Independent F1 TV client for Samsung Tizen 6.0+. | `v0.5.14` |
 | **bilibili**<br>[titlog](https://github.com/titlog/bilibili-tizen) | Unofficial bilibili client for Samsung TVs, driven entirely by the remote: QR sign-in with multiple accounts, continue-watching row, danmaku, search, live, up to 1080p H.265 (4K with premium). | `v1.4.14` |
-| **Bisnor**<br>[nikan48g](https://github.com/nikan48g/Bisnor) | Open-source Persian movie and series client (experimental Tizen TV build): browse, search and play titles from the IranFlix catalogue with AVPlay. | `43a7a97` |
+| **Bisnor**<br>[nikan48g](https://github.com/nikan48g/Bisnor) | Open-source Persian movie and series client (experimental Tizen TV build): browse, search and play titles from the IranFlix catalogue with AVPlay. | `a9ce047` |
 | **Crunchyroll**<br>[jhassan8](https://github.com/jhassan8/crunchyroll-tizen) | Unofficial Crunchyroll client for Samsung Tizen TVs with anime streaming support. | `latest` |
 | **Douyin (抖音)**<br>[titlog](https://github.com/titlog/douyin-tizen) | Unofficial Douyin client for Samsung Tizen 6.0+ TVs, driven by the remote: Featured, Following and For You feeds, QR sign-in, your history, likes and favourites, creator pages, collections and comments. | `v1.4.6` |
 | **Film Merkezi**<br>[enesk4yh4n-lab](https://github.com/enesk4yh4n-lab/TizenTV-Film-Merkezi) | Turkish/English film and series browser with multiple providers, watchlist and HTML5/AVPlay playback. | `v1.1.7` |

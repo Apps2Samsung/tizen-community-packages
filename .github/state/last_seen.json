@@ -27,7 +27,7 @@
   "build:lvndry/tv-dashboard@main": "d2b0c479ca5c4b30f33b67e9ef602d92c2ce3be2",
   "build:matifDreamIt/IPTV-Tizen-TV@main": "d8eb66b9874d54a225cf584824544925e7dd521f",
   "build:natureglass/haven-tizen-ha@main": "18ffa3e8143b71b6a0677e36cb46470370ba1b19",
-  "build:nikan48g/Bisnor@main": "43a7a97e2641f8e4966511521bda6d25d6cf30bb",
+  "build:nikan48g/Bisnor@main": "a9ce047c35cb5d7d1b4f691a82a057ad898300b7",
   "build:pvk689/snake-game-tizen@master": "62ccffcf53fd72d482bd943c865cd55e8dbf6c54",
   "build:raykholo/tubearchivist-tv@main": "3cb035faf4d9e630761cee288513929fb993af41",
   "build:rfaile313/samsucks@main": "6b00e926e163a3154dd1993a26b47482d61ebf40",
@@ -45,7 +45,7 @@
   "release:BrainFix/AniLiberty-TV-Tizen": "v1.0.1",
   "release:CoreDip/anilibria-tizen-wgt": "v1.1.0",
   "release:Edsol/go2rtc-tizen": "v0.1.0",
-  "release:Hamza-Boulila/aetherflix": "v1.1.0",
+  "release:Hamza-Boulila/aetherflix": "v1.2.0",
   "release:IIyn/omegatube": "v1.4.1",
   "release:Karl-Lauterbach24/Lumen-TV": "v1.17.1",
   "release:Kepler75/StremioK": "v2.2.8",
@@ -277,5 +277,5 @@
   "config:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:MrSimmo/sonance3": "community-777"
+  "stale:MrSimmo/sonance3": "community-778"
 }
