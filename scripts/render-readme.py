@@ -39,6 +39,7 @@ SENTENCE_END = re.compile(r"(?<=[.!?])\s+(?=[A-Z0-9\"(])")
 
 
 def version_map():
+    """'<source>:<repo>' (repo lowercased) -> version shown in the table."""
     state = json.loads(STATE.read_text()) if STATE.exists() else {}
     ver = {}
     for k, v in state.items():
@@ -52,7 +53,7 @@ def version_map():
             version = (m.group(1).strip() or "latest") if m else "latest"
         else:
             continue
-        ver[repo.lower()] = version
+        ver[k.split(":", 1)[0] + ":" + repo.lower()] = version
     return ver
 
 
@@ -91,7 +92,7 @@ def section():
         (adult if d.get("adult") is True else groups[cat]).append((
             d["name"], f"[{label}](https://{forge}/{repo})",
             first_sentence(d["description"]).replace("|", "\\|"),
-            ver.get(repo.lower(), "—"),
+            ver.get(f"{d['source']}:{repo.lower()}", "—"),
         ))
 
     out = [START]

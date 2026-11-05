@@ -4,7 +4,8 @@
 Two places an app can already live:
 
   * another manifest in packages/ (same repo in a different case, or the same
-    display name), and
+    display name; a repo may have one manifest per source when they share a
+    group, i.e. are variants of one app), and
   * the providers hardcoded in Apps2Samsung's third-party-apps.json (Jellyfin,
     Moonfin, TizenTube, ...), which the installer lists on its own, so shipping
     them in the community bundle again would show the app twice.
@@ -108,10 +109,16 @@ def main():
         name = doc["name"].strip().lower()
 
         # Against the other manifests (the structural check only catches exact-case repeats).
+        # A repo may have one manifest per source when they are variants of one app, i.e.
+        # they share a group: a native .tpk from releases beside a web app built from source.
+        group = (doc.get("group") or "").strip().lower()
+        source = doc.get("source")
         for k in sorted(keys):
-            if k in seen_repos:
-                report(path, f"repo '{k.split(':', 1)[1]}' is already packaged by {seen_repos[k]}")
-            seen_repos.setdefault(k, base)
+            other = seen_repos.get(k)
+            if other and not (group and group == other["group"] and source != other["source"]):
+                report(path, f"repo '{k.split(':', 1)[1]}' is already packaged by {other['file']}; "
+                             "a second manifest of one repo needs another source and the same group")
+            seen_repos.setdefault(k, {"file": base, "group": group, "source": source})
         if name in seen_names:
             report(path, f"name '{doc['name']}' is already used by {seen_names[name]}; "
                          "pick a distinct name (and a group/variant if it is the same app)")

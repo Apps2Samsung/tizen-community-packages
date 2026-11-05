@@ -13,12 +13,12 @@
       "enum": ["media", "iptv", "streaming", "games", "casting", "tools", "other"],
       "description": "Catalog category, shown as a filter in Apps2Samsung. media = media-server clients and local players (Jellyfin, Plex, Kodi, music, photos, USB/DLNA); iptv = IPTV and live TV; streaming = clients for streaming services and sites (YouTube, Twitch, Kick, anime, Nuvio, Stremio); games = games, emulators and game streaming; casting = casting receivers and camera viewers; tools = browsers, loaders, network and system utilities; other = anything else."
     },
-    "group": { "type": "string", "minLength": 1, "pattern": "^[^|\n]+$", "description": "Optional. Display name of the app this package is a variant of. Packages sharing a group fold into one Apps2Samsung entry with a variant picker (the Moonlight forks all set \"Moonlight\"). A package with several assets[] folds by itself: its group defaults to its name." },
+    "group": { "type": "string", "minLength": 1, "pattern": "^[^|\n]+$", "description": "Optional. Display name of the app this package is a variant of. Packages sharing a group fold into one Apps2Samsung entry with a variant picker (the Moonlight forks all set \"Moonlight\"). Required on every manifest of a repo that has more than one. A package with several assets[] folds by itself: its group defaults to its name." },
     "variant": { "type": "string", "minLength": 1, "pattern": "^[^|\n]+$", "description": "Optional. Label for this package's file in the variant picker when it belongs to a group (e.g. \"OneLiberty · Chrome\"). Single-file packages only; with assets[] put variant on each asset. Defaults to the file name without extension." },
     "repo": {
       "type": "string",
       "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$",
-      "description": "owner/repo on the forge named by host (GitHub by default). Used as the manifest key, the README link, and (for build/release) the API target."
+      "description": "owner/repo on the forge named by host (GitHub by default). Used as the manifest key, the README link, and (for build/release) the API target. One manifest per repo and source: a second manifest for the same repo (e.g. a native .tpk from its releases beside a web app built from source) must use another source, share the first one's group, and be named owner__repo__<suffix>.json."
     },
     "host": {
       "enum": ["github", "gitlab"],
