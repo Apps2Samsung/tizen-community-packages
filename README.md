@@ -1,7 +1,7 @@
 # 🌐 Tizen Community Packages
 [![Sync Tizen Community Packages](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml/badge.svg)](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Packages](https://img.shields.io/badge/packages-141-blue.svg)](#-current-packages)
+[![Packages](https://img.shields.io/badge/packages-144-blue.svg)](#-current-packages)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-green.svg)](../../issues)
 [![Tizen](https://img.shields.io/badge/Platform-Tizen-lightgrey.svg)](https://www.tizen.org/)
 [![Community](https://img.shields.io/badge/Community-Driven-orange.svg)](#)
@@ -83,7 +83,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 </details>
 
 <details>
-<summary><b>📼 Media servers & players</b> (34)</summary>
+<summary><b>📼 Media servers & players</b> (35)</summary>
 
 | 🧩 Application | 📝 Description | ⚙️ Version |
 |----------------|----------------|------------|
@@ -106,6 +106,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Phlix**<br>[detain](https://github.com/detain/phlix-tizen-client) | Samsung Tizen TV client for the Phlix media server: HLS streaming and spatial navigation. | `latest` |
 | **PlayerAVPlay**<br>[yadPe](https://github.com/yadPe/PlayerAVPlay) | AVPlayer app | `latest` |
 | **Pley**<br>[pley-media-server](https://github.com/pley-media-server/pley) | Client for the Pley media server: movies, shows, music and live TV with a guide, played through the TV's own player (AVPlay). | `cb5d209` |
+| **Pley (native)**<br>[pley-media-server](https://github.com/pley-media-server/pley) | Native C#/NUI build of the Pley client for Tizen 9 TVs, from the samsung-native releases. | `—` |
 | **Prairie**<br>[Prairie-Server](https://github.com/Prairie-Server/prairie-smarttv) | Flutter client for the self-hosted Prairie media server (native .tpk): multi-server registry with LAN discovery, profiles with PIN, Quick Connect sign-in and AVPlay playback. | `v0.5.4` |
 | **Reiverr**<br>[aleksilassila](https://github.com/aleksilassila/reiverr) | A clean combined interface for Jellyfin, TMDB, Radarr and Sonarr, as well as a replacement to Overseerr. | `dbdd50d` |
 | **SamSUCKS**<br>[rfaile313](https://github.com/rfaile313/samsucks) | Fast from-scratch Plex client for Samsung Tizen 6.5+ TVs: smooth scrolling, hardware AVPlay playback with direct play, instant search, audio/subtitle picker and up-next autoplay. | `6b00e92` |
@@ -125,7 +126,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 </details>
 
 <details>
-<summary><b>📡 IPTV & Live TV</b> (19)</summary>
+<summary><b>📡 IPTV & Live TV</b> (20)</summary>
 
 | 🧩 Application | 📝 Description | ⚙️ Version |
 |----------------|----------------|------------|
@@ -145,6 +146,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Simple TV Player**<br>[RandoMixs](https://github.com/RandoMixs/simple-tv-player) | Minimal jQuery and hls.js channel player for Samsung Tizen 6.0+ TVs. | `0.0.1` |
 | **SKY IPTV**<br>[sanwhere](https://github.com/sanwhere/sky-iptv-tizen) | IPTV player for Samsung Tizen 5.0+ TVs: M3U and Xtream playlists, remote-friendly UI, audio and subtitle track switching, embedded mov_text subtitles. | `v1.1.1` |
 | **StreamVault**<br>[StreamVault](https://github.com/christopherklint97/streamvault) | IPTV streaming app for Samsung Tizen TVs built with React, TypeScript, and Zustand. | `wgt-v1.0.0-39066361899-1` |
+| **Tizen IPTV Player**<br>[Rusty24h](https://github.com/Rusty24h/Tizen-IPTV-Player) | IPTV Player for Samsung Tizen TVs supporting Stalker MAC portals, Xtream Codes, and M3U playlists with 2D EPG and catch-up. | `2.0.0` |
 | **TVapp**<br>[KaashDev](https://github.com/KaashDev/TVapp) | Enable seamless playback of HLS/m3u8 streams as channels. | `latest` |
 | **VexonTV**<br>[VexonTV](https://github.com/DvzZDev/VexonTV) | Live TV player for Samsung Tizen TVs: M3U, Xtream Codes and Stalker portals, provider EPG and a remote-first interface. | `9aa670e` |
 | **Xtream IPTV Player**<br>[dearbulut](https://github.com/dearbulut/tizen-xtream-iptv) | IPTV player for Samsung Tizen TVs with Xtream API support: live TV, movies and series. | `7fd43a0` |
@@ -190,10 +192,11 @@ Please check the [Releases](../../releases) page for version-specific details.
 </details>
 
 <details>
-<summary><b>🛠️ Tools & system</b> (15)</summary>
+<summary><b>🛠️ Tools & system</b> (16)</summary>
 
 | 🧩 Application | 📝 Description | ⚙️ Version |
 |----------------|----------------|------------|
+| **APL Launcher**<br>[Knikt](https://github.com/Knikt/APL-Launcher-for-TizenOS) | Apple-TV-style home screen: Top Shelf, glass dock, Control Center over any app, Settings and Sources. | `v1.0.19` |
 | **App Manager**<br>[no-cover](https://github.com/no-cover/appmanager) | Alternative launcher for Samsung Tizen TVs: lists installed third-party and sideloaded apps in one grid to launch them, or hide them from Smart Hub without uninstalling. | `1.0.3` |
 | **HyperTizen**<br>[reisxd](https://github.com/reisxd/HyperTizen) | Hyperion / HyperHDR ambient-light capturer for Samsung Tizen TV (native .tpk; requires TizenBrew for the UI). | `v1.0.0` |
 | **inet-speed-old-tizen**<br>[numbereleven-a](https://github.com/numbereleven-a/inet-speed-old-tizen) | Internet diagnostics for Samsung Tizen 2.4+ TVs: response times of popular sites and download speed from Cloudflare, Fastly and HOSTKEY test CDNs, plus TV model, firmware and network info. | `v1.1.1` |

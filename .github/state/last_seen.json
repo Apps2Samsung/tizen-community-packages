@@ -50,6 +50,7 @@
   "release:IIyn/omegatube": "v1.4.1",
   "release:Karl-Lauterbach24/Lumen-TV": "v1.17.1",
   "release:Kepler75/StremioK": "v2.2.8",
+  "release:Knikt/APL-Launcher-for-TizenOS": "v1.0.19",
   "release:Licaa21/Smart-TV": "fork-v2.0.0",
   "release:MaCHeaMaRoBi/JellyLean": "v1.0.1",
   "release:MrHumanRebel/airtizen": "v2.2.34",
@@ -70,6 +71,7 @@
   "release:RandoMixs/simple-tv-player": "0.0.1",
   "release:Ricrdsson1/kodi-tizen-wasm": "Alpha-0.0.8",
   "release:RitwickVerma/TizenAmbilight": "v1.0.0",
+  "release:Rusty24h/Tizen-IPTV-Player": "2.0.0",
   "release:Stashified/StashZen": "v0.43.0",
   "release:SuperDOS/velox": "v1.1.0",
   "release:SushyDev/tizen-youtube": "v1.5.1",
@@ -191,6 +193,7 @@
   "config:release:IIyn/omegatube": "3ee3978d353ff8c5",
   "config:release:Karl-Lauterbach24/Lumen-TV": "697b0f30da413d3b",
   "config:release:Kepler75/StremioK": "994e1c75ba84c371",
+  "config:release:Knikt/APL-Launcher-for-TizenOS": "7821120999335c48",
   "config:release:Licaa21/Smart-TV": "d129bf524c5c352a",
   "config:release:MaCHeaMaRoBi/JellyLean": "064955e207bc2805",
   "config:release:MrHumanRebel/airtizen": "302f64a46c64cc46",
@@ -211,6 +214,7 @@
   "config:release:RandoMixs/simple-tv-player": "23d934a6ec327b6b",
   "config:release:Ricrdsson1/kodi-tizen-wasm": "2e6a286a09dec632",
   "config:release:RitwickVerma/TizenAmbilight": "76785aa38cf8e857",
+  "config:release:Rusty24h/Tizen-IPTV-Player": "3bacce3895dcf3a2",
   "config:release:Stashified/StashZen": "39c7e3fdbe4019fc",
   "config:release:SuperDOS/velox": "cdd050650976adfa",
   "config:release:SushyDev/tizen-youtube": "91cca388c9ee22ff",
@@ -253,6 +257,7 @@
   "config:release:opencream-ai/opencream-tv": "e095dc5655cc5ba0",
   "config:release:pebeto/tizen-steam-link": "e5c1fd2591ce77a1",
   "config:release:pedr/spelunkrtv-tizen-app": "f5a62b3cc6bf6525",
+  "config:release:pley-media-server/pley": "5c69a063382d1f43",
   "config:release:popdollar/Fladder-Tizen": "94ba722553f6eec2",
   "config:release:reisxd/HyperTizen": "285843a688c535b6",
   "config:release:reisxd/TizenBrew": "554575312a670b24",
@@ -281,5 +286,5 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-784"
+  "stale:release:MrSimmo/sonance3": "community-787"
 }
