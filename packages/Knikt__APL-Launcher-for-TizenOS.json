@@ -1,6 +1,6 @@
 {
   "name": "APL Launcher",
-  "description": "Apple-TV-style home screen: Top Shelf, glass dock, Control Center over any app, Settings and Sources. Needs Vetro on a rooted screen and Tizen 7 or newer: after install, open it and choose Settings › Remote and Devices › Set Up the Remote Buttons. Optional TMDB, YouTube and Fanart.tv keys are written into the package on install.",
+  "description": "Apple-TV-style home screen: Top Shelf, glass dock, Control Center over any app, Settings and Sources. Needs Vetro on a rooted screen: pick the full package on Tizen 7 or newer, the launcher alone on Tizen 6. After install, open it and choose Settings › Remote and Devices › Set Up the Remote Buttons. Optional TMDB, YouTube and Fanart.tv keys are written into the package on install.",
   "category": "tools",
   "repo": "Knikt/APL-Launcher-for-TizenOS",
   "source": "release",
@@ -8,7 +8,13 @@
   "assets": [
     {
       "match": "^apl-launcher-full-v.*[.]wgt$",
+      "variant": "Tizen 7 and newer (full package)",
       "output_name": "APLLauncher.wgt"
+    },
+    {
+      "match": "^apl-launcher-v.*[.]wgt$",
+      "variant": "Tizen 6 (launcher alone)",
+      "output_name": "APLLauncher-Tizen6.wgt"
     }
   ],
   "cert_level": "partner",
