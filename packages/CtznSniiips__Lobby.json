@@ -8,6 +8,5 @@
   "branch": "main",
   "project_path": "app",
   "skip_npm": true,
-  "overlay": "lobby",
   "output_name": "Lobby.wgt"
 }
