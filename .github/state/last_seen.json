@@ -1,6 +1,6 @@
 {
   "build:Bryan-Cee/Ambient@main": "73bc869632ddb9567cde24989fdb137743d0b5b9",
-  "build:CtznSniiips/Lobby@main": "df9384c3aded308101617f72d94773ecc6906746",
+  "build:CtznSniiips/Lobby@main": "9360a93b0993c9a3275716f4cdc936d5fd916a95",
   "build:DmitryMaksakov/samsung-tv-iperf3@main": "d20ac9f65531ff754f79a8490efb548c5fefdbb5",
   "build:DvzZDev/VexonTV@main": "9aa670ed641f8fe5e0980cd04b65a75ffbcd14ed",
   "build:Gonqas/baobab@main": "6ee8491cb332d45772451eb8d7aa036f92b1c32e",
@@ -10,7 +10,7 @@
   "build:aleksilassila/reiverr@master": "dbdd50dfa8366a0c311b21ba513aabbbc0f28c87",
   "build:anandhuremanan/samsung-tizen-clock-app@main": "1b9ad6fa9000c477039367f6dac6bdac7b7f3f6f",
   "build:anandsimmy/react-iptv@main": "7a7dcc285e374676a2197d70d9d1c443f2b35fa2",
-  "build:andrearicci93/vetro@main": "52b02b4cf575aae64af149b77de400c873fc14fc",
+  "build:andrearicci93/vetro@main": "7f105a21a18767081c7a45826b023574629b57f3",
   "build:aroundmyroom/Velvet@main": "6c0a88fb4f7d374cbe53f9e4cdc130b12eedadaa",
   "build:cocodedk/copenhagen-weather-tv@main": "1a934d6e7b4ab3ac51cb9f4582bf895d616f30e4",
   "build:dearbulut/tizen-xtream-iptv@main": "7fd43a02aae7b53eb2fbd6aff8541b7724a285ad",
@@ -52,9 +52,9 @@
   "release:Karl-Lauterbach24/Lumen-TV": "v1.17.1",
   "release:Kepler75/StremioK": "v2.2.9",
   "release:Knikt/APL-Launcher-for-TizenOS": "v1.0.20",
-  "release:Knikt/APL-TV-for-TizenOS": "v1.0.1",
+  "release:Knikt/APL-TV-for-TizenOS": "v1.0.2",
   "release:Licaa21/Smart-TV": "fork-v2.0.2",
-  "release:MaCHeaMaRoBi/JellyLean": "v1.0.3",
+  "release:MaCHeaMaRoBi/JellyLean": "v1.0.4",
   "release:MrHumanRebel/airtizen": "v2.2.34",
   "release:MrPhaze62/moonlight-chrome-tizen-no-gamemode": "samsung_wasm-21031261929",
   "release:MrSimmo/sonance3": "v3.15",
@@ -99,7 +99,7 @@
   "release:iqui27/nuvio-native-legacy": "v2.0.8",
   "release:janrydzewski/kick-tv-2.0": "v2.0.1",
   "release:josepvarela/OsmTwichPlayer": "v1.0.71",
-  "release:juliochemoreno/TizenXuperTV": "v1.8.1",
+  "release:juliochemoreno/TizenXuperTV": "v1.9.0",
   "release:kingflooow/floh-iptv": "v1.7.0",
   "release:kromatv/kroma": "v0.1.38",
   "release:madarra16/kick-tizen": "v1.3.0",
@@ -292,5 +292,5 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-792"
+  "stale:release:MrSimmo/sonance3": "community-794"
 }
