@@ -97,6 +97,7 @@
   "release:iqui27/nuvio-native-legacy": "v2.0.8",
   "release:janrydzewski/kick-tv-2.0": "v2.0.1",
   "release:josepvarela/OsmTwichPlayer": "v1.0.71",
+  "release:juliochemoreno/TizenXuperTV": "v1.7.0",
   "release:kingflooow/floh-iptv": "v1.7.0",
   "release:kromatv/kroma": "v0.1.38",
   "release:madarra16/kick-tizen": "v1.3.0",
@@ -117,7 +118,7 @@
   "release:popdollar/Fladder-Tizen": "Tizen",
   "release:reisxd/HyperTizen": "v1.0.0",
   "release:reisxd/TizenBrew": "v2.0.5",
-  "release:rfsmason/immich-tv-for-samsung": "v0.1.1-beta.2",
+  "release:rfsmason/immich-tv-for-samsung": "v0.1.2-beta.3",
   "release:sanwhere/sky-iptv-tizen": "v1.1.1",
   "release:sfsdffesfsfg-cloud/tacplayer": "v0.1.0",
   "release:shayanline/OpenIPTV": "1.9.3",
@@ -240,6 +241,7 @@
   "config:release:iqui27/nuvio-native-legacy": "70cd1a4bac0d427e",
   "config:release:janrydzewski/kick-tv-2.0": "cb85c20f71e895c0",
   "config:release:josepvarela/OsmTwichPlayer": "bd1c67bba73a3126",
+  "config:release:juliochemoreno/TizenXuperTV": "ab433a7593f55eb6",
   "config:release:kingflooow/floh-iptv": "bb1c6e5df427e704",
   "config:release:kromatv/kroma": "9672f98cc895ccf5",
   "config:release:madarra16/kick-tizen": "9b367c250f6c8cf5",
@@ -286,5 +288,5 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-789"
+  "stale:release:MrSimmo/sonance3": "community-790"
 }
