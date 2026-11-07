@@ -16,6 +16,7 @@
 - [What Is This?](#-what-is-this)
 - [Current Packages](#-current-packages)
 - [Contributing & Requesting Apps](#-contributing--requesting-apps)
+- [Run Your Own Repository](#-run-your-own-repository)
 - [Security Scanning](#-security-scanning)
 - [Disclaimer](#️-disclaimer)
 - [Additional Note](#-additional-note)
@@ -279,10 +280,11 @@ Each app is defined by **one JSON file** in the [`packages/`](packages/) folder 
 2. **Add** a file named `packages/<owner>__<repo>.json` for your app (copy an existing one as a template). See [`packages/README.md`](packages/README.md) for every field and worked examples of the three types (`release`, `build`, `direct`).
 3. **Open a pull request.** A bot automatically validates your file against [`packages.schema.json`](packages.schema.json) — a green check means it's ready to merge. Once merged, it's picked up by the next automated build.
 
-Your app should be:
-- Open-source (or redistributable under a permissive license)
-- Virus/malware-free
-- Tested on at least one Tizen device or emulator
+Your app should:
+- Meet [What we accept](packages/README.md#-what-we-accept): open source under any license that allows redistribution, or closed
+  source with the author's permission and the `closed-source` label
+- Be virus/malware-free
+- Be tested on at least one Tizen device or emulator
 
 > Just want to *suggest* an app without packaging it yourself? Use the **Request an App** option above.
 
@@ -292,7 +294,7 @@ Your app should be:
 > plain: they are the only thing shown before the user opts in.
 
 > ⚠️ **Important:**  
-> We can only include applications that are **open-source** and **freely distributable**.  
+> We can only include applications whose author allows redistribution, see [What we accept](packages/README.md#-what-we-accept).  
 > Please make sure you have the legal right to redistribute any software you contribute.
 
 ### 🚫 What We Can't Include
@@ -302,13 +304,27 @@ Your app should be:
   can't legally be redistributed and wouldn't activate even if it installed. They're already built into most
   Samsung TVs.
 - **Modded, cracked or "premium unlocked" builds** of paid apps or services.
-- **Closed-source packages** with no license that permits redistribution.
+- **Closed-source packages without the author's permission** to redistribute them ([What we accept](packages/README.md#-what-we-accept)).
+- **Apps that come with unlicensed content** built in (IPTV playlists, pirate-site scrapers, torrent indexers).
+- **Rebrands of other projects** that remove the original credits or license.
 
 Requests for these get closed as `wontfix`. It isn't gatekeeping — they simply can't work as side-loaded packages.
 
 > 🏨 **Hospitality / hotel TVs (`HG…` models):** side-loading needs developer mode, which is enabled from the
 > Smart Hub **Apps** screen — hospitality firmware doesn't expose it. Nothing in this repo can be installed on
 > those sets until the TV is taken out of hospitality mode.
+
+---
+
+## 🗂️ Run Your Own Repository
+
+Don't want to wait for a review here, or does your app fall outside [What we accept](packages/README.md#-what-we-accept)? Publish your
+own **signed repository** from your own GitHub repo. Users add it in Apps2Samsung and see your apps next to
+this catalog, labelled with your repository's name.
+
+Copy [`templates/independent-repo/`](templates/independent-repo/), add a signing key as a secret, and the
+workflow publishes a signed manifest to your GitHub Pages. The format is in
+[`docs/repositories.md`](docs/repositories.md).
 
 ---
 

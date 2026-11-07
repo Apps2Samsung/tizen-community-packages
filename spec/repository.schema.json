@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Apps2Samsung/tizen-community-packages/blob/main/spec/repository.schema.json",
+  "title": "Independent repository manifest, v1",
+  "description": "The payload of an independent repository's .signed file (see docs/repositories.md). The provider and release shapes are the ones Apps2Samsung's resolved.json already uses, so clients read them with the code they have. Unknown optional fields are ignored by clients; an unknown schemaVersion is rejected.",
+  "type": "object",
+  "required": ["schemaVersion", "repository", "generatedAt", "providers"],
+  "properties": {
+    "schemaVersion": { "const": 1, "description": "1 for this version. Clients reject any other value." },
+    "repository": {
+      "type": "object",
+      "required": ["id", "name", "maintainer"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*)+$",
+          "maxLength": 128,
+          "description": "Stable reverse-DNS id, e.g. io.github.owner.tizen. Never changes; clients pin to it."
+        },
+        "name": { "$ref": "#/$defs/line", "maxLength": 80 },
+        "maintainer": { "$ref": "#/$defs/line", "maxLength": 80 },
+        "description": { "$ref": "#/$defs/line", "maxLength": 300 },
+        "homepage": { "$ref": "#/$defs/httpsUrl" }
+      }
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?(?:Z|[+-]\\d{2}:\\d{2})$",
+      "description": "When the manifest was signed. Clients reject a manifest older than 7 days, and one older than the last they accepted from this repository."
+    },
+    "providers": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 500,
+      "items": { "$ref": "#/$defs/provider" }
+    }
+  },
+  "$defs": {
+    "line": { "type": "string", "minLength": 1, "pattern": "^[^\\n\\r|]+$" },
+    "httpsUrl": { "type": "string", "maxLength": 2048, "pattern": "^https://[^\\s/@:]+(?::\\d+)?(?:/[^\\s]*)?$" },
+    "sha256": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "provider": {
+      "type": "object",
+      "required": ["id", "category", "url", "releases"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,63}$", "description": "Unique within the repository." },
+        "category": { "enum": ["media", "iptv", "streaming", "games", "casting", "tools", "other"] },
+        "url": { "$ref": "#/$defs/httpsUrl", "description": "Where the releases come from, e.g. https://api.github.com/repos/owner/repo/releases. Informational: clients install only from the assets below." },
+        "displayName": { "type": "string", "maxLength": 80, "pattern": "^[^\\n\\r|]*$" },
+        "prefix": { "type": "string", "maxLength": 80 },
+        "take": { "type": "integer", "minimum": 1, "maximum": 20 },
+        "buildInfo": {
+          "type": "object",
+          "properties": {
+            "name": { "$ref": "#/$defs/line", "maxLength": 80 },
+            "description": { "$ref": "#/$defs/line", "maxLength": 300 },
+            "previewImage": { "$ref": "#/$defs/httpsUrl" }
+          }
+        },
+        "source_url": { "$ref": "#/$defs/httpsUrl", "description": "The app's source code, when it is open source." },
+        "adult": { "type": "boolean", "description": "Same meaning as in the official catalog: hidden until the user opts in to 18+ apps." },
+        "flags": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "enum": ["root", "closed-source", "self-updating"] },
+          "description": "Same meaning as in the official catalog (packages.schema.json)."
+        },
+        "cert_level": { "enum": ["public", "partner"] },
+        "ok": { "type": "boolean" },
+        "latestTag": { "type": "string" },
+        "releases": {
+          "type": "array",
+          "maxItems": 20,
+          "items": { "$ref": "#/$defs/release" }
+        }
+      }
+    },
+    "release": {
+      "type": "object",
+      "required": ["tag_name", "assets"],
+      "properties": {
+        "url": { "$ref": "#/$defs/httpsUrl" },
+        "name": { "type": "string", "maxLength": 200 },
+        "tag_name": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "published_at": { "type": "string", "format": "date-time" },
+        "draft": { "const": false },
+        "assets": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 50,
+          "items": { "$ref": "#/$defs/asset" }
+        }
+      }
+    },
+    "asset": {
+      "type": "object",
+      "required": ["name", "browser_download_url", "size", "digest"],
+      "properties": {
+        "name": { "type": "string", "pattern": "^[^/\\\\]+[.](?:wgt|tpk)$", "maxLength": 200 },
+        "browser_download_url": { "$ref": "#/$defs/httpsUrl" },
+        "size": { "type": "integer", "minimum": 1, "maximum": 536870912 },
+        "digest": { "$ref": "#/$defs/sha256" },
+        "package_version": { "type": "string", "maxLength": 64 },
+        "app_id": { "type": "string", "maxLength": 128 },
+        "package_id": { "type": "string", "maxLength": 128 },
+        "required_version": { "type": "string", "pattern": "^\\d+(?:\\.\\d+)*$" },
+        "icon": { "$ref": "#/$defs/httpsUrl" },
+        "icon_digest": { "$ref": "#/$defs/sha256" }
+      },
+      "dependentRequired": { "icon": ["icon_digest"], "icon_digest": ["icon"] }
+    }
+  }
+}

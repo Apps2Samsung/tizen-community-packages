@@ -1,0 +1,73 @@
+name: Publish Tizen repository
+
+# Builds repository.json.signed from repository.input.json and publishes it to this
+# repo's GitHub Pages (docs/repositories.md in Apps2Samsung/tizen-community-packages).
+# Runs on every release, and daily: clients reject a manifest older than 7 days, so it
+# must be re-signed even when nothing changed.
+#
+# Setup: Settings > Pages > Source: GitHub Actions, and a REPO_SIGNING_KEY secret with
+# your private key (see README.md). Your repository URL is then
+#   https://<you>.github.io/<this-repo>/repository.json.signed
+
+on:
+  release:
+    types: [published]
+  schedule:
+    - cron: '17 4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: publish-repository
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      # The generator and validator. This step runs with your signing key in the
+      # environment, so pin `ref` to a commit SHA you have looked at, and update it
+      # deliberately, rather than following main.
+      - uses: actions/checkout@v4
+        with:
+          repository: Apps2Samsung/tizen-community-packages
+          ref: main
+          path: _tcp
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - run: pip install jsonschema
+
+      - id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Build and sign
+        env:
+          REPO_SIGNING_KEY: ${{ secrets.REPO_SIGNING_KEY }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python3 -I _tcp/scripts/repo-generate.py \
+            --input repository.input.json \
+            --out _site \
+            --previous "${{ steps.pages.outputs.base_url }}/repository.json.signed"
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deploy
+        uses: actions/deploy-pages@v4
