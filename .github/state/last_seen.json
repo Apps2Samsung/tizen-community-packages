@@ -102,6 +102,7 @@
   "release:juliochemoreno/TizenXuperTV": "v1.10.1",
   "release:kingflooow/floh-iptv": "v1.7.0",
   "release:kromatv/kroma": "v0.1.38",
+  "release:labanmne/padthru": "v0.4.1",
   "release:madarra16/kick-tizen": "v1.3.0",
   "release:meocong/prj-tv-samsung": "v1.4.0",
   "release:msharifi99/30nama-tizenos": "v1.3.0",
@@ -249,6 +250,7 @@
   "config:release:juliochemoreno/TizenXuperTV": "ab433a7593f55eb6",
   "config:release:kingflooow/floh-iptv": "bb1c6e5df427e704",
   "config:release:kromatv/kroma": "9672f98cc895ccf5",
+  "config:release:labanmne/padthru": "5f8dc655a00fd832",
   "config:release:madarra16/kick-tizen": "9b367c250f6c8cf5",
   "config:release:meocong/prj-tv-samsung": "010de5e0ddf5fd50",
   "config:release:msharifi99/30nama-tizenos": "1569d739c4c53880",
@@ -294,5 +296,5 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-796"
+  "stale:release:MrSimmo/sonance3": "community-797"
 }
