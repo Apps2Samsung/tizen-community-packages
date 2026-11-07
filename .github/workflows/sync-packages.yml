@@ -924,6 +924,11 @@ jobs:
           # Full history: the commit below is rebased onto whatever landed on
           # main while this run was busy, which a shallow clone cannot do.
           fetch-depth: 0
+          # main requires the "validate" check, and this state commit never gets
+          # one. The ruleset exempts deploy keys, so the push goes over SSH with
+          # STATE_PUSH_KEY: a write deploy key for this repository only. Without
+          # the secret, checkout falls back to GITHUB_TOKEN as before.
+          ssh-key: ${{ secrets.STATE_PUSH_KEY }}
       - uses: actions/download-artifact@v4
         with:
           name: last-seen-state
