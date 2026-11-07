@@ -6,7 +6,8 @@ then show up next to the official catalog, labelled with the repository's name.
 
 This page is the normative spec. The schema is [`spec/repository.schema.json`](../spec/repository.schema.json);
 the test vectors are in [`spec/fixtures/`](../spec/fixtures/); a ready-to-copy publisher setup is in
-[`templates/independent-repo/`](../templates/independent-repo/).
+[`templates/independent-repo/`](../templates/independent-repo/), and a working example is
+[Apps2Samsung/repository-example](https://github.com/Apps2Samsung/repository-example).
 
 The words *must*, *must not* and *should* are used in their usual spec sense.
 
@@ -151,7 +152,7 @@ A client must reject the whole manifest when any of these fails. Each comes with
 | `duplicate` | Provider ids are unique, and no `package_id` + `package_version` is offered by two different providers. One provider may list several files of one version: those are variants, such as a legacy build and a current one. |
 
 So a publisher **must re-sign at least every 7 days**, even when nothing changed. The template's
-workflow does this daily.
+workflow does this daily, and keeps that daily run switched on in a quiet repo.
 
 ## What clients do with it
 

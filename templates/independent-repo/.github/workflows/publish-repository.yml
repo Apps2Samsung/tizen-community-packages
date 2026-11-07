@@ -8,6 +8,10 @@ name: Publish Tizen repository
 # Setup: Settings > Pages > Source: GitHub Actions, and a REPO_SIGNING_KEY secret with
 # your private key (see README.md). Your repository URL is then
 #   https://<you>.github.io/<this-repo>/repository.json.signed
+#
+# GitHub turns off scheduled workflows in a repo with no activity for 60 days, and
+# deploying Pages doesn't count as activity. The keepalive job re-enables this
+# workflow on each scheduled run, so a quiet repository doesn't expire.
 
 on:
   release:
@@ -71,3 +75,14 @@ jobs:
 
       - id: deploy
         uses: actions/deploy-pages@v4
+
+  keepalive:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Keep the daily schedule enabled
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/publish-repository.yml/enable"

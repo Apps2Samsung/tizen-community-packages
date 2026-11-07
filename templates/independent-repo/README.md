@@ -5,6 +5,8 @@ in tizen-community-packages and don't have to wait for a review there. Your apps
 official catalog, labelled with your repository's name. The format is in
 [`docs/repositories.md`](../../docs/repositories.md).
 
+A finished setup to look at: [Apps2Samsung/repository-example](https://github.com/Apps2Samsung/repository-example).
+
 ## Setup (once)
 
 1. **Make a repo** for it (or use an existing one) and copy these files in:
@@ -44,7 +46,9 @@ official catalog, labelled with your repository's name. The format is in
    fingerprint Apps2Samsung shows them is really yours.
 
 From then on the workflow runs on every release you publish and once a day. The daily run matters:
-clients stop accepting a manifest after 7 days.
+clients stop accepting a manifest after 7 days. GitHub switches off scheduled workflows after 60 days
+without activity in a repo; the workflow's keepalive job switches it back on each day. If you rename
+the workflow file, change the file name in that job too.
 
 ## Check it yourself
 
