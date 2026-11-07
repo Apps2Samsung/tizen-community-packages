@@ -3,7 +3,7 @@
   "description": "Duke Nukem 3D for Samsung Tizen TVs, including the shareware episode.",
   "category": "games",
   "repo": "dos-ise/eduke32-tizen",
-  "enabled": false,
+  "enabled": true,
   "source": "release",
   "branch": "release",
   "output_name": "EDuke32.wgt"
