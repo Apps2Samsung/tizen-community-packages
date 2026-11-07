@@ -1,0 +1,11 @@
+{
+  "name": "Padthru",
+  "description": "Play PC games over a long HDMI cable with the controller paired to your TV: shows the PC's HDMI input full screen and forwards the controller to the PC over your network. Needs the Padthru PC app (Windows or Linux).",
+  "category": "games",
+  "repo": "labanmne/padthru",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "^Padthru[.]wgt$", "output_name": "Padthru.wgt" }
+  ]
+}
