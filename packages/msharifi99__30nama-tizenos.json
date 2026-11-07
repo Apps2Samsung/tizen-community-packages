@@ -3,6 +3,7 @@
   "description": "Unofficial 30nama.com client for Samsung Tizen TVs.",
   "category": "streaming",
   "repo": "msharifi99/30nama-tizenos",
+  "enabled": false,
   "source": "release",
   "branch": "main",
   "assets": [

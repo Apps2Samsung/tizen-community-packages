@@ -4,6 +4,7 @@
   "category": "streaming",
   "adult": false,
   "repo": "enesk4yh4n-lab/TizenTV-Film-Merkezi",
+  "enabled": false,
   "source": "release",
   "branch": "main",
   "assets": [
