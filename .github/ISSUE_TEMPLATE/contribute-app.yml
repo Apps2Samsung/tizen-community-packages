@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        **The fastest way to contribute is a pull request** — add one JSON file to
+        **The fastest way to contribute is a pull request**: add one JSON file to
         [`packages/`](https://github.com/Apps2Samsung/tizen-community-packages/blob/main/packages/README.md)
         and it's validated automatically. Use this form only if you'd prefer a maintainer to create the file for you.
 
@@ -45,9 +45,9 @@ body:
       label: "📦 Source type"
       description: |
         How is the `.wgt` distributed?
-        • **release** — prebuilt `.wgt` attached to a GitHub Release (most common)
-        • **build** — compiled from source with Tizen Studio
-        • **direct** — downloaded from a fixed URL
+        • **release**: prebuilt `.wgt` attached to a GitHub Release (most common)
+        • **build**: compiled from source with Tizen Studio
+        • **direct**: downloaded from a fixed URL
       options:
         - release
         - build
@@ -94,7 +94,7 @@ body:
     id: branch
     attributes:
       label: "🌿 Branch"
-      description: "For **release** and **build** only — the branch/release track. Leave blank for `direct`."
+      description: "For **release** and **build** only: the branch/release track. Leave blank for `direct`."
       placeholder: "release"
     validations:
       required: false
@@ -103,7 +103,7 @@ body:
     id: url
     attributes:
       label: "🌐 Direct URL"
-      description: "For **direct** only — absolute URL to the `.wgt`. Leave blank otherwise."
+      description: "For **direct** only: absolute URL to the `.wgt`. Leave blank otherwise."
       placeholder: "https://example.com/MyApp.wgt"
     validations:
       required: false
@@ -112,7 +112,7 @@ body:
     id: project_path
     attributes:
       label: "📁 Project path"
-      description: "For **build** only — subdirectory containing the Tizen web project. Defaults to `.`."
+      description: "For **build** only: subdirectory containing the Tizen web project. Defaults to `.`."
       placeholder: "tizen"
     validations:
       required: false

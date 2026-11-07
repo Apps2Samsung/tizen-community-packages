@@ -1,6 +1,6 @@
 {
   "name": "Beam-TV",
-  "description": "Open-source USB and DLNA media player for Samsung Tizen TVs — subtitles, resume playback, remote navigation, and a local companion server.",
+  "description": "Open-source USB and DLNA media player for Samsung Tizen TVs: subtitles, resume playback, remote navigation, and a local companion server.",
   "category": "media",
   "repo": "TAGISWILD/beam-tv",
   "source": "release",

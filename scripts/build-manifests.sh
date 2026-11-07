@@ -6,8 +6,8 @@
 # consumes, so nothing downstream had to change. Run from the repo root.
 #
 # Manifests with "enabled": false are dropped here. That single filter retires a
-# package everywhere downstream — change detection, the build matrix, the release
-# downloads and the published bundle all read only these compiled manifests — so
+# package everywhere downstream (change detection, the build matrix, the release
+# downloads and the published bundle all read only these compiled manifests), so
 # the file can stay in packages/ without shipping.
 set -euo pipefail
 
