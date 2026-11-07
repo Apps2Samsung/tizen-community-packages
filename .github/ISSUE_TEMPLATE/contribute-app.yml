@@ -72,10 +72,12 @@ body:
       label: "🔄 Self-updating"
       description: |
         Does the app download and run newer code after install (outside this catalogue)?
-        Only accepted when the newer code comes from the same repository, or the author's own domain for `direct`.
+        Only accepted when the newer code comes from the same repository, the author's own domain for `direct`,
+        or the upstream project the app is built on and names in its description (e.g. TizenTube for a TizenTube wrapper).
       options:
         - "No"
         - Yes, from the same repository or my own domain
+        - Yes, from the upstream project the app is built on (named in the description)
     validations:
       required: true
 
