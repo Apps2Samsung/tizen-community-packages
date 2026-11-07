@@ -39,7 +39,7 @@
   "build:zephy-lee/velovistrix-tizen@main": "d13667833b1896c1eef5ce78b92307387476d172",
   "build:zonya/sendspin-cinema-tizen@main": "0eabc155e1dd37f9baa30ea2c688100537f5fd78",
   "release:AdvaithAvinash/AniUltimatium": "stable-v1.21",
-  "release:AdvaithAvinash/UltimatiumTube": "stable-v1.07",
+  "release:AdvaithAvinash/UltimatiumTube": "stable-v1.08",
   "release:Apps2Samsung/Overscan": "build-363c881",
   "release:Apps2Samsung/ReolinkViewer": "v1.1.0",
   "release:Apps2Samsung/TV-Store": "v0.3.21",
@@ -50,7 +50,7 @@
   "release:Hamza-Boulila/aetherflix": "v1.2.1",
   "release:IIyn/omegatube": "v1.4.1",
   "release:Karl-Lauterbach24/Lumen-TV": "v1.17.1",
-  "release:Kepler75/StremioK": "v2.3.0",
+  "release:Kepler75/StremioK": "v2.3.1",
   "release:Knikt/APL-Launcher-for-TizenOS": "v1.0.20",
   "release:Knikt/APL-TV-for-TizenOS": "v1.0.2",
   "release:Licaa21/Smart-TV": "fork-v2.0.2",
@@ -304,5 +304,5 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-813"
+  "stale:release:MrSimmo/sonance3": "community-814"
 }
