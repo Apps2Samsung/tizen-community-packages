@@ -3,6 +3,7 @@
   "description": "Anime streaming app for Samsung Tizen TVs.",
   "category": "streaming",
   "repo": "AdvaithAvinash/AniUltimatium",
+  "enabled": false,
   "source": "release",
   "branch": "main",
   "assets": [

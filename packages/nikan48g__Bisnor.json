@@ -3,6 +3,7 @@
   "description": "Open-source Persian movie and series client (experimental Tizen TV build): browse, search and play titles from the IranFlix catalogue with AVPlay. Persian UI.",
   "category": "streaming",
   "repo": "nikan48g/Bisnor",
+  "enabled": false,
   "source": "build",
   "branch": "main",
   "project_path": "tizen-tv",

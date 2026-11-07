@@ -3,6 +3,7 @@
   "description": "Open-source universal streaming platform for Smart TVs with TMDB metadata. Needs the self-hosted AetherFlix backend on your network.",
   "category": "streaming",
   "repo": "Hamza-Boulila/aetherflix",
+  "enabled": false,
   "source": "release",
   "branch": "main",
   "assets": [
