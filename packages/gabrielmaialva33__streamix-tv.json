@@ -4,7 +4,7 @@
   "category": "streaming",
   "repo": "gabrielmaialva33/streamix-tv",
   "source": "release",
-  "branch": "main",
+  "branch": "master",
   "assets": [
     {
       "match": "Streamix-.*[.]wgt$",

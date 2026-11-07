@@ -6,6 +6,7 @@
   "repo": "sverrirs/ruv-app-samsung",
   "repo_label": "RÚV VOD",
   "source": "release",
+  "flags": ["closed-source"],
   "branch": "master",
   "assets": [
     {
