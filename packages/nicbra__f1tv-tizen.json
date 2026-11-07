@@ -1,0 +1,12 @@
+{
+  "name": "F1 TV",
+  "description": "Unofficial F1 TV client: live sessions and replays up to 4K HDR, every onboard camera, a synced timing tower, multi-language commentary and spoiler-free mode. Needs your own F1 TV subscription; sign in with a code on your phone.",
+  "category": "streaming",
+  "repo": "nicbra/f1tv-tizen",
+  "source": "release",
+  "branch": "master",
+  "assets": [
+    { "match": "^F1TV[.]wgt$", "output_name": "F1TV.wgt" }
+  ],
+  "cert_level": "partner"
+}
