@@ -2,6 +2,7 @@
   "name": "APL TV",
   "description": "Apple TV style IPTV player for your own M3U playlists and Xtream accounts: live TV with a guide, movies and series with TMDB pages, subtitles and audio menus, OpenSubtitles, Alexa voice search. No channels included, no root needed. The optional TMDB key adds posters, plots and cast.",
   "category": "iptv",
+  "flags": ["self-updating"],
   "repo": "Knikt/APL-TV-for-TizenOS",
   "source": "release",
   "branch": "main",

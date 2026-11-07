@@ -2,7 +2,7 @@
   "name": "Vetro",
   "description": "TV management dashboard with root integration: app inventory, controls and diagnostics in your browser. After install, set Developer Mode Host PC IP to 127.0.0.1 and restart.",
   "category": "tools",
-  "flags": ["root"],
+  "flags": ["root", "self-updating"],
   "repo": "andrearicci93/vetro",
   "source": "build",
   "branch": "main",
