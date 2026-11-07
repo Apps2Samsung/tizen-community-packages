@@ -550,11 +550,11 @@ def render_md(results, meta):
         privs = str(len(m.get("privileges", [])))
         signer = r.get("signers", {}).get("author-signature.xml", "")
         cn = re.search(r"CN\s*=\s*([^,/|]+)", signer)
-        out.append(f"| `{r['file']}` | {BADGE.get(r['level'], r['level'])} | `{m.get('app_id') or m.get('package_id') or '?'}` | {m.get('version') or '?'} | {privs} | {n_hosts} | {cn.group(1).strip() if cn else '—'} |")
+        out.append(f"| `{r['file']}` | {BADGE.get(r['level'], r['level'])} | `{m.get('app_id') or m.get('package_id') or '?'}` | {m.get('version') or '?'} | {privs} | {n_hosts} | {cn.group(1).strip() if cn else 'n/a'} |")
     out.append("")
     for r in results:
         m = r.get("manifest", {})
-        out.append(f"<details><summary><b>{r['file']}</b> — {BADGE.get(r['level'], r['level'])}</summary>\n")
+        out.append(f"<details><summary><b>{r['file']}</b>: {BADGE.get(r['level'], r['level'])}</summary>\n")
         out.append(f"- **sha256** `{r['sha256']}` · {r['size']:,} bytes · {r.get('inventory', {}).get('files', 0)} files")
         if m:
             out.append(f"- **{m.get('manifest')}**: {m.get('name', '?')} · id `{m.get('app_id') or m.get('package_id')}` · version {m.get('version')}"

@@ -12,7 +12,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        > ⚠️ **Please check this list first — these can't be added:**
+        > ⚠️ **Please check this list first. These can't be added:**
         >
         > - **Commercial streaming apps** (Netflix, Disney+, Prime Video, HBO Max, Spotify, official YouTube, …).
         >   They're partner-signed and DRM-bound to the TV they shipped on: not redistributable, and a copied
@@ -25,7 +25,7 @@ body:
         >   or clients for unlicensed streaming services.
         > - **Rebrands of other projects** that remove the original credits or license.
         >
-        > 🏨 On a **hospitality / hotel TV** (`HG…` model), side-loading isn't possible at all — developer mode
+        > 🏨 On a **hospitality / hotel TV** (`HG…` model), side-loading isn't possible at all: developer mode
         > lives in the Smart Hub **Apps** screen, which that firmware doesn't expose.
 
   - type: input

@@ -6,7 +6,7 @@
 [![Tizen](https://img.shields.io/badge/Platform-Tizen-lightgrey.svg)](https://www.tizen.org/)
 [![Community](https://img.shields.io/badge/Community-Driven-orange.svg)](#)
 
-> **Community-curated bundles of Tizen web applications (`.wgt` packages)** —  
+> **Community-curated bundles of Tizen applications (`.wgt` and `.tpk` packages)**:  
 > compiled into single, convenient releases for easier installation and testing on your Tizen devices.
 
 ---
@@ -26,16 +26,16 @@
 
 ## 📦 What Is This?
 
-This repository provides bundled releases containing multiple Tizen applications (`.wgt` files).  
-Instead of downloading and installing each app individually, you can grab a single **bundle** that includes several community apps — ready for side-loading onto your Tizen devices.
+This repository provides bundled releases containing multiple Tizen applications (`.wgt` web apps and `.tpk` native apps).  
+Instead of downloading and installing each app individually, you can grab a single **bundle** that includes several community apps, ready for side-loading onto your Tizen devices.
 
-Each release represents a curated collection of useful, fun, or open-source Tizen web apps.
+Each release represents a curated collection of useful, fun, or open-source Tizen apps.
 
 ---
 
 ## 📋 Current Packages
 
-Apps included in the latest community bundle, grouped by category — click a category to expand it.  
+Apps included in the latest community bundle, grouped by category. Click a category to expand it.  
 Please check the [Releases](../../releases) page for version-specific details.
 
 <!-- packages:start -->
@@ -93,7 +93,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 |----------------|----------------|------------|
 | **Aerial Screensaver**<br>[jeancarlos](https://github.com/jeancarlos/aerial-tizen) | Apple TV Aerial screensavers: 115 videos streamed from Apple's CDN and decoded in hardware as HEVC 4K via AVPlay. | `3f80ef0` |
 | **AmorecoFlix**<br>[Pablitorox](https://github.com/Pablitorox/AmorecoFlix) | Personal Netflix-style player for a USB drive plugged into the TV: posters, synopses, continue watching, next episode, skip intro, audio and subtitle choice. | `e6212b3` |
-| **Beam-TV**<br>[TAGISWILD](https://github.com/TAGISWILD/beam-tv) | Open-source USB and DLNA media player for Samsung Tizen TVs — subtitles, resume playback, remote navigation, and a local companion server. | `v1.0.1` |
+| **Beam-TV**<br>[TAGISWILD](https://github.com/TAGISWILD/beam-tv) | Open-source USB and DLNA media player for Samsung Tizen TVs: subtitles, resume playback, remote navigation, and a local companion server. | `v1.0.1` |
 | **Chorus2-Tizen**<br>[Chorus2-Tizen](https://github.com/PatrickSt1991/chorus2-tizen) | Chorus2-Tizen (Kodi) Samsung Tizen. | `tizen-v21.x-1.0.1-2026-05-21-1443` |
 | **Fladder**<br>[popdollar](https://github.com/popdollar/Fladder-Tizen) | Jellyfin client for Samsung Tizen TV, built with Flutter (native .tpk). | `Tizen` |
 | **Flixor-Tizen**<br>[Flixor-Tizen](https://github.com/PatrickSt1991/flixor-tizen) | Modern cross-platform Plex client. | `v1.0.1-2026-07-24-1215` |
@@ -110,7 +110,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Phlix**<br>[detain](https://github.com/detain/phlix-tizen-client) | Samsung Tizen TV client for the Phlix media server: HLS streaming and spatial navigation. | `latest` |
 | **PlayerAVPlay**<br>[yadPe](https://github.com/yadPe/PlayerAVPlay) | AVPlayer app | `latest` |
 | **Pley**<br>[pley-media-server](https://github.com/pley-media-server/pley) | Client for the Pley media server: movies, shows, music and live TV with a guide, played through the TV's own player (AVPlay). | `a8e56c6` |
-| **Pley (native)**<br>[pley-media-server](https://github.com/pley-media-server/pley) | Native C#/NUI build of the Pley client for Tizen 9 TVs, from the samsung-native releases. | `—` |
+| **Pley (native)**<br>[pley-media-server](https://github.com/pley-media-server/pley) | Native C#/NUI build of the Pley client for Tizen 9 TVs, from the samsung-native releases. | `n/a` |
 | **Prairie**<br>[Prairie-Server](https://github.com/Prairie-Server/prairie-smarttv) | Flutter client for the self-hosted Prairie media server (native .tpk): multi-server registry with LAN discovery, profiles with PIN, Quick Connect sign-in and AVPlay playback. | `v0.5.4` |
 | **Reiverr**<br>[aleksilassila](https://github.com/aleksilassila/reiverr) | A clean combined interface for Jellyfin, TMDB, Radarr and Sonarr, as well as a replacement to Overseerr. | `dbdd50d` |
 | **SamSUCKS**<br>[rfaile313](https://github.com/rfaile313/samsucks) | Fast from-scratch Plex client for Samsung Tizen 6.5+ TVs: smooth scrolling, hardware AVPlay playback with direct play, instant search, audio/subtitle picker and up-next autoplay. | `6b00e92` |
@@ -190,7 +190,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 
 | 🧩 Application | 📝 Description | ⚙️ Version |
 |----------------|----------------|------------|
-| **AirTizen**<br>[MrHumanRebel](https://github.com/MrHumanRebel/airtizen) | AirPlay receiver for Samsung Tizen TV — stream audio/video to older Samsung TVs. | `v2.2.34` |
+| **AirTizen**<br>[MrHumanRebel](https://github.com/MrHumanRebel/airtizen) | AirPlay receiver for Samsung Tizen TV: stream audio/video to older Samsung TVs. | `v2.2.34` |
 | **Camera PiP**<br>[dzikus](https://github.com/dzikus/tizen-camera-pip) | Doorbell and driveway cameras on a Samsung Tizen TV: pops up on a trigger (Home Assistant or any webhook), plays through the hardware decoder so the app behind it keeps running, and fires actions like opening the gate from the remote. | `v1.2.0` |
 | **FCast**<br>[futo-org](https://github.com/futo-org/FCastReceiver) | FCast is an open source protocol that enables wireless streaming of audio and video content between devices. | `Wed, 08 Oct 2025 17:07:02 GMT` |
 | **go2rtc**<br>[Edsol](https://github.com/Edsol/go2rtc-tizen) | Watch the cameras of a go2rtc server (standalone or embedded in Frigate): camera grid with previews and full-screen live view. | `v0.1.0` |
@@ -249,7 +249,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 </details>
 
 <details>
-<summary>🔞 <b>Adult (18+)</b> — 1 package(s). Hidden in Apps2Samsung until you turn on its 18+ toggle.</summary>
+<summary>🔞 <b>Adult (18+)</b>: 1 package(s). Hidden in Apps2Samsung until you turn on its 18+ toggle.</summary>
 
 | 🧩 Application | 📝 Description | ⚙️ Version |
 |----------------|----------------|------------|
@@ -275,11 +275,11 @@ Include:
 - Link to source or homepage
 
 ### 📦 Contribute an App
-Each app is defined by **one JSON file** in the [`packages/`](packages/) folder — you don't need to edit anything else.
+Each app is defined by **one JSON file** in the [`packages/`](packages/) folder. You don't need to edit anything else.
 
 1. **Fork** this repository.
 2. **Add** a file named `packages/<owner>__<repo>.json` for your app (copy an existing one as a template). See [`packages/README.md`](packages/README.md) for every field and worked examples of the three types (`release`, `build`, `direct`).
-3. **Open a pull request.** A bot automatically validates your file against [`packages.schema.json`](packages.schema.json) — a green check means it's ready to merge. Once merged, it's picked up by the next automated build.
+3. **Open a pull request.** A bot automatically validates your file against [`packages.schema.json`](packages.schema.json): a green check means it's ready to merge. Once merged, it's picked up by the next automated build.
 
 Your app should:
 - Meet [What we accept](packages/README.md#-what-we-accept): open source under any license that allows redistribution, or closed
@@ -300,7 +300,7 @@ Your app should:
 
 ### 🚫 What We Can't Include
 
-- **Commercial streaming apps** — Netflix, Disney+, Prime Video, HBO Max, Spotify, official YouTube and friends.
+- **Commercial streaming apps**: Netflix, Disney+, Prime Video, HBO Max, Spotify, official YouTube and friends.
   These are partner-signed and their DRM is provisioned against the TV they shipped on, so a copied `.wgt`
   can't legally be redistributed and wouldn't activate even if it installed. They're already built into most
   Samsung TVs.
@@ -309,10 +309,10 @@ Your app should:
 - **Apps that come with unlicensed content** built in (IPTV playlists, pirate-site scrapers, torrent indexers).
 - **Rebrands of other projects** that remove the original credits or license.
 
-Requests for these get closed as `wontfix`. It isn't gatekeeping — they simply can't work as side-loaded packages.
+Requests for these get closed as `wontfix`. It isn't gatekeeping: they simply can't work as side-loaded packages.
 
 > 🏨 **Hospitality / hotel TVs (`HG…` models):** side-loading needs developer mode, which is enabled from the
-> Smart Hub **Apps** screen — hospitality firmware doesn't expose it. Nothing in this repo can be installed on
+> Smart Hub **Apps** screen, and hospitality firmware doesn't expose it. Nothing in this repo can be installed on
 > those sets until the TV is taken out of hospitality mode.
 
 ---
@@ -334,13 +334,13 @@ workflow publishes a signed manifest to your GitHub Pages. The format is in
 Nobody on this project reads the source of every app in the bundle, and we don't pretend to. What we
 do instead is run the same **automated scan** over every package, every time, and publish the result:
 
-- **Before a PR is merged** — the [validate workflow](.github/workflows/validate-packages.yml) downloads
+- **Before a PR is merged**: the [validate workflow](.github/workflows/validate-packages.yml) downloads
   the upstream artifact of each new or changed package and scans it, so the maintainer sees what the app
   asks for before it lands in the catalog.
-- **Before every release** — the [sync workflow](.github/workflows/sync-packages.yml) scans every file in
+- **Before every release**: the [sync workflow](.github/workflows/sync-packages.yml) scans every file in
   the bundle. Packages with a critical finding are dropped from that bundle. The report ships with the
   release as `scan-report.md` (and machine-readable `scan.json`) next to the packages.
-- **On demand** — [Scan Release Packages](../../actions/workflows/scan-release.yml) re-scans any published
+- **On demand**: [Scan Release Packages](../../actions/workflows/scan-release.yml) re-scans any published
   bundle with fresh virus definitions.
 
 The scanner is [`scripts/scan-packages.py`](scripts/scan-packages.py). For each `.wgt` / `.tpk` it reports:

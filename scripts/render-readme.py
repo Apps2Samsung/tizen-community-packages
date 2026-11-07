@@ -92,7 +92,7 @@ def section():
         (adult if d.get("adult") is True else groups[cat]).append((
             d["name"], f"[{label}](https://{forge}/{repo})",
             first_sentence(d["description"]).replace("|", "\\|"),
-            ver.get(f"{d['source']}:{repo.lower()}", "—"),
+            ver.get(f"{d['source']}:{repo.lower()}", "n/a"),
         ))
 
     out = [START]
@@ -100,7 +100,7 @@ def section():
         if groups[key]:
             out += details(f"<b>{title}</b> ({len(groups[key])})", groups[key])
     if adult:
-        out += details(f"\U0001F51E <b>Adult (18+)</b> — {len(adult)} package(s). "
+        out += details(f"\U0001F51E <b>Adult (18+)</b>: {len(adult)} package(s). "
                        "Hidden in Apps2Samsung until you turn on its 18+ toggle.", adult)
     out += ["", END]
     return out
