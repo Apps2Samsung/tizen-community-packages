@@ -15,10 +15,12 @@ file is valid and ready to merge.
 ### Accepted
 
 - **Open-source apps**: the source is in the linked repository, under any license that allows
-  redistribution (MIT, Apache, BSD, GPL, MPL and others).
+  redistribution (MIT, Apache, BSD, GPL, MPL and others). Without a license, the author's written
+  permission in a public place is enough: an issue or discussion comment, linked from the manifest's
+  PR (for example no-cover's apps, [#66](https://github.com/Apps2Samsung/tizen-community-packages/discussions/66)).
 - **Closed-source apps**, only when all of these are true:
-  1. The **author submits it themselves**, or the repository explicitly allows redistribution: a
-     LICENSE file, or a line in the README.
+  1. The **author submits it themselves**, or the author explicitly allows redistribution: a
+     LICENSE file, a line in the README, or written permission in a public issue or discussion.
   2. It is distributed from the **author's own place**. For a `release`: versioned releases (semver
      or dated tags on a real commit); no fixed tag names like `Releases` or `latest`, and no `.wgt`
      committed to `main` as the only distribution. For a `direct`: a URL the author controls, not a
