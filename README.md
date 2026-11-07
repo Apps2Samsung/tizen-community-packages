@@ -1,7 +1,7 @@
 # 🌐 Tizen Community Packages
 [![Sync Tizen Community Packages](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml/badge.svg)](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Packages](https://img.shields.io/badge/packages-152-blue.svg)](#-current-packages)
+[![Packages](https://img.shields.io/badge/packages-153-blue.svg)](#-current-packages)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-green.svg)](../../issues)
 [![Tizen](https://img.shields.io/badge/Platform-Tizen-lightgrey.svg)](https://www.tizen.org/)
 [![Community](https://img.shields.io/badge/Community-Driven-orange.svg)](#)
@@ -41,7 +41,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 <!-- packages:start -->
 
 <details>
-<summary><b>🎬 Streaming</b> (37)</summary>
+<summary><b>🎬 Streaming</b> (38)</summary>
 
 | 🧩 Application | 📝 Description | ⚙️ Version |
 |----------------|----------------|------------|
@@ -61,6 +61,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Film Merkezi**<br>[enesk4yh4n-lab](https://github.com/enesk4yh4n-lab/TizenTV-Film-Merkezi) | Turkish/English film and series browser with multiple providers, watchlist and HTML5/AVPlay playback. | `v1.1.7` |
 | **Kick**<br>[madarra16](https://github.com/madarra16/kick-tizen) | Unofficial Kick client modeled on the official TV app: live streams, chat, rewind, clips and 10 languages. | `v1.3.0` |
 | **Kick TV 2.0**<br>[janrydzewski](https://github.com/janrydzewski/kick-tv-2.0) | Kick live streams and public archives for Samsung Tizen TVs. | `v2.0.1` |
+| **Kick TV TR**<br>[Kick TV TR](https://github.com/igFr0sty/kick-tv-tizen-tr) | Unofficial Kick client with a Following screen and Turkish support. | `v2.4.0` |
 | **KickTV**<br>[corekill](https://github.com/corekill/kick-tv-tizen) | Kick.com streaming client for Samsung Tizen TVs. | `v2.3.0` |
 | **Lampa**<br>[yumata](https://github.com/yumata/lampa) | Free movie and TV catalogue with info, new releases and trailers. | `v1.4.1` |
 | **Nuvio**<br>[NuvioMedia](https://github.com/NuvioMedia/NuvioTVSmart) | TV-first streaming UI for Samsung Tizen. | `1.3.7` |
