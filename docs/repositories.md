@@ -214,3 +214,4 @@ with, the time to check it at (`now`), optionally `notBefore` (the last accepted
 `fingerprint`, and the expected outcome with its reason code. A client implementation should run them
 all. [`make-fixtures.py`](../spec/fixtures/make-fixtures.py) regenerates them. The keys in
 `spec/fixtures/keys/` are **test-only and public**: never sign a real repository with them.
+
