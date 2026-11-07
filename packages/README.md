@@ -23,9 +23,9 @@ file is valid and ready to merge.
      or dated tags on a real commit); no fixed tag names like `Releases` or `latest`, and no `.wgt`
      committed to `main` as the only distribution. For a `direct`: a URL the author controls, not a
      re-upload.
-  3. It is **not derived from GPL/LGPL/AGPL code**. A closed-source fork of a copyleft project
-     breaks its license and is never accepted. We can't check this without the source, so the
-     submitter declares it.
+  3. It is **not a closed-off version of GPL/LGPL/AGPL code**. Open-source GPL apps are fine; this
+     only rules out taking GPL code and shipping it without source, which breaks its license. We
+     can't check this without the source, so the submitter declares it.
   4. The manifest carries `"flags": ["closed-source"]`.
 
 ### Never accepted (open or closed source)
