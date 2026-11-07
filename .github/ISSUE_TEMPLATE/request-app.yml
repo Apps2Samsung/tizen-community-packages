@@ -21,7 +21,7 @@ body:
         > - **Don't ask us to port something to Tizen OS** we don't port we only maintain the community package and our own apps
         > - **Closed-source packages without the author's permission** to redistribute them. Closed source *with*
         >   permission is fine, see [What we accept](https://github.com/Apps2Samsung/tizen-community-packages/blob/main/packages/README.md#-what-we-accept).
-        > - **Apps that come with unlicensed content** (built-in IPTV playlists, pirate-site scrapers, torrent indexers)
+        > - **Apps that come with unlicensed content** (built-in IPTV playlists other than the public iptv-org one, pirate-site scrapers, torrent indexers)
         >   or clients for unlicensed streaming services.
         > - **Rebrands of other projects** that remove the original credits or license.
         >

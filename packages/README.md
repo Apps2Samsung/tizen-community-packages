@@ -32,7 +32,9 @@ file is valid and ready to merge.
 
 - **Apps that ship with unlicensed content sources by default**: built-in IPTV playlists,
   pirate-site scrapers, torrent indexers, or clients for unlicensed streaming services. A player
-  that only plays sources *the user adds* is fine.
+  that only plays sources *the user adds* is fine. So is the public
+  [iptv-org](https://github.com/iptv-org/iptv) playlist as a default: it only collects publicly
+  available channels.
 - **Rebrands or forks that remove upstream credit or the license**, or that claim to be original
   work.
 - **Modded, cracked or "premium unlocked" builds** of paid apps or services.
