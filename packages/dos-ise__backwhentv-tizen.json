@@ -1,0 +1,9 @@
+{
+  "name": "BackWhenTV",
+  "description": "Free 90s-style cable TV for Samsung Tizen TVs.",
+  "category": "iptv",
+  "repo": "dos-ise/backwhentv-tizen",
+  "source": "release",
+  "branch": "main",
+  "output_name": "BackWhenTV.wgt"
+}
