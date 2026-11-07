@@ -7,7 +7,7 @@
   "build:HelgeSverre/devnull-tv@main": "8bc5f09fc5cb5f5e315bed77ff4ee78881fd6cc0",
   "build:NelsonEU/arn0-tv@main": "b35c292e5bc63648cb8fef576bf5eacd9ea488d1",
   "build:Pablitorox/AmorecoFlix@master": "e6212b35df62414067626cb2419576ad266c6e5b",
-  "build:aleksilassila/reiverr@master": "dbdd50dfa8366a0c311b21ba513aabbbc0f28c87",
+  "build:aleksilassila/reiverr@master": "833178158ad6acd5bda2cf4db09b417a2aa7bf0d",
   "build:anandhuremanan/samsung-tizen-clock-app@main": "1b9ad6fa9000c477039367f6dac6bdac7b7f3f6f",
   "build:anandsimmy/react-iptv@main": "7a7dcc285e374676a2197d70d9d1c443f2b35fa2",
   "build:andrearicci93/vetro@main": "6f6c4b4977b547bcca8a98de826992e344a1e6e1",
@@ -251,7 +251,7 @@
   "config:release:fidoboy/moonlight-tizen-ac3": "013d05c3a26a171f",
   "config:release:gabrielmaialva33/streamix-tv": "4118ba368353adf7",
   "config:release:igFr0sty/kick-tv-tizen-tr": "0032000b4eba897b",
-  "config:release:iqui27/nuvio-native-legacy": "70cd1a4bac0d427e",
+  "config:release:iqui27/nuvio-native-legacy": "d66b01d6963e2c15",
   "config:release:janrydzewski/kick-tv-2.0": "cb85c20f71e895c0",
   "config:release:josepvarela/OsmTwichPlayer": "bd1c67bba73a3126",
   "config:release:kingflooow/floh-iptv": "bb1c6e5df427e704",
@@ -304,5 +304,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-808"
+  "stale:build:aleksilassila/reiverr": "community-809",
+  "stale:release:MrSimmo/sonance3": "community-809"
 }
