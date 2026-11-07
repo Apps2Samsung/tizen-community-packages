@@ -99,7 +99,6 @@
   "release:iqui27/nuvio-native-legacy": "v2.0.8",
   "release:janrydzewski/kick-tv-2.0": "v2.0.1",
   "release:josepvarela/OsmTwichPlayer": "v1.0.75",
-  "release:juliochemoreno/TizenXuperTV": "v1.10.1",
   "release:kingflooow/floh-iptv": "v1.7.0",
   "release:kromatv/kroma": "v0.1.38",
   "release:labanmne/padthru": "v0.4.1",
@@ -135,6 +134,7 @@
   "release:titlog/bilibili-tizen": "v1.4.14",
   "release:titlog/douyin-tizen": "v1.4.6",
   "release:titlog/telegram-tizen": "v1.2.6",
+  "release:tizenxupertv/TizenXuperTV": "v1.10.1",
   "release:toypoodlegaming/moonlight-chrome-tizen": "samsung_wasm-21031332442",
   "release:victorreinor/nyx-tv": "v1.4.2",
   "release:yumata/lampa": "v1.4.1",
@@ -247,7 +247,6 @@
   "config:release:iqui27/nuvio-native-legacy": "70cd1a4bac0d427e",
   "config:release:janrydzewski/kick-tv-2.0": "cb85c20f71e895c0",
   "config:release:josepvarela/OsmTwichPlayer": "bd1c67bba73a3126",
-  "config:release:juliochemoreno/TizenXuperTV": "ab433a7593f55eb6",
   "config:release:kingflooow/floh-iptv": "bb1c6e5df427e704",
   "config:release:kromatv/kroma": "9672f98cc895ccf5",
   "config:release:labanmne/padthru": "5f8dc655a00fd832",
@@ -284,6 +283,7 @@
   "config:release:titlog/bilibili-tizen": "9114acf12f07c827",
   "config:release:titlog/douyin-tizen": "f210492b6aeb4b91",
   "config:release:titlog/telegram-tizen": "38d448de69f16ca8",
+  "config:release:tizenxupertv/TizenXuperTV": "ab433a7593f55eb6",
   "config:release:toypoodlegaming/moonlight-chrome-tizen": "ccae73e62fd220db",
   "config:release:victorreinor/nyx-tv": "ed8bbc8f6b9b71b8",
   "config:release:yumata/lampa": "c22db37b6eba7991",
@@ -296,5 +296,5 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-797"
+  "stale:release:MrSimmo/sonance3": "community-798"
 }
