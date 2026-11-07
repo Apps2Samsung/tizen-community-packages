@@ -4,6 +4,7 @@
   "category": "iptv",
   "repo": "mhma26395-ctrl/tizen-iptv-player",
   "source": "release",
+  "flags": ["closed-source"],
   "branch": "main",
   "assets": [
     {

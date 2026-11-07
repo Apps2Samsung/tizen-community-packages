@@ -4,6 +4,7 @@
   "category": "streaming",
   "repo": "titlog/telegram-tizen",
   "source": "release",
+  "flags": ["self-updating"],
   "branch": "master",
   "assets": [
     {

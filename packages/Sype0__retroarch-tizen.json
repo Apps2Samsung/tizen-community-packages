@@ -4,6 +4,7 @@
   "category": "games",
   "repo": "Sype0/retroarch-tizen",
   "source": "release",
+  "flags": ["self-updating"],
   "branch": "main",
   "output_name": "RetroArch.wgt"
 }

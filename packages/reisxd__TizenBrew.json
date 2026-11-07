@@ -1,9 +1,10 @@
 {
   "name": "TizenBrew",
-  "description": "A way to experience modded websites and you can install newer apps without fighting with Tizen Studio.",
+  "description": "A way to experience modded websites and you can install newer apps without fighting with Tizen Studio. Loads its modules from npm at runtime, TizenTube by default.",
   "category": "tools",
   "repo": "reisxd/TizenBrew",
   "source": "release",
+  "flags": ["self-updating"],
   "branch": "release",
   "output_name": "TizenBrew.wgt"
 }

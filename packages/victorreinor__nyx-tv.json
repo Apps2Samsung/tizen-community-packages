@@ -4,6 +4,7 @@
   "category": "iptv",
   "repo": "victorreinor/nyx-tv",
   "source": "release",
+  "flags": ["self-updating"],
   "branch": "main",
   "assets": [
     { "match": "^nyx[.]wgt$", "output_name": "Nyx.wgt" }

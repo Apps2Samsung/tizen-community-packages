@@ -4,6 +4,7 @@
   "category": "streaming",
   "repo": "titlog/douyin-tizen",
   "source": "release",
+  "flags": ["self-updating"],
   "branch": "master",
   "assets": [
     {
