@@ -5,17 +5,54 @@ on:
   # It runs THIS workflow from the base branch with the base repo's token, so
   # PR code must never be executed: only the PR's packages/*.json are pulled
   # in, as data. Schema, scripts and this workflow always come from main.
+  #
+  # Runs on every PR (no paths filter) because main requires the "validate"
+  # check: a PR that doesn't touch packages/ gets "validate" skipped, which
+  # GitHub counts as passing, instead of a check that never arrives.
   pull_request_target:
-    paths:
-      - 'packages/**'
   workflow_dispatch:
 
 permissions:
   contents: read
+  pull-requests: read
 
 jobs:
-  validate:
+  # Does the PR touch packages/? Read from the API, no checkout. When the API
+  # call fails the answer is "yes", so a hiccup runs the validation instead of
+  # skipping it.
+  changes:
     runs-on: ubuntu-latest
+    outputs:
+      packages: ${{ steps.files.outputs.packages }}
+    steps:
+      - id: files
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT: ${{ github.event_name }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          if [ "$EVENT" != "pull_request_target" ]; then
+            echo "packages=true" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          if ! files=$(gh api --paginate "repos/$GITHUB_REPOSITORY/pulls/$PR/files" -q '.[] | .filename, (.previous_filename // empty)'); then
+            echo "::warning::Could not list the PR's files; validating anyway."
+            echo "packages=true" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          if printf '%s\n' "$files" | grep -q '^packages/'; then
+            echo "packages=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "No file under packages/ changed: nothing to validate."
+            echo "packages=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  validate:
+    needs: changes
+    if: needs.changes.outputs.packages == 'true'
+    runs-on: ubuntu-latest
+    # pull-requests: write only for the one "Policy hints" comment below.
+    permissions:
+      contents: read
+      pull-requests: write
     steps:
       # Base branch checkout: trusted schema, scripts and workflow. Full history
       # so the step below can find the PR's merge base with main.
@@ -215,6 +252,40 @@ jobs:
             failed=1
           done
           exit $failed
+
+      # Guesses about "What we accept" for the reviewer: missing closed-source /
+      # self-updating flags, brand-new accounts, forks without a shared group.
+      # Never fails the check (continue-on-error, and the script always exits 0).
+      # Runs after a failed scan too, and keeps one comment up to date.
+      - name: Policy hints (warnings only)
+        if: always() && github.event_name == 'pull_request_target'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ github.event.pull_request.number }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+        run: |
+          marker='<!-- policy-hints -->'
+          : > hints.md
+          if [ -s "$RUNNER_TEMP/pr-manifests" ]; then
+            xargs -d '\n' python3 -I scripts/policy-hints.py --scan-dir _scan --md hints.md --pr-author "$PR_AUTHOR" < "$RUNNER_TEMP/pr-manifests" || true
+          fi
+          [ -s hints.md ] && cat hints.md >> "$GITHUB_STEP_SUMMARY"
+          id=$(gh api --paginate "repos/$GITHUB_REPOSITORY/issues/$PR/comments" \
+                 -q ".[] | select(.user.login == \"github-actions[bot]\" and (.body | startswith(\"$marker\"))) | .id" | head -n 1)
+          if [ -s hints.md ]; then
+            body="$marker"$'\n'"$(cat hints.md)"
+          elif [ -n "$id" ]; then
+            body="$marker"$'\n'"### Policy hints for the reviewer"$'\n\n'"None for the latest version of this PR."
+          else
+            exit 0
+          fi
+          if [ -n "$id" ]; then
+            gh api -X PATCH "repos/$GITHUB_REPOSITORY/issues/comments/$id" -f body="$body" > /dev/null
+          else
+            gh api -X POST "repos/$GITHUB_REPOSITORY/issues/$PR/comments" -f body="$body" > /dev/null
+          fi
 
       - name: Reachability (warnings only)
         env:

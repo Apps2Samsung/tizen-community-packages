@@ -597,3 +597,7 @@ schema-checked, so removing the line is all it takes to bring the app back.
 The PR bot validates against [`../packages.schema.json`](../packages.schema.json) automatically, and
 downloads the file your manifest picks: it fails if that file has no `config.xml` /
 `tizen-manifest.xml` (not an installable Tizen package). A green check means it's ready.
+
+The bot may also post **Policy hints**: guesses about [What we accept](#-what-we-accept), such as a
+missing `closed-source` or `self-updating` flag, or a fork that should share its original's `group`.
+They never fail the check; a maintainer reads them while reviewing.
