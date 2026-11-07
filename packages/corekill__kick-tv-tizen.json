@@ -2,10 +2,11 @@
   "name": "KickTV",
   "description": "Kick.com streaming client for Samsung Tizen TVs.",
   "category": "streaming",
+  "group": "KickTV",
   "repo": "corekill/kick-tv-tizen",
   "source": "release",
   "branch": "release",
   "assets": [
-    { "match": "^KickTV[.]wgt$", "output_name": "KickTV.wgt" }
+    { "match": "^KickTV[.]wgt$", "output_name": "KickTV.wgt", "variant": "corekill · Original" }
   ]
 }

@@ -2,6 +2,7 @@
   "name": "Kick TV TR",
   "description": "Unofficial Kick client with a Following screen and Turkish support. Fork of KickTV by corekill.",
   "category": "streaming",
+  "group": "KickTV",
   "repo": "igFr0sty/kick-tv-tizen-tr",
   "repo_label": "Kick TV TR",
   "source": "release",
@@ -9,7 +10,8 @@
   "assets": [
     {
       "match": "^KickTV[.]wgt$",
-      "output_name": "KickTV-TR.wgt"
+      "output_name": "KickTV-TR.wgt",
+      "variant": "igFr0sty · Following + Turkish"
     }
   ]
 }
