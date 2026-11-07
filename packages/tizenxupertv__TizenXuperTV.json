@@ -2,7 +2,7 @@
   "name": "TizenXuper TV",
   "description": "Live TV and VOD streaming client with AVPlay hardware acceleration for Samsung Smart TV.",
   "category": "streaming",
-  "repo": "juliochemoreno/TizenXuperTV",
+  "repo": "tizenxupertv/TizenXuperTV",
   "source": "release",
   "branch": "main",
   "assets": [
