@@ -202,7 +202,7 @@
   "config:release:IIyn/omegatube": "3ee3978d353ff8c5",
   "config:release:Karl-Lauterbach24/Lumen-TV": "697b0f30da413d3b",
   "config:release:Kepler75/StremioK": "994e1c75ba84c371",
-  "config:release:Knikt/APL-Launcher-for-TizenOS": "7821120999335c48",
+  "config:release:Knikt/APL-Launcher-for-TizenOS": "b5735c0633a9734f",
   "config:release:Knikt/APL-TV-for-TizenOS": "10fc2c9c39211cf3",
   "config:release:Licaa21/Smart-TV": "d129bf524c5c352a",
   "config:release:MaCHeaMaRoBi/JellyLean": "064955e207bc2805",
@@ -302,5 +302,5 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-805"
+  "stale:release:MrSimmo/sonance3": "community-806"
 }
