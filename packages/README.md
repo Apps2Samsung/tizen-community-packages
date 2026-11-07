@@ -15,10 +15,12 @@ file is valid and ready to merge.
 ### Accepted
 
 - **Open-source apps**: the source is in the linked repository, under any license that allows
-  redistribution (MIT, Apache, BSD, GPL, MPL and others).
+  redistribution (MIT, Apache, BSD, GPL, MPL and others). Without a license, the author's written
+  permission in a public place is enough: an issue or discussion comment, linked from the manifest's
+  PR (for example no-cover's apps, [#66](https://github.com/Apps2Samsung/tizen-community-packages/discussions/66)).
 - **Closed-source apps**, only when all of these are true:
-  1. The **author submits it themselves**, or the repository explicitly allows redistribution: a
-     LICENSE file, or a line in the README.
+  1. The **author submits it themselves**, or the author explicitly allows redistribution: a
+     LICENSE file, a line in the README, or written permission in a public issue or discussion.
   2. It is distributed from the **author's own place**. For a `release`: versioned releases (semver
      or dated tags on a real commit); no fixed tag names like `Releases` or `latest`, and no `.wgt`
      committed to `main` as the only distribution. For a `direct`: a URL the author controls, not a
@@ -32,14 +34,19 @@ file is valid and ready to merge.
 
 - **Apps that ship with unlicensed content sources by default**: built-in IPTV playlists,
   pirate-site scrapers, torrent indexers, or clients for unlicensed streaming services. A player
-  that only plays sources *the user adds* is fine.
+  that only plays sources *the user adds* is fine. So is the public
+  [iptv-org](https://github.com/iptv-org/iptv) playlist as a default: it only collects publicly
+  available channels. Content streamed straight from the rights holder's own public servers is
+  fine too (for example Apple's aerial videos from Apple's CDN).
 - **Rebrands or forks that remove upstream credit or the license**, or that claim to be original
   work.
 - **Modded, cracked or "premium unlocked" builds** of paid apps or services.
 - **Commercial streaming apps** (Netflix, Disney+ and similar).
 - **Duplicates** of an existing manifest or of an app Apps2Samsung lists itself
   ([`third-party-apps.json`](https://github.com/Apps2Samsung/Apps2Samsung/blob/main/third-party-apps.json)).
-  A fork must add something real and use its own package ID.
+  A fork must add something real. It may keep upstream's package ID: Apps2Samsung and TV-Store
+  install it under its own ID when a different app with that ID is already on the TV
+  (Apps2Samsung#1028, TV-Store#84).
 - **Apps that update themselves from someone else's server.** Self-updating is only accepted when
   the newer code comes from the same repository (or the author's own domain, for `direct`) that the
   manifest points at, **or** from the upstream project the app is openly built on and names in its
