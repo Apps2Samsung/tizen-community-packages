@@ -1,7 +1,7 @@
 # 🌐 Tizen Community Packages
 [![Sync Tizen Community Packages](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml/badge.svg)](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Packages](https://img.shields.io/badge/packages-151-blue.svg)](#-current-packages)
+[![Packages](https://img.shields.io/badge/packages-152-blue.svg)](#-current-packages)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-green.svg)](../../issues)
 [![Tizen](https://img.shields.io/badge/Platform-Tizen-lightgrey.svg)](https://www.tizen.org/)
 [![Community](https://img.shields.io/badge/Community-Driven-orange.svg)](#)
@@ -128,7 +128,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 </details>
 
 <details>
-<summary><b>📡 IPTV & Live TV</b> (22)</summary>
+<summary><b>📡 IPTV & Live TV</b> (23)</summary>
 
 | 🧩 Application | 📝 Description | ⚙️ Version |
 |----------------|----------------|------------|
@@ -151,6 +151,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **SKY IPTV**<br>[sanwhere](https://github.com/sanwhere/sky-iptv-tizen) | IPTV player for Samsung Tizen 5.0+ TVs: M3U and Xtream playlists, remote-friendly UI, audio and subtitle track switching, embedded mov_text subtitles. | `v1.1.1` |
 | **StreamVault**<br>[StreamVault](https://github.com/christopherklint97/streamvault) | IPTV streaming app for Samsung Tizen TVs built with React, TypeScript, and Zustand. | `wgt-v1.0.0-39066361899-1` |
 | **Tizen IPTV Player**<br>[Rusty24h](https://github.com/Rusty24h/Tizen-IPTV-Player) | IPTV Player for Samsung Tizen TVs supporting Stalker MAC portals, Xtream Codes, and M3U playlists with 2D EPG and catch-up. | `2.0.0` |
+| **Tizen IPTV Player by mhma26395**<br>[mhma26395-ctrl](https://github.com/mhma26395-ctrl/tizen-iptv-player) | Lightweight IPTV player for compatible Samsung Tizen TVs. | `V1.0` |
 | **TVapp**<br>[KaashDev](https://github.com/KaashDev/TVapp) | Enable seamless playback of HLS/m3u8 streams as channels. | `latest` |
 | **VexonTV**<br>[VexonTV](https://github.com/DvzZDev/VexonTV) | Live TV player for Samsung Tizen TVs: M3U, Xtream Codes and Stalker portals, provider EPG and a remote-first interface. | `9aa670e` |
 | **Xtream IPTV Player**<br>[dearbulut](https://github.com/dearbulut/tizen-xtream-iptv) | IPTV player for Samsung Tizen TVs with Xtream API support: live TV, movies and series. | `7fd43a0` |

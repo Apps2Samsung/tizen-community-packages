@@ -106,6 +106,7 @@
   "release:labanmne/padthru": "v0.4.1",
   "release:madarra16/kick-tizen": "v1.3.0",
   "release:meocong/prj-tv-samsung": "v1.4.0",
+  "release:mhma26395-ctrl/tizen-iptv-player": "V1.0",
   "release:msharifi99/30nama-tizenos": "v1.3.0",
   "release:nicbra/f1tv-tizen": "v1.0.1",
   "release:no-cover/appmanager": "1.0.3",
@@ -256,6 +257,7 @@
   "config:release:labanmne/padthru": "5f8dc655a00fd832",
   "config:release:madarra16/kick-tizen": "9b367c250f6c8cf5",
   "config:release:meocong/prj-tv-samsung": "010de5e0ddf5fd50",
+  "config:release:mhma26395-ctrl/tizen-iptv-player": "a223ca63b5a85746",
   "config:release:msharifi99/30nama-tizenos": "1569d739c4c53880",
   "config:release:nicbra/f1tv-tizen": "5ab9f382d463c9cd",
   "config:release:no-cover/appmanager": "ff3952ec95fd2455",
@@ -300,5 +302,5 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-801"
+  "stale:release:MrSimmo/sonance3": "community-802"
 }
