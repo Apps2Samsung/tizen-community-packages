@@ -304,6 +304,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:build:aleksilassila/reiverr": "community-810",
-  "stale:release:MrSimmo/sonance3": "community-810"
+  "stale:build:aleksilassila/reiverr": "community-811",
+  "stale:release:MrSimmo/sonance3": "community-811"
 }
