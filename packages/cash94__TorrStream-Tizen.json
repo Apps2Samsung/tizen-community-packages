@@ -4,6 +4,7 @@
   "category": "streaming",
   "repo": "cash94/TorrStream-Tizen",
   "source": "release",
+  "flags": ["self-updating"],
   "branch": "main",
   "assets": [
     { "match": "TorrStream-Tizen.wgt", "variant": "TorrStream", "output_name": "TorrStream.wgt" },
