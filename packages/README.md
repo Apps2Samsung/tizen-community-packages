@@ -42,7 +42,9 @@ file is valid and ready to merge.
   A fork must add something real and use its own package ID.
 - **Apps that update themselves from someone else's server.** Self-updating is only accepted when
   the newer code comes from the same repository (or the author's own domain, for `direct`) that the
-  manifest points at.
+  manifest points at, **or** from the upstream project the app is openly built on and names in its
+  `description` (e.g. a wrapper that loads the latest TizenTube from TizenTube's own release
+  channel). Code from any other third party is not accepted.
 
 ### Labels
 
