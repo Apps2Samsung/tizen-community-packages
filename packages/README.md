@@ -41,7 +41,9 @@ file is valid and ready to merge.
 - **Commercial streaming apps** (Netflix, Disney+ and similar).
 - **Duplicates** of an existing manifest or of an app Apps2Samsung lists itself
   ([`third-party-apps.json`](https://github.com/Apps2Samsung/Apps2Samsung/blob/main/third-party-apps.json)).
-  A fork must add something real and use its own package ID.
+  A fork must add something real. It may keep upstream's package ID: Apps2Samsung and TV-Store
+  install it under its own ID when a different app with that ID is already on the TV
+  (Apps2Samsung#1028, TV-Store#84).
 - **Apps that update themselves from someone else's server.** Self-updating is only accepted when
   the newer code comes from the same repository (or the author's own domain, for `direct`) that the
   manifest points at, **or** from the upstream project the app is openly built on and names in its

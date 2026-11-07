@@ -154,7 +154,7 @@ body:
           required: true
         - label: "It ships no content sources by default (no built-in playlists, scrapers or torrent indexers)"
           required: true
-        - label: "If it's a fork or based on other code: upstream is credited, its license is kept, and it uses its own package ID"
+        - label: "If it's a fork or based on other code: upstream is credited and its license is kept"
           required: true
         - label: "Virus/malware-free to the best of my knowledge"
           required: true
