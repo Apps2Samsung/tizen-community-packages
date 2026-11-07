@@ -49,6 +49,10 @@ jobs:
     needs: changes
     if: needs.changes.outputs.packages == 'true'
     runs-on: ubuntu-latest
+    # pull-requests: write only for the one "Policy hints" comment below.
+    permissions:
+      contents: read
+      pull-requests: write
     steps:
       # Base branch checkout: trusted schema, scripts and workflow. Full history
       # so the step below can find the PR's merge base with main.
@@ -248,6 +252,40 @@ jobs:
             failed=1
           done
           exit $failed
+
+      # Guesses about "What we accept" for the reviewer: missing closed-source /
+      # self-updating flags, brand-new accounts, forks without a shared group.
+      # Never fails the check (continue-on-error, and the script always exits 0).
+      # Runs after a failed scan too, and keeps one comment up to date.
+      - name: Policy hints (warnings only)
+        if: always() && github.event_name == 'pull_request_target'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ github.event.pull_request.number }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+        run: |
+          marker='<!-- policy-hints -->'
+          : > hints.md
+          if [ -s "$RUNNER_TEMP/pr-manifests" ]; then
+            xargs -d '\n' python3 -I scripts/policy-hints.py --scan-dir _scan --md hints.md --pr-author "$PR_AUTHOR" < "$RUNNER_TEMP/pr-manifests" || true
+          fi
+          [ -s hints.md ] && cat hints.md >> "$GITHUB_STEP_SUMMARY"
+          id=$(gh api --paginate "repos/$GITHUB_REPOSITORY/issues/$PR/comments" \
+                 -q ".[] | select(.user.login == \"github-actions[bot]\" and (.body | startswith(\"$marker\"))) | .id" | head -n 1)
+          if [ -s hints.md ]; then
+            body="$marker"$'\n'"$(cat hints.md)"
+          elif [ -n "$id" ]; then
+            body="$marker"$'\n'"### Policy hints for the reviewer"$'\n\n'"None for the latest version of this PR."
+          else
+            exit 0
+          fi
+          if [ -n "$id" ]; then
+            gh api -X PATCH "repos/$GITHUB_REPOSITORY/issues/comments/$id" -f body="$body" > /dev/null
+          else
+            gh api -X POST "repos/$GITHUB_REPOSITORY/issues/$PR/comments" -f body="$body" > /dev/null
+          fi
 
       - name: Reachability (warnings only)
         env:
