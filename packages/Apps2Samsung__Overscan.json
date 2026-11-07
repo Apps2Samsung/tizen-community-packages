@@ -4,6 +4,7 @@
   "category": "tools",
   "repo": "Apps2Samsung/Overscan",
   "repo_label": "Apps2Samsung",
+  "enabled": false,
   "source": "release",
   "branch": "release",
   "assets": [
