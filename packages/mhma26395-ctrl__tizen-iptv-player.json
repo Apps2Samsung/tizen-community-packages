@@ -1,0 +1,14 @@
+{
+  "name": "Tizen IPTV Player by mhma26395",
+  "description": "Lightweight IPTV player for compatible Samsung Tizen TVs. Users provide and manage their own playlists.",
+  "category": "iptv",
+  "repo": "mhma26395-ctrl/tizen-iptv-player",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    {
+      "match": "^tizen-iptv-player[.]wgt$",
+      "output_name": "Tizen-IPTV-Player.wgt"
+    }
+  ]
+}
