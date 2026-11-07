@@ -10,7 +10,7 @@
   "build:aleksilassila/reiverr@master": "833178158ad6acd5bda2cf4db09b417a2aa7bf0d",
   "build:anandhuremanan/samsung-tizen-clock-app@main": "1b9ad6fa9000c477039367f6dac6bdac7b7f3f6f",
   "build:anandsimmy/react-iptv@main": "7a7dcc285e374676a2197d70d9d1c443f2b35fa2",
-  "build:andrearicci93/vetro@main": "6f6c4b4977b547bcca8a98de826992e344a1e6e1",
+  "build:andrearicci93/vetro@main": "81e16b164236e2fd1edae50a06d986da5e607469",
   "build:aroundmyroom/Velvet@main": "6c0a88fb4f7d374cbe53f9e4cdc130b12eedadaa",
   "build:cocodedk/copenhagen-weather-tv@main": "1a934d6e7b4ab3ac51cb9f4582bf895d616f30e4",
   "build:dearbulut/tizen-xtream-iptv@main": "7fd43a02aae7b53eb2fbd6aff8541b7724a285ad",
@@ -304,6 +304,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:build:aleksilassila/reiverr": "community-809",
-  "stale:release:MrSimmo/sonance3": "community-809"
+  "stale:build:aleksilassila/reiverr": "community-810",
+  "stale:release:MrSimmo/sonance3": "community-810"
 }
