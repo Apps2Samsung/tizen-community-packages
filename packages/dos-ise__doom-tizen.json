@@ -3,7 +3,7 @@
   "description": "Doom for Samsung Tizen TVs, based on Chocolate Doom and WebAssembly. Includes Chex Quest, Freedoom and HacX as selectable game modes with separate save games.",
   "category": "games",
   "repo": "dos-ise/doom-tizen",
-  "enabled": false,
+  "enabled": true,
   "source": "release",
   "branch": "release",
   "assets": [
