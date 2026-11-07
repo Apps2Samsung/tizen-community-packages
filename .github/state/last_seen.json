@@ -1,6 +1,6 @@
 {
   "build:Bryan-Cee/Ambient@main": "73bc869632ddb9567cde24989fdb137743d0b5b9",
-  "build:CtznSniiips/Lobby@main": "73bef0fc2d55ce8e22f84773ffc625f3e82375da",
+  "build:CtznSniiips/Lobby@main": "2367928c87535f9e12fa79ada9d022f9409c6f4f",
   "build:DmitryMaksakov/samsung-tv-iperf3@main": "d20ac9f65531ff754f79a8490efb548c5fefdbb5",
   "build:DvzZDev/VexonTV@main": "9aa670ed641f8fe5e0980cd04b65a75ffbcd14ed",
   "build:Gonqas/baobab@main": "6ee8491cb332d45772451eb8d7aa036f92b1c32e",
@@ -159,7 +159,7 @@
   "config:build:HelgeSverre/devnull-tv": "99b4670135780f42",
   "config:build:NelsonEU/arn0-tv": "d1d0e8868e49c0df",
   "config:build:Pablitorox/AmorecoFlix": "039d42814a714f15",
-  "config:build:aleksilassila/reiverr": "788bef6f38edd8e8",
+  "config:build:aleksilassila/reiverr": "338aba37aa09b197",
   "config:build:anandhuremanan/samsung-tizen-clock-app": "d5d8873454ca06ad",
   "config:build:anandsimmy/react-iptv": "fa0facf1eadbaa9a",
   "config:build:andrearicci93/vetro": "c89cad52b5d3a72e",
@@ -304,6 +304,5 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:build:aleksilassila/reiverr": "community-811",
-  "stale:release:MrSimmo/sonance3": "community-811"
+  "stale:release:MrSimmo/sonance3": "community-812"
 }
