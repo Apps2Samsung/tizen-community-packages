@@ -3,6 +3,7 @@
   "description": "Unofficial AniLibria anime client for Samsung Tizen TV.",
   "category": "streaming",
   "repo": "CoreDip/anilibria-tizen-wgt",
+  "enabled": false,
   "source": "release",
   "branch": "main",
   "assets": [

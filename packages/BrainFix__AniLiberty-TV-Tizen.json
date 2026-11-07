@@ -3,6 +3,7 @@
   "description": "Unofficial AniLiberty anime client for Samsung Tizen 6.0+ TVs with streaming, watch history, favorites, and account sync.",
   "category": "streaming",
   "repo": "BrainFix/AniLiberty-TV-Tizen",
+  "enabled": false,
   "source": "release",
   "branch": "main",
   "assets": [
