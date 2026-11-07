@@ -1,7 +1,7 @@
 # 🌐 Tizen Community Packages
 [![Sync Tizen Community Packages](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml/badge.svg)](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Packages](https://img.shields.io/badge/packages-149-blue.svg)](#-current-packages)
+[![Packages](https://img.shields.io/badge/packages-150-blue.svg)](#-current-packages)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-green.svg)](../../issues)
 [![Tizen](https://img.shields.io/badge/Platform-Tizen-lightgrey.svg)](https://www.tizen.org/)
 [![Community](https://img.shields.io/badge/Community-Driven-orange.svg)](#)
@@ -157,12 +157,13 @@ Please check the [Releases](../../releases) page for version-specific details.
 </details>
 
 <details>
-<summary><b>🎮 Games & emulators</b> (16)</summary>
+<summary><b>🎮 Games & emulators</b> (17)</summary>
 
 | 🧩 Application | 📝 Description | ⚙️ Version |
 |----------------|----------------|------------|
 | **Chiaki-Tizen**<br>[Chiaki-Tizen](https://github.com/Trent407/chiaki-tizen) | An open source PlayStation remote play project serving as the next-generation of Chiaki. | `v0.2.0` |
 | **Doom**<br>[dos-ise](https://github.com/dos-ise/doom-tizen) | Doom for Samsung Tizen TVs, based on Chocolate Doom and WebAssembly. | `v1.20` |
+| **EDuke32**<br>[dos-ise](https://github.com/dos-ise/eduke32-tizen) | Duke Nukem 3D for Samsung Tizen TVs, including the shareware episode. | `v0.1` |
 | **FreeSerf**<br>[dos-ise](https://github.com/dos-ise/freeserf-tizen) | An open-source recreation of The Settlers 1 (Serf City) compiled to WebAssembly for Samsung Tizen TVs. | `v1.0` |
 | **GameBoy-Emulator**<br>[dos-ise](https://github.com/dos-ise/GB-EMU_Tizen) | A Game Boy (DMG) emulator. | `v1.2.1` |
 | **Moonlight**<br>[OneLiberty](https://github.com/OneLiberty/moonlight-chrome-tizen) | Open-source client for NVIDIA GameStream and Sunshine. | `v1.2.1` |

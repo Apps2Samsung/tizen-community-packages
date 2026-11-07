@@ -89,6 +89,7 @@
   "release:detain/phlix-tizen-client": "latest",
   "release:dos-ise/GB-EMU_Tizen": "v1.2.1",
   "release:dos-ise/doom-tizen": "v1.20",
+  "release:dos-ise/eduke32-tizen": "v0.1",
   "release:dos-ise/freeserf-tizen": "v1.0",
   "release:dos-ise/openttd-tizen": "v15.3",
   "release:dzikus/tizen-camera-pip": "v1.2.0",
@@ -237,6 +238,7 @@
   "config:release:detain/phlix-tizen-client": "74eb0fa6c3b07190",
   "config:release:dos-ise/GB-EMU_Tizen": "3944346e2bca7c79",
   "config:release:dos-ise/doom-tizen": "b412ba5e472bf29f",
+  "config:release:dos-ise/eduke32-tizen": "c0c7d154241f5bcc",
   "config:release:dos-ise/freeserf-tizen": "7de907fb78f0a0c9",
   "config:release:dos-ise/openttd-tizen": "a2b82f37245c3e73",
   "config:release:dzikus/tizen-camera-pip": "e53f24d2e5016590",
@@ -296,5 +298,5 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-798"
+  "stale:release:MrSimmo/sonance3": "community-799"
 }
