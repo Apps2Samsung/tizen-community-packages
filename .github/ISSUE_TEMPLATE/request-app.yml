@@ -19,7 +19,11 @@ body:
         >   `.wgt` wouldn't activate anyway. Most Samsung TVs already have them built in.
         > - **Modded, cracked or "premium unlocked"** builds of paid apps or services.
         > - **Don't ask us to port something to Tizen OS** we don't port we only maintain the community package and our own apps
-        > - **Closed-source packages** with no license that permits redistribution.
+        > - **Closed-source packages without the author's permission** to redistribute them. Closed source *with*
+        >   permission is fine, see [What we accept](https://github.com/Apps2Samsung/tizen-community-packages/blob/main/packages/README.md#-what-we-accept).
+        > - **Apps that come with unlicensed content** (built-in IPTV playlists, pirate-site scrapers, torrent indexers)
+        >   or clients for unlicensed streaming services.
+        > - **Rebrands of other projects** that remove the original credits or license.
         >
         > 🏨 On a **hospitality / hotel TV** (`HG…` model), side-loading isn't possible at all — developer mode
         > lives in the Smart Hub **Apps** screen, which that firmware doesn't expose.
@@ -53,7 +57,7 @@ body:
     id: license
     attributes:
       label: "📋 License (if known)"
-      description: "We can only include open-source / freely distributable apps."
+      description: "We can only include apps whose author allows redistribution."
       placeholder: "MIT"
     validations:
       required: false
@@ -71,5 +75,5 @@ body:
     attributes:
       label: "✅ Before submitting"
       options:
-        - label: "This isn't a commercial streaming app, a modded build, or otherwise not freely redistributable."
+        - label: "This isn't a commercial streaming app, a modded build, an app with built-in unlicensed content, or a rebrand of someone else's project."
           required: true

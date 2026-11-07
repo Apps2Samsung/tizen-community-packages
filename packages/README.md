@@ -10,6 +10,53 @@ file is valid and ready to merge.
 
 ---
 
+## 📜 What we accept
+
+### Accepted
+
+- **Open-source apps**: the source is in the linked repository, under any license that allows
+  redistribution (MIT, Apache, BSD, GPL, MPL and others).
+- **Closed-source apps**, only when all of these are true:
+  1. The **author submits it themselves**, or the repository explicitly allows redistribution: a
+     LICENSE file, or a line in the README.
+  2. It is distributed from the **author's own place**. For a `release`: versioned releases (semver
+     or dated tags on a real commit); no fixed tag names like `Releases` or `latest`, and no `.wgt`
+     committed to `main` as the only distribution. For a `direct`: a URL the author controls, not a
+     re-upload.
+  3. It is **not derived from GPL/LGPL/AGPL code**. A closed-source fork of a copyleft project
+     breaks its license and is never accepted. We can't check this without the source, so the
+     submitter declares it.
+  4. The manifest carries `"flags": ["closed-source"]`.
+
+### Never accepted (open or closed source)
+
+- **Apps that ship with unlicensed content sources by default**: built-in IPTV playlists,
+  pirate-site scrapers, torrent indexers, or clients for unlicensed streaming services. A player
+  that only plays sources *the user adds* is fine.
+- **Rebrands or forks that remove upstream credit or the license**, or that claim to be original
+  work.
+- **Modded, cracked or "premium unlocked" builds** of paid apps or services.
+- **Commercial streaming apps** (Netflix, Disney+ and similar).
+- **Duplicates** of an existing manifest or of an app Apps2Samsung lists itself
+  ([`third-party-apps.json`](https://github.com/Apps2Samsung/Apps2Samsung/blob/main/third-party-apps.json)).
+  A fork must add something real and use its own package ID.
+- **Apps that update themselves from someone else's server.** Self-updating is only accepted when
+  the newer code comes from the same repository (or the author's own domain, for `direct`) that the
+  manifest points at.
+
+### Labels
+
+| Flag | When | What users see |
+|------|------|----------------|
+| `closed-source` | The source isn't in the linked repository. | A "Closed source" badge; a setting can hide these apps. |
+| `self-updating` | The app downloads and runs newer code after install, outside the catalogue. | A "Self-updating" badge and a note in the details. |
+| `root` | The package gains root on the TV: see [Root packages](#-root-packages). | A confirmation before install. |
+
+Every package, flagged or not, goes through the same ClamAV scan in the sync. A `self-updating`
+package is only scanned at the version the catalogue ships; what it downloads later is not.
+
+---
+
 ## 🏷️ File name
 
 Name the file after the app's repository (`owner/repo`, on GitHub or GitLab), with the `/` replaced by a
@@ -61,7 +108,7 @@ one repo with the same `source`, or without a shared `group`.
 | `release_tag_prefix` | string | `release` only. For a monorepo that releases the Tizen build under its own tags while GitHub's "latest" points at another component (e.g. `smart-tv-v` for `smart-tv-v0.7.0`). Uses the newest stable release whose tag starts with this prefix (a prerelease only if none is stable) instead of `/releases/latest`. |
 | `enabled` | boolean | `false` retires the package without deleting the file: see [Retiring a package](#-retiring-a-package). Defaults to `true`. |
 | `adult` | boolean | `true` marks an 18+ app: hidden in Apps2Samsung until the user turns on its 18+ toggle, listed in a collapsed README section: see [Adult (18+) apps](#-adult-18-apps). Defaults to `false`. |
-| `flags` | array | `["root"]` for a package that gains root on the TV. Apps2Samsung asks for confirmation before installing it, see [Root packages](#-root-packages). |
+| `flags` | array | `["root"]`, `["closed-source"]`, `["self-updating"]` or a combination. See [What we accept](#-what-we-accept) and [Root packages](#-root-packages). |
 | `cert_level` | enum | `"partner"` for an app that only works when signed with a Samsung Partner certificate. Apps2Samsung and TV-Store then sign it with the user's Partner certificate, see [Partner certificate](#-partner-certificate). Defaults to `"public"`. |
 | `user_settings` | object | Values the user fills in before install, written into the package before re-signing, see [User settings](#%EF%B8%8F-user-settings). |
 | `host` | enum | `github` (default) or `gitlab`. Where `repo` lives. `gitlab` is only supported for `source: "build"`: see [GitLab-hosted projects](#-gitlab-hosted-projects). |
@@ -353,7 +400,8 @@ Use when the `.wgt`/`.tpk` is hosted at a stable absolute URL (including one com
 ## 🔞 Adult (18+) apps
 
 An app whose content is for adults only (pornography or other sexually explicit material) is
-accepted under the same rules as everything else (open-source, redistributable, scanned), but must
+accepted under the same rules as everything else (see [What we accept](#-what-we-accept); every
+package is ClamAV-scanned), but must
 carry `"adult": true`:
 
 ```json
@@ -529,11 +577,14 @@ schema-checked, so removing the line is all it takes to bring the app back.
 - `category` is one of the seven values above; if the app belongs with an existing one, set the same `group`.
 - Adult-only content? Set `"adult": true` and keep `name` / `description` plain.
 - Gains root on the TV? Set `"flags": ["root"]`.
+- Source not in the repository? Set `"flags": ["closed-source"]`.
+- Downloads and runs newer code after install? Set `"flags": ["self-updating"]`.
 - The fields match your `source` (see the table above): the schema rejects mismatches, e.g. `url`
   on a `release`, or both `output_name` and `assets` on the same `release`.
 - `output_name` ends in `.wgt` or `.tpk`.
 - For a `release`: if the upstream release has more than one asset, you used `assets[]` with a `match`.
-- The app is open-source / redistributable, and tested on at least one Tizen device or emulator.
+- The app meets [What we accept](#-what-we-accept), and was tested on at least one Tizen device or
+  emulator.
 - The app isn't offered already: not by another manifest in this folder (search for the repo and the
   name, in any case), and not by Apps2Samsung itself, which lists Jellyfin, Moonfin, Litefin and
   TizenTube on its own from its
