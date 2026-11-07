@@ -36,7 +36,8 @@ file is valid and ready to merge.
   pirate-site scrapers, torrent indexers, or clients for unlicensed streaming services. A player
   that only plays sources *the user adds* is fine. So is the public
   [iptv-org](https://github.com/iptv-org/iptv) playlist as a default: it only collects publicly
-  available channels.
+  available channels. Content streamed straight from the rights holder's own public servers is
+  fine too (for example Apple's aerial videos from Apple's CDN).
 - **Rebrands or forks that remove upstream credit or the license**, or that claim to be original
   work.
 - **Modded, cracked or "premium unlocked" builds** of paid apps or services.
