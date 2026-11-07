@@ -109,6 +109,7 @@ one repo with the same `source`, or without a shared `group`.
 | `enabled` | boolean | `false` retires the package without deleting the file: see [Retiring a package](#-retiring-a-package). Defaults to `true`. |
 | `adult` | boolean | `true` marks an 18+ app: hidden in Apps2Samsung until the user turns on its 18+ toggle, listed in a collapsed README section: see [Adult (18+) apps](#-adult-18-apps). Defaults to `false`. |
 | `flags` | array | `["root"]`, `["closed-source"]`, `["self-updating"]` or a combination. See [What we accept](#-what-we-accept) and [Root packages](#-root-packages). |
+| `moved_to` | object | `{ "url", "fingerprint" }` of the independent repository the app moved to. Apps2Samsung offers users who have the app installed to add it. See [`../docs/repositories.md`](../docs/repositories.md#moving-an-app-out-of-the-official-catalog). |
 | `cert_level` | enum | `"partner"` for an app that only works when signed with a Samsung Partner certificate. Apps2Samsung and TV-Store then sign it with the user's Partner certificate, see [Partner certificate](#-partner-certificate). Defaults to `"public"`. |
 | `user_settings` | object | Values the user fills in before install, written into the package before re-signing, see [User settings](#%EF%B8%8F-user-settings). |
 | `host` | enum | `github` (default) or `gitlab`. Where `repo` lives. `gitlab` is only supported for `source: "build"`: see [GitLab-hosted projects](#-gitlab-hosted-projects). |

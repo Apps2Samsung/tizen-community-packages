@@ -1,0 +1,125 @@
+name: Repository spec
+
+# Tests for the independent-repository format (docs/repositories.md): the
+# validator against every test vector, the fixtures against TV-Store's own
+# verify(), and the generator end to end against a real GitHub release.
+# Plain pull_request: no secrets are involved, so fork PRs are safe to run.
+
+on:
+  pull_request:
+    paths:
+      - 'spec/**'
+      - 'scripts/repo-*.py'
+      - 'scripts/test-repo-spec.py'
+      - 'scripts/package-info.py'
+      - 'scripts/scan-packages.py'
+      - 'templates/**'
+      - '.github/workflows/repo-spec.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'spec/**'
+      - 'scripts/repo-*.py'
+      - 'scripts/test-repo-spec.py'
+      - 'scripts/package-info.py'
+      - 'scripts/scan-packages.py'
+      - 'templates/**'
+      - '.github/workflows/repo-spec.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+
+jobs:
+  vectors:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - run: pip install jsonschema
+      - name: Every test vector gives the expected result
+        run: python3 -I scripts/test-repo-spec.py
+      - name: The fixtures are what make-fixtures.py produces
+        run: |
+          python3 -I spec/fixtures/make-fixtures.py
+          git diff --exit-code -- spec/fixtures || { echo "::error::spec/fixtures is out of date: run spec/fixtures/make-fixtures.py and commit the result"; exit 1; }
+
+  tv-store:
+    # The envelope must be the one TV-Store already verifies for the official
+    # catalog, so check the fixtures with TV-Store's own catalog.js.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: Apps2Samsung/TV-Store
+          path: _tvstore
+          persist-credentials: false
+      # The Node the TV's web service runs (TV-Store tests on it too).
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '4.4.3'
+      - name: TV-Store's verify() accepts valid.signed and rejects tampered ones
+        run: |
+          node -e '
+            var c = require("./_tvstore/tizen-app/service/catalog.js"), fs = require("fs");
+            var dir = "spec/fixtures/", index = JSON.parse(fs.readFileSync(dir + "index.json", "utf8"));
+            var key = fs.readFileSync(dir + "keys/test.pub.pem", "utf8"), now = Date.parse(index.now);
+            var r = c.verify(fs.readFileSync(dir + "valid.signed"), key, now);
+            var n = Object.keys(r.index).filter(function (u) { return r.index[u]; }).length;
+            if (n !== 3) throw new Error("expected 3 files with a digest in the index, got " + n);
+            console.log("valid.signed: accepted, " + n + " files indexed");
+            ["tampered.signed", "bad-signature.signed", "no-signature.signed"].forEach(function (f) {
+              try { c.verify(fs.readFileSync(dir + f), key, now); } catch (e) { console.log(f + ": rejected (" + e.message + ")"); return; }
+              throw new Error(f + " was accepted");
+            });
+          '
+
+  generate:
+    # End to end with a throwaway key: build from a real repository's releases,
+    # then build again from the first result (assets reused, not downloaded).
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - run: pip install jsonschema
+      - name: Generate, sign and validate
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          t="$RUNNER_TEMP/e2e"; mkdir -p "$t"
+          openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:3072 -out "$t/key.pem" 2>/dev/null
+          cat > "$t/input.json" <<'JSON'
+          {
+            "repository": { "id": "io.github.apps2samsung.ci", "name": "CI test", "maintainer": "Apps2Samsung" },
+            "providers": [
+              { "id": "reolink-viewer", "category": "casting", "url": "Apps2Samsung/ReolinkViewer", "take": 2 }
+            ]
+          }
+          JSON
+          python3 -I scripts/repo-generate.py --input "$t/input.json" --out "$t/one" --key "$t/key.pem"
+          python3 -I scripts/repo-generate.py --input "$t/input.json" --out "$t/two" --key "$t/key.pem" --previous "$t/one/repository.json.signed"
+          python3 -I scripts/repo-validate.py "$t/two/repository.json.signed" --key "$t/two/repository.pem"
+          python3 -I scripts/repo-validate.py "$t/two/repository.json.signed" --key "$t/two/repository.pem" --not-before "$(python3 -c 'import json,sys;print(json.load(open(sys.argv[1]))["generatedAt"])' "$t/one/repository.json")"
+      - name: The template's input file is valid
+        run: |
+          python3 - <<'PY'
+          import json
+          spec = json.load(open("templates/independent-repo/repository.input.json"))
+          assert spec["repository"]["id"] and spec["providers"], "template input is incomplete"
+          print("template input parses:", len(spec["providers"]), "providers")
+          PY

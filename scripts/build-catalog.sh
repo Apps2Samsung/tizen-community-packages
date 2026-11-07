@@ -15,6 +15,9 @@
 # package declares it, so Apps2Samsung can warn before installing.
 # "cert_level": "partner" is copied onto each of the package's files when the
 # package declares it, so Apps2Samsung and TV-Store sign it with a Partner certificate.
+# "moved_to" ({url, fingerprint}) is copied onto each of the package's files when the
+# package declares it: the app now lives in an independent repository, and Apps2Samsung
+# offers to add that repository with the fingerprint pre-approved (docs/repositories.md).
 #
 # Usage: scripts/build-catalog.sh [packages-dir] [out-file] [shipped-dir]   (run from the repo root)
 # With shipped-dir, entries whose file is not in that directory are dropped, so
@@ -58,7 +61,8 @@ jq -s '
       } + (if $p.user_settings then { user_settings: $p.user_settings } else {} end)
         + (if $p.adult == true then { adult: true } else {} end)
         + (if $p.flags then { flags: $p.flags } else {} end)
-        + (if $p.cert_level == "partner" then { cert_level: "partner" } else {} end));
+        + (if $p.cert_level == "partner" then { cert_level: "partner" } else {} end)
+        + (if $p.moved_to then { moved_to: $p.moved_to } else {} end));
   {
     schemaVersion: 1,
     categories: {

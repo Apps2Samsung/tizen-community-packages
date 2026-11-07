@@ -57,6 +57,16 @@
         }
       }
     },
+    "moved_to": {
+      "type": "object",
+      "required": ["url", "fingerprint"],
+      "additionalProperties": false,
+      "properties": {
+        "url": { "type": "string", "pattern": "^https://[^\\s/@:]+(?::\\d+)?/[^\\s]*[.]signed$", "description": "The independent repository's repository.json.signed." },
+        "fingerprint": { "type": "string", "pattern": "^[0-9a-f]{64}$", "description": "SHA-256 of the repository key's DER public key, as repo-validate.py prints it." }
+      },
+      "description": "Optional. The app now lives in an independent repository (docs/repositories.md). Copied onto each of the package's files in catalog.json; Apps2Samsung offers users who have the app installed to add that repository, with this fingerprint approved by the official catalog. Set it for a notice period before setting enabled to false."
+    },
     "cert_level": {
       "enum": ["public", "partner"],
       "description": "Optional. The Samsung certificate level the app needs to work: \"partner\" for an app that uses partner-level rights (DRM playback, Samsung sign-in, a VPN) or hooks into a Samsung native package and so fails at launch when signed with a Public certificate. Apps2Samsung and TV-Store then sign it with the user's Partner certificate. Copied onto each of the package's files in catalog.json. Defaults to \"public\"."
