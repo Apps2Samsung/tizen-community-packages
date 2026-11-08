@@ -846,10 +846,24 @@ jobs:
             quarantine/
           if-no-files-found: ignore
 
+      - name: Fetch previous catalog.json
+        # Removed apps keep the package ids their files had while they shipped,
+        # so Apps2Samsung and TV-Store can flag an installed copy. Best effort:
+        # without it, removed entries are listed without ids.
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PREV_TAG: ${{ needs.detect-changes.outputs.prev_tag }}
+        run: |
+          mkdir -p prev
+          if [ -n "$PREV_TAG" ]; then
+            gh release download "$PREV_TAG" -p catalog.json -D prev || echo "::warning::No catalog.json in $PREV_TAG"
+          fi
+
       - name: Build catalog.json
         # Per-file index (category, group, variant) that Apps2Samsung reads from
-        # this release to filter the app list. Only files that made the bundle.
-        run: bash scripts/build-catalog.sh packages final_wgts/catalog.json final_wgts
+        # this release to filter the app list. Only files that made the bundle,
+        # plus the removed apps (packages/README.md, Retiring a package).
+        run: bash scripts/build-catalog.sh packages final_wgts/catalog.json final_wgts prev/catalog.json
 
       - name: Create and push release tag
         env:
