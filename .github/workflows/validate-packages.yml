@@ -133,12 +133,17 @@ jobs:
 
               # one manifest per repo and source; several manifests of one repo are
               # variants of one app, so they must share a group.
-              for other in repos.get(repo, []):
+              # A retired manifest (enabled: false) ships nothing, so it may sit beside a live
+              # one of the same repo: the full app a Lite build replaced, kept to say why it went.
+              retired = doc.get("enabled") is False
+              for other in ([] if retired else repos.get(repo, [])):
+                  if other["retired"]:
+                      continue
                   if other["source"] == source:
                       errors.append(f"{actual}: a '{source}' manifest for repo '{repo}' already exists: {other['file']}")
                   if not doc.get("group") or doc.get("group") != other["group"]:
                       errors.append(f"{actual}: repo '{repo}' is also packaged by {other['file']}; both must set the same 'group'")
-              repos.setdefault(repo, []).append({"file": actual, "source": source, "group": doc.get("group")})
+              repos.setdefault(repo, []).append({"file": actual, "source": source, "group": doc.get("group"), "retired": retired})
 
               # output_name must be unique across the whole bundle (top-level + assets)
               names = []

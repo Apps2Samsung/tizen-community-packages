@@ -36,7 +36,9 @@
           "enum": ["unlicensed-content", "unlicensed-service", "unlicensed-game-data", "takedown", "superseded", "upstream-gone"],
           "description": "Why the app left the catalogue. Apps2Samsung and TV-Store show their own translated text for it. unlicensed-content = ships streams, playlists or scrapers for content it has no licence for; unlicensed-service = a client for a service that has no licence for its content; unlicensed-game-data = ships commercial game data it may not redistribute; takedown = removed after a copyright (DMCA) notice; superseded = replaced by another app in the catalogue; upstream-gone = the developer removed or archived the project."
         },
-        "note": { "type": "string", "minLength": 1, "maxLength": 200, "pattern": "^[^|\\n]+$", "description": "Optional. One neutral line of detail shown under the reason (English only). Never a link to the app or where to get it." }
+        "note": { "type": "string", "minLength": 1, "maxLength": 200, "pattern": "^[^|\\n]+$", "description": "Optional. One neutral line of detail shown under the reason (English only). Never a link to the app or where to get it." },
+        "package_ids": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^[A-Za-z0-9]{10}$" }, "description": "Optional. The package ids the app's files had on the TV, for when no recent release still lists them (the build otherwise carries them over from the previous catalog.json). Merged with the carried ones." },
+        "app_ids": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^[A-Za-z0-9]{10}[.][A-Za-z0-9]+$" }, "description": "Optional. The application ids that go with package_ids, same rules." }
       },
       "description": "Optional, only with enabled: false. Tells users why the app is gone: catalog.json lists it under removed (not apps), so Apps2Samsung and TV-Store can flag an installed copy and answer a search for it. A retired package without this block disappears silently, as before."
     },

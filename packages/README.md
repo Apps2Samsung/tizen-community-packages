@@ -606,6 +606,25 @@ files had in the previous release and the date it was first removed. Apps2Samsun
 flag an installed copy ("Removed from the catalogue: no more updates") and show the entry when
 someone searches for it, with no install button and no source link.
 
+When the files are no longer in the previous release (the app was disabled first and annotated
+later), name the ids yourself with `package_ids` and `app_ids`; they are merged with any that are
+carried over. Ids are matched per file, by repo and output name.
+
+**When a repo stays in the catalogue with another app** (a Lite build replaces the full one), the
+live manifest keeps `owner__repo.json` and the full app gets a retired manifest of its own,
+`owner__repo__<suffix>.json`, with `enabled: false` and `removed`. A retired manifest may share its
+repo with a live one; it needs a distinct `name` and `output_name`:
+
+```json
+{
+  "name": "AniUltimatium",
+  "repo": "AdvaithAvinash/AniUltimatium",
+  "enabled": false,
+  "removed": { "reason": "unlicensed-content", "package_ids": ["oXabc12345"], "app_ids": ["oXabc12345.EnglishAnime"] },
+  ...
+}
+```
+
 ---
 
 ## ✅ Before you open the PR
