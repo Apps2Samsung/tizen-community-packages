@@ -27,6 +27,19 @@
     },
     "repo_label": { "type": "string", "minLength": 1, "pattern": "^[^|\n]+$", "description": "Optional link text for the README Repository column. Defaults to the repo owner." },
     "enabled": { "type": "boolean", "default": true, "description": "Set to false to retire the package without deleting this file: it is skipped by the sync (not built, downloaded, or shipped in the release) and left out of the README table. Absent means true." },
+    "removed": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reason"],
+      "properties": {
+        "reason": {
+          "enum": ["unlicensed-content", "unlicensed-service", "unlicensed-game-data", "takedown", "superseded", "upstream-gone"],
+          "description": "Why the app left the catalogue. Apps2Samsung and TV-Store show their own translated text for it. unlicensed-content = ships streams, playlists or scrapers for content it has no licence for; unlicensed-service = a client for a service that has no licence for its content; unlicensed-game-data = ships commercial game data it may not redistribute; takedown = removed after a copyright (DMCA) notice; superseded = replaced by another app in the catalogue; upstream-gone = the developer removed or archived the project."
+        },
+        "note": { "type": "string", "minLength": 1, "maxLength": 200, "pattern": "^[^|\\n]+$", "description": "Optional. One neutral line of detail shown under the reason (English only). Never a link to the app or where to get it." }
+      },
+      "description": "Optional, only with enabled: false. Tells users why the app is gone: catalog.json lists it under removed (not apps), so Apps2Samsung and TV-Store can flag an installed copy and answer a search for it. A retired package without this block disappears silently, as before."
+    },
     "adult": { "type": "boolean", "default": false, "description": "Set to true for an app whose content is for adults only (18+): pornography or other sexually explicit material. The package ships like any other, but catalog.json carries adult: true on each of its files so Apps2Samsung hides it until the user turns on the 18+ toggle, and the README lists it in a collapsed section instead of the main table. Absent means false. Independent of category: an adult app still gets the category that says what it is (a media-server client, an IPTV player)." },
     "source": {
       "enum": ["build", "release", "direct"],
@@ -143,6 +156,10 @@
     "replace": { "type": "string", "pattern": "\\{value\\}", "description": "Replacement text; {value} is the user's value." }
   },
   "allOf": [
+    {
+      "if": { "required": ["removed"] },
+      "then": { "required": ["enabled"], "properties": { "enabled": { "const": false } }, "not": { "required": ["moved_to"] } }
+    },
     {
       "if": { "required": ["assets"] },
       "then": { "not": { "required": ["variant"] } }

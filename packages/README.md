@@ -577,6 +577,35 @@ checked for upstream changes, built, downloaded or attached to the release, and 
 from the README table and the package-count badge. The file itself stays valid and fully
 schema-checked, so removing the line is all it takes to bring the app back.
 
+### Telling users why
+
+A retired package without anything else disappears silently, which is right for a superseded fork.
+When users should know why an app is gone (it broke the rules, a takedown), add `removed`:
+
+```json
+{
+  "name": "Bisnor",
+  "enabled": false,
+  "removed": { "reason": "unlicensed-content", "note": "Gets its streams from unlicensed film servers." },
+  ...
+}
+```
+
+| `reason` | Shown as |
+|---|---|
+| `unlicensed-content` | Ships streams, playlists or scrapers for content it has no licence for |
+| `unlicensed-service` | A client for a service that has no licence for its content |
+| `unlicensed-game-data` | Ships commercial game data it may not redistribute |
+| `takedown` | Removed after a copyright (DMCA) notice |
+| `superseded` | Replaced by another app in the catalogue |
+| `upstream-gone` | The developer removed or archived the project |
+
+`note` is optional: one neutral line, English only, never a link to the app or a place to get it.
+`catalog.json` then lists the package under `removed` instead of `apps`, with the package ids its
+files had in the previous release and the date it was first removed. Apps2Samsung and TV-Store
+flag an installed copy ("Removed from the catalogue: no more updates") and show the entry when
+someone searches for it, with no install button and no source link.
+
 ---
 
 ## ✅ Before you open the PR
