@@ -1,6 +1,6 @@
 {
   "build:Bryan-Cee/Ambient@main": "73bc869632ddb9567cde24989fdb137743d0b5b9",
-  "build:CtznSniiips/Lobby@main": "261c681461f0d730781f4c72107856b5aed7dc0a",
+  "build:CtznSniiips/Lobby@main": "2f05f14ac06909ef4dd8bcd4d8692b08f242a76b",
   "build:DmitryMaksakov/samsung-tv-iperf3@main": "d20ac9f65531ff754f79a8490efb548c5fefdbb5",
   "build:DvzZDev/VexonTV@main": "9aa670ed641f8fe5e0980cd04b65a75ffbcd14ed",
   "build:Gonqas/baobab@main": "6ee8491cb332d45772451eb8d7aa036f92b1c32e",
@@ -204,7 +204,7 @@
   "config:release:Prairie-Server/prairie-smarttv": "94ff0a81e902f4d7",
   "config:release:Ricrdsson1/kodi-tizen-wasm": "2e6a286a09dec632",
   "config:release:RitwickVerma/TizenAmbilight": "76785aa38cf8e857",
-  "config:release:Rusty24h/Tizen-IPTV-Player": "3bacce3895dcf3a2",
+  "config:release:Rusty24h/Tizen-IPTV-Player": "93c42a6e899c6d4d",
   "config:release:Stashified/StashZen": "39c7e3fdbe4019fc",
   "config:release:SuperDOS/velox": "cdd050650976adfa",
   "config:release:SushyDev/tizen-youtube": "91cca388c9ee22ff",
@@ -280,6 +280,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-825",
-  "stale:release:christopherklint97/streamvault": "community-825"
+  "stale:release:MrSimmo/sonance3": "community-826",
+  "stale:release:christopherklint97/streamvault": "community-826"
 }
