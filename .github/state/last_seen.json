@@ -44,7 +44,7 @@
   "release:IIyn/omegatube": "v1.5.0",
   "release:Kepler75/StremioK": "v2.3.2",
   "release:Knikt/APL-Launcher-for-TizenOS": "v1.0.21",
-  "release:Knikt/APL-TV-for-TizenOS": "v1.0.5",
+  "release:Knikt/APL-TV-for-TizenOS": "v1.0.6",
   "release:Licaa21/Smart-TV": "fork-v2.0.2",
   "release:MaCHeaMaRoBi/JellyLean": "v1.0.6",
   "release:MrHumanRebel/airtizen": "v2.2.34",
@@ -128,7 +128,7 @@
   "release:titlog/douyin-tizen": "v1.4.6",
   "release:titlog/telegram-tizen": "v1.2.6",
   "release:toypoodlegaming/moonlight-chrome-tizen": "samsung_wasm-21031332442",
-  "release:victorreinor/nyx-tv": "v1.5.0",
+  "release:victorreinor/nyx-tv": "v1.7.0",
   "release:yumata/lampa": "v1.4.1",
   "direct:Apps2Samsung/tizen-community-packages": "etag:\"76c7abc2fc40f84b17ac2acf306749e29bf1461541ceb65d5600f2f5e6555842\"|mod:|len:3130441",
   "direct:KaashDev/TVapp": "etag:\"fb2c8f15fdce92231027555f26245016e87050b2173c8af340805c37fd8cd3af\"|mod:|len:979034",
@@ -280,6 +280,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-828",
-  "stale:release:christopherklint97/streamvault": "community-828"
+  "stale:release:MrSimmo/sonance3": "community-829",
+  "stale:release:christopherklint97/streamvault": "community-829"
 }
