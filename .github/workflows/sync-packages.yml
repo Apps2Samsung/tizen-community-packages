@@ -70,6 +70,12 @@ jobs:
           set -e
           STATE_FILE=".github/state/last_seen.json"
           mkdir -p .github/state
+          # The state as main has it now, not as of the commit that triggered
+          # this run: a run that waited in the concurrency queue would otherwise
+          # miss the previous run's state commit (and its stale:<id> retries).
+          if git fetch -q --depth=1 origin main; then
+            git show FETCH_HEAD:"$STATE_FILE" > "$STATE_FILE.main" 2>/dev/null && mv "$STATE_FILE.main" "$STATE_FILE" || rm -f "$STATE_FILE.main"
+          fi
           [ -f "$STATE_FILE" ] || echo '{}' > "$STATE_FILE"
           old_state=$(cat "$STATE_FILE")
           new_state='{}'
@@ -977,24 +983,29 @@ jobs:
           set -e
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .github/state/last_seen.json README.md
-          if git diff --cached --quiet; then
-            echo "Nothing to commit."
-            exit 0
-          fi
-          git commit -m "chore: update state + README versions [skip ci]"
-          # A PR merged while this run was busy makes a plain push fail with
-          # "fetch first", the bundle is then published but its state is not
-          # recorded, and the next run rebuilds and republishes the same
-          # packages. Rebase onto the new main instead: only this job writes
-          # last_seen.json and the README table is generated, so the rebase is
-          # clean, and the merged manifest gets its own run (already queued
-          # behind this one) that re-renders the table with it included.
+          # main has usually moved on: a PR merged while this run was busy, or
+          # (for a run that waited in the concurrency queue) the previous run's
+          # own state commit, since checkout takes the commit that triggered
+          # this run. Rebasing then conflicts in last_seen.json, as it did for
+          # community-823. Instead, every attempt starts from the current main
+          # and writes this run's state on top: it is a full snapshot taken by
+          # this run, so it wins. The README table is rendered again from that
+          # main's manifests.
+          cp .github/state/last_seen.json "$RUNNER_TEMP/last_seen.json"
           for attempt in 1 2 3 4 5; do
-            if git pull --rebase origin main && git push origin HEAD:main; then
+            git fetch -q origin main
+            git reset -q --hard origin/main
+            cp "$RUNNER_TEMP/last_seen.json" .github/state/last_seen.json
+            python3 -I scripts/render-readme.py
+            git add .github/state/last_seen.json README.md
+            if git diff --cached --quiet; then
+              echo "Nothing to commit."
               exit 0
             fi
-            git rebase --abort 2>/dev/null || true
+            git commit -q -m "chore: update state + README versions [skip ci]"
+            if git push origin HEAD:main; then
+              exit 0
+            fi
             echo "Push attempt $attempt failed, retrying."
             sleep $((attempt * 5))
           done
