@@ -38,7 +38,7 @@
   "release:AdvaithAvinash/AniUltimatium": "stable-v1.23",
   "release:AdvaithAvinash/UltimatiumTube": "stable-v1.11",
   "release:Apps2Samsung/ReolinkViewer": "v1.1.0",
-  "release:Apps2Samsung/TV-Store": "v0.3.22",
+  "release:Apps2Samsung/TV-Store": "v0.3.23",
   "release:AquaPlayIPTV/aquaplay-samsung": "v1.0.51",
   "release:Edsol/go2rtc-tizen": "v0.1.0",
   "release:IIyn/omegatube": "v1.5.0",
@@ -147,7 +147,7 @@
   "config:build:HelgeSverre/devnull-tv": "99b4670135780f42",
   "config:build:NelsonEU/arn0-tv": "d1d0e8868e49c0df",
   "config:build:Pablitorox/AmorecoFlix": "039d42814a714f15",
-  "config:build:aleksilassila/reiverr": "338aba37aa09b197",
+  "config:build:aleksilassila/reiverr": "336fc9da4b69aefc",
   "config:build:anandhuremanan/samsung-tizen-clock-app": "d5d8873454ca06ad",
   "config:build:andrearicci93/vetro": "c89cad52b5d3a72e",
   "config:build:aroundmyroom/Velvet": "c222ae33d22ca8a3",
@@ -280,6 +280,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-823",
-  "stale:release:christopherklint97/streamvault": "community-823"
+  "stale:release:MrSimmo/sonance3": "community-825",
+  "stale:release:christopherklint97/streamvault": "community-825"
 }
