@@ -601,7 +601,11 @@ jobs:
                   outname="$(basename "$url")"
                 fi
                 echo "Downloading $url -> external_wgts/$outname"
-                curl -L -o "external_wgts/$outname" "$url"
+                if ! bash scripts/fetch-asset.sh "external_wgts/$outname" "$url"; then
+                  # Partial set: publish-release ships all of this package's files from the last good bundle.
+                  SKIPPED="$SKIPPED $repo"
+                  continue 2
+                fi
                 bash scripts/unwrap-zip.sh "external_wgts/$outname" "$extract"
               done
             else
@@ -618,7 +622,10 @@ jobs:
                 outname="$(basename "$url")"
               fi
               echo "Downloading $url -> external_wgts/$outname"
-              curl -L -o "external_wgts/$outname" "$url"
+              if ! bash scripts/fetch-asset.sh "external_wgts/$outname" "$url"; then
+                SKIPPED="$SKIPPED $repo"
+                continue
+              fi
               bash scripts/unwrap-zip.sh "external_wgts/$outname" "$extract"
             fi
           done
@@ -639,7 +646,8 @@ jobs:
             if [ -z "$outname" ] || [ "$outname" = "null" ]; then
               outname="${repo##*/}.wgt"
             fi
-            curl -L -o "external_wgts/$outname" "$url"
+            echo "Downloading $url -> external_wgts/$outname"
+            bash scripts/fetch-asset.sh "external_wgts/$outname" "$url" || continue
             bash scripts/unwrap-zip.sh "external_wgts/$outname" "$extract"
           done
 
