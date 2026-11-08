@@ -127,15 +127,15 @@ Please check the [Releases](../../releases) page for version-specific details.
 
 | 🧩 Application | 📝 Description | ⚙️ Version |
 |----------------|----------------|------------|
-| **APL TV**<br>[Knikt](https://github.com/Knikt/APL-TV-for-TizenOS) | Apple TV style IPTV player for your own M3U playlists and Xtream accounts: live TV with a guide, movies and series with TMDB pages, subtitles and audio menus, OpenSubtitles, Alexa voice search. | `v1.0.6` |
+| **APL TV**<br>[Knikt](https://github.com/Knikt/APL-TV-for-TizenOS) | Apple TV style IPTV player for your own M3U playlists and Xtream accounts: live TV with a guide, movies and series with TMDB pages, subtitles and audio menus, OpenSubtitles, Alexa voice search. | `v1.0.7` |
 | **AquaPlay IPTV**<br>[AquaPlay IPTV](https://github.com/AquaPlayIPTV/aquaplay-samsung) | Lightweight IPTV player for M3U and Xtream playlists, with a full guide, catch-up and setup from your phone | `v1.0.51` |
 | **Chouette TV**<br>[ipaifix](https://github.com/ipaifix/chouette-tv) | IPTV player for Samsung Tizen 2.3+ TVs: Xtream and M3U sources, EPG, favourites, profiles and resume. | `794dbef` |
 | **EN TV Player**<br>[Nur-allhi](https://github.com/Nur-allhi/en-tvplayer) | IPTV player for Samsung Tizen TVs with DRM support, M3U/M3U8 playlists, groups and live TV. | `v3.2.0` |
 | **FLOH IPTV**<br>[kingflooow](https://github.com/kingflooow/floh-iptv) | A fast IPTV player for Samsung TVs. | `v1.7.0` |
 | **HackTV**<br>[kosmodrey](https://github.com/kosmodrey/hackTV) | IPTV client for Samsung Tizen TVs. | `bf27ba9` |
 | **IPTV Manager**<br>[matifDreamIt](https://github.com/matifDreamIt/IPTV-Tizen-TV) | IPTV manager for Samsung Tizen TV with Xtream Codes support and HLS playback. | `d8eb66b` |
-| **Nyx**<br>[victorreinor](https://github.com/victorreinor/nyx-tv) | IPTV player for your own Xtream or M3U playlist with a simple, remote-first interface. | `v1.7.0` |
-| **opencream TV**<br>[opencream-ai](https://github.com/opencream-ai/opencream-tv) | A calm home screen for Samsung TVs with your own Xtream Codes IPTV built in: live TV, films, series, guide search. | `v0.1.2` |
+| **Nyx**<br>[victorreinor](https://github.com/victorreinor/nyx-tv) | IPTV player for your own Xtream or M3U playlist with a simple, remote-first interface. | `v1.7.1` |
+| **opencream TV**<br>[opencream-ai](https://github.com/opencream-ai/opencream-tv) | A calm home screen for Samsung TVs with your own Xtream Codes IPTV built in: live TV, films, series, guide search. | `v0.1.3` |
 | **OpenIPTV**<br>[shayanline](https://github.com/shayanline/OpenIPTV) | Privacy focused IPTV player for Samsung Tizen TVs with extended M3U playlists, favourites and search. | `1.9.3` |
 | **OTTplay FOSS**<br>[prog4food](https://github.com/prog4food/ottplay-foss-thin-clients) | FOSS OTT / IPTV thin client for Tizen. | `Sat, 21 Jan 2023 15:15:16 GMT` |
 | **RÚV**<br>[RÚV VOD](https://github.com/sverrirs/ruv-app-samsung) | Apps for RÚV, the Icelandic national broadcaster: Sarpur on demand, Barnaefni for children, Unglingar for teens, Menntun for education, and Útvarp radio (not affiliated with RÚV) | `2026.08.25-2350` |
@@ -208,7 +208,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **TizenBrew**<br>[reisxd](https://github.com/reisxd/TizenBrew) | A way to experience modded websites and you can install newer apps without fighting with Tizen Studio. | `v2.0.5` |
 | **TizenUtility**<br>[no-cover](https://github.com/no-cover/tizenutility) | System utility for Samsung Tizen TVs: detailed device, firmware and network info, plus a launcher for hidden built-in Samsung apps that are not reachable from the normal UI. | `1.1.1` |
 | **Torr Streaming**<br>[no-cover](https://github.com/no-cover/torr-streaming) | Runs TorrServer as a background service on the TV itself, so local web apps can stream torrents directly without a separate box. | `1.0.0` |
-| **TV-Store**<br>[Apps2Samsung](https://github.com/Apps2Samsung/TV-Store) | The Apps2Samsung catalog on the TV itself: browse with the remote and install apps natively through the set's own developer connection, with no PC or phone in the loop after a one-time arming from the Apps2Samsung 3.0 (or newer) toolbox. | `v0.3.23` |
+| **TV-Store**<br>[Apps2Samsung](https://github.com/Apps2Samsung/TV-Store) | The Apps2Samsung catalog on the TV itself: browse with the remote and install apps natively through the set's own developer connection, with no PC or phone in the loop after a one-time arming from the Apps2Samsung 3.0 (or newer) toolbox. | `v0.3.25` |
 | **Vetro**<br>[andrearicci93](https://github.com/andrearicci93/vetro) | TV management dashboard with root integration: app inventory, controls and diagnostics in your browser. | `180d984` |
 
 </details>
