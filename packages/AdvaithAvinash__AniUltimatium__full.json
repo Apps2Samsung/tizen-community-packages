@@ -1,0 +1,13 @@
+{
+  "name": "AniUltimatium",
+  "description": "Anime streaming app for Samsung Tizen TVs.",
+  "category": "streaming",
+  "repo": "AdvaithAvinash/AniUltimatium",
+  "enabled": false,
+  "removed": {"reason": "unlicensed-content", "note": "Gets its streams from unlicensed sites.", "package_ids": ["oXabc12345"], "app_ids": ["oXabc12345.EnglishAnime"]},
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "^Aniultimatium[.]wgt$", "output_name": "AniUltimatium.wgt" }
+  ]
+}
