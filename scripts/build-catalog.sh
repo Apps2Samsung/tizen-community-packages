@@ -22,8 +22,10 @@
 # per package, never in "apps"): name, repo, category, reason, note, files, since, and the
 # package_ids / app_ids its files had, so Apps2Samsung and TV-Store can flag an installed
 # copy and answer a search with why it is gone. The ids and "since" are carried from
-# prev-catalog (the previous release's catalog.json), where the package was still in "apps"
-# or already in "removed"; "since" is today the first time a package shows up as removed.
+# prev-catalog (the previous release's catalog.json), where the package's files were still in
+# "apps" or already in "removed", matched by repo and file name; ids the "removed" block names
+# itself are added (for an app no recent release still lists). "since" is today the first time
+# a package shows up as removed.
 #
 # Usage: scripts/build-catalog.sh [packages-dir] [out-file] [shipped-dir] [prev-catalog]   (run from the repo root)
 # With shipped-dir, entries whose file is not in that directory are dropped, so
@@ -85,7 +87,9 @@ jq -s '
     removed: ( map(select(.enabled == false and .removed))
                | map({ name: (.group // .name), repo, host: (.host // "github"), category, reason: .removed.reason,
                        files: (if has("assets") then [ .assets[].output_name ] else [ .output_name ] end) }
-                     + (if .removed.note then { note: .removed.note } else {} end))
+                     + (if .removed.note then { note: .removed.note } else {} end)
+                     + (if .removed.package_ids then { package_ids: .removed.package_ids } else {} end)
+                     + (if .removed.app_ids then { app_ids: .removed.app_ids } else {} end))
                | sort_by(.name | ascii_downcase) )
   }
 ' "${files[@]}" > "$OUT"
@@ -95,14 +99,21 @@ prev='{}'
 if [ -n "$PREV" ] && [ -s "$PREV" ] && jq -e . "$PREV" >/dev/null 2>&1; then prev=$(cat "$PREV"); fi
 tmp=$(mktemp)
 jq --argjson prev "$prev" --arg today "$(date -u +%F)" '
-  def ids($r; $k): [ ($prev.apps // [])[] | select((.repo // "" | ascii_downcase) == $r) | .[$k] // empty ]
-               + [ ($prev.removed // [])[] | select((.repo // "" | ascii_downcase) == $r) | (.[$k + "s"] // [])[] ]
+  # Matched per file, not per repo: a repo can have a live manifest beside a retired one (a Lite
+  # build that replaced the full app), and the live files must not lend their ids to it.
+  def mine($r; $files): (.repo // "" | ascii_downcase) == $r
+                        and ((.file // null) as $f | if $f then ($files | index($f)) != null
+                             else ((.files // []) | any(. as $g | $files | index($g))) end);
+  def ids($e; $r; $k): ($e[$k + "s"] // [])
+               + [ ($prev.apps // [])[] | select(mine($r; $e.files)) | .[$k] // empty ]
+               + [ ($prev.removed // [])[] | select(mine($r; $e.files)) | (.[$k + "s"] // [])[] ]
                | unique;
   .removed |= map(
     (.repo | ascii_downcase) as $r
-    | . + { since: ([ ($prev.removed // [])[] | select((.repo // "" | ascii_downcase) == $r) | .since // empty ][0] // $today) }
-        + (ids($r; "package_id") as $p | if ($p | length) > 0 then { package_ids: $p } else {} end)
-        + (ids($r; "app_id") as $a | if ($a | length) > 0 then { app_ids: $a } else {} end))
+    | . as $e
+    | . + { since: ([ ($prev.removed // [])[] | select(mine($r; $e.files)) | .since // empty ][0] // $today) }
+        + (ids($e; $r; "package_id") as $p | if ($p | length) > 0 then { package_ids: $p } else {} end)
+        + (ids($e; $r; "app_id") as $a | if ($a | length) > 0 then { app_ids: $a } else {} end))
 ' "$OUT" > "$tmp"
 mv "$tmp" "$OUT"
 

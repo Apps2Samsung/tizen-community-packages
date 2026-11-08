@@ -18,7 +18,8 @@ Apps2Samsung's built-in list cannot start failing every unrelated PR.
 Without --changed every conflict is an error.
 
 A retired manifest (enabled: false) ships nothing, so it is not compared with
-the built-in list; it still reserves its repo and name among the manifests.
+the built-in list, and may share its repo with a live manifest (the full app a
+Lite build replaced); it still reserves its name among the manifests.
 """
 import argparse
 import glob
@@ -111,9 +112,12 @@ def main():
         # Against the other manifests (the structural check only catches exact-case repeats).
         # A repo may have one manifest per source when they are variants of one app, i.e.
         # they share a group: a native .tpk from releases beside a web app built from source.
+        # A retired manifest (enabled: false) ships nothing, so it may sit beside a live one of
+        # the same repo (the full app a Lite build replaced, kept to say why it went); it is
+        # neither checked against the others' repos nor reserves its own.
         group = (doc.get("group") or "").strip().lower()
         source = doc.get("source")
-        for k in sorted(keys):
+        for k in ([] if doc.get("enabled") is False else sorted(keys)):
             other = seen_repos.get(k)
             if other and not (group and group == other["group"] and source != other["source"]):
                 report(path, f"repo '{k.split(':', 1)[1]}' is already packaged by {other['file']}; "
