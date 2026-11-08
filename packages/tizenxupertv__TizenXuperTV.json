@@ -4,6 +4,7 @@
   "category": "streaming",
   "repo": "tizenxupertv/TizenXuperTV",
   "enabled": false,
+  "removed": {"reason": "unlicensed-service"},
   "source": "release",
   "branch": "main",
   "assets": [

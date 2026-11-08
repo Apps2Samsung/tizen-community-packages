@@ -4,6 +4,7 @@
   "category": "iptv",
   "repo": "anandsimmy/react-iptv",
   "enabled": false,
+  "removed": {"reason": "unlicensed-content", "note": "Plays a built-in list of streams by default."},
   "source": "build",
   "branch": "main",
   "project_path": "build",

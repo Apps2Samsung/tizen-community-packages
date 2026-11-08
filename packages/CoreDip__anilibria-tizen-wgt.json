@@ -4,6 +4,7 @@
   "category": "streaming",
   "repo": "CoreDip/anilibria-tizen-wgt",
   "enabled": false,
+  "removed": {"reason": "unlicensed-service"},
   "source": "release",
   "branch": "main",
   "assets": [

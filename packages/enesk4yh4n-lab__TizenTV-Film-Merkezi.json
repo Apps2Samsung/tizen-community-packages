@@ -5,6 +5,7 @@
   "adult": false,
   "repo": "enesk4yh4n-lab/TizenTV-Film-Merkezi",
   "enabled": false,
+  "removed": {"reason": "unlicensed-content", "note": "Gets its streams from unlicensed sites."},
   "source": "release",
   "branch": "main",
   "assets": [

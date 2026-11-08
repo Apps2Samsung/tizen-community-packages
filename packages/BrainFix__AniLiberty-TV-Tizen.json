@@ -4,6 +4,7 @@
   "category": "streaming",
   "repo": "BrainFix/AniLiberty-TV-Tizen",
   "enabled": false,
+  "removed": {"reason": "unlicensed-service"},
   "source": "release",
   "branch": "main",
   "assets": [
