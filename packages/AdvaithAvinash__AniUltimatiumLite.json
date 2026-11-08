@@ -1,0 +1,10 @@
+
+{
+  "name": "AniUltimatium Lite",
+  "description": "Streaming app featuring add-ons and additional content sources for Samsung Tizen TVs.",
+  "category": "streaming",
+  "repo": "AdvaithAvinash/AniUltimatiumLite",
+  "source": "release",
+  "branch": "main",
+  "output_name": "aniultimatiumlite.wgt"
+}
