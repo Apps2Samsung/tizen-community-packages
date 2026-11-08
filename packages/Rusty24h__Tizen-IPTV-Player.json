@@ -1,10 +1,15 @@
 {
-  "name": "Tizen IPTV Player",
+  "name": "Tizen IPTV Player (Rusty24h)",
   "description": "IPTV Player for Samsung Tizen TVs supporting Stalker MAC portals, Xtream Codes, and M3U playlists with 2D EPG and catch-up.",
   "category": "iptv",
   "repo": "Rusty24h/Tizen-IPTV-Player",
   "source": "release",
   "branch": "main",
   "cert_level": "partner",
-  "output_name": "SmartSTBcloneV2.wgt"
+  "assets": [
+    {
+      "match": "^SmartSTBcloneV2[.]wgt$",
+      "output_name": "SmartSTBcloneV2.wgt"
+    }
+  ]
 }
