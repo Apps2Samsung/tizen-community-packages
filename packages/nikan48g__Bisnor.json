@@ -4,6 +4,7 @@
   "category": "streaming",
   "repo": "nikan48g/Bisnor",
   "enabled": false,
+  "removed": {"reason": "unlicensed-content", "note": "Gets its streams from unlicensed film servers."},
   "source": "build",
   "branch": "main",
   "project_path": "tizen-tv",

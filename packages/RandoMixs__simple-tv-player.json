@@ -4,6 +4,7 @@
   "category": "iptv",
   "repo": "RandoMixs/simple-tv-player",
   "enabled": false,
+  "removed": {"reason": "unlicensed-content", "note": "Plays a built-in channel list that includes pay channels."},
   "source": "release",
   "branch": "main",
   "assets": [

@@ -4,6 +4,7 @@
   "category": "streaming",
   "repo": "Hamza-Boulila/aetherflix",
   "enabled": false,
+  "removed": {"reason": "unlicensed-content", "note": "Gets its streams from unlicensed sites."},
   "source": "release",
   "branch": "main",
   "assets": [

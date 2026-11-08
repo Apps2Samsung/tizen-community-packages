@@ -4,6 +4,7 @@
   "category": "iptv",
   "repo": "dos-ise/backwhentv-tizen",
   "enabled": false,
+  "removed": {"reason": "unlicensed-content", "note": "Plays full copyrighted series by default."},
   "source": "release",
   "branch": "main",
   "output_name": "BackWhenTV.wgt"
