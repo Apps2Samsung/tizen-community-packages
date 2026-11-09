@@ -45,7 +45,7 @@
   "release:Kepler75/StremioK": "v2.3.3",
   "release:Knikt/APL-Launcher-for-TizenOS": "v1.0.22",
   "release:Knikt/APL-TV-for-TizenOS": "v1.0.10",
-  "release:Licaa21/Smart-TV": "fork-v2.0.3",
+  "release:Licaa21/Smart-TV": "fork-v2.0.4",
   "release:MaCHeaMaRoBi/JellyLean": "v1.0.7",
   "release:MrHumanRebel/airtizen": "v2.2.34",
   "release:MrPhaze62/moonlight-chrome-tizen-no-gamemode": "samsung_wasm-21031261929",
@@ -280,6 +280,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-832",
-  "stale:release:christopherklint97/streamvault": "community-832"
+  "stale:release:MrSimmo/sonance3": "community-833",
+  "stale:release:christopherklint97/streamvault": "community-833"
 }
