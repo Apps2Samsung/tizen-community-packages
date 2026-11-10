@@ -45,7 +45,7 @@
       "required": ["id", "category", "url", "releases"],
       "properties": {
         "id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,63}$", "description": "Unique within the repository." },
-        "category": { "enum": ["media", "iptv", "streaming", "games", "casting", "tools", "other"] },
+        "category": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{0,31}$", "description": "An id from the official catalog's categories. A client shows an id it does not know under other." },
         "url": { "$ref": "#/$defs/httpsUrl", "description": "Where the releases come from, e.g. https://api.github.com/repos/owner/repo/releases. Informational: clients install only from the assets below." },
         "displayName": { "type": "string", "maxLength": 80, "pattern": "^[^\\n\\r|]*$" },
         "prefix": { "type": "string", "maxLength": 80 },

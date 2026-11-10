@@ -8,6 +8,9 @@
 # "variant" labels a file inside its group; it defaults to the file name.
 # Disabled packages are left out, like everywhere else downstream.
 # "user_settings" is copied through as-is when the package declares it.
+# "categories" ({id: English name}, key order = display order) and "category_colors"
+# ({id: "#RRGGBB"}) come from data/categories.json, the one list of categories; the
+# manifests are checked against it first (scripts/check-categories.py).
 # "adult": true is copied onto each of the package's files when the package
 # declares it, so Apps2Samsung can hide those entries until the user turns on
 # its 18+ toggle (a group is adult when any of its files is). Left out when false.
@@ -49,7 +52,10 @@ if [ ${#files[@]} -eq 0 ]; then
   exit 1
 fi
 
-jq -s '
+CATEGORIES="$(dirname "$0")/../data/categories.json"
+python3 -I "$(dirname "$0")/check-categories.py" --categories "$CATEGORIES" "${files[@]}" >&2
+
+jq -s --slurpfile cats "$CATEGORIES" '
   def strip_ext: sub("\\.(wgt|tpk)$"; "");
   def entries:
     . as $p
@@ -74,15 +80,8 @@ jq -s '
         + (if $p.moved_to then { moved_to: $p.moved_to } else {} end));
   {
     schemaVersion: 1,
-    categories: {
-      media: "Media servers & players",
-      iptv: "IPTV & Live TV",
-      streaming: "Streaming",
-      games: "Games & emulators",
-      casting: "Casting & cameras",
-      tools: "Tools & system",
-      other: "Other"
-    },
+    categories: ( $cats[0] | map({ (.id): .name }) | add ),
+    category_colors: ( $cats[0] | map(select(.color) | { (.id): .color }) | add ),
     apps: ( map(select(.enabled != false)) | map(entries) | add | sort_by(.file | ascii_downcase) ),
     removed: ( map(select(.enabled == false and .removed))
                | map({ name: (.group // .name), repo, host: (.host // "github"), category, reason: .removed.reason,

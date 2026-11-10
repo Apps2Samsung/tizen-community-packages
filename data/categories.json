@@ -1,0 +1,9 @@
+[
+  { "id": "media", "name": "Media servers & players", "color": "#2B59FF", "emoji": "📼" },
+  { "id": "iptv", "name": "IPTV & Live TV", "color": "#E8590C", "emoji": "📡" },
+  { "id": "streaming", "name": "Streaming", "color": "#D6336C", "emoji": "🎬" },
+  { "id": "games", "name": "Games & emulators", "color": "#7048E8", "emoji": "🎮" },
+  { "id": "casting", "name": "Casting & cameras", "color": "#0CA678", "emoji": "📷" },
+  { "id": "tools", "name": "Tools & system", "color": "#5C677D", "emoji": "🛠️" },
+  { "id": "other", "name": "Other", "color": "#868E96", "emoji": "📦" }
+]
