@@ -3,7 +3,7 @@
 
 Usage:
   repo-generate.py --input repository.input.json --out site/
-                   [--key PATH | env REPO_SIGNING_KEY] [--previous URL_OR_PATH]
+                   [--key PATH | env REPO_SIGNING_KEY] [--previous URL_OR_PATH] [--site-url URL]
 
 Reads the publisher's input file (the repository block and a list of providers in
 the third-party-apps.json shape), takes each provider's newest GitHub releases,
@@ -14,6 +14,8 @@ Then it signs the result and writes into --out:
   repository.json.signed   what clients read: base64 RSA-SHA256 signature line + the JSON
   repository.json          the same JSON, unsigned, for people to read
   repository.pem           the public key, so Apps2Samsung can show its fingerprint
+  index.html               with --site-url (where --out is published): a page for people,
+                           with the repository's URL, key fingerprint, how to add it and its apps
 
 Finally it checks its own output with repo-validate.py, so a broken manifest is
 never published.
@@ -32,6 +34,7 @@ import argparse
 import base64
 import datetime as dt
 import hashlib
+import html
 import importlib.util
 import json
 import os
@@ -189,12 +192,106 @@ def sign(payload, key_pem_text):
     return base64.b64encode(sig.stdout) + b"\n" + payload, pub
 
 
+PAGE = """<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+<meta name="robots" content="noindex">
+<style>
+:root {{ color-scheme: light dark; --bg: #f6f7f5; --surface: #ffffff; --text: #151816; --muted: #5d6660; --accent: #0b8f78; --line: #dde2de; }}
+@media (prefers-color-scheme: dark) {{ :root {{ --bg: #101212; --surface: #1b1e1d; --text: #f0f3ef; --muted: #a9b3ae; --accent: #37ddbd; --line: #2b302e; }} }}
+* {{ box-sizing: border-box; }}
+body {{ margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 "Segoe UI", system-ui, sans-serif; }}
+main {{ width: min(760px, calc(100% - 32px)); margin: 48px auto; }}
+h1 {{ font-size: clamp(30px, 6vw, 44px); line-height: 1.1; letter-spacing: -0.03em; margin: 0 0 8px; }}
+h2 {{ font-size: 20px; margin: 36px 0 12px; }}
+p {{ margin: 0 0 12px; }}
+.muted {{ color: var(--muted); }}
+.box {{ background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin: 0 0 12px; }}
+.label {{ font-size: 13px; color: var(--muted); margin: 0 0 4px; }}
+.row {{ display: flex; gap: 8px; align-items: center; }}
+code {{ font: 14px/1.5 ui-monospace, Consolas, monospace; overflow-wrap: anywhere; flex: 1; }}
+button {{ font: inherit; font-size: 14px; border: 0; border-radius: 8px; padding: 6px 12px; background: var(--accent); color: var(--bg); cursor: pointer; }}
+ol {{ padding-left: 22px; }} li {{ margin: 0 0 6px; }}
+table {{ width: 100%; border-collapse: collapse; }}
+td, th {{ text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }}
+th {{ font-size: 13px; color: var(--muted); font-weight: 600; }}
+a {{ color: var(--accent); }}
+</style>
+</head>
+<body>
+<main>
+<h1>{name}</h1>
+<p class="muted">{byline}</p>
+{description}
+<h2>Add it to Apps2Samsung</h2>
+<div class="box"><p class="label">Repository URL</p><div class="row"><code id="url">{url}</code><button type="button" data-copy="url">Copy</button></div></div>
+<div class="box"><p class="label">Key fingerprint: check that Apps2Samsung shows exactly this</p><div class="row"><code id="fp">{fingerprint}</code><button type="button" data-copy="fp">Copy</button></div></div>
+<ol>
+<li>Install <a href="https://apps2samsung.com/">Apps2Samsung</a> on your computer or phone.</li>
+<li>Open <b>Settings &gt; Installing &gt; Your sources</b>, click <b>Add a source</b> and paste the URL above.</li>
+<li>Apps2Samsung shows the name and the key fingerprint. If the fingerprint matches the one above, approve it.</li>
+<li>Using <a href="https://github.com/Apps2Samsung/TV-Store">TV-Store</a> on the TV? In Apps2Samsung, <b>Toolbox &gt; Send sources to TV</b> adds it there too.</li>
+</ol>
+<p class="muted">A valid signature means these apps come from this publisher. They are not checked by Apps2Samsung: only add a repository you trust.</p>
+<h2>Apps</h2>
+<table><thead><tr><th>App</th><th>Category</th><th>Newest version</th></tr></thead><tbody>
+{rows}
+</tbody></table>
+<p class="muted">Published {published}. This page is regenerated every day.</p>
+</main>
+<script>
+document.querySelectorAll("button[data-copy]").forEach(function (b) {{
+  b.addEventListener("click", function () {{
+    var t = document.getElementById(b.dataset.copy).textContent;
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () {{
+      b.textContent = "Copied"; setTimeout(function () {{ b.textContent = "Copy"; }}, 1500);
+    }}, function () {{ window.prompt("Copy this:", t); }});
+  }});
+}});
+</script>
+</body>
+</html>
+"""
+
+
+def write_index(path, manifest, fingerprint, site_url):
+    """A page for people at the root of the published site."""
+    e = html.escape
+    try:
+        with open(os.path.join(HERE, "..", "data", "categories.json"), encoding="utf-8") as f:
+            cat_names = {c["id"]: c["name"] for c in json.load(f)}
+    except (OSError, ValueError):
+        cat_names = {}
+    repo = manifest["repository"]
+    rows = []
+    for p in manifest["providers"]:
+        name = p.get("displayName") or p["id"]
+        src = p.get("source_url")
+        cell = f'<a href="{e(src)}">{e(name)}</a>' if src else e(name)
+        rows.append(f"<tr><td>{cell}</td><td>{e(cat_names.get(p['category'], 'Other'))}</td>"
+                    f"<td>{e(p.get('latestTag') or 'n/a')}</td></tr>")
+    byline = "Tizen apps by " + e(repo["maintainer"])
+    if repo.get("homepage"):
+        byline += f' · <a href="{e(repo["homepage"])}">{e(repo["homepage"])}</a>'
+    page = PAGE.format(
+        title=e(repo["name"]), name=e(repo["name"]), byline=byline,
+        description=f"<p>{e(repo['description'])}</p>" if repo.get("description") else "",
+        url=e(site_url.rstrip("/") + "/repository.json.signed"), fingerprint=e(fingerprint),
+        rows="\n".join(rows), published=e(manifest["generatedAt"].replace("T", " ").replace("Z", " UTC")))
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(page)
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description="Build and sign an independent repository's manifest.")
     ap.add_argument("--input", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--key", help="private key PEM file (default: the REPO_SIGNING_KEY environment variable)")
     ap.add_argument("--previous", help="URL or path of the currently published repository.json.signed")
+    ap.add_argument("--site-url", help="where --out is published; also writes index.html, a page for people")
     a = ap.parse_args(argv)
 
     if a.key:
@@ -264,6 +361,8 @@ def main(argv=None):
         _, fp = validator.validate(signed, paths["repository.pem"])
     except validator.Rejected as e:
         sys.exit(f"the generated manifest does not validate [{e.reason}]: {e}")
+    if a.site_url:
+        write_index(os.path.join(a.out, "index.html"), manifest, fp, a.site_url)
     files = sum(len(r["assets"]) for p in providers for r in p["releases"])
     print(f"signed {len(providers)} providers, {files} files -> {paths['repository.json.signed']}")
     print(f"key fingerprint: {fp}")
