@@ -1,9 +1,9 @@
 [
-  { "id": "media", "name": "Media servers & players", "color": "#2B59FF", "emoji": "📼" },
-  { "id": "iptv", "name": "IPTV & Live TV", "color": "#E8590C", "emoji": "📡" },
-  { "id": "streaming", "name": "Streaming", "color": "#D6336C", "emoji": "🎬" },
-  { "id": "games", "name": "Games & emulators", "color": "#7048E8", "emoji": "🎮" },
-  { "id": "casting", "name": "Casting & cameras", "color": "#0CA678", "emoji": "📷" },
-  { "id": "tools", "name": "Tools & system", "color": "#5C677D", "emoji": "🛠️" },
-  { "id": "other", "name": "Other", "color": "#868E96", "emoji": "📦" }
+  {"id": "media", "name": "Media servers & players", "color": "#2B59FF", "emoji": "📼", "description": "Clients for Jellyfin, Plex, Kodi, Immich, music servers; local USB / DLNA / SMB players"},
+  {"id": "iptv", "name": "IPTV & Live TV", "color": "#E8590C", "emoji": "📡", "description": "M3U / Xtream / Stalker players, live TV and broadcaster apps"},
+  {"id": "streaming", "name": "Streaming", "color": "#D6336C", "emoji": "🎬", "description": "Clients for streaming services and sites: YouTube, Twitch, Kick, anime, Nuvio, Stremio"},
+  {"id": "games", "name": "Games & emulators", "color": "#7048E8", "emoji": "🎮", "description": "Games, emulators and game streaming (Moonlight, Chiaki)"},
+  {"id": "casting", "name": "Casting & cameras", "color": "#0CA678", "emoji": "📷", "description": "AirPlay / FCast receivers, IP camera and NVR viewers"},
+  {"id": "tools", "name": "Tools & system", "color": "#5C677D", "emoji": "🛠️", "description": "Browsers, loaders, network and system utilities"},
+  {"id": "other", "name": "Other", "color": "#868E96", "emoji": "📦", "description": "Anything that fits none of the above"}
 ]

@@ -156,7 +156,9 @@ to filter the app list and to fold variants of the same app into one entry.
 
 **`category`** is required and is one of the ids in [`../data/categories.json`](../data/categories.json),
 the one list of categories (their order, English names and tile colours in Apps2Samsung and TV-Store).
-The validate check rejects any other value. Today they are:
+The validate check rejects any other value. The table below is generated from that file:
+
+<!-- categories:start -->
 
 | Value | Shown as | What goes here |
 |-------|----------|----------------|
@@ -167,6 +169,14 @@ The validate check rejects any other value. Today they are:
 | `casting` | Casting & cameras | AirPlay / FCast receivers, IP camera and NVR viewers |
 | `tools` | Tools & system | Browsers, loaders, network and system utilities |
 | `other` | Other | Anything that fits none of the above |
+
+<!-- categories:end -->
+
+**No category fits?** Use `other` and say in the pull request which category you'd suggest, or add it
+yourself in the same pull request: one entry in [`../data/categories.json`](../data/categories.json)
+with an `id` (lowercase letters, digits, `-` or `_`), an English `name`, a tile `color` (`#RRGGBB`), an
+`emoji` for the README and a one-line `description` of what goes in it. Its place in the list is its
+place in the apps and the README. Maintainers decide whether a new category goes in.
 
 **`group`** folds packages together. Every package that names the same group becomes one entry in the
 Apps2Samsung app list, and its files are offered in a variant picker. Use it when several repos ship
