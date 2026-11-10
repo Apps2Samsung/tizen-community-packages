@@ -10,12 +10,23 @@ on:
     - cron: '23 */2 * * *'
   # A merged PR is a push to main. Bot commits made with GITHUB_TOKEN never
   # trigger workflows, so the state/README commit below can't loop.
+  # Only what shapes the bundle or catalog.json: a merge of docs, the README
+  # generator or the independent-repository tools doesn't publish a release
+  # (the next scheduled run picks those up). Keep this list and BUNDLE_SCRIPTS
+  # below in step with the scripts this workflow and build-catalog.sh run.
   push:
     branches: [main]
     paths:
-      - 'packages/**'
+      - 'packages/*.json'
       - 'apps/**'
-      - 'scripts/**'
+      - 'data/categories.json'
+      - 'scripts/build-catalog.sh'
+      - 'scripts/build-manifests.sh'
+      - 'scripts/check-categories.py'
+      - 'scripts/fetch-asset.sh'
+      - 'scripts/package-info.py'
+      - 'scripts/scan-packages.py'
+      - 'scripts/unwrap-zip.sh'
   workflow_dispatch:
     inputs:
       force:
@@ -228,9 +239,10 @@ jobs:
             # The scripts shape what gets built and shipped, so a change there
             # rebuilds everything. Unknown diff (new branch, API error) does too.
             changed_files=$(api "https://api.github.com/repos/$GITHUB_REPOSITORY/compare/$BEFORE...$GITHUB_SHA" 2>/dev/null \
-              | jq -r '.files[].filename' || echo "scripts/?")
-            if [ -z "$changed_files" ] || echo "$changed_files" | grep -q '^scripts/'; then
-              full="scripts/ changed"
+              | jq -r '.files[].filename' || true)
+            BUNDLE_SCRIPTS='^scripts/(build-catalog\.sh|build-manifests\.sh|check-categories\.py|fetch-asset\.sh|package-info\.py|scan-packages\.py|unwrap-zip\.sh)$'
+            if [ -z "$changed_files" ] || echo "$changed_files" | grep -qE "$BUNDLE_SCRIPTS"; then
+              full="a bundle script changed"
             fi
           fi
           if [ "$EVENT" = "push" ]; then
