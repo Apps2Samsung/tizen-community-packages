@@ -1,0 +1,1 @@
+{"name":"DuoBeam","description":"Receiver for DuoBeam: shows both screens of a dual-screen Android handheld (AYN Thor) on the TV over Wi-Fi.","category":"casting","repo":"Dysprohol/duobeam","source":"release","branch":"main","assets":[{"match":"^DuoBeam-tizen-.*[.]wgt$","output_name":"DuoBeam.wgt"}]}
