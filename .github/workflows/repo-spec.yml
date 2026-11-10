@@ -10,6 +10,7 @@ on:
     paths:
       - 'spec/**'
       - 'scripts/repo-*.py'
+      - 'data/categories.json'
       - 'scripts/test-repo-spec.py'
       - 'scripts/package-info.py'
       - 'scripts/scan-packages.py'
@@ -20,6 +21,7 @@ on:
     paths:
       - 'spec/**'
       - 'scripts/repo-*.py'
+      - 'data/categories.json'
       - 'scripts/test-repo-spec.py'
       - 'scripts/package-info.py'
       - 'scripts/scan-packages.py'
@@ -115,6 +117,26 @@ jobs:
           python3 -I scripts/repo-generate.py --input "$t/input.json" --out "$t/two" --key "$t/key.pem" --previous "$t/one/repository.json.signed"
           python3 -I scripts/repo-validate.py "$t/two/repository.json.signed" --key "$t/two/repository.pem"
           python3 -I scripts/repo-validate.py "$t/two/repository.json.signed" --key "$t/two/repository.pem" --not-before "$(python3 -c 'import json,sys;print(json.load(open(sys.argv[1]))["generatedAt"])' "$t/one/repository.json")"
+      - name: Add an app with repo-input.py, then publish it with its landing page
+        # What Apps2Samsung/repository-template's "Add an app" and "Publish" workflows run.
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          t="$RUNNER_TEMP/simple"; mkdir -p "$t"
+          openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:3072 -out "$t/key.pem" 2>/dev/null
+          if python3 -I scripts/repo-input.py add --file "$t/in.json" --repository someone/my-apps --app Apps2Samsung/ReolinkViewer --category nope; then
+            echo "::error::an unknown category was accepted"; exit 1
+          fi
+          test ! -e "$t/in.json"
+          python3 -I scripts/repo-input.py add --file "$t/in.json" --repository someone/my-apps --app https://github.com/Apps2Samsung/ReolinkViewer --category casting --name "Reolink Viewer"
+          python3 -I scripts/repo-input.py add --file "$t/in.json" --repository someone/my-apps --app Apps2Samsung/Overscan --category tools
+          python3 -I scripts/repo-input.py remove --file "$t/in.json" --app overscan
+          python3 -I scripts/repo-generate.py --input "$t/in.json" --out "$t/site" --key "$t/key.pem" --site-url https://someone.github.io/my-apps | tee "$t/log"
+          fp=$(sed -n 's/^key fingerprint: //p' "$t/log")
+          grep -q "$fp" "$t/site/index.html"
+          grep -q "https://someone.github.io/my-apps/repository.json.signed" "$t/site/index.html"
+          python3 -c 'import json,sys; d=json.load(open(sys.argv[1])); assert d["repository"]["id"]=="io.github.someone.my-apps" and [p["id"] for p in d["providers"]]==["reolinkviewer"], d' "$t/in.json"
       - name: The template's input file is valid
         run: |
           python3 - <<'PY'
