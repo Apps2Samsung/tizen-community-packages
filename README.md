@@ -300,6 +300,10 @@ Your app should:
 
 Requests for these get closed as `wontfix`. It isn't gatekeeping: they simply can't work as side-loaded packages.
 
+> 🗂️ **Your own app doesn't fit [What we accept](packages/README.md#-what-we-accept)?** You can still offer it from
+> your [own repository](#-run-your-own-repository): users add it in Apps2Samsung themselves, and you are
+> responsible for having the right to distribute what you publish there.
+
 > 🏨 **Hospitality / hotel TVs (`HG…` models):** side-loading needs developer mode, which is enabled from the
 > Smart Hub **Apps** screen, and hospitality firmware doesn't expose it. Nothing in this repo can be installed on
 > those sets until the TV is taken out of hospitality mode.
@@ -313,8 +317,11 @@ own **signed repository** from your own GitHub repo. Users add it in Apps2Samsun
 this catalog, labelled with your repository's name.
 
 Copy [`templates/independent-repo/`](templates/independent-repo/), add a signing key as a secret, and the
-workflow publishes a signed manifest to your GitHub Pages. The format is in
+workflow publishes a signed manifest to your GitHub Pages. A finished setup to look at is
+[Apps2Samsung/repository-example](https://github.com/Apps2Samsung/repository-example). The format is in
 [`docs/repositories.md`](docs/repositories.md).
+
+What you publish there isn't reviewed here: you are responsible for having the right to distribute it.
 
 ---
 

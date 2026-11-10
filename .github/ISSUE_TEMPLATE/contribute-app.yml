@@ -12,6 +12,9 @@ body:
 
         The fields below map directly onto a package manifest, so please fill them in precisely.
 
+        Your app doesn't fit [What we accept](https://github.com/Apps2Samsung/tizen-community-packages/blob/main/packages/README.md#-what-we-accept)?
+        Publish it from your [own repository](https://github.com/Apps2Samsung/tizen-community-packages#-run-your-own-repository) instead.
+
   - type: input
     id: name
     attributes:
