@@ -57,6 +57,15 @@ file is valid and ready to merge.
   `description` (e.g. a wrapper that loads the latest TizenTube from TizenTube's own release
   channel). Code from any other third party is not accepted.
 
+### Doesn't fit?
+
+An app that isn't accepted here can still reach users from your own signed repository: users add it
+in Apps2Samsung themselves and see it labelled with your repository's name. Start from
+[`../templates/independent-repo/`](../templates/independent-repo/) (a working example:
+[Apps2Samsung/repository-example](https://github.com/Apps2Samsung/repository-example)); the format is
+in [`../docs/repositories.md`](../docs/repositories.md). What you publish there isn't reviewed here, so
+you are responsible for having the right to distribute it.
+
 ### Labels
 
 | Flag | When | What users see |
