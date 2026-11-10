@@ -1,4 +1,9 @@
-# Your own Tizen app repository
+# Your own Tizen app repository: manual setup
+
+> **Most people should use [Apps2Samsung/repository-template](https://github.com/Apps2Samsung/repository-template)
+> instead**: *Use this template*, a key made in the browser, apps added with a form. No terminal and no
+> JSON. This folder is the manual setup, for when you want to put the workflow in a repository you
+> already have, or control every field yourself.
 
 Publish your apps as a **signed repository** that users add in Apps2Samsung. They don't need a manifest
 in tizen-community-packages and don't have to wait for a review there. Your apps show up next to the

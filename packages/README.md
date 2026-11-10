@@ -59,12 +59,16 @@ file is valid and ready to merge.
 
 ### Doesn't fit?
 
-An app that isn't accepted here can still reach users from your own signed repository: users add it
-in Apps2Samsung themselves and see it labelled with your repository's name. Start from
-[`../templates/independent-repo/`](../templates/independent-repo/) (a working example:
-[Apps2Samsung/repository-example](https://github.com/Apps2Samsung/repository-example)); the format is
-in [`../docs/repositories.md`](../docs/repositories.md). What you publish there isn't reviewed here, so
-you are responsible for having the right to distribute it.
+An app that isn't accepted here can still reach users, without this review:
+
+- People can add your app's GitHub link themselves in Apps2Samsung (**Settings > Installing > Your
+  sources**), as long as it has a release with the `.wgt` or `.tpk`. Apps2Samsung only, not TV-Store.
+- Or publish your own signed repository, for TV-Store too: start from
+  [Apps2Samsung/repository-template](https://github.com/Apps2Samsung/repository-template), which is
+  set up by clicking, no terminal (the format is in [`../docs/repositories.md`](../docs/repositories.md)).
+
+What you publish that way isn't reviewed here, so you are responsible for having the right to
+distribute it.
 
 ### Labels
 

@@ -5,8 +5,10 @@ place, usually GitHub Pages. Users add it in Apps2Samsung, which can also hand i
 then show up next to the official catalog, labelled with the repository's name.
 
 This page is the normative spec. The schema is [`spec/repository.schema.json`](../spec/repository.schema.json);
-the test vectors are in [`spec/fixtures/`](../spec/fixtures/); a ready-to-copy publisher setup is in
-[`templates/independent-repo/`](../templates/independent-repo/), and a working example is
+the test vectors are in [`spec/fixtures/`](../spec/fixtures/). To publish one, start from
+[Apps2Samsung/repository-template](https://github.com/Apps2Samsung/repository-template) (set up by clicking,
+key made at [apps2samsung.com/repository-key](https://apps2samsung.com/repository-key/)); the manual setup
+is in [`templates/independent-repo/`](../templates/independent-repo/), and a working example is
 [Apps2Samsung/repository-example](https://github.com/Apps2Samsung/repository-example).
 
 The words *must*, *must not* and *should* are used in their usual spec sense.
