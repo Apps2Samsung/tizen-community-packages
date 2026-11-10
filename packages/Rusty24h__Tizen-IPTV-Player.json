@@ -9,7 +9,13 @@
   "assets": [
     {
       "match": "^SmartSTBcloneV2[.]wgt$",
+      "variant": "v2.1.0 (Latest)",
       "output_name": "SmartSTBcloneV2.wgt"
+    },
+    {
+      "match": "^SmartSTBcloneV2-v2[.]0[.]0[.]wgt$",
+      "variant": "v2.0.0 (Stable)",
+      "output_name": "SmartSTBcloneV2-v2.0.0.wgt"
     }
   ]
 }
