@@ -38,6 +38,10 @@ file is valid and ready to merge.
   [iptv-org](https://github.com/iptv-org/iptv) playlist as a default: it only collects publicly
   available channels. Content streamed straight from the rights holder's own public servers is
   fine too (for example Apple's aerial videos from Apple's CDN).
+  This is about what the package does out of the box. An app that downloads add-ons, plugins or
+  site modules after install is fine as long as the user adds that add-on source themselves (your
+  README may say where to find it). An add-on source the app presets, or one a later in-app update
+  adds, counts as a default source.
 - **Rebrands or forks that remove upstream credit or the license**, or that claim to be original
   work.
 - **Modded, cracked or "premium unlocked" builds** of paid apps or services.
