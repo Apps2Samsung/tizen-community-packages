@@ -33,6 +33,9 @@ A finished setup to look at: [Apps2Samsung/repository-example](https://github.co
    - one provider per app: `url` is the app's GitHub repo (`owner/repo`); `take` is how many recent
      releases to list (default 1); `match` is an optional regex to pick assets when a release has
      several `.wgt` / `.tpk` files; `prerelease: true` also takes prereleases.
+   - `category` (required per provider): where the app is listed in Apps2Samsung and TV-Store. Use an
+     id from [`data/categories.json`](https://github.com/Apps2Samsung/tizen-community-packages/blob/main/data/categories.json), the official catalog's list; an id a
+     client doesn't know shows under `other`.
    - optional per provider: `source_url`, `adult`, `flags` (`closed-source`, `self-updating`, `root`),
      `cert_level: "partner"`, `buildInfo` (`name`, `description`, `previewImage`).
 
