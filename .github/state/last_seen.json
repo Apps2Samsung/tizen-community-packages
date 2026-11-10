@@ -26,7 +26,7 @@
   "build:lvndry/tv-dashboard@main": "d2b0c479ca5c4b30f33b67e9ef602d92c2ce3be2",
   "build:matifDreamIt/IPTV-Tizen-TV@main": "d8eb66b9874d54a225cf584824544925e7dd521f",
   "build:natureglass/haven-tizen-ha@main": "18ffa3e8143b71b6a0677e36cb46470370ba1b19",
-  "build:pley-media-server/pley@master": "a1ad929cbdd48e77503e3dee28bb2dc6d0e8afce",
+  "build:pley-media-server/pley@master": "b348f68703a682c7b6b4910b1d7574085385cc28",
   "build:pvk689/snake-game-tizen@master": "62ccffcf53fd72d482bd943c865cd55e8dbf6c54",
   "build:raykholo/tubearchivist-tv@main": "3cb035faf4d9e630761cee288513929fb993af41",
   "build:rfaile313/samsucks@main": "6b00e926e163a3154dd1993a26b47482d61ebf40",
@@ -38,7 +38,7 @@
   "release:AdvaithAvinash/AniUltimatium": "stable-v1.25",
   "release:AdvaithAvinash/UltimatiumTube": "stable-v1.13",
   "release:Apps2Samsung/ReolinkViewer": "v1.1.0",
-  "release:Apps2Samsung/TV-Store": "v0.3.25",
+  "release:Apps2Samsung/TV-Store": "v0.3.26",
   "release:AquaPlayIPTV/aquaplay-samsung": "v1.0.52",
   "release:Edsol/go2rtc-tizen": "v0.1.0",
   "release:IIyn/omegatube": "v1.5.0",
@@ -280,6 +280,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-838",
-  "stale:release:christopherklint97/streamvault": "community-838"
+  "stale:release:MrSimmo/sonance3": "community-839",
+  "stale:release:christopherklint97/streamvault": "community-839"
 }
