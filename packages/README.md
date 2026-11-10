@@ -105,7 +105,7 @@ one repo with the same `source`, or without a shared `group`.
 |-------|------|-------|
 | `name` | string | Display name in the README table. No `\|` or newlines. |
 | `description` | string | One-line description for the README table. No `\|` or newlines. |
-| `category` | enum | Where the app shows up when the Apps2Samsung list is filtered: see [Category, group and variant](#%EF%B8%8F-category-group-and-variant). |
+| `category` | string | Where the app shows up when the Apps2Samsung list is filtered: see [Category, group and variant](#%EF%B8%8F-category-group-and-variant). |
 | `repo` | string | `owner/repo` on the forge named by `host` (GitHub by default). Used as the manifest key, the README link, and (for `build`/`release`) the API target. |
 | `source` | enum | One of `release`, `build`, `direct`: see below. |
 
@@ -154,7 +154,9 @@ Apps2Samsung reads a `catalog.json` from every community release (built by
 [`../scripts/build-catalog.sh`](../scripts/build-catalog.sh), one entry per shipped file) and uses it
 to filter the app list and to fold variants of the same app into one entry.
 
-**`category`** is required and is one of:
+**`category`** is required and is one of the ids in [`../data/categories.json`](../data/categories.json),
+the one list of categories (their order, English names and tile colours in Apps2Samsung and TV-Store).
+The validate check rejects any other value. Today they are:
 
 | Value | Shown as | What goes here |
 |-------|----------|----------------|
@@ -636,7 +638,7 @@ repo with a live one; it needs a distinct `name` and `output_name`:
 - File is named `packages/<owner>__<repo>.json` (a second manifest of the same repo, with another
   `source` and the same `group`: `packages/<owner>__<repo>__<suffix>.json`).
 - `name` and `description` contain no `|` or newlines (they land in a Markdown table).
-- `category` is one of the seven values above; if the app belongs with an existing one, set the same `group`.
+- `category` is one of the ids in `data/categories.json`; if the app belongs with an existing one, set the same `group`.
 - Adult-only content? Set `"adult": true` and keep `name` / `description` plain.
 - Gains root on the TV? Set `"flags": ["root"]`.
 - Source not in the repository? Set `"flags": ["closed-source"]`.

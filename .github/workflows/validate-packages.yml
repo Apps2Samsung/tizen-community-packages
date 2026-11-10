@@ -17,9 +17,9 @@ permissions:
   pull-requests: read
 
 jobs:
-  # Does the PR touch packages/? Read from the API, no checkout. When the API
-  # call fails the answer is "yes", so a hiccup runs the validation instead of
-  # skipping it.
+  # Does the PR touch packages/ or data/categories.json? Read from the API, no
+  # checkout. When the API call fails the answer is "yes", so a hiccup runs the
+  # validation instead of skipping it.
   changes:
     runs-on: ubuntu-latest
     outputs:
@@ -38,10 +38,10 @@ jobs:
             echo "::warning::Could not list the PR's files; validating anyway."
             echo "packages=true" >> "$GITHUB_OUTPUT"; exit 0
           fi
-          if printf '%s\n' "$files" | grep -q '^packages/'; then
+          if printf '%s\n' "$files" | grep -qE '^(packages/|data/categories\.json$)'; then
             echo "packages=true" >> "$GITHUB_OUTPUT"
           else
-            echo "No file under packages/ changed: nothing to validate."
+            echo "Nothing under packages/ or data/categories.json changed: nothing to validate."
             echo "packages=false" >> "$GITHUB_OUTPUT"
           fi
 
@@ -61,8 +61,8 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
 
-      # Overlay ONLY the manifests the PR itself adds, changes or deletes,
-      # measured against its merge base with main. Everything else keeps main's
+      # Overlay ONLY the manifests (and data/categories.json) the PR itself adds,
+      # changes or deletes, measured against its merge base with main. Everything else keeps main's
       # copy: a fork branched before a schema change (e.g. the required
       # category field) must not fail on the manifests it never touched.
       # The files are read by jq / check-jsonschema / python json.load, never
@@ -76,7 +76,7 @@ jobs:
           base=$(git merge-base HEAD pr)
           echo "Validating PR #${{ github.event.pull_request.number }} (${{ github.event.pull_request.head.sha }}), merge base $base"
           # --no-renames: a renamed manifest is a delete plus an add.
-          git diff --no-renames --name-only --diff-filter=AM "$base" pr -- packages/ > "$RUNNER_TEMP/pr-changed"
+          git diff --no-renames --name-only --diff-filter=AM "$base" pr -- packages/ data/categories.json > "$RUNNER_TEMP/pr-changed"
           git diff --no-renames --name-only --diff-filter=D  "$base" pr -- packages/ > "$RUNNER_TEMP/pr-deleted"
           if [ -s "$RUNNER_TEMP/pr-changed" ]; then
             echo "Added/changed:"; sed 's/^/  /' "$RUNNER_TEMP/pr-changed"
@@ -98,6 +98,12 @@ jobs:
 
       - name: JSON Schema validation
         run: check-jsonschema --schemafile packages.schema.json packages/*.json
+
+      # data/categories.json is well formed and every manifest's category is one of its
+      # ids. The schema only checks the shape of "category", so without this a typo
+      # would land an app under "Other".
+      - name: Categories
+        run: python3 -I scripts/check-categories.py
 
       - name: Structural checks (filenames, uniqueness)
         run: |
