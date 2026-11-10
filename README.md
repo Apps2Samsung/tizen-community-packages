@@ -1,7 +1,7 @@
 # 🌐 Tizen Community Packages
 [![Sync Tizen Community Packages](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml/badge.svg)](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Packages](https://img.shields.io/badge/packages-141-blue.svg)](#-current-packages)
+[![Packages](https://img.shields.io/badge/packages-142-blue.svg)](#-current-packages)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-green.svg)](../../issues)
 [![Tizen](https://img.shields.io/badge/Platform-Tizen-lightgrey.svg)](https://www.tizen.org/)
 [![Community](https://img.shields.io/badge/Community-Driven-orange.svg)](#)
@@ -176,12 +176,13 @@ Please check the [Releases](../../releases) page for version-specific details.
 </details>
 
 <details>
-<summary><b>📷 Casting & cameras</b> (7)</summary>
+<summary><b>📷 Casting & cameras</b> (8)</summary>
 
 | 🧩 Application | 📝 Description | ⚙️ Version |
 |----------------|----------------|------------|
 | **AirTizen**<br>[MrHumanRebel](https://github.com/MrHumanRebel/airtizen) | AirPlay receiver for Samsung Tizen TV: stream audio/video to older Samsung TVs. | `v2.2.34` |
 | **Camera PiP**<br>[dzikus](https://github.com/dzikus/tizen-camera-pip) | Doorbell and driveway cameras on a Samsung Tizen TV: pops up on a trigger (Home Assistant or any webhook), plays through the hardware decoder so the app behind it keeps running, and fires actions like opening the gate from the remote. | `v1.2.0` |
+| **DuoBeam**<br>[Dysprohol](https://github.com/Dysprohol/duobeam) | Receiver for DuoBeam: shows both screens of a dual-screen Android handheld (AYN Thor) on the TV over Wi-Fi. | `v0.8.9` |
 | **FCast**<br>[futo-org](https://github.com/futo-org/fcast) | FCast is an open source protocol that enables wireless streaming of audio and video content between devices. | `Wed, 08 Oct 2025 17:07:02 GMT` |
 | **go2rtc**<br>[Edsol](https://github.com/Edsol/go2rtc-tizen) | Watch the cameras of a go2rtc server (standalone or embedded in Frigate): camera grid with previews and full-screen live view. | `v0.1.0` |
 | **Reolink Viewer**<br>[Apps2Samsung](https://github.com/Apps2Samsung/ReolinkViewer) | Watch a Reolink camera or NVR on your TV: enter its local IP and login, press Start. | `v1.1.0` |
