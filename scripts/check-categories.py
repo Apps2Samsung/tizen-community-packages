@@ -2,13 +2,15 @@
 """Check data/categories.json, and that every manifest uses one of its ids.
 
 data/categories.json is the one list of catalog categories: an array whose
-order is the display order, each entry {id, name, color, emoji?}. It feeds
+order is the display order, each entry {id, name, color, emoji?, description?}.
+description says what belongs in the category (for contributors). It feeds
 catalog.json ("categories" and "category_colors", scripts/build-catalog.sh)
 and the README sections (scripts/render-readme.py).
 
 The file itself must have: ids matching ^[a-z0-9][a-z0-9_-]{0,31}$, no id
 twice, a non-empty one-line name, a colour #RRGGBB, an optional non-empty
-emoji, nothing else, and an "other" entry (where an unknown category lands).
+emoji, an optional one-line description,
+nothing else, and an "other" entry (where an unknown category lands).
 
 Every manifest's "category" must be one of the ids: packages.schema.json only
 checks the shape, so a typo would otherwise land an app under "Other".
@@ -24,7 +26,7 @@ import sys
 
 ID = re.compile(r"^[a-z0-9][a-z0-9_-]{0,31}$")
 COLOR = re.compile(r"^#[0-9A-Fa-f]{6}$")
-KEYS = {"id", "name", "color", "emoji"}
+KEYS = {"id", "name", "color", "emoji", "description"}
 
 
 def check_file(path):
@@ -59,6 +61,9 @@ def check_file(path):
             errors.append(f"{where}: color {c.get('color')!r} must be #RRGGBB")
         if "emoji" in c and (not isinstance(c["emoji"], str) or not c["emoji"].strip()):
             errors.append(f"{where}: emoji, when present, must be a non-empty string")
+        d = c.get("description")
+        if "description" in c and (not isinstance(d, str) or not d.strip() or "\n" in d or "|" in d):
+            errors.append(f"{where}: description, when present, must be a non-empty line without '|'")
     if "other" not in ids:
         errors.append(f"{path}: must have an 'other' entry (where an unknown category lands)")
     return errors, ids

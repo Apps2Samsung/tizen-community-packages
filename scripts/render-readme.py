@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""Regenerate the Current Packages section of README.md from packages/*.json.
+"""Regenerate the Current Packages section of README.md from packages/*.json,
+and the category table in packages/README.md from data/categories.json.
 
 Packages are grouped by category, one collapsed <details> table per category
-in the order of data/categories.json (title: its emoji and name), so the README stays short as the catalog grows. Rows (name / repo link /
+in the order of data/categories.json (title: its emoji and name), so the
+README stays short as the catalog grows. Rows (name / repo link /
 description) come from the manifests; the Version column comes from
 .github/state/last_seen.json. Manifests with "enabled": false are retired - the
 sync no longer ships them, so they are left out of the tables and the badge.
@@ -10,7 +12,9 @@ Manifests with "adult": true are kept out of the category sections and listed
 in their own collapsed 18+ section after them.
 
 Everything between the packages:start / packages:end markers is replaced;
-the rest of the README is left untouched.
+the rest of the README is left untouched. Likewise between categories:start /
+categories:end in packages/README.md (id, name, description per category),
+when that file has the markers.
 
 usage: render-readme.py [README.md]
 """
@@ -22,6 +26,8 @@ import sys
 
 STATE = pathlib.Path(".github/state/last_seen.json")
 START, END = "<!-- packages:start -->", "<!-- packages:end -->"
+GUIDE = pathlib.Path("packages/README.md")
+CAT_START, CAT_END = "<!-- categories:start -->", "<!-- categories:end -->"
 
 CATEGORIES = pathlib.Path("data/categories.json")
 
@@ -105,6 +111,25 @@ def section():
     return out
 
 
+def category_table():
+    """packages/README.md table of the categories, in display order."""
+    cats = json.loads(CATEGORIES.read_text(encoding="utf-8"))
+    out = [CAT_START, "", "| Value | Shown as | What goes here |", "|-------|----------|----------------|"]
+    out += [f"| `{c['id']}` | {c['name']} | {c.get('description', 'n/a')} |" for c in cats]
+    return out + ["", CAT_END]
+
+
+def render_guide():
+    if not GUIDE.exists():
+        return
+    text = GUIDE.read_text(encoding="utf-8")
+    if CAT_START not in text or CAT_END not in text:
+        return
+    head, rest = text.split(CAT_START, 1)
+    GUIDE.write_text(head + "\n".join(category_table()) + rest.split(CAT_END, 1)[1], encoding="utf-8")
+    print(f"Rendered the category table in {GUIDE}.")
+
+
 def main():
     readme = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else "README.md")
     text = readme.read_text()
@@ -118,6 +143,7 @@ def main():
     text = re.sub(r"(img\.shields\.io/badge/packages-)\d+(-)", rf"\g<1>{count}\g<2>", text)
     readme.write_text(text)
     print(f"Rendered README package sections + badge ({count} enabled packages).")
+    render_guide()
 
 
 if __name__ == "__main__":

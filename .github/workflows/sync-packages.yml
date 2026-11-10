@@ -997,7 +997,7 @@ jobs:
             git reset -q --hard origin/main
             cp "$RUNNER_TEMP/last_seen.json" .github/state/last_seen.json
             python3 -I scripts/render-readme.py
-            git add .github/state/last_seen.json README.md
+            git add .github/state/last_seen.json README.md packages/README.md
             if git diff --cached --quiet; then
               echo "Nothing to commit."
               exit 0
