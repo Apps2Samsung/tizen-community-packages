@@ -241,7 +241,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 
 | 🧩 Application | 📝 Description | ⚙️ Version |
 |----------------|----------------|------------|
-| **StashZen**<br>[StashZen](https://github.com/Stashified/StashZen) | A Stash client for Samsung Tizen TVs. | `v0.43.1` |
+| **StashZen**<br>[StashZen](https://github.com/Stashified/StashZen) | A Stash client for Samsung Tizen TVs. | `v0.44.0` |
 
 </details>
 

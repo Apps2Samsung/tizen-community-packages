@@ -66,7 +66,7 @@
   "release:Ricrdsson1/kodi-tizen-wasm": "Alpha-0.0.8",
   "release:RitwickVerma/TizenAmbilight": "v1.0.0",
   "release:Rusty24h/Tizen-IPTV-Player": "2.1.0",
-  "release:Stashified/StashZen": "v0.43.1",
+  "release:Stashified/StashZen": "v0.44.0",
   "release:SuperDOS/velox": "v1.1.0",
   "release:SushyDev/tizen-youtube": "v1.6.0",
   "release:Sype0/retroarch-tizen": "v0.3.2",
@@ -205,7 +205,7 @@
   "config:release:Replexo/kick-tizen": "9b367c250f6c8cf5",
   "config:release:Ricrdsson1/kodi-tizen-wasm": "2e6a286a09dec632",
   "config:release:RitwickVerma/TizenAmbilight": "76785aa38cf8e857",
-  "config:release:Rusty24h/Tizen-IPTV-Player": "93c42a6e899c6d4d",
+  "config:release:Rusty24h/Tizen-IPTV-Player": "cb602fdd700ffbc8",
   "config:release:Stashified/StashZen": "39c7e3fdbe4019fc",
   "config:release:SuperDOS/velox": "cdd050650976adfa",
   "config:release:SushyDev/tizen-youtube": "91cca388c9ee22ff",
@@ -280,6 +280,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-835",
-  "stale:release:christopherklint97/streamvault": "community-835"
+  "stale:release:MrSimmo/sonance3": "community-836",
+  "stale:release:christopherklint97/streamvault": "community-836"
 }
