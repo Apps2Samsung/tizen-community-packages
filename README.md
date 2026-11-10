@@ -312,14 +312,19 @@ Requests for these get closed as `wontfix`. It isn't gatekeeping: they simply ca
 
 ## 🗂️ Run Your Own Repository
 
-Don't want to wait for a review here, or does your app fall outside [What we accept](packages/README.md#-what-we-accept)? Publish your
-own **signed repository** from your own GitHub repo. Users add it in Apps2Samsung and see your apps next to
-this catalog, labelled with your repository's name.
+Don't want to wait for a review here, or does your app fall outside [What we accept](packages/README.md#-what-we-accept)?
+You can offer it yourself. Two ways, both without a terminal:
 
-Copy [`templates/independent-repo/`](templates/independent-repo/), add a signing key as a secret, and the
-workflow publishes a signed manifest to your GitHub Pages. A finished setup to look at is
-[Apps2Samsung/repository-example](https://github.com/Apps2Samsung/repository-example). The format is in
-[`docs/repositories.md`](docs/repositories.md).
+- **Just your app's GitHub link.** Put your `.wgt` or `.tpk` in a GitHub release. People add the link to
+  your app's repository in Apps2Samsung under **Settings > Installing > Your sources**. Nothing to set up,
+  but it works in Apps2Samsung only, not in TV-Store on the TV.
+- **Your own signed repository**, for TV-Store too and for several apps under your name. Start from
+  **[Apps2Samsung/repository-template](https://github.com/Apps2Samsung/repository-template)**: click
+  *Use this template*, turn on Pages, make your key at
+  [apps2samsung.com/repository-key](https://apps2samsung.com/repository-key/) and add your apps with a
+  form. About five minutes, all clicking. A finished one:
+  [Apps2Samsung/repository-example](https://github.com/Apps2Samsung/repository-example). The format is
+  in [`docs/repositories.md`](docs/repositories.md).
 
 What you publish there isn't reviewed here: you are responsible for having the right to distribute it.
 
