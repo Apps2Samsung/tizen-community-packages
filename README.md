@@ -294,7 +294,7 @@ Your app should:
   Samsung TVs.
 - **Modded, cracked or "premium unlocked" builds** of paid apps or services.
 - **Closed-source packages without the author's permission** to redistribute them ([What we accept](packages/README.md#-what-we-accept)).
-- **Apps that come with unlicensed content** built in (IPTV playlists, pirate-site scrapers, torrent indexers).
+- **Apps that come with unlicensed content** built in (IPTV playlists, pirate-site scrapers, torrent indexers), or that preset an add-on source providing it.
 - **Rebrands of other projects** that remove the original credits or license.
 
 Requests for these get closed as `wontfix`. It isn't gatekeeping: they simply can't work as side-loaded packages.

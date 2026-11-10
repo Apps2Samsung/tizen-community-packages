@@ -152,7 +152,7 @@ body:
           required: true
         - label: "Closed source only: it isn't derived from GPL/LGPL/AGPL code (tick this for open-source apps too)"
           required: true
-        - label: "It ships no content sources by default (no built-in playlists, scrapers or torrent indexers)"
+        - label: "It ships no content sources by default (no built-in playlists, scrapers or torrent indexers, and no preset add-on or module source that provides them)"
           required: true
         - label: "If it's a fork or based on other code: upstream is credited and its license is kept"
           required: true
