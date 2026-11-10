@@ -267,7 +267,8 @@ Each app is defined by **one JSON file** in the [`packages/`](packages/) folder.
 
 1. **Fork** this repository.
 2. **Add** a file named `packages/<owner>__<repo>.json` for your app (copy an existing one as a template). See [`packages/README.md`](packages/README.md) for every field and worked examples of the three types (`release`, `build`, `direct`).
-3. **Open a pull request.** A bot automatically validates your file against [`packages.schema.json`](packages.schema.json): a green check means it's ready to merge. Once merged, it's picked up by the next automated build.
+3. **Pick a `category`** from [`data/categories.json`](data/categories.json) (what goes where: [Category, group and variant](packages/README.md#%EF%B8%8F-category-group-and-variant)). None fits? Use `other` and suggest a new one in the pull request.
+4. **Open a pull request.** A bot automatically validates your file against [`packages.schema.json`](packages.schema.json) and the category list: a green check means it's ready to merge. Once merged, it's picked up by the next automated build.
 
 Your app should:
 - Meet [What we accept](packages/README.md#-what-we-accept): open source under any license that allows redistribution, or closed

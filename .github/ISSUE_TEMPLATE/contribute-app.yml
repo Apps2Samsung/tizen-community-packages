@@ -31,6 +31,18 @@ body:
       required: true
 
   - type: input
+    id: category
+    attributes:
+      label: "🏷️ Category"
+      description: |
+        One of the ids in [data/categories.json](https://github.com/Apps2Samsung/tizen-community-packages/blob/main/data/categories.json):
+        what goes where is in [Category, group and variant](https://github.com/Apps2Samsung/tizen-community-packages/blob/main/packages/README.md#%EF%B8%8F-category-group-and-variant).
+        None fits? Write the category you'd suggest; a maintainer decides whether to add it or uses `other`.
+      placeholder: "media"
+    validations:
+      required: true
+
+  - type: input
     id: repo
     attributes:
       label: "🔗 Repository (owner/repo)"
