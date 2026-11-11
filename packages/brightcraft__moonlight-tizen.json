@@ -2,6 +2,7 @@
   "name": "Moonlight-Tizen",
   "description": "Open-source client for NVIDIA GameStream and Sunshine Tizen OS 5.5 or higher.",
   "category": "games",
+  "preview_image": "https://iili.io/fsvn6mJ.png",
   "group": "Moonlight",
   "repo": "brightcraft/moonlight-tizen",
   "repo_label": "BrightCraft",
