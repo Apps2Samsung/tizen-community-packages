@@ -2,6 +2,7 @@
   "name": "Moonlight (No Gamemode)",
   "description": "Open-source client for NVIDIA GameStream and Sunshine with gamemode disabled.",
   "category": "games",
+  "preview_image": "https://iili.io/fsvn6mJ.png",
   "group": "Moonlight",
   "repo": "MrPhaze62/moonlight-chrome-tizen-no-gamemode",
   "source": "release",

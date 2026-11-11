@@ -2,6 +2,7 @@
   "name": "Moonlight (ToypoodleGaming)",
   "description": "Moonlight NVIDIA GameStream / Sunshine client (ToypoodleGaming fork).",
   "category": "games",
+  "preview_image": "https://iili.io/fsvn6mJ.png",
   "group": "Moonlight",
   "repo": "toypoodlegaming/moonlight-chrome-tizen",
   "source": "release",

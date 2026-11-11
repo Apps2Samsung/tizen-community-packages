@@ -2,6 +2,7 @@
   "name": "Twitch Old Tizen",
   "description": "Twitch client for older Samsung Tizen TVs (2.4/3.0) with 720p/1080p playback fixes for channels that enable 1440p, plus device-code sign-in.",
   "category": "streaming",
+  "preview_image": "https://iili.io/fsvUNu2.md.gif",
   "repo": "numbereleven-a/smarttv-twitch-old-tizen",
   "source": "release",
   "branch": "master",
