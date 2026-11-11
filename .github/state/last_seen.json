@@ -44,7 +44,7 @@
   "release:Edsol/go2rtc-tizen": "v0.1.0",
   "release:IIyn/omegatube": "v1.5.0",
   "release:Kepler75/StremioK": "v2.3.4",
-  "release:Knikt/APL-Launcher-for-TizenOS": "v1.1.3",
+  "release:Knikt/APL-Launcher-for-TizenOS": "v1.1.4",
   "release:Knikt/APL-TV-for-TizenOS": "v1.0.14",
   "release:Licaa21/Smart-TV": "fork-v2.0.9",
   "release:MaCHeaMaRoBi/JellyLean": "v1.0.9",
@@ -75,7 +75,7 @@
   "release:Trent407/chiaki-tizen": "v0.2.0",
   "release:Viren070/AIOStreams": "smart-tv-v0.8.0",
   "release:brightcraft/moonlight-tizen": "v1.20.0",
-  "release:cash94/MonoServer": "v1.0.35",
+  "release:cash94/MonoServer": "v1.0.36",
   "release:cash94/TorrStream-Tizen": "v1.1.4",
   "release:christopherklint97/streamvault": "v0.1.0",
   "release:cloke-tech/Lumen-TV": "v1.17.1",
@@ -133,6 +133,7 @@
   "release:toypoodlegaming/moonlight-chrome-tizen": "samsung_wasm-21031332442",
   "release:victorreinor/nyx-tv": "v1.7.1",
   "release:yumata/lampa": "v1.4.1",
+  "release:zabique/Reolink2Samsung": "v1.1.0",
   "direct:Apps2Samsung/tizen-community-packages": "etag:\"76c7abc2fc40f84b17ac2acf306749e29bf1461541ceb65d5600f2f5e6555842\"|mod:|len:3130441",
   "direct:KaashDev/TVapp": "etag:\"fb2c8f15fdce92231027555f26245016e87050b2173c8af340805c37fd8cd3af\"|mod:|len:979034",
   "direct:TizenTVWebApp/TVideoPlayer": "etag:\"5ffe8d0002722208c57393676c1d5d0e8f0e0592c1a511f275505455c2d63349\"|mod:|len:61404893",
@@ -277,6 +278,7 @@
   "config:release:toypoodlegaming/moonlight-chrome-tizen": "ccae73e62fd220db",
   "config:release:victorreinor/nyx-tv": "ed8bbc8f6b9b71b8",
   "config:release:yumata/lampa": "c22db37b6eba7991",
+  "config:release:zabique/Reolink2Samsung": "de4596b8a09b7ccb",
   "config:direct:Apps2Samsung/tizen-community-packages": "ddd29c308be438d0",
   "config:direct:KaashDev/TVapp": "8b70a432757fe0ce",
   "config:direct:TizenTVWebApp/TVideoPlayer": "914ed4daec193066",
@@ -286,6 +288,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-854",
-  "stale:release:christopherklint97/streamvault": "community-854"
+  "stale:release:MrSimmo/sonance3": "community-855",
+  "stale:release:christopherklint97/streamvault": "community-855"
 }
