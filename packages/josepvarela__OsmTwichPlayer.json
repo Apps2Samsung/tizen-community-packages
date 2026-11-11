@@ -1,6 +1,6 @@
 {
   "name": "OsmTwich",
-  "description": "Unofficial Twitch client for Samsung Tizen TV.",
+  "description": "Unofficial Twitch Player with 7TV emotes for Samsung Smart TVs with Tizen OS.",
   "category": "streaming",
   "repo": "josepvarela/OsmTwichPlayer",
   "repo_label": "OsmTwichPlayer",
