@@ -137,6 +137,7 @@ one repo with the same `source`, or without a shared `group`.
 | `flags` | array | `["root"]`, `["closed-source"]`, `["self-updating"]` or a combination. See [What we accept](#-what-we-accept) and [Root packages](#-root-packages). |
 | `moved_to` | object | `{ "url", "fingerprint" }` of the independent repository the app moved to. Apps2Samsung offers users who have the app installed to add it. See [`../docs/repositories.md`](../docs/repositories.md#moving-an-app-out-of-the-official-catalog). |
 | `cert_level` | enum | `"partner"` for an app that only works when signed with a Samsung Partner certificate. Apps2Samsung and TV-Store then sign it with the user's Partner certificate, see [Partner certificate](#-partner-certificate). Defaults to `"public"`. |
+| `preview_image` | string | HTTPS URL of a 16:9 screenshot, shown on the app's card in Apps2Samsung and TV-Store. Host it somewhere stable, the app's own repository is fine. |
 | `user_settings` | object | Values the user fills in before install, written into the package before re-signing, see [User settings](#%EF%B8%8F-user-settings). |
 | `host` | enum | `github` (default) or `gitlab`. Where `repo` lives. `gitlab` is only supported for `source: "build"`: see [GitLab-hosted projects](#-gitlab-hosted-projects). |
 
@@ -227,7 +228,7 @@ and distinctive within the group: the fork or author, the Tizen version range, o
 
 Every community release ships a `catalog.json` next to its packages, one entry per shipped file.
 Each entry copies the manifest's `name`, `description`, `category`, `group`, `variant`, `repo`,
-`adult`, `flags` and `user_settings`, and adds what the package says about itself, read from its own
+`adult`, `flags`, `preview_image` and `user_settings`, and adds what the package says about itself, read from its own
 `config.xml` or `tizen-manifest.xml` when the bundle is assembled
 ([`../scripts/package-info.py`](../scripts/package-info.py)): `version`, `app_id`, `package_id` and
 `required_version` (the `required_version` of a `.wgt`, the `api-version` of a `.tpk`). Apps2Samsung
