@@ -87,6 +87,7 @@
   "release:dos-ise/freeserf-tizen": "v1.0",
   "release:dos-ise/openttd-tizen": "v15.3",
   "release:dzikus/tizen-camera-pip": "v1.2.0",
+  "release:enesk4yh4n-lab/TizenTV-Film-Merkezi": "v2.0.0",
   "release:exzos28/tizen-os-ambilight": "v1.2.1",
   "release:fidoboy/moonlight-tizen-ac3": "v1.2.3",
   "release:gabrielmaialva33/streamix-tv": "v1.0.027",
@@ -228,6 +229,7 @@
   "config:release:dos-ise/freeserf-tizen": "7de907fb78f0a0c9",
   "config:release:dos-ise/openttd-tizen": "a2b82f37245c3e73",
   "config:release:dzikus/tizen-camera-pip": "e53f24d2e5016590",
+  "config:release:enesk4yh4n-lab/TizenTV-Film-Merkezi": "373aaba3f53a9b30",
   "config:release:exzos28/tizen-os-ambilight": "2ec9266bc67eee53",
   "config:release:fidoboy/moonlight-tizen-ac3": "013d05c3a26a171f",
   "config:release:gabrielmaialva33/streamix-tv": "12a04c8f121d7a2c",
@@ -282,6 +284,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-849",
-  "stale:release:christopherklint97/streamvault": "community-849"
+  "stale:release:MrSimmo/sonance3": "community-850",
+  "stale:release:christopherklint97/streamvault": "community-850"
 }
