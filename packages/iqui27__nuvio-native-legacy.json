@@ -2,7 +2,6 @@
   "name": "Nuvio Native Legacy",
   "description": "Unofficial native C/SDL2 Nuvio client, fast on older TVs. Native .tpk per Tizen version (4.0-5.5, 6.0, 6.5-7, 8-9) plus a WebAssembly .wgt for Tizen 5.5+.",
   "category": "streaming",
-  "preview_image": "https://nuvioapp.space/assets/newss/Screenshot%202026-04-05%20at%203.17.41%E2%80%AFPM.png",
   "group": "Nuvio",
   "repo": "iqui27/nuvio-native-legacy",
   "repo_label": "iqui27",
