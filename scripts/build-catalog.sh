@@ -18,6 +18,8 @@
 # package declares it, so Apps2Samsung can warn before installing.
 # "cert_level": "partner" is copied onto each of the package's files when the
 # package declares it, so Apps2Samsung and TV-Store sign it with a Partner certificate.
+# "preview_image" (an https URL) is copied onto each of the package's files when the
+# package declares it: the screenshot Apps2Samsung and TV-Store show on the app's card.
 # "moved_to" ({url, fingerprint}) is copied onto each of the package's files when the
 # package declares it: the app now lives in an independent repository, and Apps2Samsung
 # offers to add that repository with the fingerprint pre-approved (docs/repositories.md).
@@ -77,6 +79,7 @@ jq -s --slurpfile cats "$CATEGORIES" '
         + (if $p.adult == true then { adult: true } else {} end)
         + (if $p.flags then { flags: $p.flags } else {} end)
         + (if $p.cert_level == "partner" then { cert_level: "partner" } else {} end)
+        + (if $p.preview_image then { preview_image: $p.preview_image } else {} end)
         + (if $p.moved_to then { moved_to: $p.moved_to } else {} end));
   {
     schemaVersion: 1,
