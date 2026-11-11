@@ -1,6 +1,6 @@
 {
   "name": "Film Merkezi",
-  "description": "Open-source Turkish/English media center for Samsung Tizen TVs, with watchlists, resume playback and HTML5/AVPlay. Supports in-app core updates and user-selected site modules.",
+  "description": "Open-source Turkish/English media center for Samsung Tizen TVs. No preset repositories or bundled site/resolver modules. User-selected addons, watchlists, resume playback and signed in-app core updates.",
   "category": "streaming",
   "adult": false,
   "repo": "enesk4yh4n-lab/TizenTV-Film-Merkezi",
