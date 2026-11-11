@@ -121,6 +121,7 @@
   "release:sfsdffesfsfg-cloud/tacplayer": "v0.1.0",
   "release:shayanline/OpenIPTV": "1.9.3",
   "release:simbasjungles/free-my-tv": "v1.4.0",
+  "release:smjmusavi/Lumio-IPTV": "v1.0.1",
   "release:somefosterkid/vemm": "preview-0.10.0",
   "release:sverrirs/ruv-app-samsung": "2026.08.25-2350",
   "release:sverrirs/ruv-live-samsung": "2026.08.25",
@@ -264,6 +265,7 @@
   "config:release:sfsdffesfsfg-cloud/tacplayer": "6d1c4ae8460ef0cc",
   "config:release:shayanline/OpenIPTV": "aabf27084137141e",
   "config:release:simbasjungles/free-my-tv": "5f60fd3eb618f4ec",
+  "config:release:smjmusavi/Lumio-IPTV": "779044727af482ab",
   "config:release:somefosterkid/vemm": "940793bec0fa87b5",
   "config:release:sverrirs/ruv-app-samsung": "5513008340ed5428",
   "config:release:sverrirs/ruv-live-samsung": "a0f535f6561d505e",
@@ -284,6 +286,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-851",
-  "stale:release:christopherklint97/streamvault": "community-851"
+  "stale:release:MrSimmo/sonance3": "community-852",
+  "stale:release:christopherklint97/streamvault": "community-852"
 }
