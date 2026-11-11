@@ -1,11 +1,10 @@
 {
   "name": "Film Merkezi",
-  "description": "Turkish/English film and series browser with multiple providers, watchlist and HTML5/AVPlay playback. Includes adult-content filtering; not intended as an adult-content catalog. Tizen 3.0 target; newer-TV compatibility varies.",
+  "description": "Open-source Turkish/English media center for Samsung Tizen TVs. No preset repositories or bundled site/resolver modules. User-selected addons, watchlists, resume playback and signed in-app core updates.",
   "category": "streaming",
   "adult": false,
   "repo": "enesk4yh4n-lab/TizenTV-Film-Merkezi",
-  "enabled": false,
-  "removed": {"reason": "unlicensed-content", "note": "Gets its streams from unlicensed sites."},
+  "enabled": true,
   "source": "release",
   "branch": "main",
   "assets": [
@@ -13,5 +12,8 @@
       "match": "^Film-Merkezi-TV-[0-9]+[.][0-9]+[.][0-9]+-public[.]wgt$",
       "output_name": "Film-Merkezi.wgt"
     }
+  ],
+  "flags": [
+    "self-updating"
   ]
 }
