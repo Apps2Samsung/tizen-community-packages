@@ -1,7 +1,7 @@
 # 🌐 Tizen Community Packages
 [![Sync Tizen Community Packages](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml/badge.svg)](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Packages](https://img.shields.io/badge/packages-143-blue.svg)](#-current-packages)
+[![Packages](https://img.shields.io/badge/packages-144-blue.svg)](#-current-packages)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-green.svg)](../../issues)
 [![Tizen](https://img.shields.io/badge/Platform-Tizen-lightgrey.svg)](https://www.tizen.org/)
 [![Community](https://img.shields.io/badge/Community-Driven-orange.svg)](#)
@@ -84,7 +84,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 </details>
 
 <details>
-<summary><b>📡 IPTV & Live TV</b> (20)</summary>
+<summary><b>📡 IPTV & Live TV</b> (21)</summary>
 
 | 🧩 Application | 📝 Description | ⚙️ Version |
 |----------------|----------------|------------|
@@ -95,6 +95,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **FLOH IPTV**<br>[kingflooow](https://github.com/kingflooow/floh-iptv) | A fast IPTV player for Samsung TVs. | `v1.7.0` |
 | **HackTV**<br>[kosmodrey](https://github.com/kosmodrey/hackTV) | IPTV client for Samsung Tizen TVs. | `bf27ba9` |
 | **IPTV Manager**<br>[matifDreamIt](https://github.com/matifDreamIt/IPTV-Tizen-TV) | IPTV manager for Samsung Tizen TV with Xtream Codes support and HLS playback. | `d8eb66b` |
+| **Lumio IPTV**<br>[smjmusavi](https://github.com/smjmusavi/Lumio-IPTV) | IPTV player for Samsung TVs from 2016 on (Tizen 2.4 and newer): live TV in list, grid and card views, programme guides, movies and series from your own playlists | `n/a` |
 | **Nyx**<br>[victorreinor](https://github.com/victorreinor/nyx-tv) | IPTV player for your own Xtream or M3U playlist with a simple, remote-first interface. | `v1.7.1` |
 | **opencream TV**<br>[opencream-ai](https://github.com/opencream-ai/opencream-tv) | A calm home screen for Samsung TVs with your own Xtream Codes IPTV built in: live TV, films, series, guide search. | `v0.1.4` |
 | **OpenIPTV**<br>[shayanline](https://github.com/shayanline/OpenIPTV) | Privacy focused IPTV player for Samsung Tizen TVs with extended M3U playlists, favourites and search. | `1.9.3` |
