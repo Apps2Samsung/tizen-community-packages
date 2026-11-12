@@ -26,7 +26,7 @@
   "build:lvndry/tv-dashboard@main": "d2b0c479ca5c4b30f33b67e9ef602d92c2ce3be2",
   "build:matifDreamIt/IPTV-Tizen-TV@main": "d8eb66b9874d54a225cf584824544925e7dd521f",
   "build:natureglass/haven-tizen-ha@main": "18ffa3e8143b71b6a0677e36cb46470370ba1b19",
-  "build:pley-media-server/pley@master": "96506965261eb3af0adc1288082b6e549ff432fe",
+  "build:pley-media-server/pley@master": "7335b91cc10b868f499a1c566e3d5dc91172e1f4",
   "build:pvk689/snake-game-tizen@master": "62ccffcf53fd72d482bd943c865cd55e8dbf6c54",
   "build:raykholo/tubearchivist-tv@main": "3cb035faf4d9e630761cee288513929fb993af41",
   "build:rfaile313/samsucks@main": "6b00e926e163a3154dd1993a26b47482d61ebf40",
@@ -52,7 +52,7 @@
   "release:MrPhaze62/moonlight-chrome-tizen-no-gamemode": "samsung_wasm-21031261929",
   "release:MrSimmo/sonance3": "v3.15",
   "release:Nur-allhi/en-tvplayer": "v3.2.0",
-  "release:NuvioMedia/NuvioTVSmart": "1.3.11",
+  "release:NuvioMedia/NuvioTVSmart": "1.4.0",
   "release:OneLiberty/moonlight-chrome-tizen": "v1.2.1",
   "release:Pajuodelis/apex-tv": "v0.5.14",
   "release:PatrickSt1991/Sportlink.Club.Info.Viewer": "v1.1.0",
@@ -131,7 +131,7 @@
   "release:titlog/douyin-tizen": "v1.4.6",
   "release:titlog/telegram-tizen": "v1.2.6",
   "release:toypoodlegaming/moonlight-chrome-tizen": "samsung_wasm-21031332442",
-  "release:victorreinor/nyx-tv": "v1.7.1",
+  "release:victorreinor/nyx-tv": "v1.8.0",
   "release:yumata/lampa": "v1.4.1",
   "release:zabique/Reolink2Samsung": "v1.1.0",
   "direct:Apps2Samsung/tizen-community-packages": "etag:\"76c7abc2fc40f84b17ac2acf306749e29bf1461541ceb65d5600f2f5e6555842\"|mod:|len:3130441",
@@ -288,6 +288,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-857",
-  "stale:release:christopherklint97/streamvault": "community-857"
+  "stale:release:MrSimmo/sonance3": "community-858",
+  "stale:release:christopherklint97/streamvault": "community-858"
 }
