@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Apps2Samsung/tizen-community-packages/blob/main/spec/catalog.schema.json",
+  "title": "Official catalog (catalog.json), v1",
+  "description": "The catalog.json every community release ships, also embedded in apps2samsung.com/catalog/resolved.json (see docs/catalog.md). This schema is strict on purpose: it describes exactly what the build publishes today, and CI fails when the build and the schema drift apart. A client must not apply it strictly: it ignores fields it does not know and treats unknown values as docs/catalog.md says, because later releases may add optional fields and values without a new schemaVersion.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "categories", "category_colors", "apps", "removed"],
+  "properties": {
+    "schemaVersion": {
+      "const": 1,
+      "description": "The catalog format version. Raised only for a breaking change (docs/catalog.md, Versioning). A client that sees a higher number warns the user that it needs an update."
+    },
+    "categories": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "$ref": "#/$defs/categoryId" },
+      "additionalProperties": { "$ref": "#/$defs/line" },
+      "required": ["other"],
+      "description": "Category id to English display name. The key order is the display order. Always contains other."
+    },
+    "category_colors": {
+      "type": "object",
+      "propertyNames": { "$ref": "#/$defs/categoryId" },
+      "additionalProperties": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+      "description": "Category id to tile colour (#RRGGBB). A category without an entry has no colour of its own."
+    },
+    "apps": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/file" },
+      "description": "One entry per shipped package file, sorted by file name (case-insensitive)."
+    },
+    "removed": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/removed" },
+      "description": "Apps that left the catalog, one entry per retired package, sorted by name. Never installable."
+    }
+  },
+  "$defs": {
+    "line": { "type": "string", "minLength": 1, "pattern": "^[^\\n]+$" },
+    "categoryId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{0,31}$" },
+    "httpsUrl": { "type": "string", "maxLength": 2048, "pattern": "^https://[^\\s/@:]+(?::\\d+)?/[^\\s]*$" },
+    "fileName": { "type": "string", "pattern": "^[^/\\\\\\s][^/\\\\]*\\.(wgt|tpk)$" },
+    "repo": { "type": "string", "pattern": "^[A-Za-z0-9_.-]+(/[A-Za-z0-9_.-]+)+$", "description": "owner/name on host (GitLab may have subgroups)." },
+    "host": { "enum": ["github", "gitlab"], "description": "Where repo lives: github.com or gitlab.com." },
+    "id": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[A-Za-z0-9._-]+$" },
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file", "name", "description", "category", "group", "variant", "repo", "host"],
+      "properties": {
+        "file": { "$ref": "#/$defs/fileName", "description": "The package's file name in the release; unique within apps. Joins to resolved.json's assets[].name." },
+        "name": { "$ref": "#/$defs/line" },
+        "description": { "$ref": "#/$defs/line" },
+        "category": { "$ref": "#/$defs/categoryId", "description": "A key of categories. A client shows an id it does not know under other." },
+        "group": {
+          "oneOf": [{ "$ref": "#/$defs/line" }, { "type": "null" }],
+          "description": "Files with the same non-null group are one app, offered as variants. null: the file is an app by itself."
+        },
+        "variant": { "$ref": "#/$defs/line", "description": "Label of this file inside its group." },
+        "repo": { "$ref": "#/$defs/repo" },
+        "host": { "$ref": "#/$defs/host" },
+        "version": { "$ref": "#/$defs/line", "description": "The version in the package's own manifest: what the TV reports once installed." },
+        "app_id": { "$ref": "#/$defs/id" },
+        "package_id": { "$ref": "#/$defs/id" },
+        "required_version": { "type": "string", "pattern": "^[0-9]+(\\.[0-9]+)*$", "description": "Lowest Tizen version the package installs on." },
+        "adult": { "const": true, "description": "18+ content. Absent means false." },
+        "flags": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "enum": ["root", "closed-source", "self-updating"] }
+        },
+        "cert_level": { "const": "partner", "description": "Sign with a Partner certificate. Absent means public." },
+        "preview_image": { "$ref": "#/$defs/httpsUrl" },
+        "user_settings": {
+          "type": "object",
+          "required": ["fields"],
+          "description": "Values the user supplies before install. The full shape is properties.user_settings in packages.schema.json; scripts/test-catalog-spec.py checks it against that."
+        },
+        "moved_to": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["url", "fingerprint"],
+          "properties": {
+            "url": { "type": "string", "pattern": "^https://[^\\s/@:]+(?::\\d+)?/[^\\s]*[.]signed$" },
+            "fingerprint": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          },
+          "description": "The app now lives in this independent repository (docs/repositories.md)."
+        }
+      }
+    },
+    "removed": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "repo", "host", "category", "reason", "files", "since"],
+      "properties": {
+        "name": { "$ref": "#/$defs/line" },
+        "repo": { "$ref": "#/$defs/repo" },
+        "host": { "$ref": "#/$defs/host" },
+        "category": { "$ref": "#/$defs/categoryId" },
+        "reason": {
+          "enum": ["unlicensed-content", "unlicensed-service", "unlicensed-game-data", "takedown", "superseded", "upstream-gone"],
+          "description": "A client shows its own text for a reason it knows and a generic one otherwise."
+        },
+        "note": { "type": "string", "minLength": 1, "maxLength": 200, "pattern": "^[^|\\n]+$" },
+        "files": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/fileName" } },
+        "since": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$", "description": "The date (UTC) the app first showed up as removed." },
+        "package_ids": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
+        "app_ids": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } }
+      }
+    }
+  }
+}

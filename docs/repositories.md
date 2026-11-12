@@ -11,6 +11,8 @@ key made at [apps2samsung.com/repository-key](https://apps2samsung.com/repositor
 is in [`templates/independent-repo/`](../templates/independent-repo/), and a working example is
 [Apps2Samsung/repository-example](https://github.com/Apps2Samsung/repository-example).
 
+The official catalog these repositories sit next to has a written format too: [`catalog.md`](catalog.md).
+
 The words *must*, *must not* and *should* are used in their usual spec sense.
 
 ---

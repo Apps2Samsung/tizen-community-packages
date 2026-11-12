@@ -237,6 +237,10 @@ compares `version` with what the TV reports after an install. TV-Store labels an
 it with `install failed[118, -19]` (TV-Store#44). None of these come from the manifest in this
 folder; they are read from the package itself.
 
+Other tools read `catalog.json` too. Its format, and what may change without notice, is in
+[`../docs/catalog.md`](../docs/catalog.md): a field added to the catalog goes there and into
+[`../spec/catalog.schema.json`](../spec/catalog.schema.json) in the same pull request.
+
 ---
 
 ## 🚀 `source: "release"`: prebuilt `.wgt`/`.tpk` from GitHub Releases
