@@ -97,7 +97,7 @@ jobs:
           '
       - name: spec/official-catalog.pem is the key TV-Store trusts for the official catalog
         run: |
-          node -e 'process.stdout.write(require("./_tvstore/tizen-app/service/catalog-key.js").join("\n") + "\n")' > "$RUNNER_TEMP/tv-store-key.pem"
+          node -e 'var k = require("./_tvstore/tizen-app/service/catalog-key.js"); process.stdout.write(Array.isArray(k) ? k.join("\n") + "\n" : String(k))' > "$RUNNER_TEMP/tv-store-key.pem"
           a=$(openssl pkey -pubin -in "$RUNNER_TEMP/tv-store-key.pem" -outform DER | sha256sum | cut -d' ' -f1)
           b=$(openssl pkey -pubin -in spec/official-catalog.pem -outform DER | sha256sum | cut -d' ' -f1)
           echo "TV-Store: $a"; echo "spec:     $b"
