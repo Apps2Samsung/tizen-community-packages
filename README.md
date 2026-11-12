@@ -17,6 +17,7 @@
 - [Current Packages](#-current-packages)
 - [Contributing & Requesting Apps](#-contributing--requesting-apps)
 - [Run Your Own Repository](#-run-your-own-repository)
+- [Use the Catalog in Your Own Tool](#-use-the-catalog-in-your-own-tool)
 - [Security Scanning](#-security-scanning)
 - [Disclaimer](#️-disclaimer)
 - [Additional Note](#-additional-note)
@@ -331,6 +332,19 @@ You can offer it yourself. Two ways, both without a terminal:
   in [`docs/repositories.md`](docs/repositories.md).
 
 What you publish there isn't reviewed here: you are responsible for having the right to distribute it.
+
+---
+
+## 🧩 Use the Catalog in Your Own Tool
+
+Building a launcher, an installer or a phone app that lists Tizen apps? You can use this catalog instead of
+keeping your own list. Every release ships a `catalog.json`, and
+[apps2samsung.com/catalog/resolved.json.signed](https://apps2samsung.com/catalog/resolved.json.signed) adds a
+signed SHA-256 for every file. Both are described in **[`docs/catalog.md`](docs/catalog.md)**, with a schema
+and a version number, so a breaking change is announced before it happens.
+
+Two requests: send your users to **each app's own repository** for help with that app, and **credit the
+catalog** with a link back here.
 
 ---
 

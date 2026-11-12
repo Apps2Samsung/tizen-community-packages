@@ -187,7 +187,10 @@ jobs:
         run: bash scripts/build-manifests.sh
 
       - name: Catalog compiles cleanly
-        run: bash scripts/build-catalog.sh packages "$RUNNER_TEMP/catalog.json"
+        run: |
+          bash scripts/build-catalog.sh packages "$RUNNER_TEMP/catalog.json"
+          # The published format (docs/catalog.md): what other tools build on.
+          python3 -I scripts/test-catalog-spec.py "$RUNNER_TEMP/catalog.json"
 
       - name: Security scan of new or changed packages
         # Downloads the current upstream artifact for every release/direct manifest

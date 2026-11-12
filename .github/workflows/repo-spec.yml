@@ -3,6 +3,8 @@ name: Repository spec
 # Tests for the independent-repository format (docs/repositories.md): the
 # validator against every test vector, the fixtures against TV-Store's own
 # verify(), and the generator end to end against a real GitHub release.
+# And for the official catalog format (docs/catalog.md): the schema against
+# the example, a fresh build and the latest release's catalog.json.
 # Plain pull_request: no secrets are involved, so fork PRs are safe to run.
 
 on:
@@ -14,6 +16,10 @@ on:
       - 'scripts/test-repo-spec.py'
       - 'scripts/package-info.py'
       - 'scripts/scan-packages.py'
+      - 'scripts/build-catalog.sh'
+      - 'scripts/check-categories.py'
+      - 'scripts/test-catalog-spec.py'
+      - 'packages.schema.json'
       - 'templates/**'
       - '.github/workflows/repo-spec.yml'
   push:
@@ -25,6 +31,10 @@ on:
       - 'scripts/test-repo-spec.py'
       - 'scripts/package-info.py'
       - 'scripts/scan-packages.py'
+      - 'scripts/build-catalog.sh'
+      - 'scripts/check-categories.py'
+      - 'scripts/test-catalog-spec.py'
+      - 'packages.schema.json'
       - 'templates/**'
       - '.github/workflows/repo-spec.yml'
   workflow_dispatch:
@@ -85,6 +95,41 @@ jobs:
               throw new Error(f + " was accepted");
             });
           '
+      - name: spec/official-catalog.pem is the key TV-Store trusts for the official catalog
+        run: |
+          node -e 'process.stdout.write(require("./_tvstore/tizen-app/service/catalog-key.js").join("\n") + "\n")' > "$RUNNER_TEMP/tv-store-key.pem"
+          a=$(openssl pkey -pubin -in "$RUNNER_TEMP/tv-store-key.pem" -outform DER | sha256sum | cut -d' ' -f1)
+          b=$(openssl pkey -pubin -in spec/official-catalog.pem -outform DER | sha256sum | cut -d' ' -f1)
+          echo "TV-Store: $a"; echo "spec:     $b"
+          [ "$a" = "$b" ] || { echo "::error::spec/official-catalog.pem differs from TV-Store's catalog-key.js: update it and the fingerprint in docs/catalog.md"; exit 1; }
+          grep -q "$b" docs/catalog.md || { echo "::error::docs/catalog.md does not name the fingerprint $b"; exit 1; }
+
+  catalog:
+    # catalog.json against spec/catalog.schema.json. The schema is strict, so a
+    # field added to build-catalog.sh fails here until the schema and
+    # docs/catalog.md describe it too.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - run: pip install jsonschema
+      - name: The example matches the schema
+        run: python3 -I scripts/test-catalog-spec.py
+      - name: A catalog built from packages/ matches the schema
+        run: |
+          bash scripts/build-catalog.sh packages "$RUNNER_TEMP/built.json"
+          python3 -I scripts/test-catalog-spec.py "$RUNNER_TEMP/built.json"
+      - name: The latest release's catalog.json matches the schema
+        # The published file has what a fresh build can't: version and ids read from the packages.
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download --repo "$GITHUB_REPOSITORY" -p catalog.json -D "$RUNNER_TEMP/latest"
+          python3 -I scripts/test-catalog-spec.py "$RUNNER_TEMP/latest/catalog.json"
 
   generate:
     # End to end with a throwaway key: build from a real repository's releases,
