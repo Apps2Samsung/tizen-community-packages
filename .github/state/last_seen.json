@@ -10,7 +10,7 @@
   "build:aleksilassila/reiverr@master": "3b7351f8bc6e53c61b90c583fe5857dac543c139",
   "build:anandhuremanan/samsung-tizen-clock-app@main": "1b9ad6fa9000c477039367f6dac6bdac7b7f3f6f",
   "build:andrearicci93/vetro@main": "42bceac690aed4c3ac42cfd2c85f20054fc8c81b",
-  "build:aroundmyroom/Velvet@main": "51f46d1f5453e77e65e2e8b039f19616f505cccb",
+  "build:aroundmyroom/Velvet@main": "19fdb0bafe80526338a7a9dbd83841948bbd2b0e",
   "build:cocodedk/copenhagen-weather-tv@main": "1a934d6e7b4ab3ac51cb9f4582bf895d616f30e4",
   "build:dearbulut/tizen-xtream-iptv@main": "7fd43a02aae7b53eb2fbd6aff8541b7724a285ad",
   "build:detain/shmup-cup@v1.x": "ef6605c3c04e4454b6df206d8a51d8fc3ed448e7",
@@ -26,7 +26,7 @@
   "build:lvndry/tv-dashboard@main": "d2b0c479ca5c4b30f33b67e9ef602d92c2ce3be2",
   "build:matifDreamIt/IPTV-Tizen-TV@main": "d8eb66b9874d54a225cf584824544925e7dd521f",
   "build:natureglass/haven-tizen-ha@main": "18ffa3e8143b71b6a0677e36cb46470370ba1b19",
-  "build:pley-media-server/pley@master": "7335b91cc10b868f499a1c566e3d5dc91172e1f4",
+  "build:pley-media-server/pley@master": "3702d2d89cc380e589a2c1db3e14f46c53570e21",
   "build:pvk689/snake-game-tizen@master": "62ccffcf53fd72d482bd943c865cd55e8dbf6c54",
   "build:raykholo/tubearchivist-tv@main": "3cb035faf4d9e630761cee288513929fb993af41",
   "build:rfaile313/samsucks@main": "6b00e926e163a3154dd1993a26b47482d61ebf40",
@@ -38,7 +38,7 @@
   "release:AdvaithAvinash/AniUltimatium": "stable-v1.25",
   "release:AdvaithAvinash/UltimatiumTube": "stable-v1.13",
   "release:Apps2Samsung/ReolinkViewer": "v1.1.0",
-  "release:Apps2Samsung/TV-Store": "v0.3.29",
+  "release:Apps2Samsung/TV-Store": "v0.3.30",
   "release:AquaPlayIPTV/aquaplay-samsung": "v1.0.52",
   "release:Dysprohol/duobeam": "v0.8.9",
   "release:Edsol/go2rtc-tizen": "v0.1.0",
@@ -288,6 +288,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-859",
-  "stale:release:christopherklint97/streamvault": "community-859"
+  "stale:release:MrSimmo/sonance3": "community-860",
+  "stale:release:christopherklint97/streamvault": "community-860"
 }
