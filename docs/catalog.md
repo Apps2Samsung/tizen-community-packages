@@ -216,9 +216,10 @@ these safe, so a client must follow them.
 **Breaking, a new version:** a field removed or renamed, a field's type or meaning changed, or a change that
 makes one of those rules unsafe.
 
-A breaking change is announced in an issue on this repository **at least 30 days** before it ships. A client
-that sees a `schemaVersion` higher than it knows should tell the user to update and keep using the last catalog
-it understood, rather than guess at the new one.
+A breaking change is announced in an issue on this repository **at least 30 days** before it ships, so a client
+that is kept up to date never sees a version it doesn't know. One that does should tell the user to update it.
+It may keep working with the fields it understands in the meantime, but it must still check the signature and
+every file's hash.
 
 ## Not part of the format
 
