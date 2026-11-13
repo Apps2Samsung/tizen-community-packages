@@ -1,7 +1,7 @@
 # 🌐 Tizen Community Packages
 [![Sync Tizen Community Packages](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml/badge.svg)](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Packages](https://img.shields.io/badge/packages-145-blue.svg)](#-current-packages)
+[![Packages](https://img.shields.io/badge/packages-147-blue.svg)](#-current-packages)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-green.svg)](../../issues)
 [![Tizen](https://img.shields.io/badge/Platform-Tizen-lightgrey.svg)](https://www.tizen.org/)
 [![Community](https://img.shields.io/badge/Community-Driven-orange.svg)](#)
@@ -60,7 +60,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Kodi-TeX**<br>[PatrickSt1991](https://github.com/PatrickSt1991/tex-tizen) | Kodi TeX web interface ported to Samsung Tizen. | `tex-tizen-v1.3.0-2026-06-09-0952` |
 | **KROMA**<br>[kromatv](https://github.com/kromatv/kroma) | Client for KROMA, a self-hosted direct-play media server for your NAS. | `v0.1.38` |
 | **Lumen TV**<br>[cloke-tech](https://github.com/cloke-tech/Lumen-TV) | Receiver app for Lumen, plays Blu-ray, DVD and files from a computer or USB. | `v1.17.1` |
-| **Moonfin (Lica fork)**<br>[Licaa21](https://github.com/Licaa21/Smart-TV) | Fork of the Moonfin Jellyfin/Emby client with extra features: Emby Connect sign-in, an EPUB reader with bookmarks and themes, Forgot PIN, remembered audio/subtitle picks per title and more. | `fork-v2.0.9` |
+| **Moonfin (Lica fork)**<br>[Licaa21](https://github.com/Licaa21/Smart-TV) | Fork of the Moonfin Jellyfin/Emby client with extra features: Emby Connect sign-in, an EPUB reader with bookmarks and themes, Forgot PIN, remembered audio/subtitle picks per title and more. | `fork-v2.1.0` |
 | **Pelagica**<br>[PelagicaApp](https://github.com/PelagicaApp/pelagica) | A modern web, desktop and TV client for Jellyfin | `4.15.0` |
 | **Phlix**<br>[detain](https://github.com/detain/phlix-tizen-client) | Samsung Tizen TV client for the Phlix media server: HLS streaming and spatial navigation. | `latest` |
 | **PlayerAVPlay**<br>[yadPe](https://github.com/yadPe/PlayerAVPlay) | AVPlayer app | `latest` |
@@ -179,7 +179,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 </details>
 
 <details>
-<summary><b>📷 Casting & cameras</b> (9)</summary>
+<summary><b>📷 Casting & cameras</b> (10)</summary>
 
 | 🧩 Application | 📝 Description | ⚙️ Version |
 |----------------|----------------|------------|
@@ -191,12 +191,13 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Reolink Viewer**<br>[Apps2Samsung](https://github.com/Apps2Samsung/ReolinkViewer) | Watch a Reolink camera or NVR on your TV: enter its local IP and login, press Start. | `v1.1.0` |
 | **Reolink2Samsung**<br>[zabique](https://github.com/zabique/Reolink2Samsung) | Reolink NVR viewer built on Reolink Viewer (Apps2Samsung/ReolinkViewer): all cameras on one screen in tile layouts, any camera full screen, PTZ popup with presets, patrol, camera reordering and five languages, all with the arrow keys and OK. | `v1.1.0` |
 | **RTSP Camera Viewer**<br>[vzakharchenko](https://github.com/vzakharchenko/rtsp-samsung-tv) | Display RTSP streams from IP cameras on your Samsung TV, with numpad channel switching and a 4-camera grid. | `3aefa34` |
+| **RTSP Viewer**<br>[RTSP Viewer](https://github.com/PardeepChahal7/RTSP-Viewer) | View your RTSP cameras on your Samsung TV. | `n/a` |
 | **UniFi Cameras**<br>[xtantaudio](https://github.com/xtantaudio/unifi-cameras-on-tizen) | Live camera grid for UniFi Protect or any RTSP cameras on Samsung Tizen 6.0+ TVs, D-pad to go fullscreen. | `2f7f8c0` |
 
 </details>
 
 <details>
-<summary><b>🛠️ Tools & system</b> (15)</summary>
+<summary><b>🛠️ Tools & system</b> (16)</summary>
 
 | 🧩 Application | 📝 Description | ⚙️ Version |
 |----------------|----------------|------------|
@@ -206,6 +207,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **inet-speed-old-tizen**<br>[numbereleven-a](https://github.com/numbereleven-a/inet-speed-old-tizen) | Internet diagnostics for Samsung Tizen 2.4+ TVs: response times of popular sites and download speed from Cloudflare, Fastly and HOSTKEY test CDNs, plus TV model, firmware and network info. | `v1.1.1` |
 | **iperf3 TV**<br>[DmitryMaksakov](https://github.com/DmitryMaksakov/samsung-tv-iperf3) | Measures your Samsung TV's network throughput to an iperf3 server, upload or download. | `d20ac9f` |
 | **MonoServer**<br>[cash94](https://github.com/cash94/MonoServer) | TorrServer rewritten in C# (MonoTorrent) that runs as a background service on the TV itself, including Tizen 5.5 where the official TorrServer cannot start. | `v1.0.36` |
+| **Overscan for Hue**<br>[burkben](https://github.com/burkben/Overscan) | Syncs Philips Hue lights with the TV picture. | `v1.2.0` |
 | **Tailscale**<br>[PatrickSt1991](https://github.com/PatrickSt1991/tailscale-tizen) | Tailscale exit-node app for Samsung Tizen TV (experimental; advertises the TV as a tailnet exit node). | `tpk-f3a7b39` |
 | **Tizen Debug App**<br>[no-cover](https://github.com/no-cover/tizendebugapp) | Developer toolkit for troubleshooting apps and monitoring system state on real Samsung Tizen TV hardware. | `1.0.0` |
 | **Tizen OS Ambilight**<br>[exzos28](https://github.com/exzos28/tizen-os-ambilight) | DIY ambilight: reads the screen-edge colors from the TV's video processor and streams them to an ESP32 LED controller or HyperHDR; the launcher shows whether your TV supports capture. | `v1.2.1` |
@@ -229,7 +231,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Baobab Signage**<br>[Gonqas](https://github.com/Gonqas/baobab) | Player for Baobab, open-source local digital signage: plays the playlist your own Baobab server on the LAN assigns to this screen. | `6ee8491` |
 | **Copenhagen Weather**<br>[cocodedk](https://github.com/cocodedk/copenhagen-weather-tv) | Current conditions, hourly and 7-day forecast for Copenhagen on Samsung Tizen 6.0+ TVs. | `1a934d6` |
 | **Frame Dashboard**<br>[joseamijares](https://github.com/joseamijares/frame-dashboard) | Daily dashboard for the Samsung Frame TV: a public-domain painting beside your calendar, focus and tasks. | `8cc81fe` |
-| **Free My TV**<br>[simbasjungles](https://github.com/simbasjungles/free-my-tv) | Fast, ad-free home screen with your app shelf, weather, sunset-based day/night theme and a photo screensaver. | `v1.4.0` |
+| **Free My TV**<br>[simbasjungles](https://github.com/simbasjungles/free-my-tv) | Fast, ad-free home screen with your app shelf, weather, sunset-based day/night theme and a photo screensaver. | `v1.5.0` |
 | **Haven**<br>[natureglass](https://github.com/natureglass/haven-tizen-ha) | Home Assistant powered home screen: sensors, lights and scenes by room, weather, live cameras, a Jellyfin client and music from Home Assistant's media folder. | `18ffa3e` |
 | **Lobby**<br>[Lobby](https://github.com/CtznSniiips/Lobby) | Home screen for Samsung TVs with your Emby (or Jellyfin) server's Continue Watching, Live TV and teams, and Seerr's trending titles. | `e9fa0a6` |
 | **Nhà Mình**<br>[meocong](https://github.com/meocong/prj-tv-samsung) | Apple TV-style home screen for Samsung Tizen TVs: your installed apps, a YouTube shelf, weather, a lunar calendar, news, an English word of the day read aloud, Bing wallpapers and a family photo screensaver. | `v1.4.0` |
@@ -246,7 +248,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 
 | 🧩 Application | 📝 Description | ⚙️ Version |
 |----------------|----------------|------------|
-| **StashZen**<br>[StashZen](https://github.com/Stashified/StashZen) | A Stash client for Samsung Tizen TVs. | `v0.44.2` |
+| **StashZen**<br>[StashZen](https://github.com/Stashified/StashZen) | A Stash client for Samsung Tizen TVs. | `v0.45.0` |
 
 </details>
 
