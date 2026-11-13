@@ -191,7 +191,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Reolink Viewer**<br>[Apps2Samsung](https://github.com/Apps2Samsung/ReolinkViewer) | Watch a Reolink camera or NVR on your TV: enter its local IP and login, press Start. | `v1.1.0` |
 | **Reolink2Samsung**<br>[zabique](https://github.com/zabique/Reolink2Samsung) | Reolink NVR viewer built on Reolink Viewer (Apps2Samsung/ReolinkViewer): all cameras on one screen in tile layouts, any camera full screen, PTZ popup with presets, patrol, camera reordering and five languages, all with the arrow keys and OK. | `v1.1.0` |
 | **RTSP Camera Viewer**<br>[vzakharchenko](https://github.com/vzakharchenko/rtsp-samsung-tv) | Display RTSP streams from IP cameras on your Samsung TV, with numpad channel switching and a 4-camera grid. | `3aefa34` |
-| **RTSP Viewer**<br>[RTSP Viewer](https://github.com/PardeepChahal7/RTSP-Viewer) | View your RTSP cameras on your Samsung TV. | `n/a` |
+| **RTSP Viewer**<br>[RTSP Viewer](https://github.com/PardeepChahal7/RTSP-Viewer) | View your RTSP cameras on your Samsung TV. | `v1.0.0` |
 | **UniFi Cameras**<br>[xtantaudio](https://github.com/xtantaudio/unifi-cameras-on-tizen) | Live camera grid for UniFi Protect or any RTSP cameras on Samsung Tizen 6.0+ TVs, D-pad to go fullscreen. | `2f7f8c0` |
 
 </details>

@@ -55,6 +55,7 @@
   "release:NuvioMedia/NuvioTVSmart": "1.4.0",
   "release:OneLiberty/moonlight-chrome-tizen": "v1.2.1",
   "release:Pajuodelis/apex-tv": "v0.5.14",
+  "release:PardeepChahal7/RTSP-Viewer": "v1.0.0",
   "release:PatrickSt1991/Sportlink.Club.Info.Viewer": "v1.1.0",
   "release:PatrickSt1991/chorus2-tizen": "tizen-v21.x-1.0.1-2026-05-21-1443",
   "release:PatrickSt1991/flixor-tizen": "v1.0.1-2026-11-08-0607",
@@ -200,6 +201,7 @@
   "config:release:NuvioMedia/NuvioTVSmart": "f2ed6e9697ab47ad",
   "config:release:OneLiberty/moonlight-chrome-tizen": "ed24950af9fbc3bf",
   "config:release:Pajuodelis/apex-tv": "ecde21f2acc4897d",
+  "config:release:PardeepChahal7/RTSP-Viewer": "cfe7316f259347fe",
   "config:release:PatrickSt1991/Sportlink.Club.Info.Viewer": "bf4c396e93c1cd58",
   "config:release:PatrickSt1991/chorus2-tizen": "ceddd02ad8e944f1",
   "config:release:PatrickSt1991/flixor-tizen": "5e87ccb773733c02",
@@ -290,6 +292,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-861",
-  "stale:release:christopherklint97/streamvault": "community-861"
+  "stale:release:MrSimmo/sonance3": "community-862",
+  "stale:release:christopherklint97/streamvault": "community-862"
 }
