@@ -72,14 +72,14 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Sendspin Cinema**<br>[zonya](https://github.com/zonya/sendspin-cinema-tizen) | Minimal cinema-style Sendspin player for Music Assistant on Samsung Tizen 3.0+ TVs: album art with adaptive accent colours, set up from the TV screen. | `0eabc15` |
 | **Shutter**<br>[khanh-ly](https://github.com/khanh-ly/shutter) | Unofficial Synology Photos slideshow for Samsung TVs: all photos, favorites, an album or Shared Space, with crossfades, pan/zoom and a clock. | `32df354` |
 | **Sonance3**<br>[MrSimmo](https://github.com/MrSimmo/sonance3) | A music player for Samsung Tizen TVs, built to stream from your self-hosted Jellyfin, Navidrome or Subsonic-compatible server. | `v3.15` |
-| **SubTizen**<br>[therosaer](https://github.com/therosaer/SubTizen) | Subsonic music client for Navidrome, Airsonic, Gonic and Subsonic: Apple Music-style UI, server playlists, search and synced lyrics. | `v1.0.1` |
+| **SubTizen**<br>[therosaer](https://github.com/therosaer/SubTizen) | Subsonic music client for Navidrome, Airsonic, Gonic and Subsonic: Apple Music-style UI, server playlists, search and synced lyrics. | `v1.1` |
 | **tacplayer**<br>[sfsdffesfsfg-cloud](https://github.com/sfsdffesfsfg-cloud/tacplayer) | Custom Jellyfin Tizen client with cinematic red UI for Samsung TV | `v0.1.0` |
 | **Tessel**<br>[PatrickSt1991](https://github.com/PatrickSt1991/tessel-tizen-tv) | Media player for Samsung TVs: SMB shares, USB drives, network streams and subtitles, with an optional transcode server (formerly VLC-Tizen-tv). | `v1.36.0-20261112-1726` |
 | **TubeArchivist TV**<br>[raykholo](https://github.com/raykholo/tubearchivist-tv) | 10-foot client for your self-hosted TubeArchivist: pair from your phone, never type on the remote. | `3cb035f` |
 | **TVideoPlayer**<br>[TizenTVWebApp](https://github.com/TizenTVWebApp/TVideoPlayer) | Tizen TV HTML video player based on videojs. | `latest` |
 | **VeloVistrix**<br>[zephy-lee](https://github.com/zephy-lee/velovistrix-tizen) | Read-only PhotoPrism viewer for Samsung Tizen 5.0+ TVs, driven by the remote: albums, places, calendar, labels and folders from your own server, with slideshow. | `d136678` |
 | **Velox**<br>[SuperDOS](https://github.com/SuperDOS/velox) | Fast Plex client: opens in about a second, smooth scrolling, hardware playback. | `v1.1.0` |
-| **Velvet TV**<br>[aroundmyroom](https://github.com/aroundmyroom/Velvet) | Big-screen TV client for the Velvet self-hosted music server. | `b7e76d0` |
+| **Velvet TV**<br>[aroundmyroom](https://github.com/aroundmyroom/Velvet) | Big-screen TV client for the Velvet self-hosted music server. | `1b532a8` |
 | **Vemm**<br>[somefosterkid](https://github.com/somefosterkid/vemm) | Unofficial Plex-compatible media player for Samsung Tizen TVs with AVPlay playback, Direct Play and server transcoding. | `preview-0.10.0` |
 
 </details>
