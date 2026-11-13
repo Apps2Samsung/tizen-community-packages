@@ -1,0 +1,12 @@
+{
+  "name": "Overscan for Hue",
+  "description": "Syncs Philips Hue lights with the TV picture. Runs natively on the TV with no sync box or computer; pair the bridge and pick an Entertainment area with the remote. Tested on 2019 and 2022 Samsung Frame TVs; screen capture varies by model.",
+  "category": "tools",
+  "repo": "burkben/Overscan",
+  "source": "release",
+  "branch": "main",
+  "preview_image": "https://raw.githubusercontent.com/burkben/Overscan/v1.2.0/docs/images/tv-menu-1.2.0.png",
+  "assets": [
+    { "match": "^Overscan-.*[.]tpk$", "output_name": "OverscanForHue.tpk" }
+  ]
+}
