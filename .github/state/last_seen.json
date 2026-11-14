@@ -26,7 +26,7 @@
   "build:lvndry/tv-dashboard@main": "d2b0c479ca5c4b30f33b67e9ef602d92c2ce3be2",
   "build:matifDreamIt/IPTV-Tizen-TV@main": "d8eb66b9874d54a225cf584824544925e7dd521f",
   "build:natureglass/haven-tizen-ha@main": "18ffa3e8143b71b6a0677e36cb46470370ba1b19",
-  "build:pley-media-server/pley@master": "b05c6a47b9dc6af80bce0ec94f5d12ff421be696",
+  "build:pley-media-server/pley@master": "cd3eec128577502d6c69ce61d372de3504916568",
   "build:pvk689/snake-game-tizen@master": "62ccffcf53fd72d482bd943c865cd55e8dbf6c54",
   "build:raykholo/tubearchivist-tv@main": "3cb035faf4d9e630761cee288513929fb993af41",
   "build:rfaile313/samsucks@main": "6b00e926e163a3154dd1993a26b47482d61ebf40",
@@ -46,7 +46,7 @@
   "release:Kepler75/StremioK": "v2.3.8",
   "release:Knikt/APL-Launcher-for-TizenOS": "v1.2.0",
   "release:Knikt/APL-TV-for-TizenOS": "v1.1.1",
-  "release:Licaa21/Smart-TV": "fork-v2.1.2",
+  "release:Licaa21/Smart-TV": "fork-v2.1.4",
   "release:MaCHeaMaRoBi/JellyLean": "v1.0.10",
   "release:MrHumanRebel/airtizen": "v2.2.34",
   "release:MrPhaze62/moonlight-chrome-tizen-no-gamemode": "samsung_wasm-21031261929",
@@ -292,6 +292,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-866",
-  "stale:release:christopherklint97/streamvault": "community-866"
+  "stale:release:MrSimmo/sonance3": "community-867",
+  "stale:release:christopherklint97/streamvault": "community-867"
 }
