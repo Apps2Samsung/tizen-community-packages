@@ -65,7 +65,7 @@
   "release:PelagicaApp/pelagica": "4.15.0",
   "release:Prairie-Server/prairie-smarttv": "v0.5.4",
   "release:Replexo/kick-tizen": "v1.3.2",
-  "release:Ricrdsson1/kodi-tizen-wasm": "Alpha-0.0.11",
+  "release:Ricrdsson1/kodi-tizen-wasm": "Alpha-0.0.12",
   "release:RitwickVerma/TizenAmbilight": "v1.0.0",
   "release:Rusty24h/Tizen-IPTV-Player": "2.2.0",
   "release:Stashified/StashZen": "v0.45.0",
@@ -141,7 +141,7 @@
   "direct:TizenTVWebApp/TVideoPlayer": "etag:\"5ffe8d0002722208c57393676c1d5d0e8f0e0592c1a511f275505455c2d63349\"|mod:|len:61404893",
   "direct:TizenTVWebApp/TizenTVAudioRecorder": "etag:\"ee5fea95757fb79a31daae30de7054e27323fe8b30e8fca6f38cb195e7f03c02\"|mod:|len:29724428",
   "direct:futo-org/fcast": "etag:\"ffdc59301ed48f6a265c93ec27b7b263\"|mod:Wed, 08 Oct 2025 17:07:02 GMT|len:6669120",
-  "direct:ihovsky/Reelo": "etag:\"6af805be-bca76e\"|mod:Sat, 14 Nov 2026 06:54:54 GMT|len:12363630",
+  "direct:ihovsky/Reelo": "etag:\"6af8b0b5-bcc763\"|mod:Sat, 14 Nov 2026 19:04:21 GMT|len:12371811",
   "direct:jhassan8/crunchyroll-tizen": "etag:\"ea42374bad2f0c3e13e33095f7e617e2b025641aea2039e9d4ad9b1838bbba3c\"|mod:|len:978485",
   "direct:prog4food/ottplay-foss-thin-clients": "etag:\"0x8DAFBC24D128479\"|mod:Sat, 21 Jan 2023 15:15:16 GMT|len:10090",
   "direct:yadPe/PlayerAVPlay": "etag:\"86d18fae091a6bb45afea7897ba07656ac8c1c6123440d25cddd8ca944129b26\"|mod:|len:32385",
@@ -292,6 +292,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-870",
-  "stale:release:christopherklint97/streamvault": "community-870"
+  "stale:release:MrSimmo/sonance3": "community-871",
+  "stale:release:christopherklint97/streamvault": "community-871"
 }
