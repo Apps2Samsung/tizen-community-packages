@@ -1,13 +1,13 @@
 {
   "build:Bryan-Cee/Ambient@main": "73bc869632ddb9567cde24989fdb137743d0b5b9",
-  "build:CtznSniiips/Lobby@main": "f8fdc0cc10ca846e8234492f9ffa7c7d63e01057",
+  "build:CtznSniiips/Lobby@main": "052fa8b1ad07649d1e56a7bc4b0bbc3ed0b221da",
   "build:DmitryMaksakov/samsung-tv-iperf3@main": "d20ac9f65531ff754f79a8490efb548c5fefdbb5",
   "build:DvzZDev/VexonTV@main": "9aa670ed641f8fe5e0980cd04b65a75ffbcd14ed",
   "build:Gonqas/baobab@main": "6ee8491cb332d45772451eb8d7aa036f92b1c32e",
   "build:HelgeSverre/devnull-tv@main": "8bc5f09fc5cb5f5e315bed77ff4ee78881fd6cc0",
   "build:NelsonEU/arn0-tv@main": "b35c292e5bc63648cb8fef576bf5eacd9ea488d1",
   "build:Pablitorox/AmorecoFlix@master": "e6212b35df62414067626cb2419576ad266c6e5b",
-  "build:aleksilassila/reiverr@master": "3b7351f8bc6e53c61b90c583fe5857dac543c139",
+  "build:aleksilassila/reiverr@master": "5923207efa3a537f1c9b6eec6364ad884ce1d06e",
   "build:anandhuremanan/samsung-tizen-clock-app@main": "1b9ad6fa9000c477039367f6dac6bdac7b7f3f6f",
   "build:andrearicci93/vetro@main": "42bceac690aed4c3ac42cfd2c85f20054fc8c81b",
   "build:aroundmyroom/Velvet@main": "44a14f5b56cc8bfedf5b3ac360a657ca56a3003e",
@@ -141,7 +141,7 @@
   "direct:TizenTVWebApp/TVideoPlayer": "etag:\"5ffe8d0002722208c57393676c1d5d0e8f0e0592c1a511f275505455c2d63349\"|mod:|len:61404893",
   "direct:TizenTVWebApp/TizenTVAudioRecorder": "etag:\"ee5fea95757fb79a31daae30de7054e27323fe8b30e8fca6f38cb195e7f03c02\"|mod:|len:29724428",
   "direct:futo-org/fcast": "etag:\"ffdc59301ed48f6a265c93ec27b7b263\"|mod:Wed, 08 Oct 2025 17:07:02 GMT|len:6669120",
-  "direct:ihovsky/Reelo": "etag:\"6af8b0b5-bcc763\"|mod:Sat, 14 Nov 2026 19:04:21 GMT|len:12371811",
+  "direct:ihovsky/Reelo": "etag:\"6af90526-bd2890\"|mod:Sun, 15 Nov 2026 01:04:38 GMT|len:12396688",
   "direct:jhassan8/crunchyroll-tizen": "etag:\"ea42374bad2f0c3e13e33095f7e617e2b025641aea2039e9d4ad9b1838bbba3c\"|mod:|len:978485",
   "direct:prog4food/ottplay-foss-thin-clients": "etag:\"0x8DAFBC24D128479\"|mod:Sat, 21 Jan 2023 15:15:16 GMT|len:10090",
   "direct:yadPe/PlayerAVPlay": "etag:\"86d18fae091a6bb45afea7897ba07656ac8c1c6123440d25cddd8ca944129b26\"|mod:|len:32385",
@@ -292,6 +292,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-871",
-  "stale:release:christopherklint97/streamvault": "community-871"
+  "stale:release:MrSimmo/sonance3": "community-872",
+  "stale:release:christopherklint97/streamvault": "community-872"
 }
