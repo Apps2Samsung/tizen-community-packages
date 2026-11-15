@@ -43,7 +43,7 @@
   "release:Dysprohol/duobeam": "v0.8.9",
   "release:Edsol/go2rtc-tizen": "v0.1.0",
   "release:IIyn/omegatube": "v1.5.0",
-  "release:Kepler75/StremioK": "v2.3.8",
+  "release:Kepler75/StremioK": "v2.4.0",
   "release:Knikt/APL-Launcher-for-TizenOS": "v1.2.0",
   "release:Knikt/APL-TV-for-TizenOS": "v1.1.1",
   "release:Licaa21/Smart-TV": "fork-v2.1.6",
@@ -60,7 +60,7 @@
   "release:PatrickSt1991/chorus2-tizen": "tizen-v21.x-1.0.1-2026-05-21-1443",
   "release:PatrickSt1991/flixor-tizen": "v1.0.1-2026-11-08-0607",
   "release:PatrickSt1991/tailscale-tizen": "tpk-f3a7b39",
-  "release:PatrickSt1991/tessel-tizen-tv": "v1.36.1-20261114-1042",
+  "release:PatrickSt1991/tessel-tizen-tv": "v1.37.0-20261115-0723",
   "release:PatrickSt1991/tex-tizen": "tex-tizen-v1.3.0-2026-06-09-0952",
   "release:PelagicaApp/pelagica": "4.15.0",
   "release:Prairie-Server/prairie-smarttv": "v0.5.4",
@@ -292,6 +292,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-872",
-  "stale:release:christopherklint97/streamvault": "community-872"
+  "stale:release:MrSimmo/sonance3": "community-873",
+  "stale:release:christopherklint97/streamvault": "community-873"
 }
