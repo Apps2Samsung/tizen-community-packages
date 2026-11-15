@@ -7,6 +7,7 @@
   "group": "Moonlight",
   "repo": "fidoboy/moonlight-tizen-ac3",
   "repo_label": "fidoboy",
+  "cert_level": "partner",
   "source": "release",
   "branch": "master",
   "assets": [
