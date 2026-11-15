@@ -108,7 +108,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Tizen IPTV Player by mhma26395**<br>[mhma26395-ctrl](https://github.com/mhma26395-ctrl/tizen-iptv-player) | Lightweight IPTV player for compatible Samsung Tizen TVs. | `V1.0` |
 | **TVapp**<br>[KaashDev](https://github.com/KaashDev/TVapp) | Enable seamless playback of HLS/m3u8 streams as channels. | `latest` |
 | **VexonTV**<br>[VexonTV](https://github.com/DvzZDev/VexonTV) | Live TV player for Samsung Tizen TVs: M3U, Xtream Codes and Stalker portals, provider EPG and a remote-first interface. | `9aa670e` |
-| **VortixTV**<br>[Rusty24h](https://github.com/Rusty24h/Tizen-IPTV-Player) | High-performance IPTV player supporting Stalker MAC portals, Xtream Codes, M3U playlists, and MPEG-DASH (ClearKey & PlayReady DRM) with 2D EPG and catch-up. | `2.2.0` |
+| **VortixTV**<br>[Rusty24h](https://github.com/Rusty24h/VortixTV) | High-performance IPTV player supporting Stalker MAC portals, Xtream Codes, M3U playlists, and MPEG-DASH (ClearKey & PlayReady DRM) with 2D EPG and catch-up. | `2.2.0` |
 | **Xtream IPTV Player**<br>[dearbulut](https://github.com/dearbulut/tizen-xtream-iptv) | IPTV player for Samsung Tizen TVs with Xtream API support: live TV, movies and series. | `7fd43a0` |
 
 </details>
@@ -227,7 +227,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **inet-speed-old-tizen**<br>[numbereleven-a](https://github.com/numbereleven-a/inet-speed-old-tizen) | Internet diagnostics for Samsung Tizen 2.4+ TVs: response times of popular sites and download speed from Cloudflare, Fastly and HOSTKEY test CDNs, plus TV model, firmware and network info. | `v1.1.1` |
 | **iperf3 TV**<br>[DmitryMaksakov](https://github.com/DmitryMaksakov/samsung-tv-iperf3) | Measures your Samsung TV's network throughput to an iperf3 server, upload or download. | `d20ac9f` |
 | **MonoServer**<br>[cash94](https://github.com/cash94/MonoServer) | TorrServer rewritten in C# (MonoTorrent) that runs as a background service on the TV itself, including Tizen 5.5 where the official TorrServer cannot start. | `v1.0.36` |
-| **Overscan for Hue**<br>[burkben](https://github.com/burkben/Overscan) | Syncs Philips Hue lights with the TV picture. | `v1.2.2` |
+| **Overscan for Hue**<br>[burkben](https://github.com/burkben/Overscan) | Syncs Philips Hue lights with the TV picture. | `v1.2.3` |
 | **Tailscale**<br>[PatrickSt1991](https://github.com/PatrickSt1991/tailscale-tizen) | Tailscale exit-node app for Samsung Tizen TV (experimental; advertises the TV as a tailnet exit node). | `tpk-f3a7b39` |
 | **Tizen Debug App**<br>[no-cover](https://github.com/no-cover/tizendebugapp) | Developer toolkit for troubleshooting apps and monitoring system state on real Samsung Tizen TV hardware. | `1.0.0` |
 | **Tizen OS Ambilight**<br>[exzos28](https://github.com/exzos28/tizen-os-ambilight) | DIY ambilight: reads the screen-edge colors from the TV's video processor and streams them to an ESP32 LED controller or HyperHDR; the launcher shows whether your TV supports capture. | `v1.2.1` |
@@ -235,7 +235,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **TizenBrew**<br>[reisxd](https://github.com/reisxd/TizenBrew) | A way to experience modded websites and you can install newer apps without fighting with Tizen Studio. | `v2.0.5` |
 | **TizenUtility**<br>[no-cover](https://github.com/no-cover/tizenutility) | System utility for Samsung Tizen TVs: detailed device, firmware and network info, plus a launcher for hidden built-in Samsung apps that are not reachable from the normal UI. | `1.1.1` |
 | **Torr Streaming**<br>[no-cover](https://github.com/no-cover/torr-streaming) | Runs TorrServer as a background service on the TV itself, so local web apps can stream torrents directly without a separate box. | `1.0.0` |
-| **TV-Store**<br>[Apps2Samsung](https://github.com/Apps2Samsung/TV-Store) | The Apps2Samsung catalog on the TV itself: browse with the remote and install apps natively through the set's own developer connection, with no PC or phone in the loop after a one-time arming from the Apps2Samsung 3.0 (or newer) toolbox. | `v0.3.31` |
+| **TV-Store**<br>[Apps2Samsung](https://github.com/Apps2Samsung/TV-Store) | The Apps2Samsung catalog on the TV itself: browse with the remote and install apps natively through the set's own developer connection, with no PC or phone in the loop after a one-time arming from the Apps2Samsung 3.0 (or newer) toolbox. | `v0.3.32` |
 | **Vetro**<br>[andrearicci93](https://github.com/andrearicci93/vetro) | TV management dashboard with root integration: app inventory, controls and diagnostics in your browser. | `42bceac` |
 
 </details>
