@@ -1,7 +1,7 @@
 {
   "name": "Free My TV",
   "description": "Fast, ad-free home screen with your app shelf, weather, sunset-based day/night theme and a photo screensaver.",
-  "category": "other",
+  "category": "home",
   "repo": "simbasjungles/free-my-tv",
   "source": "release",
   "branch": "main",

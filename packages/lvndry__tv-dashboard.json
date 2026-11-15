@@ -1,7 +1,7 @@
 {
   "name": "TV Dashboard",
   "description": "A calm remote-first home screen: weather and news as a short letter, an app rack, and an ambient art gallery.",
-  "category": "other",
+  "category": "home",
   "repo": "lvndry/tv-dashboard",
   "source": "build",
   "branch": "main",

@@ -1,7 +1,7 @@
 {
   "name": "Arn0 Launcher",
   "description": "Minimal remote-friendly home screen for Samsung TVs: a clock, your apps, your consoles and rotating wallpapers.",
-  "category": "other",
+  "category": "home",
   "repo": "NelsonEU/arn0-tv",
   "source": "build",
   "branch": "main",

@@ -181,6 +181,7 @@ The validate check rejects any other value. The table below is generated from th
 | `streaming` | Streaming | Clients for streaming services and sites: YouTube, Twitch, Kick, anime, Nuvio, Stremio |
 | `games` | Games & emulators | Games, emulators and game streaming (Moonlight, Chiaki) |
 | `casting` | Casting & cameras | AirPlay / FCast receivers, IP camera and NVR viewers |
+| `home` | Home screens & ambient | Home screens and launchers, dashboards, clocks, weather, screensavers and photo frames |
 | `tools` | Tools & system | Browsers, loaders, network and system utilities |
 | `other` | Other | Anything that fits none of the above |
 
