@@ -117,7 +117,7 @@ have. What's new is the top-level `repository` block.
 | `generatedAt` | ✅ | When the manifest was signed (ISO 8601 with a time zone). |
 | `providers[]` | ✅ | One per app, 1 to 500. |
 | `providers[].id` | ✅ | Unique within the repository. |
-| `providers[].category` | ✅ | Any id from the official catalog's `categories` (today `media`, `iptv`, `streaming`, `games`, `casting`, `tools`, `other`), matching `^[a-z0-9][a-z0-9_-]{0,31}$`. A client shows an id it does not know under `other`. |
+| `providers[].category` | ✅ | Any id from the official catalog's `categories` (today `media`, `iptv`, `streaming`, `games`, `casting`, `home`, `tools`, `other`), matching `^[a-z0-9][a-z0-9_-]{0,31}$`. A client shows an id it does not know under `other`. |
 | `providers[].url` | ✅ | Where the releases come from. For information only: clients install only the assets listed. |
 | `providers[].releases[]` | ✅ | Newest first, at most 20. |
 | `providers[].displayName`, `prefix`, `take`, `buildInfo` | | As in `third-party-apps.json`. |

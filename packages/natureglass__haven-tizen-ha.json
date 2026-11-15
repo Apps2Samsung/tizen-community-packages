@@ -1,7 +1,7 @@
 {
   "name": "Haven",
   "description": "Home Assistant powered home screen: sensors, lights and scenes by room, weather, live cameras, a Jellyfin client and music from Home Assistant's media folder. Your Home Assistant address and token are written into the package on install.",
-  "category": "other",
+  "category": "home",
   "repo": "natureglass/haven-tizen-ha",
   "source": "build",
   "branch": "main",

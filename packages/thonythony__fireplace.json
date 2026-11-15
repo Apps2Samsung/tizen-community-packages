@@ -1,7 +1,7 @@
 {
   "name": "Fireplace",
   "description": "Transform your Samsung Smart TV into a fireplace.",
-  "category": "other",
+  "category": "home",
   "preview_image": "https://raw.githubusercontent.com/thonythony/fireplace/refs/heads/master/icon.jpg",
   "repo": "thonythony/fireplace",
   "enabled": false,

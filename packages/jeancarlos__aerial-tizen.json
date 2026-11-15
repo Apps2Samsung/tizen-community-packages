@@ -1,7 +1,7 @@
 {
   "name": "Aerial Screensaver",
   "description": "Apple TV Aerial screensavers: 115 videos streamed from Apple's CDN and decoded in hardware as HEVC 4K via AVPlay.",
-  "category": "media",
+  "category": "home",
   "repo": "jeancarlos/aerial-tizen",
   "source": "build",
   "branch": "main",

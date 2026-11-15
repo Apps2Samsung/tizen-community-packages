@@ -1,7 +1,7 @@
 {
   "name": "Frame Dashboard",
   "description": "Daily dashboard for the Samsung Frame TV: a public-domain painting beside your calendar, focus and tasks. Thin shell around your own deployment of the hosted dashboard; its URL is written into the package on install.",
-  "category": "other",
+  "category": "home",
   "repo": "joseamijares/frame-dashboard",
   "source": "build",
   "branch": "main",
