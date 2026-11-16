@@ -1,0 +1,16 @@
+{
+  "name": "Xtivio IPTV",
+  "description": "Free IPTV player for M3U, Xtream Codes and Stalker portals, with a guide, catch-up, movies and series with resume, and pairing from your phone. Runs on older Tizen models too.",
+  "category": "iptv",
+  "flags": ["closed-source"],
+  "repo": "xtivio/xtivio-iptv",
+  "repo_label": "Xtivio",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    {
+      "match": "^Xtivio-[0-9.]+\\.wgt$",
+      "output_name": "Xtivio-IPTV.wgt"
+    }
+  ]
+}
