@@ -26,7 +26,7 @@
   "build:lvndry/tv-dashboard@main": "d2b0c479ca5c4b30f33b67e9ef602d92c2ce3be2",
   "build:matifDreamIt/IPTV-Tizen-TV@main": "d8eb66b9874d54a225cf584824544925e7dd521f",
   "build:natureglass/haven-tizen-ha@main": "18ffa3e8143b71b6a0677e36cb46470370ba1b19",
-  "build:pley-media-server/pley@master": "bd485e444d7d1919f1a8f6eef5805a52d2f155e1",
+  "build:pley-media-server/pley@master": "f98643330df7704d1cef3c3fe08c05d53e15e6c9",
   "build:pvk689/snake-game-tizen@master": "62ccffcf53fd72d482bd943c865cd55e8dbf6c54",
   "build:raykholo/tubearchivist-tv@main": "3cb035faf4d9e630761cee288513929fb993af41",
   "build:rfaile313/samsucks@main": "6b00e926e163a3154dd1993a26b47482d61ebf40",
@@ -134,6 +134,7 @@
   "release:titlog/telegram-tizen": "v1.2.9",
   "release:toypoodlegaming/moonlight-chrome-tizen": "samsung_wasm-21031332442",
   "release:victorreinor/nyx-tv": "v1.8.0",
+  "release:xtivio/xtivio-iptv": "v1.0.9",
   "release:yumata/lampa": "v1.4.1",
   "release:zabique/Reolink2Samsung": "v1.1.0",
   "direct:Apps2Samsung/tizen-community-packages": "etag:\"76c7abc2fc40f84b17ac2acf306749e29bf1461541ceb65d5600f2f5e6555842\"|mod:|len:3130441",
@@ -281,6 +282,7 @@
   "config:release:titlog/telegram-tizen": "38d448de69f16ca8",
   "config:release:toypoodlegaming/moonlight-chrome-tizen": "ccae73e62fd220db",
   "config:release:victorreinor/nyx-tv": "ed8bbc8f6b9b71b8",
+  "config:release:xtivio/xtivio-iptv": "9d31f4dd643e8179",
   "config:release:yumata/lampa": "c22db37b6eba7991",
   "config:release:zabique/Reolink2Samsung": "de4596b8a09b7ccb",
   "config:direct:Apps2Samsung/tizen-community-packages": "ddd29c308be438d0",
@@ -292,6 +294,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-878",
-  "stale:release:christopherklint97/streamvault": "community-878"
+  "stale:release:MrSimmo/sonance3": "community-879",
+  "stale:release:christopherklint97/streamvault": "community-879"
 }
