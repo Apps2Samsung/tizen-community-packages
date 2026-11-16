@@ -1,1 +1,11 @@
-{"assets":[{"match":"^FnTV[.]wgt$","output_name":"FnTV.wgt"}],"branch":"main","category":"media","description":"fnOS (Feiniu) media server client for Samsung Tizen TVs: browse, resume and play your own library with subtitles.","name":"FnTV for Tizen","repo":"JJrexWang/FnTV-for-Tizen","source":"release"}
+{
+  "name": "FnTV for Tizen",
+  "description": "fnOS (Feiniu) media server client for Samsung Tizen TVs. Requires the fntv-proxy Docker container next to your fnOS server. Chinese UI.",
+  "category": "media",
+  "repo": "JJrexWang/FnTV-for-Tizen",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "^FnTV[.]wgt$", "output_name": "FnTV.wgt" }
+  ]
+}
