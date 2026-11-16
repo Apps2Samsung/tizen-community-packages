@@ -26,7 +26,7 @@
   "build:lvndry/tv-dashboard@main": "d2b0c479ca5c4b30f33b67e9ef602d92c2ce3be2",
   "build:matifDreamIt/IPTV-Tizen-TV@main": "d8eb66b9874d54a225cf584824544925e7dd521f",
   "build:natureglass/haven-tizen-ha@main": "18ffa3e8143b71b6a0677e36cb46470370ba1b19",
-  "build:pley-media-server/pley@master": "b57dab4906ff95096472f00022c5cdf8a52c8a7b",
+  "build:pley-media-server/pley@master": "bd485e444d7d1919f1a8f6eef5805a52d2f155e1",
   "build:pvk689/snake-game-tizen@master": "62ccffcf53fd72d482bd943c865cd55e8dbf6c54",
   "build:raykholo/tubearchivist-tv@main": "3cb035faf4d9e630761cee288513929fb993af41",
   "build:rfaile313/samsucks@main": "6b00e926e163a3154dd1993a26b47482d61ebf40",
@@ -76,8 +76,8 @@
   "release:Trent407/chiaki-tizen": "v0.2.0",
   "release:Viren070/AIOStreams": "smart-tv-v0.10.0",
   "release:brightcraft/moonlight-tizen": "v1.20.0",
-  "release:burkben/Overscan": "v1.2.3",
-  "release:cash94/MonoServer": "v1.0.36",
+  "release:burkben/Overscan": "v1.2.4",
+  "release:cash94/MonoServer": "v1.0.37",
   "release:cash94/TorrStream-Tizen": "v1.1.5",
   "release:christopherklint97/streamvault": "v0.1.0",
   "release:cloke-tech/Lumen-TV": "v1.17.1",
@@ -292,6 +292,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-877",
-  "stale:release:christopherklint97/streamvault": "community-877"
+  "stale:release:MrSimmo/sonance3": "community-878",
+  "stale:release:christopherklint97/streamvault": "community-878"
 }
