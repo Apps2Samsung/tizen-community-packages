@@ -39,7 +39,7 @@
   "release:AdvaithAvinash/UltimatiumTube": "stable-v1.14",
   "release:Apps2Samsung/ReolinkViewer": "v1.1.0",
   "release:Apps2Samsung/TV-Store": "v0.3.33",
-  "release:AquaPlayIPTV/aquaplay-samsung": "v1.0.52",
+  "release:AquaPlayIPTV/aquaplay-samsung": "v1.0.53",
   "release:Dysprohol/duobeam": "v0.8.9",
   "release:Edsol/go2rtc-tizen": "v0.1.0",
   "release:IIyn/omegatube": "v1.6.0",
@@ -61,7 +61,7 @@
   "release:PatrickSt1991/chorus2-tizen": "tizen-v21.x-1.0.1-2026-05-21-1443",
   "release:PatrickSt1991/flixor-tizen": "v1.0.1-2026-11-08-0607",
   "release:PatrickSt1991/tailscale-tizen": "tpk-f3a7b39",
-  "release:PatrickSt1991/tessel-tizen-tv": "v1.37.2-20261116-0952",
+  "release:PatrickSt1991/tessel-tizen-tv": "v1.37.3-20261117-0956",
   "release:PatrickSt1991/tex-tizen": "tex-tizen-v1.3.0-2026-06-09-0952",
   "release:PelagicaApp/pelagica": "4.16.0",
   "release:Prairie-Server/prairie-smarttv": "v0.5.4",
@@ -83,7 +83,7 @@
   "release:christopherklint97/streamvault": "v0.1.0",
   "release:cloke-tech/Lumen-TV": "v1.17.1",
   "release:corekill/kick-tv-tizen": "v2.4.2",
-  "release:d7ooye/sard-samsung": "v0.1.3",
+  "release:d7ooye/sard-samsung": "v0.1.4",
   "release:detain/phlix-tizen-client": "latest",
   "release:dos-ise/GB-EMU_Tizen": "v1.2.1",
   "release:dos-ise/doom-tizen": "v1.21",
@@ -298,6 +298,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-883",
-  "stale:release:christopherklint97/streamvault": "community-883"
+  "stale:release:MrSimmo/sonance3": "community-884",
+  "stale:release:christopherklint97/streamvault": "community-884"
 }
