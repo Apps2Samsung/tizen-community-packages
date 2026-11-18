@@ -53,7 +53,7 @@
   "release:MrPhaze62/moonlight-chrome-tizen-no-gamemode": "samsung_wasm-21031261929",
   "release:MrSimmo/sonance3": "v3.15",
   "release:Nur-allhi/en-tvplayer": "v3.2.0",
-  "release:NuvioMedia/NuvioTVSmart": "1.4.3",
+  "release:NuvioMedia/NuvioTVSmart": "1.4.4",
   "release:OneLiberty/moonlight-chrome-tizen": "v1.2.1",
   "release:Pajuodelis/apex-tv": "v0.5.14",
   "release:PardeepChahal7/RTSP-Viewer": "v1.0.0",
@@ -251,7 +251,7 @@
   "config:release:igFr0sty/kick-tv-tizen-tr": "0032000b4eba897b",
   "config:release:iqui27/nuvio-native-legacy": "d66b01d6963e2c15",
   "config:release:janrydzewski/kick-tv-2.0": "cb85c20f71e895c0",
-  "config:release:josepvarela/OsmTwichPlayer": "bd1c67bba73a3126",
+  "config:release:josepvarela/OsmTwichPlayer": "6aac09e421ed216c",
   "config:release:kingflooow/floh-iptv": "bb1c6e5df427e704",
   "config:release:kromatv/kroma": "9672f98cc895ccf5",
   "config:release:labanmne/padthru": "5f8dc655a00fd832",
@@ -302,6 +302,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-889",
-  "stale:release:christopherklint97/streamvault": "community-889"
+  "stale:release:MrSimmo/sonance3": "community-890",
+  "stale:release:christopherklint97/streamvault": "community-890"
 }
