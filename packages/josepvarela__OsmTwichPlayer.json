@@ -6,5 +6,10 @@
   "repo_label": "OsmTwichPlayer",
   "source": "release",
   "branch": "release",
-  "output_name": "OsmTwich.wgt"
+  "assets": [
+    {
+      "match": "^OsmTwich[.]wgt$",
+      "output_name": "OsmTwich.wgt"
+    }
+  ]
 }
