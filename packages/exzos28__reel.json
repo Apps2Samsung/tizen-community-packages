@@ -5,6 +5,11 @@
   "repo": "exzos28/reel",
   "source": "release",
   "branch": "main",
-  "output_name": "reel-samsung-tv.wgt",
-  "preview_image": "https://raw.githubusercontent.com/exzos28/reel/main/design/concept/png/tv-home.png"
+  "preview_image": "https://raw.githubusercontent.com/exzos28/reel/main/design/concept/png/tv-home.png",
+  "assets": [
+    {
+      "match": "reel-samsung-tv.wgt",
+      "output_name": "reel-samsung-tv.wgt"
+    }
+  ]
 }
