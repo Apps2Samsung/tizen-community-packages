@@ -7,7 +7,7 @@
   "branch": "main",
   "assets": [
     {
-      "match": "^arn0-launcher-[0-9].*[.]wgt$",
+      "match": "^Arn0Plus-.*[.]wgt$",
       "output_name": "Arn0Plus.wgt"
     }
   ]
