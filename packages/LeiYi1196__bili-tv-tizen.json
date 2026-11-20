@@ -1,0 +1,14 @@
+{
+  "name": "Bili TV",
+  "description": "Lightweight unofficial bilibili client for Samsung TVs, driven by the remote: recommended, popular and history feeds, search, multi-part videos, selectable quality, watch-progress sync, optional QR sign-in and voice search. Needs Tizen 6.0+; tested on one TV (The Frame). Talks to bilibili directly, no backend or proxy.",
+  "category": "streaming",
+  "repo": "LeiYi1196/bili-tv-tizen",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    {
+      "match": "^BiliTV-.*-unsigned[.]wgt$",
+      "output_name": "BiliTV.wgt"
+    }
+  ]
+}
