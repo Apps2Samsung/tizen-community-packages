@@ -26,7 +26,7 @@
   "build:lvndry/tv-dashboard@main": "d2b0c479ca5c4b30f33b67e9ef602d92c2ce3be2",
   "build:matifDreamIt/IPTV-Tizen-TV@main": "d8eb66b9874d54a225cf584824544925e7dd521f",
   "build:natureglass/haven-tizen-ha@main": "18ffa3e8143b71b6a0677e36cb46470370ba1b19",
-  "build:pley-media-server/pley@master": "d6205ef5ab3d00fdbf584c33de476696938cf954",
+  "build:pley-media-server/pley@master": "f97d77fe5a70f2136f143c942f2e7a24baf63d3d",
   "build:pvk689/snake-game-tizen@master": "62ccffcf53fd72d482bd943c865cd55e8dbf6c54",
   "build:raykholo/tubearchivist-tv@main": "3cb035faf4d9e630761cee288513929fb993af41",
   "build:rfaile313/samsucks@main": "6b00e926e163a3154dd1993a26b47482d61ebf40",
@@ -70,7 +70,7 @@
   "release:Ricrdsson1/kodi-tizen-wasm": "Alpha-0.0.13",
   "release:RitwickVerma/TizenAmbilight": "v1.0.0",
   "release:Rusty24h/VortixTV": "2.2.0",
-  "release:SherrySingh03/settle": "v1.0.1",
+  "release:SherrySingh03/settle": "v1.1.0",
   "release:Stashified/StashZen": "v0.45.0",
   "release:SuperDOS/velox": "v1.2.0",
   "release:SushyDev/tizen-youtube": "v1.6.0",
@@ -93,7 +93,7 @@
   "release:dos-ise/eduke32-tizen": "v0.11",
   "release:dos-ise/freeserf-tizen": "v1.0",
   "release:dos-ise/openttd-tizen": "v15.3",
-  "release:dx616b/arn0-tv": "v0.6.13",
+  "release:dx616b/arn0-tv": "v0.6.14",
   "release:dzikus/tizen-camera-pip": "v1.2.0",
   "release:enesk4yh4n-lab/TizenTV-Film-Merkezi": "v2.0.3",
   "release:exzos28/reel": "v0.5.0",
@@ -310,6 +310,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-901",
-  "stale:release:christopherklint97/streamvault": "community-901"
+  "stale:release:MrSimmo/sonance3": "community-902",
+  "stale:release:christopherklint97/streamvault": "community-902"
 }
