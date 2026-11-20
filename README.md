@@ -56,7 +56,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **ImmiTV**<br>[xHiqhAim](https://gitlab.com/xHiqhAim/immitv) | Lightweight Immich photo and video client for Samsung Tizen 4.0 TVs: remote-control navigation, hardware-accelerated AVPlay video playback and a month-based timeline. | `142e6ae` |
 | **Jellyfin + Bonfire**<br>[jellyfin](https://github.com/jellyfin/jellyfin-tizen) | Official Jellyfin Tizen client patched with the Bonfire loader for multi-user profile switching. | `31408c1` |
 | **JellyLean**<br>[MaCHeaMaRoBi](https://github.com/MaCHeaMaRoBi/JellyLean) | Fast, lightweight Jellyfin client without jellyfin-web: AVPlay playback with transcode fallback, Quick Connect, subtitles, SyncPlay and skip intro. | `v1.0.11` |
-| **Kodi**<br>[Ricrdsson1](https://github.com/Ricrdsson1/kodi-tizen-wasm) | Unofficial WebAssembly port of Kodi for Samsung Tizen TVs (alpha). | `Alpha-0.0.12` |
+| **Kodi**<br>[Ricrdsson1](https://github.com/Ricrdsson1/kodi-tizen-wasm) | Unofficial WebAssembly port of Kodi for Samsung Tizen TVs (alpha). | `Alpha-0.0.13` |
 | **Kodi-TeX**<br>[PatrickSt1991](https://github.com/PatrickSt1991/tex-tizen) | Kodi TeX web interface ported to Samsung Tizen. | `tex-tizen-v1.3.0-2026-06-09-0952` |
 | **KROMA**<br>[kromatv](https://github.com/kromatv/kroma) | Client for KROMA, a self-hosted direct-play media server for your NAS. | `v0.1.38` |
 | **Lobby**<br>[Lobby](https://github.com/CtznSniiips/Lobby) | Home screen for Samsung TVs with your Emby (or Jellyfin) server's Continue Watching, Live TV and teams, and Seerr's trending titles. | `986b844` |
@@ -139,7 +139,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **OmegaTube**<br>[OmegaTube](https://github.com/IIyn/omegatube) | Ad-free YouTube client with SponsorBlock and a native 4K player (Tizen 6+). | `v1.6.0` |
 | **OsmTwich**<br>[OsmTwichPlayer](https://github.com/josepvarela/OsmTwichPlayer) | Unofficial Twitch Player with 7TV emotes for Samsung Smart TVs with Tizen OS. | `v2.7.3` |
 | **reel**<br>[exzos28](https://github.com/exzos28/reel) | Films and series streamed from torrents with a built-in engine, through a Torznab source the user adds; catalogue from TMDB and AniList, set up from a phone by QR code. | `v0.5.0` |
-| **Reelo**<br>[Reelo](https://github.com/ihovsky/Reelo) | TV client for the Reelo service: films and series with a remote-first interface, family profiles and library sync between devices (Russian UI). | `Thu, 19 Nov 2026 18:00:20 GMT` |
+| **Reelo**<br>[Reelo](https://github.com/ihovsky/Reelo) | TV client for the Reelo service: films and series with a remote-first interface, family profiles and library sync between devices (Russian UI). | `Fri, 20 Nov 2026 10:58:46 GMT` |
 | **SeanimeTV**<br>[ihiqhaim](https://github.com/ihiqhaim/SeanimeTV-Tizen) | Unofficial Seanime client for Samsung Tizen TVs with torrent streaming and AVPlay playback. | `4da9288` |
 | **Spelunkr**<br>[pedr](https://github.com/pedr/spelunkrtv-tizen-app) | Unofficial spelunkr.tv client: 24/7 synchronized channels of Internet Archive video, driven by the remote, with a fix that lets Samsung's player seek in archive.org videos. | `v1.1.0` |
 | **Streamix TV**<br>[gabrielmaialva33](https://github.com/gabrielmaialva33/streamix-tv) | Cinematic 10-foot TV client for the self-hosted Streamix platform. | `v1.0.027` |
@@ -216,7 +216,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Free My TV**<br>[simbasjungles](https://github.com/simbasjungles/free-my-tv) | Fast, ad-free home screen with your app shelf, weather, sunset-based day/night theme and a photo screensaver. | `v1.5.0` |
 | **Haven**<br>[natureglass](https://github.com/natureglass/haven-tizen-ha) | Home Assistant powered home screen: sensors, lights and scenes by room, weather, live cameras, a Jellyfin client and music from Home Assistant's media folder. | `18ffa3e` |
 | **Nhà Mình**<br>[meocong](https://github.com/meocong/prj-tv-samsung) | Apple TV-style home screen for Samsung Tizen TVs: your installed apps, a YouTube shelf, weather, a lunar calendar, news, an English word of the day read aloud, Bing wallpapers and a family photo screensaver. | `v1.4.0` |
-| **Settle**<br>[SherrySingh03](https://github.com/SherrySingh03/settle) | Calm home screen: an icon dock, rows of films and shows to watch tonight on the apps you have, Up next from Trakt, search and trailers. | `v1.0.0` |
+| **Settle**<br>[SherrySingh03](https://github.com/SherrySingh03/settle) | Calm home screen: an icon dock, rows of films and shows to watch tonight on the apps you have, Up next from Trakt, search and trailers. | `v1.0.1` |
 | **TV Clock**<br>[anandhuremanan](https://github.com/anandhuremanan/samsung-tizen-clock-app) | Simple clock and screen saver for Samsung Tizen 6.0+ TVs. | `1b9ad6f` |
 | **TV Dashboard**<br>[lvndry](https://github.com/lvndry/tv-dashboard) | A calm remote-first home screen: weather and news as a short letter, an app rack, and an ambient art gallery. | `d2b0c47` |
 | **Wall**<br>[no-cover](https://github.com/no-cover/wall) | Digital photo frame for Samsung Tizen TVs: give it the URL of a ZIP of images, it downloads them and runs a configurable slideshow, with a background service that auto-starts it on boot. | `1.0.0` |
