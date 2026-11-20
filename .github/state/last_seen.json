@@ -47,6 +47,7 @@
   "release:Kepler75/StremioK": "v2.4.6",
   "release:Knikt/APL-Launcher-for-TizenOS": "v1.3.8",
   "release:Knikt/APL-TV-for-TizenOS": "v1.4.7",
+  "release:LeiYi1196/bili-tv-tizen": "v0.4.8",
   "release:Licaa21/Smart-TV": "fork-v2.1.6",
   "release:MaCHeaMaRoBi/JellyLean": "v1.0.11",
   "release:MrHumanRebel/airtizen": "v2.2.34",
@@ -201,6 +202,7 @@
   "config:release:Kepler75/StremioK": "994e1c75ba84c371",
   "config:release:Knikt/APL-Launcher-for-TizenOS": "b5735c0633a9734f",
   "config:release:Knikt/APL-TV-for-TizenOS": "10fc2c9c39211cf3",
+  "config:release:LeiYi1196/bili-tv-tizen": "dac0213da638d66c",
   "config:release:Licaa21/Smart-TV": "d129bf524c5c352a",
   "config:release:MaCHeaMaRoBi/JellyLean": "064955e207bc2805",
   "config:release:MrHumanRebel/airtizen": "302f64a46c64cc46",
@@ -308,6 +310,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-900",
-  "stale:release:christopherklint97/streamvault": "community-900"
+  "stale:release:MrSimmo/sonance3": "community-901",
+  "stale:release:christopherklint97/streamvault": "community-901"
 }
