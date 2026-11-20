@@ -2,6 +2,8 @@
   "name": "Arn0+",
   "description": "Fork of Arn0 Launcher: quiet Samsung Tizen home screen with Immich/Mix live wallpapers, weather and Navidrome music.",
   "category": "home",
+  "group": "Arn0 Launcher",
+  "variant": "dx616b \u00b7 Arn0+",
   "repo": "dx616b/arn0-tv",
   "source": "release",
   "branch": "main",
