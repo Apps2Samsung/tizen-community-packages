@@ -1,7 +1,7 @@
 # 🌐 Tizen Community Packages
 [![Sync Tizen Community Packages](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml/badge.svg)](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Packages](https://img.shields.io/badge/packages-156-blue.svg)](#-current-packages)
+[![Packages](https://img.shields.io/badge/packages-157-blue.svg)](#-current-packages)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-green.svg)](../../issues)
 [![Tizen](https://img.shields.io/badge/Platform-Tizen-lightgrey.svg)](https://www.tizen.org/)
 [![Community](https://img.shields.io/badge/Community-Driven-orange.svg)](#)
@@ -116,11 +116,11 @@ Please check the [Releases](../../releases) page for version-specific details.
 </details>
 
 <details>
-<summary><b>🎬 Streaming</b> (34)</summary>
+<summary><b>🎬 Streaming</b> (35)</summary>
 
 | 🧩 Application | 📝 Description | ⚙️ Version |
 |----------------|----------------|------------|
-| **AIOStreams**<br>[Viren070](https://github.com/Viren070/AIOStreams) | Tizen build of AIOStreams, the all-in-one Stremio super-addon for debrid and Usenet sources. | `smart-tv-v0.12.0` |
+| **AIOStreams**<br>[Viren070](https://github.com/Viren070/AIOStreams) | Tizen build of AIOStreams, the all-in-one Stremio super-addon for debrid and Usenet sources. | `smart-tv-v0.13.0` |
 | **AIOStreams (thomasrtg)**<br>[thomasrtg](https://github.com/thomasrtg/AIOStreams) | Tizen 6 build of AIOStreams, the all-in-one Stremio super-addon for debrid and Usenet sources. | `tizen6-v0.7.0-beta.1` |
 | **AniUltimatium Lite**<br>[AdvaithAvinash](https://github.com/AdvaithAvinash/AniUltimatium) | Player for your own Stremio add-ons, debrid account, IPTV playlist and direct streams; nothing built in. | `stable-v1.27` |
 | **Apex TV**<br>[Pajuodelis](https://github.com/Pajuodelis/apex-tv) | Independent F1 TV client for Samsung Tizen 6.0+. | `v0.5.14` |
@@ -135,6 +135,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Kick TV TR**<br>[Kick TV TR](https://github.com/igFr0sty/kick-tv-tizen-tr) | Unofficial Kick client with a Following screen and Turkish support. | `v2.4.0` |
 | **KickTV**<br>[corekill](https://github.com/corekill/kick-tv-tizen) | Kick.com streaming client for Samsung Tizen TVs. | `v2.4.2` |
 | **Lampa**<br>[yumata](https://github.com/yumata/lampa) | Free movie and TV catalogue with info, new releases and trailers. | `v1.4.1` |
+| **Native AIO**<br>[thomasrtg](https://github.com/thomasrtg/native-aio) | Unofficial native .NET client for your own AIOStreams server, built for the TV remote. | `v1.0.1` |
 | **Nuvio**<br>[NuvioMedia](https://github.com/NuvioMedia/NuvioTVSmart) | TV-first streaming UI for Samsung Tizen. | `1.4.4` |
 | **Nuvio Native Legacy**<br>[iqui27](https://github.com/iqui27/nuvio-native-legacy) | Unofficial native C/SDL2 Nuvio client, fast on older TVs. | `v2.0.8` |
 | **OmegaTube**<br>[OmegaTube](https://github.com/IIyn/omegatube) | Ad-free YouTube client with SponsorBlock and a native 4K player (Tizen 6+). | `v1.6.0` |
@@ -145,7 +146,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Spelunkr**<br>[pedr](https://github.com/pedr/spelunkrtv-tizen-app) | Unofficial spelunkr.tv client: 24/7 synchronized channels of Internet Archive video, driven by the remote, with a fix that lets Samsung's player seek in archive.org videos. | `v1.1.0` |
 | **Streamix TV**<br>[gabrielmaialva33](https://github.com/gabrielmaialva33/streamix-tv) | Cinematic 10-foot TV client for the self-hosted Streamix platform. | `v1.0.027` |
 | **Stremio (Tizen 4)**<br>[Apps2Samsung](https://github.com/Apps2Samsung/tizen-community-packages) | Stremio media center packaged for Tizen 4.0 devices. | `latest` |
-| **StremioK**<br>[Kepler75](https://github.com/Kepler75/StremioK) | Stremio-addon streaming client for Samsung Tizen 3.0+ TVs: catalogs, sources and subtitles from your addons, Jellyfin/Emby/Plex, IPTV (M3U, Xtream, Stalker, TV guide), YouTube, USB and network folders (WebDAV, SMB, DLNA), Trakt and Stremio sync, Nuvio plugins, 17 languages. | `v2.4.6` |
+| **StremioK**<br>[Kepler75](https://github.com/Kepler75/StremioK) | Stremio-addon streaming client for Samsung Tizen 3.0+ TVs: catalogs, sources and subtitles from your addons, Jellyfin/Emby/Plex, IPTV (M3U, Xtream, Stalker, TV guide), YouTube, USB and network folders (WebDAV, SMB, DLNA), Trakt and Stremio sync, Nuvio plugins, 17 languages. | `v2.4.7` |
 | **Telegram Videos**<br>[titlog](https://github.com/titlog/telegram-tizen) | Plays the videos in your Telegram groups and channels on Samsung Tizen 6.0+ TVs: QR sign-in, several accounts, MP4 and MKV streamed while downloading, audio tracks and subtitles, search across chats. | `v1.2.9` |
 | **TizenTube Old Tizen**<br>[numbereleven-a](https://github.com/numbereleven-a/TizenTube-old-tizen) | Standalone YouTube with SponsorBlock for older Samsung TVs (Tizen 2.4 and 3.0). | `v2.5.0` |
 | **TorrStream**<br>[cash94](https://github.com/cash94/TorrStream-Tizen) | Movies and TV shows through TorrServer, with TMDB catalogs and audio and subtitle track names read on the TV. | `v1.2.0` |
@@ -211,7 +212,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Ambient TV**<br>[Bryan-Cee](https://github.com/Bryan-Cee/Ambient) | Ambient dashboard for Samsung Tizen 5.5+ TVs: clock, weather, calendar, Google Photos slideshow and daily quotes. | `73bc869` |
 | **APL Launcher**<br>[Knikt](https://github.com/Knikt/APL-Launcher-for-TizenOS) | Apple-TV-style home screen: Top Shelf, glass dock, Control Center over any app, Settings and Sources. | `v1.3.8` |
 | **Arn0 Launcher**<br>[NelsonEU](https://github.com/NelsonEU/arn0-tv) | Minimal remote-friendly home screen for Samsung TVs: a clock, your apps, your consoles and rotating wallpapers. | `b35c292` |
-| **Arn0+**<br>[dx616b](https://github.com/dx616b/arn0-tv) | Fork of Arn0 Launcher: quiet Samsung Tizen home screen with Immich/Mix live wallpapers, weather and Navidrome music. | `v0.6.14` |
+| **Arn0+**<br>[dx616b](https://github.com/dx616b/arn0-tv) | Fork of Arn0 Launcher: quiet Samsung Tizen home screen with Immich/Mix live wallpapers, weather and Navidrome music. | `v0.6.15` |
 | **Athan TV**<br>[hvmzx](https://github.com/hvmzx/Athan-TV) | Prayer times on your TV, powered by mawaqit.net: pick your mosque and see its adhan and iqama times, Jumu'ah and announcements. | `v0.1.0` |
 | **Copenhagen Weather**<br>[cocodedk](https://github.com/cocodedk/copenhagen-weather-tv) | Current conditions, hourly and 7-day forecast for Copenhagen on Samsung Tizen 6.0+ TVs. | `1a934d6` |
 | **Frame Dashboard**<br>[joseamijares](https://github.com/joseamijares/frame-dashboard) | Daily dashboard for the Samsung Frame TV: a public-domain painting beside your calendar, focus and tasks. | `8cc81fe` |
@@ -244,7 +245,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **TizenUtility**<br>[no-cover](https://github.com/no-cover/tizenutility) | System utility for Samsung Tizen TVs: detailed device, firmware and network info, plus a launcher for hidden built-in Samsung apps that are not reachable from the normal UI. | `1.1.1` |
 | **Torr Streaming**<br>[no-cover](https://github.com/no-cover/torr-streaming) | Runs TorrServer as a background service on the TV itself, so local web apps can stream torrents directly without a separate box. | `1.0.0` |
 | **TV-Store**<br>[Apps2Samsung](https://github.com/Apps2Samsung/TV-Store) | The Apps2Samsung catalog on the TV itself: browse with the remote and install apps natively through the set's own developer connection, with no PC or phone in the loop after a one-time arming from the Apps2Samsung 3.0 (or newer) toolbox. | `v0.3.37` |
-| **Vetro**<br>[andrearicci93](https://github.com/andrearicci93/vetro) | TV management dashboard with root integration: app inventory, controls and diagnostics in your browser. | `42bceac` |
+| **Vetro**<br>[andrearicci93](https://github.com/andrearicci93/vetro) | TV management dashboard with root integration: app inventory, controls and diagnostics in your browser. | `4d6cdf0` |
 
 </details>
 
