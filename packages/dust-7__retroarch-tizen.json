@@ -1,0 +1,15 @@
+{
+  "name": "RetroArch Tizen",
+  "description": "Tizen port of RetroArch, for Samsung TVs running Tizen OS 5.5 and above.",
+  "category": "games",
+  "repo": "dust-7/retroarch-tizen",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    {
+      "match": "^RetroArch_v.*[.]wgt$",
+      "output_name": "RetroArch-Tizen.wgt"
+    }
+  ],
+  "preview_image": "https://raw.githubusercontent.com/dust-7/retroarch-tizen/refs/heads/main/docs/images/main-menu.webp"
+}
