@@ -109,6 +109,7 @@
   "release:kingflooow/floh-iptv": "v1.7.0",
   "release:kromatv/kroma": "v0.1.38",
   "release:labanmne/padthru": "v0.5.0",
+  "release:mahmutisik/light-kick-tv": "v1.0.2",
   "release:meocong/prj-tv-samsung": "v1.4.0",
   "release:mhma26395-ctrl/tizen-iptv-player": "V1.0",
   "release:nicbra/f1tv-tizen": "v1.1.0",
@@ -266,6 +267,7 @@
   "config:release:kingflooow/floh-iptv": "bb1c6e5df427e704",
   "config:release:kromatv/kroma": "9672f98cc895ccf5",
   "config:release:labanmne/padthru": "5f8dc655a00fd832",
+  "config:release:mahmutisik/light-kick-tv": "cf442caa69d3d2de",
   "config:release:meocong/prj-tv-samsung": "010de5e0ddf5fd50",
   "config:release:mhma26395-ctrl/tizen-iptv-player": "a223ca63b5a85746",
   "config:release:nicbra/f1tv-tizen": "5ab9f382d463c9cd",
@@ -314,6 +316,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-906",
-  "stale:release:christopherklint97/streamvault": "community-906"
+  "stale:release:MrSimmo/sonance3": "community-907",
+  "stale:release:christopherklint97/streamvault": "community-907"
 }
