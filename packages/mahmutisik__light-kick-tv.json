@@ -1,0 +1,12 @@
+{
+  "name": "Light Kick TV",
+  "description": "Lightweight unofficial Kick client: live streams, past broadcasts, read-only chat and a language/sort filter, in 10 languages. Plays through the TV's web engine, so it also works where AVPlay fails.",
+  "category": "streaming",
+  "repo": "mahmutisik/light-kick-tv",
+  "repo_label": "mahmutisik",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "^LightKickTV[.]wgt$", "output_name": "LightKickTV.wgt" }
+  ]
+}
