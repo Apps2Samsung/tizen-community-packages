@@ -1,0 +1,15 @@
+{
+  "name": "TizenTube 2.4 Native",
+  "description": "YouTube client with SponsorBlock for Samsung TVs running Tizen 2.4, with a custom remote-friendly interface and native hardware playback.",
+  "category": "streaming",
+  "repo": "numbereleven-a/TizenTube-2.4-Native",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    {
+      "match": "^TizenTube-2[.]4-Native-.*[.]zip$",
+      "extract": "^TizenTube-2[.]4-Native[.]wgt$",
+      "output_name": "TizenTube-2.4-Native.wgt"
+    }
+  ]
+}
