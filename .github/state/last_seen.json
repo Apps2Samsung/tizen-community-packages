@@ -26,7 +26,7 @@
   "build:lvndry/tv-dashboard@main": "d2b0c479ca5c4b30f33b67e9ef602d92c2ce3be2",
   "build:matifDreamIt/IPTV-Tizen-TV@main": "d8eb66b9874d54a225cf584824544925e7dd521f",
   "build:natureglass/haven-tizen-ha@main": "18ffa3e8143b71b6a0677e36cb46470370ba1b19",
-  "build:pley-media-server/pley@master": "257868b20d44080e2b832550712198934312197c",
+  "build:pley-media-server/pley@master": "538a8dc9d997d9627e8134a3631c95d54c422200",
   "build:pvk689/snake-game-tizen@master": "62ccffcf53fd72d482bd943c865cd55e8dbf6c54",
   "build:raykholo/tubearchivist-tv@main": "3cb035faf4d9e630761cee288513929fb993af41",
   "build:rfaile313/samsucks@main": "6b00e926e163a3154dd1993a26b47482d61ebf40",
@@ -110,7 +110,7 @@
   "release:kingflooow/floh-iptv": "v1.7.0",
   "release:kromatv/kroma": "v0.1.38",
   "release:labanmne/padthru": "v0.5.0",
-  "release:mahmutisik/light-kick-tv": "v1.0.2",
+  "release:mahmutisik/light-kick-tv": "v1.0.3",
   "release:meocong/prj-tv-samsung": "v1.4.0",
   "release:mhma26395-ctrl/tizen-iptv-player": "V1.0",
   "release:nicbra/f1tv-tizen": "v1.1.0",
@@ -318,6 +318,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-909",
-  "stale:release:christopherklint97/streamvault": "community-909"
+  "stale:release:MrSimmo/sonance3": "community-910",
+  "stale:release:christopherklint97/streamvault": "community-910"
 }
