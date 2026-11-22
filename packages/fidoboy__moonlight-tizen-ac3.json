@@ -13,11 +13,6 @@
       "match": "Moonlight.wgt",
       "variant": "fidoboy · Dolby",
       "output_name": "Moonlight-AC3-fidoboy.wgt"
-    },
-    {
-      "match": "Moonlight-ForceGM.wgt",
-      "variant": "fidoboy · Dolby ForceGM",
-      "output_name": "Moonlight-AC3-fidoboy-ForceGM.wgt"
     }
   ]
 }
