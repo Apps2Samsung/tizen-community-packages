@@ -1,0 +1,11 @@
+{
+  "name": "Reolink2Samsung",
+  "description": "Reolink NVR viewer built on Reolink Viewer (Apps2Samsung/ReolinkViewer): all cameras on one screen in tile layouts, any camera full screen, PTZ popup with presets, patrol, camera reordering and five languages, all with the arrow keys and OK. Local network only.",
+  "category": "casting",
+  "repo": "zabique/Reolink2Samsung",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "^Reolink2Samsung[.]wgt$", "output_name": "Reolink2Samsung.wgt" }
+  ]
+}

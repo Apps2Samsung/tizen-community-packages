@@ -1,0 +1,10 @@
+{
+  "name": "Snake",
+  "description": "Snake game for Samsung Tizen TVs, played with the remote.",
+  "category": "games",
+  "repo": "pvk689/snake-game-tizen",
+  "source": "build",
+  "branch": "master",
+  "skip_npm": true,
+  "output_name": "Snake-Game.wgt"
+}

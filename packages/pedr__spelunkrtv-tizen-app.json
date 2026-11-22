@@ -1,0 +1,9 @@
+{
+  "name": "Spelunkr",
+  "description": "Unofficial spelunkr.tv client: 24/7 synchronized channels of Internet Archive video, driven by the remote, with a fix that lets Samsung's player seek in archive.org videos.",
+  "category": "streaming",
+  "repo": "pedr/spelunkrtv-tizen-app",
+  "source": "release",
+  "branch": "main",
+  "output_name": "Spelunkr.wgt"
+}

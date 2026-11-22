@@ -1,0 +1,14 @@
+{
+  "name": "SKY IPTV",
+  "description": "IPTV player for Samsung Tizen 5.0+ TVs: M3U and Xtream playlists, remote-friendly UI, audio and subtitle track switching, embedded mov_text subtitles. Bring your own playlist.",
+  "category": "iptv",
+  "repo": "sanwhere/sky-iptv-tizen",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    {
+      "match": "SkyIptv-.*[.]wgt$",
+      "output_name": "SKY-IPTV.wgt"
+    }
+  ]
+}

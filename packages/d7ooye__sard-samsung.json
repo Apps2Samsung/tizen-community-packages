@@ -1,0 +1,10 @@
+{
+  "name": "SARD",
+  "description": "Arabic subtitles for console games on your TV, with the SARD phone app.",
+  "category": "games",
+  "repo": "d7ooye/sard-samsung",
+  "source": "release",
+  "branch": "main",
+  "output_name": "sard-samsung.wgt",
+  "preview_image": "https://raw.githubusercontent.com/d7ooye/sard-samsung/main/docs/screenshot.png"
+}

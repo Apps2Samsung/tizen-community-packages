@@ -1,0 +1,11 @@
+{
+  "name": "Xtream IPTV Player",
+  "description": "IPTV player for Samsung Tizen TVs with Xtream API support: live TV, movies and series. Bring your own Xtream subscription.",
+  "category": "iptv",
+  "repo": "dearbulut/tizen-xtream-iptv",
+  "source": "build",
+  "branch": "main",
+  "project_path": ".",
+  "skip_npm": true,
+  "output_name": "XtreamIPTV.wgt"
+}

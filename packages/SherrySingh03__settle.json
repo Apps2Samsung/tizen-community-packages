@@ -1,0 +1,91 @@
+{
+  "name": "Settle",
+  "description": "Calm home screen: an icon dock, rows of films and shows to watch tonight on the apps you have, Up next from Trakt, search and trailers. The Home button, Control Center, sleep timer and app profiles need Vetro. Your country is asked on install; TMDB, Trakt, OMDb, Unsplash and YouTube keys are optional and written into the package.",
+  "category": "home",
+  "repo": "SherrySingh03/settle",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "^Settle-.*[.]wgt$", "output_name": "Settle.wgt" }
+  ],
+  "cert_level": "partner",
+  "preview_image": "https://raw.githubusercontent.com/SherrySingh03/settle/main/docs/img/home.jpg",
+  "user_settings": {
+    "help_url": "https://github.com/SherrySingh03/settle/blob/main/docs/SETUP.md#installing-from-the-apps2samsung-catalogue",
+    "file": "js/config.local.js",
+    "fields": [
+      {
+        "key": "region",
+        "label": "Your country, as a 2-letter code (US, GB, IN, DE...): where-to-watch and popular titles",
+        "type": "text",
+        "required": true,
+        "pattern": "^[A-Z]{2}$",
+        "find": "region: \"IN\",",
+        "replace": "region: \"{value}\","
+      },
+      {
+        "key": "tmdb",
+        "label": "TMDB API key (v3), for the film and show rows, posters and search; optional",
+        "type": "text",
+        "required": false,
+        "pattern": "^[A-Za-z0-9]+$",
+        "find": "tmdb: \"\",",
+        "replace": "tmdb: \"{value}\","
+      },
+      {
+        "key": "trakt",
+        "label": "Trakt client id, for Up next, your watchlist and personal picks; optional",
+        "type": "text",
+        "required": false,
+        "pattern": "^[A-Za-z0-9]+$",
+        "find": "traktClientId: \"\",",
+        "replace": "traktClientId: \"{value}\","
+      },
+      {
+        "key": "omdb",
+        "label": "OMDb API key, for IMDb and Rotten Tomatoes ratings; optional",
+        "type": "text",
+        "required": false,
+        "pattern": "^[A-Za-z0-9]+$",
+        "find": "omdb: \"\",",
+        "replace": "omdb: \"{value}\","
+      },
+      {
+        "key": "unsplash",
+        "label": "Unsplash access key, for the wallpapers; optional",
+        "type": "text",
+        "required": false,
+        "pattern": "^[A-Za-z0-9_-]+$",
+        "find": "unsplash: \"\",",
+        "replace": "unsplash: \"{value}\","
+      },
+      {
+        "key": "youtube",
+        "label": "YouTube Data API v3 key, for Trending on YouTube above the dock; optional",
+        "type": "text",
+        "required": false,
+        "pattern": "^[A-Za-z0-9_-]+$",
+        "find": "youtube: \"\",",
+        "replace": "youtube: \"{value}\","
+      },
+      {
+        "key": "vetro_host",
+        "label": "Your TV's own IP address, only if Control Center says Vetro can't be reached; optional",
+        "type": "text",
+        "required": false,
+        "pattern": "^[0-9]{1,3}([.][0-9]{1,3}){3}$",
+        "find": "vetroHost: \"\"",
+        "replace": "vetroHost: \"{value}\""
+      },
+      {
+        "key": "youtube_screen",
+        "label": "YouTube screen id, for trailers in the YouTube app (see the setup guide); optional",
+        "type": "text",
+        "required": false,
+        "pattern": "^[A-Za-z0-9_-]+$",
+        "find": "screenId: \"\"",
+        "replace": "screenId: \"{value}\""
+      }
+    ]
+  }
+}

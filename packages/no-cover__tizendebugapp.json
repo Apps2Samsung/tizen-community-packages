@@ -1,0 +1,20 @@
+{
+  "name": "Tizen Debug App",
+  "description": "Developer toolkit for troubleshooting apps and monitoring system state on real Samsung Tizen TV hardware. Hybrid web + .NET/C++ build for Tizen 4.0+, plus a web-only build for Tizen 3.0.",
+  "category": "tools",
+  "repo": "no-cover/tizendebugapp",
+  "source": "release",
+  "branch": "master",
+  "assets": [
+    {
+      "match": "TizenDebugApp.wgt",
+      "variant": "Tizen 4.0 and up",
+      "output_name": "TizenDebugApp.wgt"
+    },
+    {
+      "match": "TizenDebugApp_tizen30.wgt",
+      "variant": "Tizen 3.0",
+      "output_name": "TizenDebugApp-tizen3.wgt"
+    }
+  ]
+}

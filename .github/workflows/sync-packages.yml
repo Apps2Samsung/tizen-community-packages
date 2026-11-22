@@ -2,16 +2,31 @@ name: Sync Tizen Community Packages
 
 on:
   schedule:
-    # 04:00 UTC daily - 05:00 CET (winter) / 06:00 CEST (summer) in Brussel
-    - cron: '23 2 * * *' 
+    # Every two hours, at an odd minute: GitHub delays schedules that fire on
+    # the hour. A run that finds nothing new only costs the detect-changes
+    # job (about a minute and ~160 API calls on the 1000/hour repo budget),
+    # so an upstream release lands in a bundle within two hours instead of
+    # the next night.
+    - cron: '23 */2 * * *'
   # A merged PR is a push to main. Bot commits made with GITHUB_TOKEN never
   # trigger workflows, so the state/README commit below can't loop.
+  # Only what shapes the bundle or catalog.json: a merge of docs, the README
+  # generator or the independent-repository tools doesn't publish a release
+  # (the next scheduled run picks those up). Keep this list and BUNDLE_SCRIPTS
+  # below in step with the scripts this workflow and build-catalog.sh run.
   push:
     branches: [main]
     paths:
-      - 'packages/**'
+      - 'packages/*.json'
       - 'apps/**'
-      - 'scripts/**'
+      - 'data/categories.json'
+      - 'scripts/build-catalog.sh'
+      - 'scripts/build-manifests.sh'
+      - 'scripts/check-categories.py'
+      - 'scripts/fetch-asset.sh'
+      - 'scripts/package-info.py'
+      - 'scripts/scan-packages.py'
+      - 'scripts/unwrap-zip.sh'
   workflow_dispatch:
     inputs:
       force:
@@ -39,13 +54,18 @@ jobs:
     outputs:
       has_changes: ${{ steps.check.outputs.has_changes }}
       changes_summary: ${{ steps.check.outputs.changes_summary }}
+      # Incremental runs: only `rebuild` is built / downloaded, the files in
+      # `carry` are copied over unchanged from the `prev_tag` release.
+      rebuild: ${{ steps.check.outputs.rebuild }}
+      carry: ${{ steps.check.outputs.carry }}
+      # {repo: {tag, files}}: the recent bundle that can stand in for a
+      # refreshed package when its refresh comes up short.
+      fallback: ${{ steps.check.outputs.fallback }}
+      prev_tag: ${{ steps.check.outputs.prev_tag }}
+      matrix: ${{ steps.check.outputs.matrix }}
+      build_count: ${{ steps.check.outputs.build_count }}
     steps:
       - uses: actions/checkout@v4
-
-      - name: Install jq
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y jq curl
 
       - name: Compile manifests
         run: bash scripts/build-manifests.sh
@@ -54,17 +74,26 @@ jobs:
         id: check
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # Push (merged PR) always rebuilds: an edited manifest isn't an upstream change.
-          FORCE: ${{ github.event_name == 'push' || inputs.force == true }}
+          FORCE: ${{ inputs.force == true }}
+          EVENT: ${{ github.event_name }}
+          BEFORE: ${{ github.event.before }}
         run: |
           set -e
           STATE_FILE=".github/state/last_seen.json"
           mkdir -p .github/state
+          # The state as main has it now, not as of the commit that triggered
+          # this run: a run that waited in the concurrency queue would otherwise
+          # miss the previous run's state commit (and its stale:<id> retries).
+          if git fetch -q --depth=1 origin main; then
+            git show FETCH_HEAD:"$STATE_FILE" > "$STATE_FILE.main" 2>/dev/null && mv "$STATE_FILE.main" "$STATE_FILE" || rm -f "$STATE_FILE.main"
+          fi
           [ -f "$STATE_FILE" ] || echo '{}' > "$STATE_FILE"
           old_state=$(cat "$STATE_FILE")
           new_state='{}'
           summary=""
           has_changes="false"
+          # Packages (<source>:<repo>) whose upstream or manifest changed, one per line.
+          dirty=""
 
           api() {
             curl -fsSL -H "Authorization: Bearer $GH_TOKEN" \
@@ -94,17 +123,25 @@ jobs:
             if [ "$old_val" != "$sha" ]; then
               summary="${summary}"$'\n'"- build $repo ($branch) -> ${sha:0:7}"
               has_changes="true"
+              dirty="${dirty}build:$repo"$'\n'
             fi
           done < <(jq -c 'to_entries[]' repos-build.json)
 
           # --- Release-based repos (track latest tag) ---
           while IFS= read -r entry; do
             repo=$(echo "$entry" | jq -r '.key')
-            json=$(api "https://api.github.com/repos/$repo/releases/latest" 2>/dev/null || echo '')
-            tag=$(echo "$json" | jq -r '.tag_name // empty')
-            if [ -z "$tag" ]; then
-              json=$(api "https://api.github.com/repos/$repo/releases?per_page=20" 2>/dev/null || echo '[]')
-              tag=$(echo "$json" | jq -r '[.[] | select(.prerelease==true and .draft==false)][0].tag_name // empty')
+            prefix=$(echo "$entry" | jq -r '.value.release_tag_prefix // empty')
+            if [ -n "$prefix" ]; then
+              # Monorepo: the Tizen build has its own tags, /releases/latest belongs to another component.
+              json=$(api "https://api.github.com/repos/$repo/releases?per_page=100" 2>/dev/null || echo '[]')
+              tag=$(echo "$json" | jq -r --arg p "$prefix" '[.[] | select(.draft==false and (.tag_name | startswith($p)))] | (map(select(.prerelease==false))[0] // .[0]) | .tag_name // empty')
+            else
+              json=$(api "https://api.github.com/repos/$repo/releases/latest" 2>/dev/null || echo '')
+              tag=$(echo "$json" | jq -r '.tag_name // empty')
+              if [ -z "$tag" ]; then
+                json=$(api "https://api.github.com/repos/$repo/releases?per_page=20" 2>/dev/null || echo '[]')
+                tag=$(echo "$json" | jq -r '[.[] | select(.prerelease==true and .draft==false)][0].tag_name // empty')
+              fi
             fi
             if [ -z "$tag" ]; then
               echo "WARN: no releases for $repo - keeping previous state"
@@ -117,6 +154,7 @@ jobs:
             if [ "$old_val" != "$tag" ]; then
               summary="${summary}"$'\n'"- release $repo -> $tag"
               has_changes="true"
+              dirty="${dirty}release:$repo"$'\n'
             fi
           done < <(jq -c '.releases | to_entries[]' repos-sync.json)
 
@@ -139,14 +177,118 @@ jobs:
             if [ "$old_val" != "$fingerprint" ]; then
               summary="${summary}"$'\n'"- direct $repo -> $fingerprint"
               has_changes="true"
+              dirty="${dirty}direct:$repo"$'\n'
             fi
           done < <(jq -c '.direct | to_entries[]' repos-sync.json)
 
+          # --- Every package: the files it ships and its config fingerprint ---
+          # id = <source>:<repo>: a repo may carry one manifest per source (a
+          # native .tpk from releases beside a web app built from source), so
+          # everything per package (dirty, rebuild, config:, stale:, fallback) is
+          # keyed on the id, so a missing release asset never rebuilds the web app.
+          pkgs=$(jq -nc --slurpfile b repos-build.json --slurpfile s repos-sync.json '
+            [ ($b[0] | to_entries[] | {id: ("build:" + .key), repo: .key, cfg: .value, overlay: (.value.overlay // ""),
+                files: [.value.output_name]}),
+              ($s[0].releases | to_entries[] | {id: ("release:" + .key), repo: .key, cfg: .value, overlay: "",
+                files: (if .value.assets then [.value.assets[].output_name] else [.value.output_name] end)}),
+              ($s[0].direct | to_entries[] | {id: ("direct:" + .key), repo: .key, cfg: .value, overlay: "",
+                files: [.value.output_name // ((.key | split("/") | last) + ".wgt")]}) ]')
+
+          # Config fingerprint = compiled manifest entry + overlay files, so an
+          # edited manifest rebuilds just that package. Name / description /
+          # category are not in the compiled entry: they only feed catalog.json,
+          # which every release regenerates anyway.
+          had_config=$(echo "$old_state" | jq 'any(keys[]; startswith("config:"))')
+          while IFS= read -r p; do
+            id=$(echo "$p" | jq -r '.id')
+            repo=$(echo "$p" | jq -r '.repo')
+            overlay=$(echo "$p" | jq -r '.overlay')
+            cfg=$( { echo "$p" | jq -c '.cfg'
+                     if [ -n "$overlay" ] && [ -d "apps/$overlay" ]; then
+                       (cd "apps/$overlay" && find . -type f -print0 | sort -z | xargs -0 sha256sum)
+                     fi; } | sha256sum | cut -c1-16)
+            key="config:$id"
+            new_state=$(echo "$new_state" | jq --arg k "$key" --arg v "$cfg" '. + {($k): $v}')
+            old_val=$(echo "$old_state" | jq -r --arg k "$key" '.[$k] // empty')
+            if [ "$old_val" != "$cfg" ]; then
+              # A package seen before: a new one is already listed by its build / release / direct line.
+              [ -n "$old_val" ] && summary="${summary}"$'\n'"- config $id"
+              has_changes="true"
+              dirty="$dirty$id"$'\n'
+            fi
+          done < <(echo "$pkgs" | jq -c '.[]')
+
+          # --- Previous bundle: what it already ships ---
+          # Recent bundles, newest first, as [{tag, files}].
+          bundles=$(api "https://api.github.com/repos/$GITHUB_REPOSITORY/releases?per_page=20" 2>/dev/null \
+            | jq -c '[.[] | select(.draft == false and (.tag_name | startswith("community-")))
+                       | {tag: .tag_name, files: [(.assets // [])[].name]}]' || true)
+          [ -n "$bundles" ] || bundles='[]'
+          prev_tag=$(echo "$bundles" | jq -r '.[0].tag // empty')
+          prev_files=$(echo "$bundles" | jq -c '.[0].files // []')
+
+          # --- Full or incremental ---
+          full=""
           if [ "$FORCE" = "true" ]; then
-            echo "Force flag set - treating as changed"
-            has_changes="true"
-            summary="${summary}"$'\n'"(forced via ${{ github.event_name }})"
+            full="forced via workflow_dispatch"
+          elif [ -z "$prev_tag" ]; then
+            full="no previous community release to reuse"
+          elif [ "$had_config" != "true" ]; then
+            full="package config fingerprints initialised"
+          elif [ "$EVENT" = "push" ]; then
+            # The scripts shape what gets built and shipped, so a change there
+            # rebuilds everything. Unknown diff (new branch, API error) does too.
+            changed_files=$(api "https://api.github.com/repos/$GITHUB_REPOSITORY/compare/$BEFORE...$GITHUB_SHA" 2>/dev/null \
+              | jq -r '.files[].filename' || true)
+            BUNDLE_SCRIPTS='^scripts/(build-catalog\.sh|build-manifests\.sh|check-categories\.py|fetch-asset\.sh|package-info\.py|scan-packages\.py|unwrap-zip\.sh)$'
+            if [ -z "$changed_files" ] || echo "$changed_files" | grep -qE "$BUNDLE_SCRIPTS"; then
+              full="a bundle script changed"
+            fi
           fi
+          if [ "$EVENT" = "push" ]; then
+            # A merged PR always publishes, so metadata-only edits reach catalog.json.
+            has_changes="true"
+            summary="${summary}"$'\n'"(push to main)"
+          fi
+          if [ -n "$full" ]; then
+            echo "Full rebuild: $full"
+            has_changes="true"
+            summary="${summary}"$'\n'"(full rebuild: $full)"
+            rebuild=$(echo "$pkgs" | jq -c '[.[].id]')
+          else
+            # Changed packages, plus any whose files the previous bundle lacks
+            # (skipped asset, quarantined) or only has from an older version
+            # (stale:<id>, see publish-release). Those never start a run on
+            # their own, they just get retried whenever one happens.
+            rebuild=$(echo "$pkgs" | jq -c --arg dirty "$dirty" --argjson have "$prev_files" \
+                --argjson stale "$(echo "$old_state" | jq -c '[keys[] | select(startswith("stale:")) | .[6:]]')" '
+              ($dirty | split("\n") | map(select(. != ""))) as $d
+              | [ .[] | select((.id as $i | ($d | index($i)) or ($stale | index($i)))
+                    or any(.files[]; . == null or (. as $f | $have | index($f) | not)))
+                  | .id ]')
+          fi
+          # Newest recent bundle that has all of a refreshed package's files,
+          # so an app already missing from the last bundle can still come back.
+          fallback=$(echo "$pkgs" | jq -c --argjson r "$rebuild" --argjson bundles "$bundles" '
+            [.[] | select(.id as $x | $r | index($x)) | . as $p
+             | ([$bundles[] | select(. as $b | all($p.files[]; . as $f | $b.files | index($f)))][0].tag) as $tag
+             | select($tag) | {key: .id, value: {tag: $tag, files: .files}}] | from_entries')
+          carry=$(echo "$pkgs" | jq -c --argjson r "$rebuild" \
+            '[.[] | select(.id as $x | $r | index($x) | not) | .files[]] | unique')
+          matrix=$(jq -c --argjson r "$rebuild" \
+            '{include: [to_entries[] | select(("build:" + .key) as $k | $r | index($k)) | {
+              repo: .key,
+              repo_id: (.key | gsub("/"; "-")),
+              manifest: ("packages/" + (.key | gsub("/"; "__")) + ".json"),
+              branch: .value.branch,
+              project_path: (.value.project_path // "."),
+              output_name: (.value.output_name // ""),
+              skip_npm: (.value.skip_npm // false),
+              pre_build: (.value.pre_build // ""),
+              overlay: (.value.overlay // ""),
+              host: (.value.host // "github")
+            }]}' repos-build.json)
+          build_count=$(echo "$matrix" | jq '.include | length')
 
           echo "$new_state" | jq '.' > new_last_seen.json
 
@@ -154,8 +296,23 @@ jobs:
           cat new_last_seen.json
           echo "--- summary ---"
           echo "${summary:-No changes.}"
+          echo "--- plan ---"
+          echo "Rebuild/download $(echo "$rebuild" | jq length) of $(echo "$pkgs" | jq length) packages ($build_count builds): $(echo "$rebuild" | jq -r 'join(", ")')"
+          echo "Reuse $(echo "$carry" | jq length) files from ${prev_tag:-(none)}"
+          {
+            echo "### Sync plan"
+            echo "Rebuild/download **$(echo "$rebuild" | jq length)** of $(echo "$pkgs" | jq length) packages, reuse **$(echo "$carry" | jq length)** files from \`${prev_tag:-none}\`."
+          } >> "$GITHUB_STEP_SUMMARY"
 
           echo "has_changes=$has_changes" >> "$GITHUB_OUTPUT"
+          {
+            echo "rebuild=$rebuild"
+            echo "carry=$carry"
+            echo "fallback=$fallback"
+            echo "prev_tag=$prev_tag"
+            echo "matrix=$matrix"
+            echo "build_count=$build_count"
+          } >> "$GITHUB_OUTPUT"
           {
             echo "changes_summary<<__END__"
             echo "${summary:-No changes.}"
@@ -170,23 +327,23 @@ jobs:
           path: new_last_seen.json
 
   prepare:
+    # Only makes sure the Tizen Studio Web CLI is in the actions cache. On a hit
+    # this is a few-second lookup; every build-matrix leg then restores the SDK
+    # straight from cache instead of pulling a 400MB artifact. On a miss it
+    # installs once and saves, so the matrix never installs in parallel.
     runs-on: ubuntu-24.04
     needs: detect-changes
-    if: needs.detect-changes.outputs.has_changes == 'true'
+    if: needs.detect-changes.outputs.has_changes == 'true' && needs.detect-changes.outputs.build_count != '0'
     steps:
       - uses: actions/checkout@v4
 
-      - name: Restore Tizen SDK cache
+      - name: Look up Tizen SDK cache
         id: tizen-sdk-cache
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: tizen-studio
           key: tizen-web-sdk-4.0
-
-      - name: Install base dependencies
-        run: |
-          sudo apt-get update
-          sudo DEBIAN_FRONTEND=noninteractive NEEDRESTART_MODE=a apt-get -o DPkg::Lock::Timeout=120 install -y --no-install-recommends wget zip git jq nodejs npm expect curl unzip
+          lookup-only: true
 
       - name: Install Tizen Studio Web CLI
         if: steps.tizen-sdk-cache.outputs.cache-hit != 'true'
@@ -206,6 +363,48 @@ jobs:
           path: tizen-studio
           key: tizen-web-sdk-4.0
 
+
+  tizen-build:
+    runs-on: ubuntu-24.04
+    needs: [detect-changes, prepare]
+    # Skipped when nothing built-from-source needs a rebuild (an empty matrix
+    # is an error); publish-release accepts that.
+    if: needs.detect-changes.outputs.build_count != '0'
+    # A hung upstream build (npm, pre_build, packaging) must not hold the whole
+    # release for GitHub's 6h default. A timeout counts as a failed leg, and the
+    # release still ships the rest.
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJson(needs.detect-changes.outputs.matrix).include }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore Tizen SDK from cache
+        uses: actions/cache/restore@v4
+        with:
+          path: tizen-studio
+          key: tizen-web-sdk-4.0
+          fail-on-cache-miss: true
+      - name: Restore build cache
+        # Per-package scratch space that pre_build may reuse across runs for
+        # expensive, pinned inputs (e.g. the jellyfin-web build at a fixed tag).
+        # Keyed on the manifest, so editing pre_build starts from scratch.
+        if: matrix.pre_build != ''
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/build-cache
+          key: build-cache-${{ matrix.repo_id }}-${{ hashFiles(matrix.manifest) }}
+      # PR #59: upstream apps increasingly require Node 24 (e.g. jellyfin-web).
+      # This is the job that actually runs npm / pre_build, so it belongs here,
+      # not in prepare (which never touches node).
+      - name: Setup Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Fix Tizen Studio permissions
+        run: chmod -R +x tizen-studio
       - name: Create signing certificate
         run: |
           mkdir -p tizen-studio-data/keystore/author tizen-studio-data/profile
@@ -235,74 +434,6 @@ jobs:
             '}' \
             > package.exp
           chmod +x package.exp
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: tizen-studio-artifact
-          path: tizen-studio/
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: package-exp-artifact
-          path: package.exp
-
-  generate-matrix-build:
-    runs-on: ubuntu-24.04
-    needs: detect-changes
-    if: needs.detect-changes.outputs.has_changes == 'true'
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
-    steps:
-      - uses: actions/checkout@v4
-      - name: Compile manifests
-        run: bash scripts/build-manifests.sh
-      - id: set-matrix
-        run: |
-          matrix=$(jq -c \
-            '{include: [to_entries[] | {
-              repo: .key,
-              repo_id: (.key | gsub("/"; "-")),
-              branch: .value.branch,
-              project_path: (.value.project_path // "."),
-              output_name: (.value.output_name // ""),
-              skip_npm: (.value.skip_npm // false),
-              pre_build: (.value.pre_build // ""),
-              overlay: (.value.overlay // ""),
-              host: (.value.host // "github")
-            }]}' repos-build.json)
-          echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
-
-  tizen-build:
-    runs-on: ubuntu-24.04
-    needs: [prepare, generate-matrix-build]
-    # A hung upstream build (npm, pre_build, packaging) must not hold the whole
-    # release for GitHub's 6h default. A timeout counts as a failed leg, and the
-    # release still ships the rest.
-    timeout-minutes: 30
-    strategy:
-      fail-fast: false
-      matrix:
-        include: ${{ fromJson(needs.generate-matrix-build.outputs.matrix).include }}
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
-        with:
-          name: tizen-studio-artifact
-          path: tizen-studio
-      - uses: actions/download-artifact@v4
-        with:
-          name: package-exp-artifact
-          path: .
-      # PR #59: upstream apps increasingly require Node 24 (e.g. jellyfin-web).
-      # This is the job that actually runs npm / pre_build, so it belongs here,
-      # not in prepare (which never touches node).
-      - name: Setup Node.js 24
-        uses: actions/setup-node@v4
-        with:
-          node-version: '24'
-
-      - name: Fix Tizen Studio permissions
-        run: chmod -R +x tizen-studio
       # apt on a fresh runner can block for a long time (dpkg lock held by
       # unattended-upgrades, stalled mirror). Try the image's existing index
       # first, retry with a refresh, and never let this step eat the job budget.
@@ -328,9 +459,10 @@ jobs:
           OVERLAY: ${{ matrix.overlay }}
           PROJECT_PATH: ${{ matrix.project_path }}
           HOST: ${{ matrix.host }}
+          BUILD_CACHE: ${{ runner.temp }}/build-cache
         run: |
           set -e
-          mkdir -p build wgt_files
+          mkdir -p build wgt_files "$BUILD_CACHE"
           cd build
           case "$HOST" in
             gitlab) clone_url="https://gitlab.com/${{ matrix.repo }}.git" ;;
@@ -350,6 +482,13 @@ jobs:
             echo "pre_build: $PRE_BUILD"
             bash -lc "$PRE_BUILD"
           fi
+
+          # The Tizen packager zips the whole project directory, so a project at the
+          # repo root would ship its .git history inside the .wgt (TizenFeed was
+          # 70MB of mostly git objects) and the package would differ on every
+          # build because of clone timestamps. The clone and pre_build are done
+          # with it by now.
+          rm -rf "$repo_root/.git"
 
           cd "$repo_root/$PROJECT_PATH"
 
@@ -374,20 +513,15 @@ jobs:
         with:
           name: built-wgts-${{ matrix.repo_id }}
           path: wgt_files/
+          compression-level: 0   # .wgt files are already zips
 
   external-downloads:
+    # Independent of the build matrix, so it runs alongside it.
     runs-on: ubuntu-24.04
-    needs: tizen-build
-    # One broken upstream build must not sink the whole bundle: run as long as
-    # the build matrix actually ran (success or partial failure), not if skipped/cancelled.
-    if: ${{ !cancelled() && (needs.tizen-build.result == 'success' || needs.tizen-build.result == 'failure') }}
+    needs: detect-changes
+    if: needs.detect-changes.outputs.has_changes == 'true'
     steps:
       - uses: actions/checkout@v4
-
-      - name: Install jq & curl
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y jq curl git unzip
 
       - name: Compile manifests
         run: bash scripts/build-manifests.sh
@@ -410,6 +544,7 @@ jobs:
         if: ${{ steps.config.outputs.config != '' }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REBUILD: ${{ needs.detect-changes.outputs.rebuild }}
         run: |
           set -e
           api() {
@@ -417,7 +552,8 @@ jobs:
               -H "Accept: application/vnd.github+json" "$@"
           }
           CFG="${{ steps.config.outputs.config }}"
-          repos=$(jq -r '.releases | to_entries[] | .key' "$CFG")
+          # Only what detect-changes picked; the rest is reused from the previous bundle.
+          repos=$(jq -r --argjson r "$REBUILD" '.releases | keys[] | select(("release:" + .) as $k | $r | index($k))' "$CFG")
 
           # A single dead/renamed/asset-less upstream must not break the whole catalog sync -
           # collect skips and warn, don't `exit 1`.
@@ -429,20 +565,29 @@ jobs:
 
             echo "Fetching release for $repo ..."
 
-            # 1) Try /releases/latest (non-prerelease, non-draft).
-            json=$(api "$latest_api" 2>/dev/null || echo '')
+            tag_prefix=$(jq -r ".releases[\"$repo\"].release_tag_prefix // \"\"" "$CFG")
 
-            # 2) Probe whether /latest actually gave us a usable URL.
-            #    Note: relying on a count is fragile because `jq` on empty
-            #    input exits 0 with no output, so the `|| echo 0` fallback
-            #    never fires. Probing for an actual URL avoids that.
-            probe_url=$(echo "$json" | jq -r '(.assets // [])[] | .browser_download_url // empty' 2>/dev/null | head -n 1 || echo '')
+            if [ -n "$tag_prefix" ]; then
+              # Monorepo: newest non-draft release whose tag starts with release_tag_prefix.
+              echo "  Using newest release tagged '$tag_prefix*' for $repo"
+              list_json=$(api "https://api.github.com/repos/$repo/releases?per_page=100" 2>/dev/null || echo '[]')
+              json=$(echo "$list_json" | jq --arg p "$tag_prefix" '[.[] | select(.draft==false and (.tag_name | startswith($p)))] | (map(select(.prerelease==false))[0] // .[0])' 2>/dev/null || echo 'null')
+            else
+              # 1) Try /releases/latest (non-prerelease, non-draft).
+              json=$(api "$latest_api" 2>/dev/null || echo '')
 
-            # 3) Fall back to newest non-draft prerelease if /latest had nothing.
-            if [ -z "$probe_url" ]; then
-              echo "  No /latest assets for $repo, falling back to newest prerelease..."
-              list_json=$(api "$list_api" 2>/dev/null || echo '[]')
-              json=$(echo "$list_json" | jq '[.[] | select(.prerelease==true and .draft==false)][0]' 2>/dev/null || echo 'null')
+              # 2) Probe whether /latest actually gave us a usable URL.
+              #    Note: relying on a count is fragile because `jq` on empty
+              #    input exits 0 with no output, so the `|| echo 0` fallback
+              #    never fires. Probing for an actual URL avoids that.
+              probe_url=$(echo "$json" | jq -r '(.assets // [])[] | .browser_download_url // empty' 2>/dev/null | head -n 1 || echo '')
+
+              # 3) Fall back to newest non-draft prerelease if /latest had nothing.
+              if [ -z "$probe_url" ]; then
+                echo "  No /latest assets for $repo, falling back to newest prerelease..."
+                list_json=$(api "$list_api" 2>/dev/null || echo '[]')
+                json=$(echo "$list_json" | jq '[.[] | select(.prerelease==true and .draft==false)][0]' 2>/dev/null || echo 'null')
+              fi
             fi
 
             # Decide: new-style (.assets array) or legacy (.output_name single).
@@ -474,7 +619,11 @@ jobs:
                   outname="$(basename "$url")"
                 fi
                 echo "Downloading $url -> external_wgts/$outname"
-                curl -L -o "external_wgts/$outname" "$url"
+                if ! bash scripts/fetch-asset.sh "external_wgts/$outname" "$url"; then
+                  # Partial set: publish-release ships all of this package's files from the last good bundle.
+                  SKIPPED="$SKIPPED $repo"
+                  continue 2
+                fi
                 bash scripts/unwrap-zip.sh "external_wgts/$outname" "$extract"
               done
             else
@@ -491,7 +640,10 @@ jobs:
                 outname="$(basename "$url")"
               fi
               echo "Downloading $url -> external_wgts/$outname"
-              curl -L -o "external_wgts/$outname" "$url"
+              if ! bash scripts/fetch-asset.sh "external_wgts/$outname" "$url"; then
+                SKIPPED="$SKIPPED $repo"
+                continue
+              fi
               bash scripts/unwrap-zip.sh "external_wgts/$outname" "$extract"
             fi
           done
@@ -502,15 +654,18 @@ jobs:
 
       - name: Download direct WGT URLs
         if: ${{ steps.config.outputs.config != '' }}
+        env:
+          REBUILD: ${{ needs.detect-changes.outputs.rebuild }}
         run: |
           CFG="${{ steps.config.outputs.config }}"
-          jq -r '.direct | to_entries[] | "\(.key) \(.value.url // .value) \(.value.output_name // "") \(.value.extract // "")"' "$CFG" |
+          jq -r --argjson r "$REBUILD" '.direct | to_entries[] | select(("direct:" + .key) as $k | $r | index($k)) | "\(.key) \(.value.url // .value) \(.value.output_name // "") \(.value.extract // "")"' "$CFG" |
           while read -r repo url outname extract; do
             [ -n "$repo" ] || continue
             if [ -z "$outname" ] || [ "$outname" = "null" ]; then
               outname="${repo##*/}.wgt"
             fi
-            curl -L -o "external_wgts/$outname" "$url"
+            echo "Downloading $url -> external_wgts/$outname"
+            bash scripts/fetch-asset.sh "external_wgts/$outname" "$url" || continue
             bash scripts/unwrap-zip.sh "external_wgts/$outname" "$extract"
           done
 
@@ -518,25 +673,128 @@ jobs:
         with:
           name: external-wgts
           path: external_wgts/
+          compression-level: 0   # already-compressed packages
+          if-no-files-found: ignore   # nothing external to refresh this run
 
   publish-release:
     runs-on: ubuntu-24.04
     needs: [detect-changes, tizen-build, external-downloads]
-    if: ${{ !cancelled() && needs.external-downloads.result == 'success' && (needs.tizen-build.result == 'success' || needs.tizen-build.result == 'failure') }}
+    if: ${{ !cancelled() && needs.external-downloads.result == 'success' && contains(fromJson('["success","failure","skipped"]'), needs.tizen-build.result) }}
     steps:
       - uses: actions/checkout@v4
+
+      - name: Start ClamAV install (background)
+        # apt runs while the artifacts download below; "Wait for ClamAV" joins it.
+        # The distro AppArmor profile confines freshclam to /etc/clamav and
+        # /var/lib/clamav, so it is unloaded to let it use the cached database dir.
+        run: |
+          sudo -E setsid nohup sh -c '
+            apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -qq install -y --no-install-recommends clamav
+            systemctl stop clamav-freshclam 2>/dev/null; systemctl disable clamav-freshclam 2>/dev/null
+            apparmor_parser -R /etc/apparmor.d/usr.bin.freshclam 2>/dev/null
+            echo CLAMAV_INSTALL_DONE' > "$RUNNER_TEMP/clamav-install.log" 2>&1 &
+
+      - name: Cache key for this week
+        id: week
+        run: echo "week=$(date -u +%G-W%V)" >> "$GITHUB_OUTPUT"
+
+      - name: Restore ClamAV database cache
+        # One cache entry per ISO week; freshclam then only pulls the daily deltas.
+        uses: actions/cache@v4
+        with:
+          path: clamav-db
+          key: clamav-db-${{ steps.week.outputs.week }}
+          restore-keys: clamav-db-
+
+      - name: Restore ClamAV verdict cache
+        # ClamAV scans at a few MB/s and the bundle is ~600MB, so verdicts are
+        # cached per file hash: a daily run only scans packages that changed.
+        # The key rolls over with the definitions cache, so everything is
+        # rescanned against fresh signatures once a week.
+        uses: actions/cache@v4
+        with:
+          path: clamav-verdicts.json
+          key: clamav-verdicts-${{ steps.week.outputs.week }}-${{ github.run_id }}
+          restore-keys: clamav-verdicts-${{ steps.week.outputs.week }}-
+
       - uses: actions/download-artifact@v4
         with:
           pattern: built-wgts-*
           path: built
       - uses: actions/download-artifact@v4
         with:
-          name: external-wgts
+          # pattern, not name: the artifact is absent when nothing external changed.
+          pattern: external-wgts
           path: external
+          merge-multiple: true
+
+      - name: Carry over unchanged packages
+        # Packages whose upstream and manifest did not change ship the exact
+        # file from the previous bundle instead of being rebuilt / re-downloaded.
+        # Identical bytes also keep their cached ClamAV verdict.
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PREV_TAG: ${{ needs.detect-changes.outputs.prev_tag }}
+          CARRY: ${{ needs.detect-changes.outputs.carry }}
+        run: |
+          set -e
+          mkdir -p carried
+          want=$(echo "$CARRY" | jq length)
+          [ "$want" -gt 0 ] || { echo "Nothing to carry over."; exit 0; }
+          args=()
+          while IFS= read -r f; do args+=(-p "$f"); done < <(echo "$CARRY" | jq -r '.[]')
+          gh release download "$PREV_TAG" -D carried "${args[@]}"
+          got=$(ls carried | wc -l)
+          echo "Carried $got of $want files from $PREV_TAG"
+          # A short bundle would silently drop apps for every user; fail instead.
+          [ "$got" -eq "$want" ] || { echo "::error::Expected $want files from $PREV_TAG, got $got"; exit 1; }
+
+      - name: Keep previous files where the refresh came up short
+        # A failed build or a new upstream release without the expected asset
+        # would drop the app from the bundle. Ship what the last good bundle had
+        # instead (all of the package's files, so variants stay one version),
+        # and record the package as stale:<id> so every later run retries it.
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FALLBACK: ${{ needs.detect-changes.outputs.fallback }}
+        run: |
+          set -e
+          mkdir -p fallback
+          [ -n "$FALLBACK" ] || FALLBACK='{}'
+          stale='{}'
+          while IFS= read -r p; do
+            id=$(echo "$p" | jq -r '.key')
+            tag=$(echo "$p" | jq -r '.value.tag')
+            short=false
+            while IFS= read -r f; do
+              ls built/*/"$f" "external/$f" 2>/dev/null | grep -q . || short=true
+            done < <(echo "$p" | jq -r '.value.files[]')
+            [ "$short" = "true" ] || continue
+            args=()
+            while IFS= read -r f; do
+              rm -f built/*/"$f" "external/$f"
+              args+=(-p "$f")
+            done < <(echo "$p" | jq -r '.value.files[]')
+            if gh release download "$tag" -D fallback "${args[@]}"; then
+              echo "::warning title=Kept previous version::$id did not refresh - shipping its files from $tag."
+              stale=$(echo "$stale" | jq --arg k "stale:$id" --arg v "$tag" '. + {($k): $v}')
+            else
+              echo "::warning title=Package dropped::$id did not refresh and could not be taken from $tag."
+            fi
+          done < <(echo "$FALLBACK" | jq -c 'to_entries[]')
+          echo "$stale" > stale.json
+          cat stale.json
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stale-packages
+          path: stale.json
 
       - name: Merge all wgt files
         run: |
           mkdir -p final_wgts
+          cp carried/* final_wgts/ 2>/dev/null || true
+          cp fallback/* final_wgts/ 2>/dev/null || true
           cp built/**/*.wgt final_wgts/ 2>/dev/null || true
           cp external/*.wgt final_wgts/ 2>/dev/null || true
           cp external/*.tpk final_wgts/ 2>/dev/null || true
@@ -544,24 +802,94 @@ jobs:
           # A .wgt is itself a zip, so a zip *wrapping* a .wgt copies in here
           # unnoticed and ships an uninstallable file. Drop those rather than
           # exiting, so one bad upstream cannot sink the whole bundle.
+          # A file with its own manifest at the root is a real package even if
+          # it carries a stray .wgt (Simple TV Player ships its previous build
+          # inside); that one ships as-is.
           command -v unzip >/dev/null || sudo apt-get install -y unzip
           for f in final_wgts/*.wgt final_wgts/*.tpk; do
             [ -e "$f" ] || continue
-            if unzip -Z1 "$f" 2>/dev/null | grep -qiE '\.(wgt|tpk)$'; then
-              echo "::warning title=Nested archive::$(basename "$f") contains a .wgt/.tpk - it is a zip wrapper, not a package. Set \"extract\" in its manifest. Dropping it from this bundle."
-              rm -f "$f"
-            elif ! unzip -Z1 "$f" 2>/dev/null | grep -qx 'config.xml'; then
-              echo "::warning title=No config.xml::$(basename "$f") has no config.xml at its root - it may not be a valid package."
+            case "$f" in *.tpk) manifest=tizen-manifest.xml ;; *) manifest=config.xml ;; esac
+            entries=$(unzip -Z1 "$f" 2>/dev/null || true)
+            has_manifest=false
+            echo "$entries" | grep -qx "$manifest" && has_manifest=true
+            if echo "$entries" | grep -qiE '\.(wgt|tpk)$'; then
+              if [ "$has_manifest" = "true" ]; then
+                echo "::warning title=Nested archive::$(basename "$f") has a .wgt/.tpk inside next to its own $manifest - shipping it as a package, the inner file is just dead weight."
+              else
+                echo "::warning title=Nested archive::$(basename "$f") contains a .wgt/.tpk - it is a zip wrapper, not a package. Set \"extract\" in its manifest. Dropping it from this bundle."
+                rm -f "$f"
+              fi
+            elif [ "$has_manifest" != "true" ]; then
+              echo "::warning title=No $manifest::$(basename "$f") has no $manifest at its root - it may not be a valid package."
             fi
           done
 
           echo "Final WGT files:"
           ls -l final_wgts
 
+      - name: Wait for ClamAV and refresh definitions
+        # Never fatal: without ClamAV the scan still runs, the report says so.
+        run: |
+          for i in $(seq 1 60); do
+            grep -q CLAMAV_INSTALL_DONE "$RUNNER_TEMP/clamav-install.log" 2>/dev/null && break
+            sleep 3
+          done
+          if ! command -v clamscan >/dev/null; then
+            echo "::warning title=ClamAV::Install did not finish; scanning without it."
+            tail -n 20 "$RUNNER_TEMP/clamav-install.log" || true
+            exit 0
+          fi
+          mkdir -p clamav-db
+          printf 'DatabaseMirror database.clamav.net\nDatabaseDirectory %s\nDatabaseOwner %s\n' "$PWD/clamav-db" "$(id -un)" > "$RUNNER_TEMP/freshclam.conf"
+          freshclam --config-file="$RUNNER_TEMP/freshclam.conf" --datadir="$PWD/clamav-db" \
+            || echo "::warning title=ClamAV::Could not refresh virus definitions; scanning with the cached set."
+          ls -l clamav-db
+
+      - name: Security scan
+        # Mechanical scan of every file about to ship (see scripts/scan-packages.py):
+        # privileges, hosts referenced, signatures, obfuscation / miner signatures,
+        # ClamAV. Packages with a critical finding are moved to quarantine/ and
+        # dropped from the bundle; everything else ships, with the report attached
+        # to the release and shown in the job summary.
+        env:
+          CLAMAV_DB: ${{ github.workspace }}/clamav-db
+        run: |
+          python3 -I scripts/scan-packages.py final_wgts \
+            --json final_wgts/scan.json --md final_wgts/scan-report.md --quarantine quarantine \
+            --clamav-cache clamav-verdicts.json --clamav-jobs 4
+          cat final_wgts/scan-report.md >> "$GITHUB_STEP_SUMMARY"
+          if [ -d quarantine ] && [ -n "$(ls -A quarantine)" ]; then
+            echo "::error title=Quarantined::Dropped from this bundle after the security scan: $(ls quarantine | tr '\n' ' ')"
+          fi
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: security-scan
+          path: |
+            final_wgts/scan-report.md
+            final_wgts/scan.json
+            quarantine/
+          if-no-files-found: ignore
+
+      - name: Fetch previous catalog.json
+        # Removed apps keep the package ids their files had while they shipped,
+        # so Apps2Samsung and TV-Store can flag an installed copy. Best effort:
+        # without it, removed entries are listed without ids.
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PREV_TAG: ${{ needs.detect-changes.outputs.prev_tag }}
+        run: |
+          mkdir -p prev
+          if [ -n "$PREV_TAG" ]; then
+            gh release download "$PREV_TAG" -p catalog.json -D prev || echo "::warning::No catalog.json in $PREV_TAG"
+          fi
+
       - name: Build catalog.json
         # Per-file index (category, group, variant) that Apps2Samsung reads from
-        # this release to filter the app list. Only files that made the bundle.
-        run: bash scripts/build-catalog.sh packages final_wgts/catalog.json final_wgts
+        # this release to filter the app list. Only files that made the bundle,
+        # plus the removed apps (packages/README.md, Retiring a package).
+        run: bash scripts/build-catalog.sh packages final_wgts/catalog.json final_wgts prev/catalog.json
 
       - name: Create and push release tag
         env:
@@ -586,13 +914,45 @@ jobs:
             final_wgts/*.wgt
             final_wgts/*.tpk
             final_wgts/catalog.json
+            final_wgts/scan-report.md
+            final_wgts/scan.json
           body: |
             Automated community bundle.
+
+            Every file in this bundle went through the [automated security scan](../../blob/main/README.md#-security-scanning);
+            the result is attached as `scan-report.md` (privileges, hosts, signatures, ClamAV).
 
             **Changes since last bundle:**
             ${{ needs.detect-changes.outputs.changes_summary }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # Tell Apps2Samsung a new bundle is out, so its resolved catalog
+  # (apps2samsung.com/catalog/resolved.json, the file the installer reads
+  # instead of the GitHub API) refreshes right away rather than at its next
+  # half-hour cron tick. Needs A2S_DISPATCH_TOKEN: a fine-grained PAT with
+  # Contents read/write on Apps2Samsung/Apps2Samsung (GITHUB_TOKEN cannot
+  # reach another repo). Without it this just warns; the cron still catches up.
+  notify-apps2samsung:
+    runs-on: ubuntu-24.04
+    needs: [publish-release]
+    if: ${{ !cancelled() && needs.publish-release.result == 'success' }}
+    steps:
+      - name: Dispatch community-release to Apps2Samsung/Apps2Samsung
+        env:
+          GH_TOKEN: ${{ secrets.A2S_DISPATCH_TOKEN }}
+          TAG: "community-${{ github.run_number }}"
+        run: |
+          set -euo pipefail
+          if [ -z "${GH_TOKEN:-}" ]; then
+            echo "::warning::A2S_DISPATCH_TOKEN is not set; Apps2Samsung will pick up $TAG on its next scheduled snapshot instead."
+            exit 0
+          fi
+          gh api --method POST repos/Apps2Samsung/Apps2Samsung/dispatches \
+            -f event_type=community-release \
+            -f "client_payload[repo]=${GITHUB_REPOSITORY}" \
+            -f "client_payload[tag]=${TAG}"
+          echo "Dispatched community-release for $TAG."
 
   update-state:
     runs-on: ubuntu-24.04
@@ -600,108 +960,66 @@ jobs:
     if: ${{ !cancelled() && needs.publish-release.result == 'success' && needs.detect-changes.outputs.has_changes == 'true' }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Full history: the commit below is rebased onto whatever landed on
+          # main while this run was busy, which a shallow clone cannot do.
+          fetch-depth: 0
+          # main requires the "validate" check, and this state commit never gets
+          # one. The ruleset exempts deploy keys, so the push goes over SSH with
+          # STATE_PUSH_KEY: a write deploy key for this repository only. Without
+          # the secret, checkout falls back to GITHUB_TOKEN as before.
+          ssh-key: ${{ secrets.STATE_PUSH_KEY }}
       - uses: actions/download-artifact@v4
         with:
           name: last-seen-state
           path: .state-download
+      - uses: actions/download-artifact@v4
+        with:
+          name: stale-packages
+          path: .state-download
 
       - name: Apply new state
+        # stale:<id> marks a package shipped from an older bundle this run;
+        # detect-changes retries it until a refresh succeeds and drops the key.
         run: |
           set -e
           mkdir -p .github/state
-          mv .state-download/new_last_seen.json .github/state/last_seen.json
+          jq -s '.[0] + .[1]' .state-download/new_last_seen.json .state-download/stale.json \
+            > .github/state/last_seen.json
 
       - name: Render README package table
-        run: |
-          python3 - <<'PY'
-          # Regenerate the entire Current Packages table from packages/*.json.
-          # Rows (name / category / description / repo link) come from the manifests;
-          # the gear Version column comes from .github/state/last_seen.json.
-          # Manifests with "enabled": false are retired - the sync no longer
-          # ships them, so they are left out of the table and the badge count.
-          # Everything outside the table is left untouched.
-          import json, glob, re, pathlib
-
-          STATE = pathlib.Path(".github/state/last_seen.json")
-          README = pathlib.Path("README.md")
-
-          def version_map():
-              state = json.loads(STATE.read_text()) if STATE.exists() else {}
-              ver = {}
-              for k, v in state.items():
-                  if k.startswith("release:"):
-                      repo, version = k[8:], v
-                  elif k.startswith("build:"):
-                      repo, version = k[6:].split("@", 1)[0], v[:7]   # short SHA
-                  elif k.startswith("direct:"):
-                      repo = k[7:]
-                      m = re.search(r"mod:([^|]*)", v)
-                      version = (m.group(1).strip() or "latest") if m else "latest"
-                  else:
-                      continue
-                  ver[repo.lower()] = version
-              return ver
-
-          CATEGORY = {
-              "media": "Media servers & players", "iptv": "IPTV & Live TV", "streaming": "Streaming",
-              "games": "Games & emulators", "casting": "Casting & cameras", "tools": "Tools & system",
-              "other": "Other",
-          }
-
-          def table():
-              ver = version_map()
-              items = []
-              for path in glob.glob("packages/*.json"):
-                  d = json.loads(pathlib.Path(path).read_text())
-                  if not d.get("enabled", True):
-                      continue
-                  repo = d["repo"]
-                  label = d.get("repo_label", repo.split("/")[0])
-                  forge = "gitlab.com" if d.get("host") == "gitlab" else "github.com"
-                  items.append((
-                      d["name"], CATEGORY.get(d.get("category"), "Other"), d["description"],
-                      f"[{label}](https://{forge}/{repo})",
-                      ver.get(repo.lower(), "\u2014"),
-                  ))
-              items.sort(key=lambda r: r[0].lower())
-              rows = ["| \U0001F9E9 Application | \U0001F3F7\ufe0f Category | \U0001F4DD Description | \U0001F517 Repository | \u2699\ufe0f Version |",
-                      "|----------------|-------------|----------------|------------------|------------|"]
-              rows += [f"| **{n}** | {c} | {d} | {link} | `{v}` |" for n, c, d, link, v in items]
-              return rows
-
-          def main():
-              lines = README.read_text().splitlines()
-              out, i, n = [], 0, len(lines)
-              while i < n:
-                  line = lines[i]
-                  if line.lstrip().startswith("|") and "Application" in line and "Repository" in line:
-                      out.extend(table())
-                      i += 1                                   # skip old header
-                      while i < n and lines[i].lstrip().startswith("|"):
-                          i += 1                               # skip old separator + rows
-                      continue
-                  out.append(line)
-                  i += 1
-              text = "\n".join(out) + "\n"
-              # keep the package-count badge in sync (enabled packages only)
-              count = sum(1 for p in glob.glob("packages/*.json")
-                          if json.loads(pathlib.Path(p).read_text()).get("enabled", True))
-              text = re.sub(r"(img\.shields\.io/badge/packages-)\d+(-)", rf"\g<1>{count}\g<2>", text)
-              README.write_text(text)
-              print(f"Rendered README table + badge ({count} enabled packages).")
-
-          main()
-          PY
+        run: python3 -I scripts/render-readme.py
 
       - name: Commit state + README
         run: |
           set -e
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .github/state/last_seen.json README.md
-          if git diff --cached --quiet; then
-            echo "Nothing to commit."
-          else
-            git commit -m "chore: update state + README versions [skip ci]"
-            git push
-          fi
+          # main has usually moved on: a PR merged while this run was busy, or
+          # (for a run that waited in the concurrency queue) the previous run's
+          # own state commit, since checkout takes the commit that triggered
+          # this run. Rebasing then conflicts in last_seen.json, as it did for
+          # community-823. Instead, every attempt starts from the current main
+          # and writes this run's state on top: it is a full snapshot taken by
+          # this run, so it wins. The README table is rendered again from that
+          # main's manifests.
+          cp .github/state/last_seen.json "$RUNNER_TEMP/last_seen.json"
+          for attempt in 1 2 3 4 5; do
+            git fetch -q origin main
+            git reset -q --hard origin/main
+            cp "$RUNNER_TEMP/last_seen.json" .github/state/last_seen.json
+            python3 -I scripts/render-readme.py
+            git add .github/state/last_seen.json README.md packages/README.md
+            if git diff --cached --quiet; then
+              echo "Nothing to commit."
+              exit 0
+            fi
+            git commit -q -m "chore: update state + README versions [skip ci]"
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "Push attempt $attempt failed, retrying."
+            sleep $((attempt * 5))
+          done
+          echo "::error::Could not push the state commit after 5 attempts."
+          exit 1

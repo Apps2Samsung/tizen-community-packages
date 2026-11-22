@@ -1,0 +1,14 @@
+{
+  "name": "Native AIO",
+  "description": "Unofficial native .NET client for your own AIOStreams server, built for the TV remote.",
+  "category": "streaming",
+  "repo": "thomasrtg/native-aio",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    {
+      "match": "^io[.]github[.]thomasrtg[.]nativeaio-[0-9.]+[.]tpk$",
+      "output_name": "NativeAIO.tpk"
+    }
+  ]
+}

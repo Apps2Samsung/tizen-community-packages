@@ -3,7 +3,7 @@
   "description": "TV-first streaming UI for Samsung Tizen.",
   "category": "streaming",
   "group": "Nuvio",
-  "repo": "NuvioMedia/NuvioWeb",
+  "repo": "NuvioMedia/NuvioTVSmart",
   "source": "release",
   "branch": "main",
   "assets": [

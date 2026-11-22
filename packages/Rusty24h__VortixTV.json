@@ -1,0 +1,15 @@
+{
+  "name": "VortixTV",
+  "description": "High-performance IPTV player supporting Stalker MAC portals, Xtream Codes, M3U playlists, and MPEG-DASH (ClearKey & PlayReady DRM) with 2D EPG and catch-up.",
+  "category": "iptv",
+  "repo": "Rusty24h/VortixTV",
+  "source": "release",
+  "branch": "main",
+  "cert_level": "partner",
+  "assets": [
+    {
+      "match": "^VortixTV[.]wgt$",
+      "output_name": "VortixTV.wgt"
+    }
+  ]
+}

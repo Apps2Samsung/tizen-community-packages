@@ -1,0 +1,12 @@
+{
+  "name": "UltimatiumTube",
+  "description": "Ad-free YouTube for Samsung Tizen 5.0 and 5.5 TVs.",
+  "category": "streaming",
+  "repo": "AdvaithAvinash/UltimatiumTube",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "UltimatiumTubetizen5.0.wgt", "variant": "Tizen 5.0", "output_name": "UltimatiumTube-Tizen50.wgt" },
+    { "match": "UltimatiumTubetizen5.5.wgt", "variant": "Tizen 5.5", "output_name": "UltimatiumTube-Tizen55.wgt" }
+  ]
+}

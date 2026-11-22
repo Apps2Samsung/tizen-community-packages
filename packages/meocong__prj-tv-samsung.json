@@ -1,0 +1,11 @@
+{
+  "name": "Nhà Mình",
+  "description": "Apple TV-style home screen for Samsung Tizen TVs: your installed apps, a YouTube shelf, weather, a lunar calendar, news, an English word of the day read aloud, Bing wallpapers and a family photo screensaver. A background service brings it back when you leave an app or wake the TV. Set up from your phone. English and Vietnamese UI.",
+  "category": "home",
+  "repo": "meocong/prj-tv-samsung",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "^NhaMinh-[0-9.]+[.]wgt$", "output_name": "NhaMinh.wgt" }
+  ]
+}

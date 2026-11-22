@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "categories": {
+    "media": "Media servers & players",
+    "games": "Games & emulators",
+    "tools": "Tools & system",
+    "other": "Other"
+  },
+  "category_colors": {
+    "media": "#2B59FF",
+    "games": "#7048E8",
+    "tools": "#5C677D",
+    "other": "#868E96"
+  },
+  "apps": [
+    {
+      "file": "ExamplePlayer.wgt",
+      "name": "Example Player",
+      "description": "A media server client, one file, standing alone.",
+      "category": "media",
+      "group": null,
+      "variant": "ExamplePlayer",
+      "repo": "example-owner/example-player",
+      "host": "github",
+      "preview_image": "https://raw.githubusercontent.com/example-owner/example-player/main/docs/screenshot.png",
+      "app_id": "ExmplPlyr0.ExamplePlayer",
+      "package_id": "ExmplPlyr0",
+      "required_version": "5.5",
+      "version": "1.2.0"
+    },
+    {
+      "file": "ExampleTool.wgt",
+      "name": "Example Tool",
+      "description": "Asks the user for a port before install, needs a Partner certificate and runs as root.",
+      "category": "tools",
+      "group": null,
+      "variant": "ExampleTool",
+      "repo": "example-group/sub/example-tool",
+      "host": "gitlab",
+      "flags": ["root", "closed-source"],
+      "cert_level": "partner",
+      "user_settings": {
+        "help_url": "https://gitlab.com/example-group/sub/example-tool#settings",
+        "file": "js/config.js",
+        "fields": [
+          { "key": "port", "label": "Port", "type": "number", "required": false, "default": "8080", "min": 1024, "max": 65535, "find": "port: 8080", "replace": "port: {value}" }
+        ]
+      },
+      "app_id": "ExmplTool0.ExampleTool",
+      "package_id": "ExmplTool0",
+      "version": "0.3.0"
+    },
+    {
+      "file": "Moved.wgt",
+      "name": "Moved App",
+      "description": "Lives in its author's own repository now; still listed during the notice period.",
+      "category": "other",
+      "group": null,
+      "variant": "Moved",
+      "repo": "example-owner/moved-app",
+      "host": "github",
+      "moved_to": {
+        "url": "https://example-owner.github.io/tizen/repository.json.signed",
+        "fingerprint": "0000000000000000000000000000000000000000000000000000000000000000"
+      }
+    },
+    {
+      "file": "RetroGame-legacy.tpk",
+      "name": "Retro Game",
+      "description": "Two builds of one app: one entry in the app list, two variants.",
+      "category": "games",
+      "group": "Retro Game",
+      "variant": "Tizen 4 to 5",
+      "repo": "example-owner/retro-game",
+      "host": "github",
+      "adult": true,
+      "flags": ["self-updating"],
+      "app_id": "org.example.retrogame",
+      "package_id": "org.example.retrogame",
+      "required_version": "4.0",
+      "version": "2.0.1"
+    },
+    {
+      "file": "RetroGame.tpk",
+      "name": "Retro Game",
+      "description": "Two builds of one app: one entry in the app list, two variants.",
+      "category": "games",
+      "group": "Retro Game",
+      "variant": "Tizen 6 and later",
+      "repo": "example-owner/retro-game",
+      "host": "github",
+      "adult": true,
+      "flags": ["self-updating"],
+      "app_id": "org.example.retrogame",
+      "package_id": "org.example.retrogame",
+      "required_version": "6.0",
+      "version": "2.0.1"
+    }
+  ],
+  "removed": [
+    {
+      "name": "Gone App",
+      "repo": "example-owner/gone-app",
+      "host": "github",
+      "category": "media",
+      "reason": "upstream-gone",
+      "files": ["GoneApp.wgt"],
+      "note": "The developer archived the project.",
+      "since": "2026-11-01",
+      "package_ids": ["GoneApp000"],
+      "app_ids": ["GoneApp000.GoneApp"]
+    }
+  ]
+}

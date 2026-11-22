@@ -2,6 +2,7 @@
   "name": "Tailscale",
   "description": "Tailscale exit-node app for Samsung Tizen TV (experimental; advertises the TV as a tailnet exit node).",
   "category": "tools",
+  "cert_level": "partner",
   "repo": "PatrickSt1991/tailscale-tizen",
   "source": "release",
   "branch": "main",

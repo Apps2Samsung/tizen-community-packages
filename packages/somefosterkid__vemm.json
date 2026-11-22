@@ -1,0 +1,11 @@
+{
+  "name": "Vemm",
+  "description": "Unofficial Plex-compatible media player for Samsung Tizen TVs with AVPlay playback, Direct Play and server transcoding.",
+  "category": "media",
+  "repo": "somefosterkid/vemm",
+  "source": "release",
+  "branch": "samsung-tv-features",
+  "assets": [
+    { "match": "Vemm-.*[.]wgt$", "output_name": "Vemm.wgt" }
+  ]
+}

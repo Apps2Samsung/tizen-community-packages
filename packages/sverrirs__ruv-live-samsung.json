@@ -6,6 +6,7 @@
   "repo": "sverrirs/ruv-live-samsung",
   "repo_label": "RÚV Live",
   "source": "release",
+  "flags": ["closed-source"],
   "branch": "master",
   "assets": [
     {

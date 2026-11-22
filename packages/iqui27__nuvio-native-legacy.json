@@ -10,7 +10,7 @@
   "assets": [
     {
       "match": "-NuvioTpk40[.]tpk$",
-      "variant": "Native legacy · Tizen 4.0–5.5",
+      "variant": "Native legacy · Tizen 4.0 to 5.5",
       "output_name": "Nuvio-Legacy-tizen4.tpk"
     },
     {
@@ -20,12 +20,12 @@
     },
     {
       "match": "-NuvioTpk65[.]tpk$",
-      "variant": "Native legacy · Tizen 6.5–7",
+      "variant": "Native legacy · Tizen 6.5 to 7",
       "output_name": "Nuvio-Legacy-tizen6.5.tpk"
     },
     {
       "match": "-NuvioTpk[.]tpk$",
-      "variant": "Native legacy · Tizen 8–9",
+      "variant": "Native legacy · Tizen 8 to 9",
       "output_name": "Nuvio-Legacy-tizen8.tpk"
     },
     {

@@ -1,16 +1,19 @@
 name: "📦 Contribute an App"
-description: "Add your open-source Tizen app (.wgt) to the community bundle"
+description: "Add your Tizen app (.wgt / .tpk) to the community bundle"
 title: "[Contribution] <App Name>"
 labels: ["app contribution"]
 body:
   - type: markdown
     attributes:
       value: |
-        **The fastest way to contribute is a pull request** — add one JSON file to
+        **The fastest way to contribute is a pull request**: add one JSON file to
         [`packages/`](https://github.com/Apps2Samsung/tizen-community-packages/blob/main/packages/README.md)
         and it's validated automatically. Use this form only if you'd prefer a maintainer to create the file for you.
 
         The fields below map directly onto a package manifest, so please fill them in precisely.
+
+        Your app doesn't fit [What we accept](https://github.com/Apps2Samsung/tizen-community-packages/blob/main/packages/README.md#-what-we-accept)?
+        Publish it from your [own repository](https://github.com/Apps2Samsung/tizen-community-packages#-run-your-own-repository) instead.
 
   - type: input
     id: name
@@ -31,6 +34,18 @@ body:
       required: true
 
   - type: input
+    id: category
+    attributes:
+      label: "🏷️ Category"
+      description: |
+        One of the ids in [data/categories.json](https://github.com/Apps2Samsung/tizen-community-packages/blob/main/data/categories.json):
+        what goes where is in [Category, group and variant](https://github.com/Apps2Samsung/tizen-community-packages/blob/main/packages/README.md#%EF%B8%8F-category-group-and-variant).
+        None fits? Write the category you'd suggest; a maintainer decides whether to add it or uses `other`.
+      placeholder: "media"
+    validations:
+      required: true
+
+  - type: input
     id: repo
     attributes:
       label: "🔗 Repository (owner/repo)"
@@ -45,13 +60,39 @@ body:
       label: "📦 Source type"
       description: |
         How is the `.wgt` distributed?
-        • **release** — prebuilt `.wgt` attached to a GitHub Release (most common)
-        • **build** — compiled from source with Tizen Studio
-        • **direct** — downloaded from a fixed URL
+        • **release**: prebuilt `.wgt` attached to a GitHub Release (most common)
+        • **build**: compiled from source with Tizen Studio
+        • **direct**: downloaded from a fixed URL
       options:
         - release
         - build
         - direct
+    validations:
+      required: true
+
+  - type: dropdown
+    id: source_availability
+    attributes:
+      label: "🔓 Source code"
+      description: "Is the app's source code in the linked repository?"
+      options:
+        - Open source (code is in the repository)
+        - Closed source (prebuilt only; I grant or link redistribution permission)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: self_updating
+    attributes:
+      label: "🔄 Self-updating"
+      description: |
+        Does the app download and run newer code after install (outside this catalogue)?
+        Only accepted when the newer code comes from the same repository, the author's own domain for `direct`,
+        or the upstream project the app is built on and names in its description (e.g. TizenTube for a TizenTube wrapper).
+      options:
+        - "No"
+        - Yes, from the same repository or my own domain
+        - Yes, from the upstream project the app is built on (named in the description)
     validations:
       required: true
 
@@ -68,7 +109,7 @@ body:
     id: branch
     attributes:
       label: "🌿 Branch"
-      description: "For **release** and **build** only — the branch/release track. Leave blank for `direct`."
+      description: "For **release** and **build** only: the branch/release track. Leave blank for `direct`."
       placeholder: "release"
     validations:
       required: false
@@ -77,7 +118,7 @@ body:
     id: url
     attributes:
       label: "🌐 Direct URL"
-      description: "For **direct** only — absolute URL to the `.wgt`. Leave blank otherwise."
+      description: "For **direct** only: absolute URL to the `.wgt`. Leave blank otherwise."
       placeholder: "https://example.com/MyApp.wgt"
     validations:
       required: false
@@ -86,7 +127,7 @@ body:
     id: project_path
     attributes:
       label: "📁 Project path"
-      description: "For **build** only — subdirectory containing the Tizen web project. Defaults to `.`."
+      description: "For **build** only: subdirectory containing the Tizen web project. Defaults to `.`."
       placeholder: "tizen"
     validations:
       required: false
@@ -109,7 +150,7 @@ body:
     id: license
     attributes:
       label: "🧾 License"
-      description: "Must be open-source or otherwise freely redistributable."
+      description: "The app's license, e.g. MIT or GPL-3.0. Closed source? Write \"closed source\" and link where you grant redistribution (LICENSE file or README line). See [What we accept](https://github.com/Apps2Samsung/tizen-community-packages/blob/main/packages/README.md#-what-we-accept)."
       placeholder: "MIT"
     validations:
       required: true
@@ -118,15 +159,24 @@ body:
     id: checks
     attributes:
       label: "🧪 Confirmations"
+      description: "See [What we accept](https://github.com/Apps2Samsung/tizen-community-packages/blob/main/packages/README.md#-what-we-accept)."
       options:
-        - label: "The app is open-source or redistributable under a permissive license"
+        - label: "The app is open source, or closed source with explicit permission to redistribute it"
           required: true
-        - label: "I have the legal right to have this redistributed"
+        - label: "I'm the author, or the repository grants redistribution"
+          required: true
+        - label: "Closed source only: it isn't derived from GPL/LGPL/AGPL code (tick this for open-source apps too)"
+          required: true
+        - label: "It ships no content sources by default (no built-in playlists, scrapers or torrent indexers, and no preset add-on or module source that provides them)"
+          required: true
+        - label: "If it's a fork or based on other code: upstream is credited and its license is kept"
+          required: true
+        - label: "Virus/malware-free to the best of my knowledge"
           required: true
         - label: "Tested on a real Tizen device or emulator"
           required: false
-        - label: "Virus/malware-free to the best of my knowledge"
-          required: true
+        - label: "This app is for adults only (18+), and will be hidden in Apps2Samsung until the user opts in"
+          required: false
 
   - type: textarea
     id: notes

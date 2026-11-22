@@ -1,0 +1,20 @@
+{
+  "name": "Film Merkezi",
+  "description": "Open-source Turkish/English media center for Samsung Tizen TVs. No preset repositories or bundled site/resolver modules. User-selected addons, watchlists, resume playback and signed in-app core updates.",
+  "category": "streaming",
+  "preview_image": "https://raw.githubusercontent.com/enesk4yh4n-lab/TizenTV-Film-Merkezi/main/docs/gorseller/ayarlar.png",
+  "adult": false,
+  "repo": "enesk4yh4n-lab/TizenTV-Film-Merkezi",
+  "enabled": true,
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    {
+      "match": "^Film-Merkezi-TV-[0-9]+[.][0-9]+[.][0-9]+-public[.]wgt$",
+      "output_name": "Film-Merkezi.wgt"
+    }
+  ],
+  "flags": [
+    "self-updating"
+  ]
+}

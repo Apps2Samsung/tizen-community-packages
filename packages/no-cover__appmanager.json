@@ -1,0 +1,10 @@
+{
+  "name": "App Manager",
+  "description": "Alternative launcher for Samsung Tizen TVs: lists installed third-party and sideloaded apps in one grid to launch them, or hide them from Smart Hub without uninstalling.",
+  "category": "tools",
+  "repo": "no-cover/appmanager",
+  "source": "release",
+  "branch": "master",
+  "extract": "[.]wgt$",
+  "output_name": "AppManager.wgt"
+}

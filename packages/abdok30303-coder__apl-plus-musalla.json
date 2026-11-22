@@ -1,0 +1,14 @@
+{
+  "name": "Salah Launcher",
+  "description": "Arabic home screen launcher with prayer times, Quran radio and an offline Mushaf with tafsir. Fork of APL Launcher.",
+  "category": "home",
+  "repo": "abdok30303-coder/apl-plus-musalla",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    {
+      "match": "^salah-launcher-v[0-9.]+[.]wgt$",
+      "output_name": "SalahLauncher.wgt"
+    }
+  ]
+}

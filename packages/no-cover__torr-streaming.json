@@ -1,0 +1,9 @@
+{
+  "name": "Torr Streaming",
+  "description": "Runs TorrServer as a background service on the TV itself, so local web apps can stream torrents directly without a separate box. Hybrid .NET package with a small launcher widget; Tizen 4.0+.",
+  "category": "tools",
+  "repo": "no-cover/torr-streaming",
+  "source": "release",
+  "branch": "master",
+  "output_name": "TorrStreaming.wgt"
+}
