@@ -8,17 +8,13 @@
   "repo": "fidoboy/moonlight-tizen-ac3",
   "repo_label": "fidoboy",
   "source": "release",
+  "cert_level": "partner",
   "branch": "master",
   "assets": [
     {
       "match": "Moonlight.wgt",
       "variant": "fidoboy · Enhanced · Dolby",
       "output_name": "Moonlight-AC3-fidoboy.wgt"
-    },
-    {
-      "match": "Moonlight-ForceGM.wgt",
-      "variant": "fidoboy · Enhanced · Dolby · ForceGM",
-      "output_name": "Moonlight-AC3-fidoboy-ForceGM.wgt"
     }
   ]
 }
