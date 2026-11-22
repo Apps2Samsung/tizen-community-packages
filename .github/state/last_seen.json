@@ -155,7 +155,7 @@
   "direct:TizenTVWebApp/TVideoPlayer": "etag:\"5ffe8d0002722208c57393676c1d5d0e8f0e0592c1a511f275505455c2d63349\"|mod:|len:61404893",
   "direct:TizenTVWebApp/TizenTVAudioRecorder": "etag:\"ee5fea95757fb79a31daae30de7054e27323fe8b30e8fca6f38cb195e7f03c02\"|mod:|len:29724428",
   "direct:futo-org/fcast": "etag:\"ffdc59301ed48f6a265c93ec27b7b263\"|mod:Wed, 08 Oct 2025 17:07:02 GMT|len:6669120",
-  "direct:ihovsky/Reelo": "etag:\"6b02394c-bf943d\"|mod:Sun, 22 Nov 2026 00:37:32 GMT|len:12555325",
+  "direct:ihovsky/Reelo": "etag:\"6b02ca98-bf97b9\"|mod:Sun, 22 Nov 2026 10:57:28 GMT|len:12556217",
   "direct:jhassan8/crunchyroll-tizen": "etag:\"ea42374bad2f0c3e13e33095f7e617e2b025641aea2039e9d4ad9b1838bbba3c\"|mod:|len:978485",
   "direct:prog4food/ottplay-foss-thin-clients": "etag:\"0x8DAFBC24D128479\"|mod:Sat, 21 Jan 2023 15:15:16 GMT|len:10090",
   "direct:yadPe/PlayerAVPlay": "etag:\"86d18fae091a6bb45afea7897ba07656ac8c1c6123440d25cddd8ca944129b26\"|mod:|len:32385",
@@ -254,7 +254,7 @@
   "config:release:dos-ise/eduke32-tizen": "c0c7d154241f5bcc",
   "config:release:dos-ise/freeserf-tizen": "7de907fb78f0a0c9",
   "config:release:dos-ise/openttd-tizen": "a2b82f37245c3e73",
-  "config:release:dust-7/retroarch-tizen": "475a13c28442e5eb",
+  "config:release:dust-7/retroarch-tizen": "2716c26f88466042",
   "config:release:dx616b/arn0-tv": "0c228ee0fc265241",
   "config:release:dzikus/tizen-camera-pip": "e53f24d2e5016590",
   "config:release:enesk4yh4n-lab/TizenTV-Film-Merkezi": "373aaba3f53a9b30",
@@ -320,6 +320,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-913",
-  "stale:release:christopherklint97/streamvault": "community-913"
+  "stale:release:MrSimmo/sonance3": "community-914",
+  "stale:release:christopherklint97/streamvault": "community-914"
 }
