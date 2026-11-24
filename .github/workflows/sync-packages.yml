@@ -374,6 +374,12 @@ jobs:
     # release for GitHub's 6h default. A timeout counts as a failed leg, and the
     # release still ships the rest.
     timeout-minutes: 30
+    # One upstream that is gone, private or broken must not turn the whole run
+    # red: the leg itself still shows as failed, publish-release ships the
+    # package's previous files and lists the leg in a warning. publish-release
+    # does fail the run when every leg failed, which points at our side (SDK,
+    # certificate) instead of at an upstream.
+    continue-on-error: true
     strategy:
       fail-fast: false
       matrix:
@@ -721,6 +727,31 @@ jobs:
         with:
           pattern: built-wgts-*
           path: built
+
+      - name: Report failed build legs
+        # tizen-build is continue-on-error, so a failed leg no longer fails the
+        # run. Name each one here, and fail when not a single leg produced a
+        # package: that is a broken toolchain, not a broken upstream.
+        env:
+          MATRIX: ${{ needs.detect-changes.outputs.matrix }}
+        run: |
+          set -e
+          [ -n "$MATRIX" ] || MATRIX='{"include":[]}'
+          total=0; failed=0
+          while IFS=$'\t' read -r repo repo_id; do
+            total=$((total + 1))
+            if ! ls "built/built-wgts-$repo_id"/* >/dev/null 2>&1; then
+              failed=$((failed + 1))
+              echo "::warning title=Build failed::$repo did not build. See its tizen-build leg; the previous version is kept when there is one."
+              echo "- \`$repo\` did not build" >> "$GITHUB_STEP_SUMMARY"
+            fi
+          done < <(echo "$MATRIX" | jq -r '.include[]? | [.repo, .repo_id] | @tsv')
+          echo "$failed of $total build legs failed"
+          if [ "$total" -gt 1 ] && [ "$failed" -eq "$total" ]; then
+            echo "::error::All $total build legs failed. This is not one bad upstream: check the Tizen SDK and signing steps."
+            exit 1
+          fi
+
       - uses: actions/download-artifact@v4
         with:
           # pattern, not name: the artifact is absent when nothing external changed.
