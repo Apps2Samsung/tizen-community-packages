@@ -2,7 +2,6 @@
   "name": "Nuvio Native Legacy",
   "description": "Unofficial native C/SDL2 Nuvio client, fast on older TVs. Native .tpk per Tizen version (4.0-5.5, 6.0, 6.5-7, 8-9) plus a WebAssembly .wgt for Tizen 5.5+.",
   "category": "streaming",
-  "group": "Nuvio",
   "repo": "iqui27/nuvio-native-legacy",
   "repo_label": "iqui27",
   "source": "release",
@@ -10,27 +9,27 @@
   "assets": [
     {
       "match": "-NuvioTpk40[.]tpk$",
-      "variant": "Native legacy · Tizen 4.0 to 5.5",
+      "variant": "Tizen 4.0 to 5.5",
       "output_name": "Nuvio-Legacy-tizen4.tpk"
     },
     {
       "match": "-NuvioTpk60[.]tpk$",
-      "variant": "Native legacy · Tizen 6.0",
+      "variant": "Tizen 6.0",
       "output_name": "Nuvio-Legacy-tizen6.tpk"
     },
     {
       "match": "-NuvioTpk65[.]tpk$",
-      "variant": "Native legacy · Tizen 6.5 to 7",
+      "variant": "Tizen 6.5 to 7",
       "output_name": "Nuvio-Legacy-tizen6.5.tpk"
     },
     {
       "match": "-NuvioTpk[.]tpk$",
-      "variant": "Native legacy · Tizen 8 to 9",
+      "variant": "Tizen 8 to 9",
       "output_name": "Nuvio-Legacy-tizen8.tpk"
     },
     {
       "match": "^NuvioTV-.*-tizen[.]wgt$",
-      "variant": "Native legacy · WebAssembly (Tizen 5.5+)",
+      "variant": "WebAssembly (Tizen 5.5+)",
       "output_name": "Nuvio-Legacy.wgt"
     }
   ]
