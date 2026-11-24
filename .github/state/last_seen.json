@@ -62,7 +62,7 @@
   "release:PatrickSt1991/chorus2-tizen": "tizen-v21.x-1.0.1-2026-05-21-1443",
   "release:PatrickSt1991/flixor-tizen": "v1.0.1-2026-11-08-0607",
   "release:PatrickSt1991/tailscale-tizen": "tpk-f3a7b39",
-  "release:PatrickSt1991/tessel-tizen-tv": "v1.37.6-20261120-0740",
+  "release:PatrickSt1991/tessel-tizen-tv": "v1.37.7-20261124-1919",
   "release:PatrickSt1991/tex-tizen": "tex-tizen-v1.3.0-2026-06-09-0952",
   "release:PelagicaApp/pelagica": "4.17.0",
   "release:Prairie-Server/prairie-smarttv": "v0.5.4",
@@ -71,6 +71,7 @@
   "release:RitwickVerma/TizenAmbilight": "v1.0.2",
   "release:Rusty24h/VortixTV": "2.2.1",
   "release:SherrySingh03/settle": "v1.1.1",
+  "release:Shicknovz/WEMIN_TV_Player": "v0.4.0",
   "release:Stashified/StashZen": "v0.45.0",
   "release:SuperDOS/velox": "v1.3.1",
   "release:SushyDev/tizen-youtube": "v1.6.0",
@@ -232,6 +233,7 @@
   "config:release:RitwickVerma/TizenAmbilight": "76785aa38cf8e857",
   "config:release:Rusty24h/VortixTV": "b82b9f7f5c15dbc2",
   "config:release:SherrySingh03/settle": "80ad37d438550613",
+  "config:release:Shicknovz/WEMIN_TV_Player": "999e2695ba0eb190",
   "config:release:Stashified/StashZen": "39c7e3fdbe4019fc",
   "config:release:SuperDOS/velox": "cdd050650976adfa",
   "config:release:SushyDev/tizen-youtube": "91cca388c9ee22ff",
@@ -322,6 +324,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-927",
-  "stale:release:christopherklint97/streamvault": "community-927"
+  "stale:release:MrSimmo/sonance3": "community-928",
+  "stale:release:christopherklint97/streamvault": "community-928"
 }
