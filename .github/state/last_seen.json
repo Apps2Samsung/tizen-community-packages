@@ -12,7 +12,6 @@
   "build:andrearicci93/vetro@main": "4d6cdf076cf6387c5ac0ef9ea46402e52ff689a5",
   "build:aroundmyroom/Velvet@main": "d900e3350509e6243fb1043722c60bb471cb54a3",
   "build:cocodedk/copenhagen-weather-tv@main": "1a934d6e7b4ab3ac51cb9f4582bf895d616f30e4",
-  "build:dearbulut/tizen-xtream-iptv@main": "7fd43a02aae7b53eb2fbd6aff8541b7724a285ad",
   "build:detain/shmup-cup@v1.x": "ef6605c3c04e4454b6df206d8a51d8fc3ed448e7",
   "build:fgl27/smarttv-twitch@master": "ca315126b2c432cab82df746c7998e29ad10ae0f",
   "build:guhcostan/retro-tv@main": "5d0cadd3724af375022d80b99b643647c845016e",
@@ -26,7 +25,7 @@
   "build:lvndry/tv-dashboard@main": "d2b0c479ca5c4b30f33b67e9ef602d92c2ce3be2",
   "build:matifDreamIt/IPTV-Tizen-TV@main": "d8eb66b9874d54a225cf584824544925e7dd521f",
   "build:natureglass/haven-tizen-ha@main": "f436b058b5b61a398a2feddc73f7f79a0aed87ef",
-  "build:pley-media-server/pley@master": "6a5535ef143f8867a08ef02ae6a80859ed7a7a95",
+  "build:pley-media-server/pley@master": "8a3fb17e586a916112d2ad6325ec259e2cb66ac0",
   "build:pvk689/snake-game-tizen@master": "62ccffcf53fd72d482bd943c865cd55e8dbf6c54",
   "build:raykholo/tubearchivist-tv@main": "3cb035faf4d9e630761cee288513929fb993af41",
   "build:rfaile313/samsucks@main": "6b00e926e163a3154dd1993a26b47482d61ebf40",
@@ -173,7 +172,6 @@
   "config:build:andrearicci93/vetro": "c89cad52b5d3a72e",
   "config:build:aroundmyroom/Velvet": "c222ae33d22ca8a3",
   "config:build:cocodedk/copenhagen-weather-tv": "257a9125b3ce6597",
-  "config:build:dearbulut/tizen-xtream-iptv": "3fde224fba5a6f2f",
   "config:build:detain/shmup-cup": "e12e6e8e8ee86b96",
   "config:build:fgl27/smarttv-twitch": "d38d294c317db388",
   "config:build:guhcostan/retro-tv": "cc66fd378661c61c",
@@ -322,7 +320,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:build:dearbulut/tizen-xtream-iptv": "community-923",
-  "stale:release:MrSimmo/sonance3": "community-923",
-  "stale:release:christopherklint97/streamvault": "community-923"
+  "stale:release:MrSimmo/sonance3": "community-924",
+  "stale:release:christopherklint97/streamvault": "community-924"
 }
