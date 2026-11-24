@@ -80,6 +80,7 @@
   "release:UbivisMedia/SO-Regelvideo-SamsungTizenTVApp": "v1.3.0",
   "release:Viren070/AIOStreams": "smart-tv-v0.13.0",
   "release:abdok30303-coder/apl-plus-musalla": "v8.7.20",
+  "release:andremaiqui/Tizen-YouTube-Andre-Maiqui": "v1.6.3",
   "release:brightcraft/moonlight-tizen": "v1.20.0",
   "release:burkben/Overscan": "v1.2.5",
   "release:cash94/MonoServer": "v1.0.38",
@@ -240,6 +241,7 @@
   "config:release:UbivisMedia/SO-Regelvideo-SamsungTizenTVApp": "b0f73902b5c7cb97",
   "config:release:Viren070/AIOStreams": "7818bee21432e1ff",
   "config:release:abdok30303-coder/apl-plus-musalla": "7ba581e256d25e66",
+  "config:release:andremaiqui/Tizen-YouTube-Andre-Maiqui": "915a854dc2a4a743",
   "config:release:brightcraft/moonlight-tizen": "4c5e01d38a504adf",
   "config:release:burkben/Overscan": "4a36fbf8557868f8",
   "config:release:cash94/MonoServer": "e60ca424ff0e106f",
@@ -320,6 +322,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-924",
-  "stale:release:christopherklint97/streamvault": "community-924"
+  "stale:release:MrSimmo/sonance3": "community-925",
+  "stale:release:christopherklint97/streamvault": "community-925"
 }

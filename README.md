@@ -1,7 +1,7 @@
 # 🌐 Tizen Community Packages
 [![Sync Tizen Community Packages](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml/badge.svg)](https://github.com/Apps2Samsung/tizen-community-packages/actions/workflows/sync-packages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Packages](https://img.shields.io/badge/packages-161-blue.svg)](#-current-packages)
+[![Packages](https://img.shields.io/badge/packages-162-blue.svg)](#-current-packages)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-green.svg)](../../issues)
 [![Tizen](https://img.shields.io/badge/Platform-Tizen-lightgrey.svg)](https://www.tizen.org/)
 [![Community](https://img.shields.io/badge/Community-Driven-orange.svg)](#)
@@ -116,7 +116,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 </details>
 
 <details>
-<summary><b>🎬 Streaming</b> (37)</summary>
+<summary><b>🎬 Streaming</b> (38)</summary>
 
 | 🧩 Application | 📝 Description | ⚙️ Version |
 |----------------|----------------|------------|
@@ -157,6 +157,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **UltimatiumTube**<br>[AdvaithAvinash](https://github.com/AdvaithAvinash/UltimatiumTube) | Ad-free YouTube for Samsung Tizen 5.0 and 5.5 TVs. | `stable-v1.18.1` |
 | **YouTube Dummy**<br>[no-cover](https://github.com/no-cover/youtube-dummy) | Lightweight wrapper around youtube.com/tv that injects the TizenTube userscript (ad-free, SponsorBlock), handles remote-control navigation and exits cleanly back to Smart Hub. | `1.0.0` |
 | **YouTube for Tizen**<br>[SushyDev](https://github.com/SushyDev/tizen-youtube) | Ad-free YouTube for Samsung TVs, running in Samsung's own Cobalt engine with SponsorBlock, DeArrow and preferred-quality settings. | `v1.6.0` |
+| **YouTube for Tizen (Andre Maiqui)**<br>[andremaiqui](https://github.com/andremaiqui/Tizen-YouTube-Andre-Maiqui) | Fork of SushyDev's YouTube for Tizen with login, proxy and stability fixes. | `v1.6.3` |
 
 </details>
 
