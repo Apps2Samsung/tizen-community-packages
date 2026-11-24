@@ -1,0 +1,10 @@
+{
+  "name": "WEMIN TV Player",
+  "description": "Player for Samsung Tizen 5.5+ based on Saimo TV (MIT). No preset content sources: users add their own M3U playlists or catalog URLs.",
+  "category": "iptv",
+  "repo": "Shicknovz/WEMIN_TV_Player",
+  "source": "release",
+  "branch": "main",
+  "flags": ["closed-source"],
+  "assets": [{"match": "^WEMIN-TV-Player-Samsung-[0-9]+[.][0-9]+[.][0-9]+[.]wgt$", "output_name": "WEMIN-TV-Player-Samsung.wgt"}]
+}
