@@ -26,7 +26,7 @@
   "build:lvndry/tv-dashboard@main": "d2b0c479ca5c4b30f33b67e9ef602d92c2ce3be2",
   "build:matifDreamIt/IPTV-Tizen-TV@main": "d8eb66b9874d54a225cf584824544925e7dd521f",
   "build:natureglass/haven-tizen-ha@main": "f436b058b5b61a398a2feddc73f7f79a0aed87ef",
-  "build:pley-media-server/pley@master": "59b7a70500a8d6ff914dd764b9ddc4982653fc9f",
+  "build:pley-media-server/pley@master": "4a2237396c6f8d76a10db2e1bc67e1cb22fd873e",
   "build:pvk689/snake-game-tizen@master": "62ccffcf53fd72d482bd943c865cd55e8dbf6c54",
   "build:raykholo/tubearchivist-tv@main": "3cb035faf4d9e630761cee288513929fb993af41",
   "build:rfaile313/samsucks@main": "6b00e926e163a3154dd1993a26b47482d61ebf40",
@@ -264,7 +264,7 @@
   "config:release:gabrielmaialva33/streamix-tv": "12a04c8f121d7a2c",
   "config:release:hvmzx/Athan-TV": "24927c03ee644dfa",
   "config:release:igFr0sty/kick-tv-tizen-tr": "0032000b4eba897b",
-  "config:release:iqui27/nuvio-native-legacy": "d66b01d6963e2c15",
+  "config:release:iqui27/nuvio-native-legacy": "f9c67db7aef9adc5",
   "config:release:janrydzewski/kick-tv-2.0": "cb85c20f71e895c0",
   "config:release:josepvarela/OsmTwichPlayer": "6aac09e421ed216c",
   "config:release:kingflooow/floh-iptv": "bb1c6e5df427e704",
@@ -320,6 +320,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-920",
-  "stale:release:christopherklint97/streamvault": "community-920"
+  "stale:release:MrSimmo/sonance3": "community-921",
+  "stale:release:christopherklint97/streamvault": "community-921"
 }
