@@ -5,6 +5,7 @@
   "repo": "dearbulut/tizen-xtream-iptv",
   "source": "build",
   "branch": "main",
+  "enabled": false,
   "project_path": ".",
   "skip_npm": true,
   "output_name": "XtreamIPTV.wgt"
