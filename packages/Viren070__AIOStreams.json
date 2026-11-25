@@ -1,0 +1,17 @@
+{
+  "name": "AIOStreams",
+  "description": "Tizen build of AIOStreams, the all-in-one Stremio super-addon for debrid and Usenet sources.",
+  "category": "streaming",
+  "group": "AIOStreams",
+  "repo": "Viren070/AIOStreams",
+  "source": "release",
+  "branch": "main",
+  "release_tag_prefix": "smart-tv-v",
+  "assets": [
+    {
+      "match": "aiostreams-tizen-.*[.]wgt$",
+      "variant": "Official web app",
+      "output_name": "AIOStreams-Official.wgt"
+    }
+  ]
+}

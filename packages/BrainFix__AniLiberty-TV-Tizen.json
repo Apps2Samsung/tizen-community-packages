@@ -1,0 +1,16 @@
+{
+  "name": "AniLiberty TV",
+  "description": "Unofficial AniLiberty anime client for Samsung Tizen 6.0+ TVs with streaming, watch history, favorites, and account sync.",
+  "category": "streaming",
+  "repo": "BrainFix/AniLiberty-TV-Tizen",
+  "enabled": false,
+  "removed": {"reason": "unlicensed-service"},
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    {
+      "match": "^AniLiberty-TV-.*[.]wgt$",
+      "output_name": "AniLiberty-TV.wgt"
+    }
+  ]
+}

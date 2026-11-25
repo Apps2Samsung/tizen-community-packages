@@ -1,0 +1,15 @@
+{
+  "name": "reel",
+  "description": "Films and series streamed from torrents with a built-in engine, through a Torznab source the user adds; catalogue from TMDB and AniList, set up from a phone by QR code.",
+  "category": "streaming",
+  "repo": "exzos28/reel",
+  "source": "release",
+  "branch": "main",
+  "preview_image": "https://raw.githubusercontent.com/exzos28/reel/main/design/concept/png/tv-home.png",
+  "assets": [
+    {
+      "match": "reel-samsung-tv.wgt",
+      "output_name": "reel-samsung-tv.wgt"
+    }
+  ]
+}

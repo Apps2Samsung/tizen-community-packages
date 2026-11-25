@@ -1,0 +1,14 @@
+{
+  "name": "Prairie",
+  "description": "Flutter client for the self-hosted Prairie media server (native .tpk): multi-server registry with LAN discovery, profiles with PIN, Quick Connect sign-in and AVPlay playback.",
+  "category": "media",
+  "repo": "Prairie-Server/prairie-smarttv",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    {
+      "match": "Prairie-tizen.tpk",
+      "output_name": "Prairie.tpk"
+    }
+  ]
+}

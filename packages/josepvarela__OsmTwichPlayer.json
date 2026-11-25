@@ -1,0 +1,15 @@
+{
+  "name": "OsmTwich",
+  "description": "Unofficial Twitch Player with 7TV emotes for Samsung Smart TVs with Tizen OS.",
+  "category": "streaming",
+  "repo": "josepvarela/OsmTwichPlayer",
+  "repo_label": "OsmTwichPlayer",
+  "source": "release",
+  "branch": "release",
+  "assets": [
+    {
+      "match": "^OsmTwich[.]wgt$",
+      "output_name": "OsmTwich.wgt"
+    }
+  ]
+}

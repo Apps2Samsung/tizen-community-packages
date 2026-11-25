@@ -1,0 +1,16 @@
+{
+  "name": "Lumio IPTV",
+  "description": "IPTV player for Samsung TVs from 2016 on (Tizen 2.4 and newer): live TV in list, grid and card views, programme guides, movies and series from your own playlists",
+  "category": "iptv",
+  "flags": ["closed-source"],
+  "repo": "smjmusavi/Lumio-IPTV",
+  "repo_label": "smjmusavi",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    {
+      "match": "^Lumio-IPTV-[0-9]+[.][0-9]+[.][0-9]+-unsigned[.]wgt$",
+      "output_name": "Lumio-IPTV.wgt"
+    }
+  ]
+}

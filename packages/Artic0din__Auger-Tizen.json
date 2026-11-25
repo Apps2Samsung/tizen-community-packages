@@ -1,0 +1,14 @@
+{
+  "name": "Auger",
+  "description": "Third-party Samsung TV client for Silo self-hosted media servers (Tizen 8.0+).",
+  "category": "media",
+  "repo": "Artic0din/Auger-Tizen",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    {
+      "match": "^Auger[.]wgt$",
+      "output_name": "Auger.wgt"
+    }
+  ]
+}

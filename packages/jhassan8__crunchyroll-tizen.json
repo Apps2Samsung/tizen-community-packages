@@ -1,0 +1,9 @@
+{
+  "name": "Crunchyroll",
+  "description": "Unofficial Crunchyroll client for Samsung Tizen TVs with anime streaming support.",
+  "category": "streaming",
+  "repo": "jhassan8/crunchyroll-tizen",
+  "source": "direct",
+  "url": "https://raw.githubusercontent.com/jhassan8/crunchyroll-tizen/master/Crunchyroll.wgt",
+  "output_name": "Crunchyroll.wgt"
+}

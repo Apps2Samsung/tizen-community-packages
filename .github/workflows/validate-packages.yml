@@ -5,33 +5,89 @@ on:
   # It runs THIS workflow from the base branch with the base repo's token, so
   # PR code must never be executed: only the PR's packages/*.json are pulled
   # in, as data. Schema, scripts and this workflow always come from main.
+  #
+  # Runs on every PR (no paths filter) because main requires the "validate"
+  # check: a PR that doesn't touch packages/ gets "validate" skipped, which
+  # GitHub counts as passing, instead of a check that never arrives.
   pull_request_target:
-    paths:
-      - 'packages/**'
   workflow_dispatch:
 
 permissions:
   contents: read
+  pull-requests: read
 
 jobs:
-  validate:
+  # Does the PR touch packages/ or data/categories.json? Read from the API, no
+  # checkout. When the API call fails the answer is "yes", so a hiccup runs the
+  # validation instead of skipping it.
+  changes:
     runs-on: ubuntu-latest
+    outputs:
+      packages: ${{ steps.files.outputs.packages }}
     steps:
-      # Base branch checkout: trusted schema, scripts and workflow.
+      - id: files
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT: ${{ github.event_name }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          if [ "$EVENT" != "pull_request_target" ]; then
+            echo "packages=true" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          if ! files=$(gh api --paginate "repos/$GITHUB_REPOSITORY/pulls/$PR/files" -q '.[] | .filename, (.previous_filename // empty)'); then
+            echo "::warning::Could not list the PR's files; validating anyway."
+            echo "packages=true" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          if printf '%s\n' "$files" | grep -qE '^(packages/|data/categories\.json$)'; then
+            echo "packages=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Nothing under packages/ or data/categories.json changed: nothing to validate."
+            echo "packages=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  validate:
+    needs: changes
+    if: needs.changes.outputs.packages == 'true'
+    runs-on: ubuntu-latest
+    # pull-requests: write only for the one "Policy hints" comment below.
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      # Base branch checkout: trusted schema, scripts and workflow. Full history
+      # so the step below can find the PR's merge base with main.
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+          fetch-depth: 0
 
-      # Overlay ONLY the PR's manifests. They are read by jq / check-jsonschema /
-      # python json.load, never executed.
-      - name: Take packages/ from the PR
+      # Overlay ONLY the manifests (and data/categories.json) the PR itself adds,
+      # changes or deletes, measured against its merge base with main. Everything else keeps main's
+      # copy: a fork branched before a schema change (e.g. the required
+      # category field) must not fail on the manifests it never touched.
+      # The files are read by jq / check-jsonschema / python json.load, never
+      # executed. The list of added/changed manifests is reused by the steps
+      # below (the "Not already in the catalog" and security-scan steps).
+      - name: Take the PR's changed manifests
         if: github.event_name == 'pull_request_target'
         run: |
           set -e
           git fetch --no-tags origin "pull/${{ github.event.pull_request.number }}/head:pr"
-          rm -rf packages
-          git checkout pr -- packages
-          echo "Validating manifests from PR #${{ github.event.pull_request.number }} (${{ github.event.pull_request.head.sha }})"
+          base=$(git merge-base HEAD pr)
+          echo "Validating PR #${{ github.event.pull_request.number }} (${{ github.event.pull_request.head.sha }}), merge base $base"
+          # --no-renames: a renamed manifest is a delete plus an add.
+          git diff --no-renames --name-only --diff-filter=AM "$base" pr -- packages/ data/categories.json > "$RUNNER_TEMP/pr-changed"
+          git diff --no-renames --name-only --diff-filter=D  "$base" pr -- packages/ > "$RUNNER_TEMP/pr-deleted"
+          if [ -s "$RUNNER_TEMP/pr-changed" ]; then
+            echo "Added/changed:"; sed 's/^/  /' "$RUNNER_TEMP/pr-changed"
+            xargs -d '\n' git checkout pr -- < "$RUNNER_TEMP/pr-changed"
+          fi
+          if [ -s "$RUNNER_TEMP/pr-deleted" ]; then
+            echo "Deleted:"; sed 's/^/  /' "$RUNNER_TEMP/pr-deleted"
+            xargs -d '\n' rm -f -- < "$RUNNER_TEMP/pr-deleted"
+          fi
+          # Later steps read this list; only manifests (packages/*.json) count.
+          grep -E '^packages/[^/]+\.json$' "$RUNNER_TEMP/pr-changed" > "$RUNNER_TEMP/pr-manifests" || true
 
       - uses: actions/setup-python@v5
         with:
@@ -43,26 +99,57 @@ jobs:
       - name: JSON Schema validation
         run: check-jsonschema --schemafile packages.schema.json packages/*.json
 
+      # data/categories.json is well formed and every manifest's category is one of its
+      # ids. The schema only checks the shape of "category", so without this a typo
+      # would land an app under "Other".
+      - name: Categories
+        run: python3 -I scripts/check-categories.py
+
       - name: Structural checks (filenames, uniqueness)
         run: |
           python3 - <<'PY'
-          import json, glob, os, sys
+          import json, glob, os, re, sys
           errors = []
           repos, outputs = {}, {}
+
+          # Only *.json manifests (and the README) belong in packages/. Anything
+          # else - typically a manifest saved without the .json extension - would
+          # pass every check below and never be synced.
+          for name in sorted(os.listdir("packages")):
+              if name != "README.md" and not name.endswith(".json"):
+                  errors.append(f"{name}: not a manifest; files in packages/ must be named owner__repo.json")
+
           for path in sorted(glob.glob("packages/*.json")):
               doc = json.load(open(path))
               repo = doc["repo"]
-
-              # filename must match the repo slug: owner/repo -> owner__repo.json
-              expected = repo.replace("/", "__") + ".json"
+              source = doc["source"]
               actual = os.path.basename(path)
-              if actual != expected:
-                  errors.append(f"{actual}: filename must be '{expected}' (derived from repo '{repo}')")
 
-              # one manifest per repo
-              if repo in repos:
-                  errors.append(f"{actual}: repo '{repo}' already defined in {repos[repo]}")
-              repos[repo] = actual
+              # filename is the repo slug: owner/repo -> owner__repo.json. A second
+              # manifest for the same repo (another source of the same app, e.g. a
+              # native .tpk from releases beside a web app built from source) adds
+              # a suffix: owner__repo__<suffix>.json. The build manifest keeps the
+              # plain name: the sync's build matrix derives it from the repo.
+              base = repo.replace("/", "__")
+              plain = actual == base + ".json"
+              suffixed = re.fullmatch(re.escape(base) + r"__[a-z0-9]+(?:-[a-z0-9]+)*\.json", actual) is not None
+              if not plain and not (suffixed and source != "build"):
+                  errors.append(f"{actual}: filename must be '{base}.json' (derived from repo '{repo}'), "
+                                f"or '{base}__<suffix>.json' for a second release/direct manifest of that repo")
+
+              # one manifest per repo and source; several manifests of one repo are
+              # variants of one app, so they must share a group.
+              # A retired manifest (enabled: false) ships nothing, so it may sit beside a live
+              # one of the same repo: the full app a Lite build replaced, kept to say why it went.
+              retired = doc.get("enabled") is False
+              for other in ([] if retired else repos.get(repo, [])):
+                  if other["retired"]:
+                      continue
+                  if other["source"] == source:
+                      errors.append(f"{actual}: a '{source}' manifest for repo '{repo}' already exists: {other['file']}")
+                  if not doc.get("group") or doc.get("group") != other["group"]:
+                      errors.append(f"{actual}: repo '{repo}' is also packaged by {other['file']}; both must set the same 'group'")
+              repos.setdefault(repo, []).append({"file": actual, "source": source, "group": doc.get("group"), "retired": retired})
 
               # output_name must be unique across the whole bundle (top-level + assets)
               names = []
@@ -80,14 +167,139 @@ jobs:
               for e in errors:
                   print(f"::error::  {e}")
               sys.exit(1)
-          print(f"OK â€” {len(repos)} manifests, {len(outputs)} unique output names.")
+          print(f"OK â€” {sum(len(v) for v in repos.values())} manifests, {len(outputs)} unique output names.")
           PY
+
+      - name: Not already in the catalog
+        # A repo or display name that another manifest already carries (any case),
+        # or that Apps2Samsung lists on its own from its hardcoded
+        # third-party-apps.json (Jellyfin, Moonfin, TizenTube, ...). Errors for the
+        # manifests this PR touches, warnings for the rest.
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request_target" ]; then
+            # shellcheck disable=SC2046
+            python3 -I scripts/check-duplicates.py --changed $(cat "$RUNNER_TEMP/pr-manifests")
+          else
+            python3 -I scripts/check-duplicates.py
+          fi
 
       - name: Manifests compile cleanly
         run: bash scripts/build-manifests.sh
 
       - name: Catalog compiles cleanly
-        run: bash scripts/build-catalog.sh packages "$RUNNER_TEMP/catalog.json"
+        run: |
+          bash scripts/build-catalog.sh packages "$RUNNER_TEMP/catalog.json"
+          # The published format (docs/catalog.md): what other tools build on.
+          python3 -I scripts/test-catalog-spec.py "$RUNNER_TEMP/catalog.json"
+
+      - name: Security scan of new or changed packages
+        # Downloads the current upstream artifact for every release/direct manifest
+        # the PR adds or changes and runs scripts/scan-packages.py on it, so the
+        # privileges, hosts and signatures of a new app are in the job summary
+        # before anyone merges. Downloads are untrusted data: unzipped and read
+        # in their own directory, never executed. Build-sourced apps are scanned
+        # by the sync once they are compiled.
+        # Two things fail the PR here rather than only warning: a single output_name on a
+        # release with several assets (the sync always takes the first one, e.g. a Windows
+        # zip or an APK), and a download with no config.xml / tizen-manifest.xml (a package
+        # that can never install, whatever picked it).
+        if: github.event_name == 'pull_request_target'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          api() { curl -fsSL -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" "$@"; }
+          mkdir -p _scan
+          failed=0
+          changed=$(cat "$RUNNER_TEMP/pr-manifests")
+          for f in $changed; do
+            [ -f "$f" ] || continue
+            src=$(jq -r '.source' "$f"); repo=$(jq -r '.repo' "$f")
+            [ "$(jq -r '.enabled != false' "$f")" = "true" ] || continue
+            if [ "$src" = "direct" ]; then
+              out=$(jq -r '.output_name' "$f")
+              curl -fsSL -o "_scan/$out" "$(jq -r '.url' "$f")" || { echo "::warning file=$f::download failed"; continue; }
+              bash scripts/unwrap-zip.sh "_scan/$out" "$(jq -r '.extract // ""' "$f")"
+            elif [ "$src" = "release" ]; then
+              tag_prefix=$(jq -r '.release_tag_prefix // ""' "$f")
+              if [ -n "$tag_prefix" ]; then
+                json=$(api "https://api.github.com/repos/$repo/releases?per_page=100" 2>/dev/null | jq --arg p "$tag_prefix" '[.[] | select(.draft==false and (.tag_name | startswith($p)))] | (map(select(.prerelease==false))[0] // .[0])' 2>/dev/null || echo 'null')
+              else
+                json=$(api "https://api.github.com/repos/$repo/releases/latest" 2>/dev/null || echo '')
+                if [ -z "$(echo "$json" | jq -r '(.assets // [])[0].browser_download_url // empty' 2>/dev/null)" ]; then
+                  json=$(api "https://api.github.com/repos/$repo/releases?per_page=20" 2>/dev/null | jq '[.[] | select(.prerelease==true and .draft==false)][0]' 2>/dev/null || echo 'null')
+                fi
+              fi
+              if [ "$(jq -r 'has("assets")' "$f")" = "true" ]; then
+                n=$(jq -r '.assets | length' "$f")
+                for i in $(seq 0 $((n - 1))); do
+                  m=$(jq -r ".assets[$i].match" "$f"); out=$(jq -r ".assets[$i].output_name" "$f"); ex=$(jq -r ".assets[$i].extract // \"\"" "$f")
+                  url=$(echo "$json" | jq -r --arg m "$m" '(.assets // [])[] | select(.name == $m) | .browser_download_url' | head -n 1)
+                  [ -n "$url" ] || url=$(echo "$json" | jq -r --arg m "$m" '(.assets // [])[] | select(.name | test($m)) | .browser_download_url' | head -n 1)
+                  [ -n "$url" ] || { echo "::warning file=$f::no release asset matches '$m' - nothing to scan"; continue; }
+                  curl -fsSL -o "_scan/$out" "$url" && bash scripts/unwrap-zip.sh "_scan/$out" "$ex"
+                done
+              else
+                out=$(jq -r '.output_name' "$f"); ex=$(jq -r '.extract // ""' "$f")
+                count=$(echo "$json" | jq -r '(.assets // []) | length')
+                if [ "${count:-0}" -gt 1 ]; then
+                  names=$(echo "$json" | jq -r '[(.assets // [])[].name] | join(", ")')
+                  echo "::error file=$f,title=Ambiguous release asset::The latest release of $repo has $count assets ($names). A single output_name always downloads the first one. Use assets[] with a match for the .wgt/.tpk instead (see packages/README.md)."
+                  failed=1
+                  continue
+                fi
+                url=$(echo "$json" | jq -r '(.assets // [])[] | .browser_download_url // empty' | head -n 1)
+                [ -n "$url" ] || { echo "::warning file=$f::no release asset found - nothing to scan"; continue; }
+                curl -fsSL -o "_scan/$out" "$url" && bash scripts/unwrap-zip.sh "_scan/$out" "$ex"
+              fi
+            fi
+          done
+          if [ -z "$(ls -A _scan)" ]; then
+            echo "No release/direct packages changed in this PR - nothing to scan."
+            exit $failed
+          fi
+          python3 -I scripts/scan-packages.py _scan --md scan-report.md --json scan.json --no-clamav --fail-on critical || failed=1
+          { echo "## Security scan of packages changed in this PR"; echo; cat scan-report.md; } >> "$GITHUB_STEP_SUMMARY"
+          not_tizen=$(jq -r '.packages[] | select(any(.findings[]?; .code == "no-manifest" or .code == "bad-manifest" or .code == "no-app-id")) | .file' scan.json)
+          for p in $not_tizen; do
+            echo "::error title=Not a Tizen package::$p has no usable config.xml / tizen-manifest.xml, so it will not install. Check that the manifest picks the right release asset (assets[] + match), or set extract if upstream ships a zip."
+            failed=1
+          done
+          exit $failed
+
+      # Guesses about "What we accept" for the reviewer: missing closed-source /
+      # self-updating flags, brand-new accounts, forks without a shared group.
+      # Never fails the check (continue-on-error, and the script always exits 0).
+      # Runs after a failed scan too, and keeps one comment up to date.
+      - name: Policy hints (warnings only)
+        if: always() && github.event_name == 'pull_request_target'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ github.event.pull_request.number }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+        run: |
+          marker='<!-- policy-hints -->'
+          : > hints.md
+          if [ -s "$RUNNER_TEMP/pr-manifests" ]; then
+            xargs -d '\n' python3 -I scripts/policy-hints.py --scan-dir _scan --md hints.md --pr-author "$PR_AUTHOR" < "$RUNNER_TEMP/pr-manifests" || true
+          fi
+          [ -s hints.md ] && cat hints.md >> "$GITHUB_STEP_SUMMARY"
+          id=$(gh api --paginate "repos/$GITHUB_REPOSITORY/issues/$PR/comments" \
+                 -q ".[] | select(.user.login == \"github-actions[bot]\" and (.body | startswith(\"$marker\"))) | .id" | head -n 1)
+          if [ -s hints.md ]; then
+            body="$marker"$'\n'"$(cat hints.md)"
+          elif [ -n "$id" ]; then
+            body="$marker"$'\n'"### Policy hints for the reviewer"$'\n\n'"None for the latest version of this PR."
+          else
+            exit 0
+          fi
+          if [ -n "$id" ]; then
+            gh api -X PATCH "repos/$GITHUB_REPOSITORY/issues/comments/$id" -f body="$body" > /dev/null
+          else
+            gh api -X POST "repos/$GITHUB_REPOSITORY/issues/$PR/comments" -f body="$body" > /dev/null
+          fi
 
       - name: Reachability (warnings only)
         env:

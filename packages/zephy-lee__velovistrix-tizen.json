@@ -1,0 +1,11 @@
+{
+  "name": "VeloVistrix",
+  "description": "Read-only PhotoPrism viewer for Samsung Tizen 5.0+ TVs, driven by the remote: albums, places, calendar, labels and folders from your own server, with slideshow. Sign in with an app password, or straight in if the server runs in public mode.",
+  "category": "media",
+  "repo": "zephy-lee/velovistrix-tizen",
+  "source": "build",
+  "branch": "main",
+  "pre_build": "npm run build && cp config.xml icon.png dist/",
+  "project_path": "dist",
+  "output_name": "VeloVistrix.wgt"
+}

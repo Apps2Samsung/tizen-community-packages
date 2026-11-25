@@ -1,0 +1,9 @@
+{
+  "name": "SO-Regelvideos",
+  "description": "Board game rule video player for licensed rule videos (german) from spiele-offensive.de",
+  "category": "other",
+  "repo": "UbivisMedia/SO-Regelvideo-SamsungTizenTVApp",
+  "source": "release",
+  "branch": "main",
+  "output_name": "SOVideoPlayer.wgt"
+}

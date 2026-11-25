@@ -1,9 +1,11 @@
 {
-  "name": "AniUltimatium",
-  "description": "Anime streaming app for Samsung Tizen TVs.",
+  "name": "AniUltimatium Lite",
+  "description": "Player for your own Stremio add-ons, debrid account, IPTV playlist and direct streams; nothing built in.",
   "category": "streaming",
   "repo": "AdvaithAvinash/AniUltimatium",
   "source": "release",
   "branch": "main",
-  "output_name": "AniUltimatium.wgt"
+  "assets": [
+    { "match": "^AniultimatiumLite[.]wgt$", "output_name": "AniUltimatiumLite.wgt" }
+  ]
 }

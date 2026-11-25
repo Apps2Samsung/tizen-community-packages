@@ -1,0 +1,13 @@
+{
+  "name": "Bisnor",
+  "description": "Open-source Persian movie and series client (experimental Tizen TV build): browse, search and play titles from the IranFlix catalogue with AVPlay. Persian UI.",
+  "category": "streaming",
+  "repo": "nikan48g/Bisnor",
+  "enabled": false,
+  "removed": {"reason": "unlicensed-content", "note": "Gets its streams from unlicensed film servers."},
+  "source": "build",
+  "branch": "main",
+  "project_path": "tizen-tv",
+  "skip_npm": true,
+  "output_name": "Bisnor.wgt"
+}

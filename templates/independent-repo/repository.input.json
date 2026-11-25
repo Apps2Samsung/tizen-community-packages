@@ -1,0 +1,27 @@
+{
+  "repository": {
+    "id": "io.github.your-name.tizen",
+    "name": "Your Name's Tizen apps",
+    "maintainer": "Your Name",
+    "description": "Apps for Samsung Tizen TVs by Your Name.",
+    "homepage": "https://github.com/your-name"
+  },
+  "providers": [
+    {
+      "id": "my-app",
+      "category": "media",
+      "url": "your-name/my-app",
+      "displayName": "My App",
+      "take": 1,
+      "source_url": "https://github.com/your-name/my-app"
+    },
+    {
+      "id": "my-other-app",
+      "category": "tools",
+      "url": "your-name/my-other-app",
+      "displayName": "My Other App",
+      "match": "-tizen[0-9]+[.]tpk$",
+      "flags": ["closed-source"]
+    }
+  ]
+}

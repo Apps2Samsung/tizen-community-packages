@@ -3,6 +3,8 @@
   "description": "IPTV player for Samsung Tizen TV, built with React.",
   "category": "iptv",
   "repo": "anandsimmy/react-iptv",
+  "enabled": false,
+  "removed": {"reason": "unlicensed-content", "note": "Plays a built-in list of streams by default."},
   "source": "build",
   "branch": "main",
   "project_path": "build",

@@ -1,0 +1,13 @@
+{
+  "name": "RTSP Viewer",
+  "description": "View your RTSP cameras on your Samsung TV. Just enter RTSP details, Nothing leaves your network: no cloud account, no app server. The TV talks straight to the camera. Add all of your cameras and view them as a grid and MUCH MORE.",
+  "category": "casting",
+  "repo": "PardeepChahal7/RTSP-Viewer",
+  "repo_label": "RTSP Viewer",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "^RTSPViewer[.]wgt$", "output_name": "RTSPViewer.wgt" },
+    { "match": "^RTSPViewer-legacy[.]wgt$", "output_name": "RTSPViewer-legacy.wgt" }
+  ]
+}

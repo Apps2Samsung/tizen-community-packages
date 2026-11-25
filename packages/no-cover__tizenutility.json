@@ -1,0 +1,9 @@
+{
+  "name": "TizenUtility",
+  "description": "System utility for Samsung Tizen TVs: detailed device, firmware and network info, plus a launcher for hidden built-in Samsung apps that are not reachable from the normal UI.",
+  "category": "tools",
+  "repo": "no-cover/tizenutility",
+  "source": "release",
+  "branch": "master",
+  "output_name": "TizenUtility.wgt"
+}

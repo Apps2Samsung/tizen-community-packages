@@ -1,0 +1,17 @@
+{
+  "name": "AIOStreams (thomasrtg)",
+  "description": "Tizen 6 build of AIOStreams, the all-in-one Stremio super-addon for debrid and Usenet sources.",
+  "category": "streaming",
+  "group": "AIOStreams",
+  "repo": "thomasrtg/AIOStreams",
+  "repo_label": "thomasrtg",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    {
+      "match": "^AIOStreams-tizen6[.]wgt$",
+      "variant": "thomasrtg · Tizen 6",
+      "output_name": "AIOStreams-tizen6.wgt"
+    }
+  ]
+}

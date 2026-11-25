@@ -1,0 +1,12 @@
+{
+  "name": "Athan TV",
+  "description": "Prayer times on your TV, powered by mawaqit.net: pick your mosque and see its adhan and iqama times, Jumu'ah and announcements. Full-screen reminder with adhan audio at each prayer, six themes, and an interface in English, French and Arabic.",
+  "category": "home",
+  "repo": "hvmzx/Athan-TV",
+  "source": "release",
+  "branch": "main",
+  "preview_image": "https://raw.githubusercontent.com/hvmzx/Athan-TV/main/docs/screenshots/dashboard.jpg",
+  "assets": [
+    { "match": "^AthanTV[.]wgt$", "output_name": "AthanTV.wgt" }
+  ]
+}

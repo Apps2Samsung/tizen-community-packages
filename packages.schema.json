@@ -10,15 +10,16 @@
     "name": { "type": "string", "minLength": 1, "pattern": "^[^|\n]+$", "description": "Display name shown in the README table. No '|' or newlines." },
     "description": { "type": "string", "minLength": 1, "pattern": "^[^|\n]+$", "description": "One-line description for the README table. No '|' or newlines." },
     "category": {
-      "enum": ["media", "iptv", "streaming", "games", "casting", "tools", "other"],
-      "description": "Catalog category, shown as a filter in Apps2Samsung. media = media-server clients and local players (Jellyfin, Plex, Kodi, music, photos, USB/DLNA); iptv = IPTV and live TV; streaming = clients for streaming services and sites (YouTube, Twitch, Kick, anime, Nuvio, Stremio); games = games, emulators and game streaming; casting = casting receivers and camera viewers; tools = browsers, loaders, network and system utilities; other = anything else."
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_-]{0,31}$",
+      "description": "Catalog category, shown as a filter in Apps2Samsung and TV-Store: one of the ids in data/categories.json (the validate workflow checks this). Today: media = media-server clients and local players (Jellyfin, Plex, Kodi, music, photos, USB/DLNA); iptv = IPTV and live TV; streaming = clients for streaming services and sites (YouTube, Twitch, Kick, anime, Nuvio, Stremio); games = games, emulators and game streaming; casting = casting receivers and camera viewers; home = home screens, launchers, dashboards, clocks, screensavers and photo frames; tools = browsers, loaders, network and system utilities; other = anything else."
     },
-    "group": { "type": "string", "minLength": 1, "pattern": "^[^|\n]+$", "description": "Optional. Display name of the app this package is a variant of. Packages sharing a group fold into one Apps2Samsung entry with a variant picker (the Moonlight forks all set \"Moonlight\"). A package with several assets[] folds by itself: its group defaults to its name." },
+    "group": { "type": "string", "minLength": 1, "pattern": "^[^|\n]+$", "description": "Optional. Display name of the app this package is a variant of. Packages sharing a group fold into one Apps2Samsung entry with a variant picker (the Moonlight forks all set \"Moonlight\"). Required on every manifest of a repo that has more than one. A package with several assets[] folds by itself: its group defaults to its name." },
     "variant": { "type": "string", "minLength": 1, "pattern": "^[^|\n]+$", "description": "Optional. Label for this package's file in the variant picker when it belongs to a group (e.g. \"OneLiberty · Chrome\"). Single-file packages only; with assets[] put variant on each asset. Defaults to the file name without extension." },
     "repo": {
       "type": "string",
       "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$",
-      "description": "owner/repo on the forge named by host (GitHub by default). Used as the manifest key, the README link, and (for build/release) the API target."
+      "description": "owner/repo on the forge named by host (GitHub by default). Used as the manifest key, the README link, and (for build/release) the API target. One manifest per repo and source: a second manifest for the same repo (e.g. a native .tpk from its releases beside a web app built from source) must use another source, share the first one's group, and be named owner__repo__<suffix>.json."
     },
     "host": {
       "enum": ["github", "gitlab"],
@@ -27,6 +28,22 @@
     },
     "repo_label": { "type": "string", "minLength": 1, "pattern": "^[^|\n]+$", "description": "Optional link text for the README Repository column. Defaults to the repo owner." },
     "enabled": { "type": "boolean", "default": true, "description": "Set to false to retire the package without deleting this file: it is skipped by the sync (not built, downloaded, or shipped in the release) and left out of the README table. Absent means true." },
+    "removed": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reason"],
+      "properties": {
+        "reason": {
+          "enum": ["unlicensed-content", "unlicensed-service", "unlicensed-game-data", "takedown", "superseded", "upstream-gone"],
+          "description": "Why the app left the catalogue. Apps2Samsung and TV-Store show their own translated text for it. unlicensed-content = ships streams, playlists or scrapers for content it has no licence for; unlicensed-service = a client for a service that has no licence for its content; unlicensed-game-data = ships commercial game data it may not redistribute; takedown = removed after a copyright (DMCA) notice; superseded = replaced by another app in the catalogue; upstream-gone = the developer removed or archived the project."
+        },
+        "note": { "type": "string", "minLength": 1, "maxLength": 200, "pattern": "^[^|\\n]+$", "description": "Optional. One neutral line of detail shown under the reason (English only). Never a link to the app or where to get it." },
+        "package_ids": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^[A-Za-z0-9]{10}$" }, "description": "Optional. The package ids the app's files had on the TV, for when no recent release still lists them (the build otherwise carries them over from the previous catalog.json). Merged with the carried ones." },
+        "app_ids": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^[A-Za-z0-9]{10}[.][A-Za-z0-9]+$" }, "description": "Optional. The application ids that go with package_ids, same rules." }
+      },
+      "description": "Optional, only with enabled: false. Tells users why the app is gone: catalog.json lists it under removed (not apps), so Apps2Samsung and TV-Store can flag an installed copy and answer a search for it. A retired package without this block disappears silently, as before."
+    },
+    "adult": { "type": "boolean", "default": false, "description": "Set to true for an app whose content is for adults only (18+): pornography or other sexually explicit material. The package ships like any other, but catalog.json carries adult: true on each of its files so Apps2Samsung hides it until the user turns on the 18+ toggle, and the README lists it in a collapsed section instead of the main table. Absent means false. Independent of category: an adult app still gets the category that says what it is (a media-server client, an IPTV player)." },
     "source": {
       "enum": ["build", "release", "direct"],
       "description": "build = compiled from source with Tizen Studio; release = prebuilt .wgt from GitHub Releases; direct = downloaded from a fixed URL."
@@ -38,6 +55,7 @@
     "overlay": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$", "description": "build only. Name of a directory under apps/ whose contents are copied over the project before packaging (e.g. a config.xml the upstream doesn't ship)." },
     "url": { "type": "string", "pattern": "^https?://", "description": "direct only. Absolute URL to the .wgt." },
     "output_name": { "type": "string", "pattern": "\\.(wgt|tpk)$", "description": "Filename inside the bundle. Required unless using assets[]." },
+    "release_tag_prefix": { "type": "string", "minLength": 1, "pattern": "^[A-Za-z0-9._/-]+$", "description": "release only. For a monorepo whose Tizen build is released under its own tags (e.g. \"smart-tv-v\" for smart-tv-v0.7.0) while GitHub's \"latest\" points at another component. Use the newest stable release whose tag starts with this prefix (a prerelease only if none is stable) instead of /releases/latest. Absent means the usual latest, then newest prerelease." },
     "extract": { "type": "string", "minLength": 1, "description": "release/direct only. The downloaded asset is a zip wrapper; extract the entry matching this exact name or regex and use that as the package. Use when upstream ships the .wgt inside a .zip." },
     "assets": {
       "type": "array",
@@ -54,9 +72,103 @@
           "extract": { "type": "string", "minLength": 1, "description": "This asset is a zip wrapper; extract the entry matching this exact name or regex." }
         }
       }
+    },
+    "moved_to": {
+      "type": "object",
+      "required": ["url", "fingerprint"],
+      "additionalProperties": false,
+      "properties": {
+        "url": { "type": "string", "pattern": "^https://[^\\s/@:]+(?::\\d+)?/[^\\s]*[.]signed$", "description": "The independent repository's repository.json.signed." },
+        "fingerprint": { "type": "string", "pattern": "^[0-9a-f]{64}$", "description": "SHA-256 of the repository key's DER public key, as repo-validate.py prints it." }
+      },
+      "description": "Optional. The app now lives in an independent repository (docs/repositories.md). Copied onto each of the package's files in catalog.json; Apps2Samsung offers users who have the app installed to add that repository, with this fingerprint approved by the official catalog. Set it for a notice period before setting enabled to false."
+    },
+    "cert_level": {
+      "enum": ["public", "partner"],
+      "description": "Optional. The Samsung certificate level the app needs to work: \"partner\" for an app that uses partner-level rights (DRM playback, Samsung sign-in, a VPN) or hooks into a Samsung native package and so fails at launch when signed with a Public certificate. Apps2Samsung and TV-Store then sign it with the user's Partner certificate. Copied onto each of the package's files in catalog.json. Defaults to \"public\"."
+    },
+    "preview_image": {
+      "type": "string",
+      "maxLength": 2048,
+      "pattern": "^https://[^\\s/@:]+(?::\\d+)?/[^\\s]*$",
+      "description": "Optional. HTTPS URL of a 16:9 screenshot of the app, shown on its card in Apps2Samsung and TV-Store. Copied onto each of the package's files in catalog.json. Host it somewhere stable (the app's own repository is fine)."
+    },
+    "flags": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "enum": ["root", "closed-source", "self-updating"] },
+      "description": "Optional. Properties Apps2Samsung shows or warns about (see packages/README.md, What we accept). root = the package gains root on the TV and runs a service from boot; after install the user sets Developer Mode Host PC IP to 127.0.0.1 and restarts, which locks every PC (Apps2Samsung included) out of SDB until it is set back. closed-source = the app's source isn't in the linked repository; accepted because the author grants redistribution. Apps2Samsung shows a Closed source badge. self-updating = the app downloads and runs newer code after install, outside the catalogue and its scan; only allowed from the same repository or author, or from the upstream project the app is built on and names in its description. Apps2Samsung shows a Self-updating badge and a note in the app details. Copied onto each of the package's files in catalog.json."
+    },
+    "user_settings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fields"],
+      "description": "Optional. Values the user supplies before install (e.g. a per-user API key, a port). Apps2Samsung asks for them and writes them into the package before re-signing. Two forms, not mixed: file + find/replace on every field (one file), or targets on every field and no file (several files). Copied into catalog.json.",
+      "properties": {
+        "help_url": { "type": "string", "pattern": "^https://", "description": "Page that explains where to get the values. Shown as a link above the form." },
+        "file": { "$ref": "#/$defs/package_path", "description": "Path of the file to patch, relative to the package root (for build, relative to project_path). Required when the fields use find/replace, absent when they use targets." },
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["key", "label", "type"],
+            "properties": {
+              "key": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$", "description": "Stable id; Apps2Samsung stores the value under it per app." },
+              "label": { "type": "string", "minLength": 1, "description": "Field label in the form." },
+              "type": { "enum": ["number", "text"], "description": "number = digits only, written as-is; text = written with quotes and backslashes escaped." },
+              "required": { "type": "boolean", "default": true },
+              "pattern": { "type": "string", "minLength": 1, "description": "Optional regex the value must match." },
+              "default": { "type": "string", "minLength": 1, "description": "Optional. Written instead when the field is not required and the user leaves it empty, so every find is always replaced. Must itself pass the field's own checks." },
+              "min": { "type": "integer", "description": "number only. Smallest accepted value, inclusive." },
+              "max": { "type": "integer", "description": "number only. Largest accepted value, inclusive." },
+              "disallow": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "integer" }, "description": "number only. Values the form rejects (e.g. ports the TV itself uses)." },
+              "find": { "type": "string", "minLength": 1, "description": "Exact text in file that is replaced. The install fails if it is missing." },
+              "replace": { "$ref": "#/$defs/replace" },
+              "targets": {
+                "type": "array",
+                "minItems": 1,
+                "description": "Every place the value goes, when it lands in more than one spot or file. All are applied; the install fails if any find is missing. Used instead of file + find/replace.",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["file", "find", "replace"],
+                  "properties": {
+                    "file": { "$ref": "#/$defs/package_path" },
+                    "find": { "type": "string", "minLength": 1, "description": "Exact text in file that is replaced." },
+                    "replace": { "$ref": "#/$defs/replace" }
+                  }
+                }
+              }
+            },
+            "if": { "properties": { "type": { "const": "text" } } },
+            "then": { "not": { "anyOf": [ { "required": ["min"] }, { "required": ["max"] }, { "required": ["disallow"] } ] } }
+          }
+        }
+      },
+      "oneOf": [
+        {
+          "required": ["file"],
+          "properties": { "fields": { "items": { "required": ["find", "replace"], "not": { "required": ["targets"] } } } }
+        },
+        {
+          "not": { "required": ["file"] },
+          "properties": { "fields": { "items": { "required": ["targets"], "not": { "anyOf": [ { "required": ["find"] }, { "required": ["replace"] } ] } } } }
+        }
+      ]
     }
   },
+  "$defs": {
+    "package_path": { "type": "string", "pattern": "^[A-Za-z0-9_./-]+$", "not": { "pattern": "(^/|\\.\\.)" }, "description": "Path inside the package, relative to its root (for build, relative to project_path). No leading / and no .." },
+    "replace": { "type": "string", "pattern": "\\{value\\}", "description": "Replacement text; {value} is the user's value." }
+  },
   "allOf": [
+    {
+      "if": { "required": ["removed"] },
+      "then": { "required": ["enabled"], "properties": { "enabled": { "const": false } }, "not": { "required": ["moved_to"] } }
+    },
     {
       "if": { "required": ["assets"] },
       "then": { "not": { "required": ["variant"] } }
@@ -65,7 +177,7 @@
       "if": { "required": ["source"], "properties": { "source": { "const": "build" } } },
       "then": {
         "required": ["branch", "output_name"],
-        "not": { "anyOf": [ { "required": ["url"] }, { "required": ["assets"] }, { "required": ["extract"] } ] }
+        "not": { "anyOf": [ { "required": ["url"] }, { "required": ["assets"] }, { "required": ["extract"] }, { "required": ["release_tag_prefix"] } ] }
       }
     },
     {
@@ -83,7 +195,7 @@
       "if": { "required": ["source"], "properties": { "source": { "const": "direct" } } },
       "then": {
         "required": ["url", "output_name"],
-        "not": { "anyOf": [ { "required": ["branch"] }, { "required": ["assets"] }, { "required": ["skip_npm"] }, { "required": ["pre_build"] }, { "required": ["project_path"] }, { "required": ["overlay"] }, { "required": ["host"] } ] }
+        "not": { "anyOf": [ { "required": ["branch"] }, { "required": ["assets"] }, { "required": ["skip_npm"] }, { "required": ["pre_build"] }, { "required": ["project_path"] }, { "required": ["overlay"] }, { "required": ["host"] }, { "required": ["release_tag_prefix"] } ] }
       }
     }
   ]

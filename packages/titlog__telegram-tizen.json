@@ -1,0 +1,15 @@
+{
+  "name": "Telegram Videos",
+  "description": "Plays the videos in your Telegram groups and channels on Samsung Tizen 6.0+ TVs: QR sign-in, several accounts, MP4 and MKV streamed while downloading, audio tracks and subtitles, search across chats. Chinese and English UI. Updates itself.",
+  "category": "streaming",
+  "repo": "titlog/telegram-tizen",
+  "source": "release",
+  "flags": ["self-updating"],
+  "branch": "master",
+  "assets": [
+    {
+      "match": "telegram-tizen-.*[.]wgt$",
+      "output_name": "Telegram-Videos.wgt"
+    }
+  ]
+}

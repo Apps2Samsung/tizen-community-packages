@@ -2,10 +2,12 @@
   "name": "Moonlight",
   "description": "Open-source client for NVIDIA GameStream and Sunshine.",
   "category": "games",
+  "preview_image": "https://iili.io/fsvn6mJ.png",
   "group": "Moonlight",
-  "variant": "OneLiberty · Chrome",
   "repo": "OneLiberty/moonlight-chrome-tizen",
   "source": "release",
   "branch": "release",
-  "output_name": "Moonlight-Chrome.wgt"
+  "assets": [
+    { "match": "^Moonlight[.]wgt$", "variant": "OneLiberty · Chrome", "output_name": "Moonlight-Chrome.wgt" }
+  ]
 }

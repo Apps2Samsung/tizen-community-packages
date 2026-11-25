@@ -1,6 +1,6 @@
 {
   "name": "AirTizen",
-  "description": "AirPlay receiver for Samsung Tizen TV — stream audio/video to older Samsung TVs.",
+  "description": "AirPlay receiver for Samsung Tizen TV: stream audio/video to older Samsung TVs.",
   "category": "casting",
   "repo": "MrHumanRebel/airtizen",
   "source": "release",

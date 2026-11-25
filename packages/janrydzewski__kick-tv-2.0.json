@@ -5,5 +5,7 @@
   "repo": "janrydzewski/kick-tv-2.0",
   "source": "release",
   "branch": "main",
-  "output_name": "KickTV20.wgt"
+  "assets": [
+    { "match": "^KickTV20[.]wgt$", "output_name": "KickTV20.wgt" }
+  ]
 }

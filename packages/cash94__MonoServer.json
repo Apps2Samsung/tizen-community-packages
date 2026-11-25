@@ -1,0 +1,11 @@
+{
+  "name": "MonoServer",
+  "description": "TorrServer rewritten in C# (MonoTorrent) that runs as a background service on the TV itself, including Tizen 5.5 where the official TorrServer cannot start. TorrServer MatriX API on port 8090, with a small status launcher.",
+  "category": "tools",
+  "repo": "cash94/MonoServer",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    { "match": "MonoServer-Tizen.wgt", "output_name": "MonoServer.wgt" }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "YouTube for Tizen (Andre Maiqui)",
+  "description": "Fork of SushyDev's YouTube for Tizen with login, proxy and stability fixes. Requires a Samsung partner certificate.",
+  "category": "streaming",
+  "group": "YouTube for Tizen",
+  "cert_level": "partner",
+  "repo": "andremaiqui/Tizen-YouTube-Andre-Maiqui",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    {
+      "match": "tizen-youtube-.*-tizen-5[.]5[.]wgt$",
+      "variant": "Andre Maiqui · Tizen 5.5 and up",
+      "output_name": "tizen-youtube-andremaiqui-tizen-5.5.wgt"
+    },
+    {
+      "match": "tizen-youtube-.*-tizen-5[.]0[.]wgt$",
+      "variant": "Andre Maiqui · Tizen 5.0",
+      "output_name": "tizen-youtube-andremaiqui-tizen-5.0.wgt"
+    }
+  ]
+}

@@ -1,9 +1,14 @@
 {
   "name": "Doom",
-  "description": "A WebAssembly-powered port of Doom packaged as a Samsung Tizen TV application.",
+  "description": "Doom for Samsung Tizen TVs, based on Chocolate Doom and WebAssembly. Includes Chex Quest, Freedoom and HacX as selectable game modes with separate save games.",
   "category": "games",
+  "preview_image": "https://raw.githubusercontent.com/dos-ise/doom-tizen/main/docs/doom-preview.jpeg",
   "repo": "dos-ise/doom-tizen",
+  "enabled": true,
   "source": "release",
   "branch": "release",
-  "output_name": "Doom.wgt"
+  "assets": [
+    { "match": "Doom.wgt", "variant": "Tizen 6+", "output_name": "Doom.wgt" },
+    { "match": "Doom-tizen55.wgt", "variant": "Tizen 5.5", "output_name": "Doom-tizen55.wgt" }
+  ]
 }
