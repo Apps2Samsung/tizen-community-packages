@@ -1,0 +1,9 @@
+{
+  "name": "Lumora",
+  "description": "Modern IPTV player for Samsung Tizen TVs with Xtream Codes, Stalker portal and M3U support.",
+  "category": "iptv",
+  "repo": "mejri02/Lumora-TV_iptv_tizen",
+  "source": "release",
+  "branch": "main",
+  "output_name": "Lumora-TV.wgt"
+}
