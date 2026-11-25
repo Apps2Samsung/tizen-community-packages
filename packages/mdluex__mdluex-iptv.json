@@ -1,0 +1,16 @@
+{
+  "name": "Mdluex IPTV",
+  "description": "Netflix-style IPTV player for your own Xtream Codes account (live TV, movies, series, resume, favorites), plus the Mdluex Industries YouTube channel. No built-in channels.",
+  "category": "iptv",
+  "repo": "mdluex/mdluex-iptv",
+  "repo_label": "Mdluex IPTV",
+  "source": "release",
+  "branch": "main",
+  "assets": [
+    {
+      "match": "^MdluexIPTV-v[0-9.]+\\.wgt$",
+      "output_name": "Mdluex-IPTV.wgt"
+    }
+  ],
+  "preview_image": "https://mdluex.github.io/mdluex-iptv/channel-videos-tab.png"
+}
