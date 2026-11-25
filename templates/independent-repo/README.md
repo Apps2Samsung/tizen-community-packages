@@ -50,6 +50,10 @@ A finished setup to look at: [Apps2Samsung/repository-example](https://github.co
    https://<your-name>.github.io/<repo>/repository.json.signed
    ```
 
+   Next to it the workflow publishes each app's own icon, taken out of the package (`icons/`, named
+   in the manifest with its hash, so Apps2Samsung and TV-Store show it), and a page for people at
+   `https://<your-name>.github.io/<repo>/` with the address, the fingerprint and your apps.
+
    The workflow log prints the **key fingerprint**. Put it in your README, so users can check that the
    fingerprint Apps2Samsung shows them is really yours.
 

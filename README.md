@@ -353,7 +353,7 @@ You can offer it yourself. Two ways, both without a terminal:
   **[Apps2Samsung/repository-template](https://github.com/Apps2Samsung/repository-template)**: click
   *Use this template*, turn on Pages, make your key at
   [apps2samsung.com/repository-key](https://apps2samsung.com/repository-key/) and add your apps with a
-  form. About five minutes, all clicking. A finished one:
+  form. About five minutes, all clicking. Your apps show with their own icons, taken from each package. A finished one:
   [Apps2Samsung/repository-example](https://github.com/Apps2Samsung/repository-example). The format is
   in [`docs/repositories.md`](docs/repositories.md).
 

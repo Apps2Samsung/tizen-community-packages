@@ -181,6 +181,18 @@ jobs:
           fp=$(sed -n 's/^key fingerprint: //p' "$t/log")
           grep -q "$fp" "$t/site/index.html"
           grep -q "https://someone.github.io/my-apps/repository.json.signed" "$t/site/index.html"
+          # Every package's own icon is on the site and named in the manifest with its hash.
+          python3 - "$t/site" <<'PY'
+          import hashlib, json, os, sys
+          site = sys.argv[1]
+          assets = [a for p in json.load(open(site + "/repository.json"))["providers"] for r in p["releases"] for a in r["assets"]]
+          assert assets and all("icon" in a for a in assets), "an asset has no icon"
+          for a in assets:
+              assert a["icon"].startswith("https://someone.github.io/my-apps/icons/"), a["icon"]
+              data = open(os.path.join(site, "icons", a["icon"].rsplit("/", 1)[1]), "rb").read()
+              assert "sha256:" + hashlib.sha256(data).hexdigest() == a["icon_digest"], a["name"]
+          print(len(assets), "assets, each with its icon on the site")
+          PY
           python3 -c 'import json,sys; d=json.load(open(sys.argv[1])); assert d["repository"]["id"]=="io.github.someone.my-apps" and [p["id"] for p in d["providers"]]==["reolinkviewer"], d' "$t/in.json"
       - name: The template's input file is valid
         run: |
