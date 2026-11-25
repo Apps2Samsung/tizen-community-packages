@@ -264,7 +264,7 @@
   "config:release:enesk4yh4n-lab/TizenTV-Film-Merkezi": "373aaba3f53a9b30",
   "config:release:exzos28/reel": "76d10155f43c721b",
   "config:release:exzos28/tizen-os-ambilight": "2ec9266bc67eee53",
-  "config:release:fidoboy/moonlight-tizen-ac3": "e04600730b410f7d",
+  "config:release:fidoboy/moonlight-tizen-ac3": "2152ce7b538683ee",
   "config:release:gabrielmaialva33/streamix-tv": "12a04c8f121d7a2c",
   "config:release:hvmzx/Athan-TV": "24927c03ee644dfa",
   "config:release:igFr0sty/kick-tv-tizen-tr": "0032000b4eba897b",
@@ -323,5 +323,7 @@
   "config:direct:ihovsky/Reelo": "2d73f6138537b11f",
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
-  "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59"
+  "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
+  "stale:release:MrSimmo/sonance3": "community-929",
+  "stale:release:christopherklint97/streamvault": "community-929"
 }
