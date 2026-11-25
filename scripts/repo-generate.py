@@ -16,6 +16,12 @@ Then it signs the result and writes into --out:
   repository.pem           the public key, so Apps2Samsung can show its fingerprint
   index.html               with --site-url (where --out is published): a page for people,
                            with the repository's URL, key fingerprint, how to add it and its apps
+  icons/<sha256>.<ext>     with --site-url: each package's own icon, taken out of the package,
+                           and named in the manifest as the asset's icon + icon_digest, so
+                           Apps2Samsung and TV-Store show it (they only show an icon whose bytes
+                           hash to icon_digest)
+  icons/none.json          the packages that were looked at and have no icon, so they are not
+                           downloaded again for it every day
 
 Finally it checks its own output with repo-validate.py, so a broken manifest is
 never published.
@@ -23,6 +29,8 @@ never published.
 --previous (the URL or path of the currently published repository.json.signed)
 lets unchanged assets be reused without downloading them again, and keeps a
 provider whose GitHub fetch failed (marked "ok": false) instead of dropping it.
+A reused asset's icon is copied over from the published site; an asset published
+before icons existed is downloaded once more to look for one.
 GITHUB_TOKEN, when set, is sent to api.github.com (60 requests/hour without it).
 
 The private key never touches the output folder: it comes from --key or from the
@@ -45,10 +53,13 @@ import sys
 import tempfile
 import urllib.parse
 import urllib.request
+import xml.etree.ElementTree as ET
+import zipfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 GENERATOR_ONLY = ("match", "prerelease")
 MAX_ASSET_BYTES = 512 * 1024 * 1024
+MAX_ICON_BYTES = 1024 * 1024   # what TV-Store takes; a Tizen icon is a 512 px PNG, well under this
 USER_AGENT = "tizen-community-packages repo-generate"
 
 
@@ -98,6 +109,133 @@ def download(url, dest):
     return size, h.hexdigest()
 
 
+def image_ext(data):
+    """The raster formats the clients show, by the first bytes; None for anything else (an SVG can carry scripts)."""
+    if data[:4] == b"\x89PNG":
+        return "png"
+    if data[:3] == b"\xff\xd8\xff":
+        return "jpg"
+    if data[:4] == b"GIF8":
+        return "gif"
+    if data[:4] == b"RIFF" and data[8:12] == b"WEBP":
+        return "webp"
+    return None
+
+
+def package_icon(path):
+    """The icon a package names for itself -> (bytes, extension), or None.
+
+    A web package names it in config.xml (<icon src="icon.png"/>, icon.png when it says nothing),
+    a native one in tizen-manifest.xml (<icon>name.png</icon>, a file in shared/res/). Only that
+    one entry is read from the zip, and only when it is a PNG, JPEG, GIF or WebP of at most 1 MiB.
+    """
+    try:
+        with zipfile.ZipFile(path) as z:
+            infos = {i.filename: i for i in z.infolist()}
+            wanted = []
+            for manifest, attr in (("config.xml", "src"), ("tizen-manifest.xml", None)):
+                if manifest not in infos or infos[manifest].file_size > MAX_ICON_BYTES:
+                    continue
+                try:
+                    root = ET.fromstring(z.read(manifest))
+                except ET.ParseError:
+                    continue
+                for el in root.iter():
+                    if not isinstance(el.tag, str) or el.tag.rsplit("}", 1)[-1] != "icon":
+                        continue
+                    name = (el.get(attr) if attr else el.text) or ""
+                    name = name.strip().replace("\\", "/").lstrip("/")
+                    while name.startswith("./"):
+                        name = name[2:]
+                    if name:
+                        wanted += [name] if attr else ["shared/res/" + name, name]
+                if attr:
+                    wanted.append("icon.png")
+                break
+            for name in wanted:
+                info = infos.get(name)
+                if not info or info.is_dir() or not 0 < info.file_size <= MAX_ICON_BYTES:
+                    continue
+                data = z.read(name)
+                ext = image_ext(data)
+                if ext:
+                    return data, ext
+    except (zipfile.BadZipFile, OSError, RuntimeError, NotImplementedError):
+        pass
+    return None
+
+
+class Icons:
+    """The icons folder of the site being built (--site-url; without it nothing is written)."""
+
+    def __init__(self, out, site_url):
+        self.dir = os.path.join(out, "icons")
+        self.base = site_url.rstrip("/") + "/icons/"
+        self.none = set()      # digests of packages that have no icon, kept in icons/none.json
+        try:
+            with http_get(self.base + "none.json") as r:
+                listed = json.loads(r.read(1 << 20).decode("utf-8"))
+            self.none = {d for d in listed if isinstance(d, str)}
+        except Exception:      # first run with icons, or not published yet
+            pass
+        self.seen = set()      # the packages of this run that have none
+
+    def put(self, entry, data, ext):
+        sha = hashlib.sha256(data).hexdigest()
+        os.makedirs(self.dir, exist_ok=True)
+        with open(os.path.join(self.dir, f"{sha}.{ext}"), "wb") as f:
+            f.write(data)
+        entry["icon"] = f"{self.base}{sha}.{ext}"
+        entry["icon_digest"] = f"sha256:{sha}"
+
+    def add(self, entry, package_path):
+        """After a download: the package's icon goes on the site and into its entry."""
+        found = package_icon(package_path)
+        if found:
+            self.put(entry, *found)
+        else:
+            self.seen.add(entry["digest"])
+
+    def carry(self, old):
+        """An asset published before, with its icon on the new site -> its entry, or None to download it again."""
+        if "icon" not in old:
+            if old.get("digest") in self.none:
+                self.seen.add(old["digest"])
+                return old
+            return None
+        try:
+            if not old["icon"].startswith(self.base):
+                raise ValueError("it is not on this site")
+            with http_get(old["icon"]) as r:
+                data = r.read(MAX_ICON_BYTES + 1)
+            ext = image_ext(data)
+            if len(data) > MAX_ICON_BYTES or not ext or f"sha256:{hashlib.sha256(data).hexdigest()}" != old.get("icon_digest"):
+                raise ValueError("it is not the image the manifest names")
+        except Exception as e:
+            warn(f"{old.get('name')}: its published icon cannot be reused ({e}); taking it from the package again")
+            return None
+        entry = dict(old)
+        self.put(entry, data, ext)
+        return entry
+
+    def keep(self, old):
+        """An asset of a provider whose fetch failed: with its icon when that can be copied over, else without."""
+        if "icon" not in old:
+            return old
+        entry = self.carry(old)
+        return entry or {k: v for k, v in old.items() if k not in ("icon", "icon_digest")}
+
+    def finish(self):
+        if self.seen:
+            os.makedirs(self.dir, exist_ok=True)
+            with open(os.path.join(self.dir, "none.json"), "w", encoding="utf-8") as f:
+                json.dump(sorted(self.seen), f)
+
+
+def without_icon(asset):
+    return {k: v for k, v in asset.items() if k not in ("icon", "icon_digest")}
+
+
 def previous_assets(previous):
     """browser_download_url -> asset entry, and provider id -> provider, from the published manifest."""
     by_url, by_provider = {}, {}
@@ -128,7 +266,7 @@ def load_previous(src, validator):
         return None
 
 
-def resolve_provider(p, prev_by_url, scanner, pkginfo, workdir):
+def resolve_provider(p, prev_by_url, scanner, pkginfo, workdir, icons=None):
     api = releases_api_url(p["url"])
     with http_get(api + "?per_page=30", "application/vnd.github+json") as r:
         releases = json.load(r)
@@ -147,8 +285,11 @@ def resolve_provider(p, prev_by_url, scanner, pkginfo, workdir):
             gh_digest = a.get("digest") if isinstance(a.get("digest"), str) else None
             old = prev_by_url.get(url)
             if old and old.get("size") == a.get("size") and (not gh_digest or gh_digest == old.get("digest")):
-                assets.append(old)
-                continue
+                # Without a site to put icons on, none is named: its address would lead nowhere.
+                old = icons.carry(old) if icons else without_icon(old)
+                if old:
+                    assets.append(old)
+                    continue
             path = os.path.join(workdir, name)
             size, sha = download(url, path)
             if gh_digest and gh_digest != f"sha256:{sha}":
@@ -160,6 +301,8 @@ def resolve_provider(p, prev_by_url, scanner, pkginfo, workdir):
             for src, dst in (("version", "package_version"), ("app_id", "app_id"), ("package_id", "package_id"), ("required_version", "required_version")):
                 if info.get(src):
                     entry[dst] = info[src]
+            if icons:
+                icons.add(entry, path)
             os.remove(path)
             assets.append(entry)
         if not assets:
@@ -311,6 +454,12 @@ def main(argv=None):
     previous = load_previous(a.previous, validator)
     prev_by_url, prev_by_provider = previous_assets(previous)
 
+    icons = None
+    if a.site_url:
+        if a.site_url.startswith("https://"):
+            icons = Icons(a.out, a.site_url)
+        else:
+            warn("--site-url is not an https:// address, so the apps' icons are left out")
     providers = []
     workdir = tempfile.mkdtemp(prefix="repo-generate-")
     try:
@@ -318,7 +467,7 @@ def main(argv=None):
             entry = {k: v for k, v in p.items() if k not in GENERATOR_ONLY}
             try:
                 entry["url"] = releases_api_url(p["url"])
-                releases = resolve_provider(p, prev_by_url, scanner, pkginfo, workdir)
+                releases = resolve_provider(p, prev_by_url, scanner, pkginfo, workdir, icons)
                 if not releases:
                     warn(f"{p['id']}: no release with a .wgt/.tpk asset; left out")
                     continue
@@ -329,7 +478,8 @@ def main(argv=None):
                     warn(f"{p['id']}: {e}; left out (nothing published before to fall back on)")
                     continue
                 warn(f"{p['id']}: {e}; keeping the previously published releases")
-                entry.update(ok=False, latestTag=old.get("latestTag", ""), releases=old["releases"])
+                kept = [dict(r, assets=[icons.keep(x) if icons else without_icon(x) for x in r.get("assets", [])]) for r in old["releases"]]
+                entry.update(ok=False, latestTag=old.get("latestTag", ""), releases=kept)
             for r in entry["releases"]:
                 for k in [k for k, v in r.items() if v is None]:
                     del r[k]
@@ -349,6 +499,8 @@ def main(argv=None):
     signed, pub = sign(payload, key_text)
 
     os.makedirs(a.out, exist_ok=True)
+    if icons:
+        icons.finish()
     paths = {name: os.path.join(a.out, name) for name in ("repository.json.signed", "repository.json", "repository.pem")}
     with open(paths["repository.json.signed"], "wb") as f:
         f.write(signed)
@@ -364,7 +516,8 @@ def main(argv=None):
     if a.site_url:
         write_index(os.path.join(a.out, "index.html"), manifest, fp, a.site_url)
     files = sum(len(r["assets"]) for p in providers for r in p["releases"])
-    print(f"signed {len(providers)} providers, {files} files -> {paths['repository.json.signed']}")
+    with_icon = sum("icon" in x for p in providers for r in p["releases"] for x in r["assets"])
+    print(f"signed {len(providers)} providers, {files} files, {with_icon} with an icon -> {paths['repository.json.signed']}")
     print(f"key fingerprint: {fp}")
     return 0
 

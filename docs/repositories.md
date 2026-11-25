@@ -129,7 +129,7 @@ have. What's new is the top-level `repository` block.
 | `assets[].size` | ✅ | Bytes, at most 512 MiB. |
 | `assets[].digest` | ✅ | `sha256:<64 lowercase hex>` of the file. Clients install only bytes that hash to this. |
 | `assets[].package_version`, `app_id`, `package_id`, `required_version` | | Read from the package's own `config.xml` / `tizen-manifest.xml`. Clients use them to match installed apps and to skip TVs that are too old. |
-| `assets[].icon` + `icon_digest` | | Both or neither, as in `resolved.json`. |
+| `assets[].icon` + `icon_digest` | | The app's icon: an HTTPS address of a PNG, JPEG, GIF or WebP of at most 1 MiB, and its `sha256:<64 lowercase hex>`. Both or neither. Clients show the icon only when its bytes hash to `icon_digest`; without one, the app shows a letter. `repo-generate.py` takes each package's own icon and publishes it under `icons/` next to the manifest. |
 
 Clients ignore fields they don't know, so later versions can add optional fields without a new
 `schemaVersion`.
@@ -203,7 +203,7 @@ their updates continue from there. After a notice period the manifest is set to 
 
 | Script | What it does |
 |--------|--------------|
-| [`scripts/repo-generate.py`](../scripts/repo-generate.py) | Builds and signs a manifest from a small input file, reading GitHub releases. Used by the template. |
+| [`scripts/repo-generate.py`](../scripts/repo-generate.py) | Builds and signs a manifest from a small input file, reading GitHub releases. With `--site-url` it also publishes each package's own icon (`icons/<sha256>.png`, named in the manifest as `icon` + `icon_digest`) and a page for people. Used by the template. |
 | [`scripts/repo-validate.py`](../scripts/repo-validate.py) | Checks a `.signed` file against a key: every rule above, with its reason code. |
 | [`scripts/test-repo-spec.py`](../scripts/test-repo-spec.py) | Runs the validator over every test vector. |
 

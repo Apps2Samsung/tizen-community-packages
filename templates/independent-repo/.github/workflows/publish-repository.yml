@@ -67,6 +67,7 @@ jobs:
           python3 -I _tcp/scripts/repo-generate.py \
             --input repository.input.json \
             --out _site \
+            --site-url "${{ steps.pages.outputs.base_url }}" \
             --previous "${{ steps.pages.outputs.base_url }}/repository.json.signed"
 
       - uses: actions/upload-pages-artifact@v3
