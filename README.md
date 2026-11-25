@@ -91,7 +91,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 
 | 🧩 Application | 📝 Description | ⚙️ Version |
 |----------------|----------------|------------|
-| **APL TV**<br>[Knikt](https://github.com/Knikt/APL-TV-for-TizenOS) | Apple TV style IPTV player for your own M3U playlists and Xtream accounts: live TV with a guide, movies and series with TMDB pages, subtitles and audio menus, OpenSubtitles, Alexa voice search. | `v1.4.15` |
+| **APL TV**<br>[Knikt](https://github.com/Knikt/APL-TV-for-TizenOS) | Apple TV style IPTV player for your own M3U playlists and Xtream accounts: live TV with a guide, movies and series with TMDB pages, subtitles and audio menus, OpenSubtitles, Alexa voice search. | `v1.4.16` |
 | **AquaPlay IPTV**<br>[AquaPlay IPTV](https://github.com/AquaPlayIPTV/aquaplay-samsung) | Lightweight IPTV player for M3U and Xtream playlists, with a full guide, catch-up and setup from your phone | `v1.0.54` |
 | **Chouette TV**<br>[ipaifix](https://github.com/ipaifix/chouette-tv) | IPTV player for Samsung Tizen 2.3+ TVs: Xtream and M3U sources, EPG, favourites, profiles and resume. | `794dbef` |
 | **EN TV Player**<br>[Nur-allhi](https://github.com/Nur-allhi/en-tvplayer) | IPTV player for Samsung Tizen TVs with DRM support, M3U/M3U8 playlists, groups and live TV. | `v3.2.0` |
@@ -111,7 +111,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Tizen IPTV Player by mhma26395**<br>[mhma26395-ctrl](https://github.com/mhma26395-ctrl/tizen-iptv-player) | Lightweight IPTV player for compatible Samsung Tizen TVs. | `V1.0` |
 | **TVapp**<br>[KaashDev](https://github.com/KaashDev/TVapp) | Enable seamless playback of HLS/m3u8 streams as channels. | `latest` |
 | **VexonTV**<br>[VexonTV](https://github.com/DvzZDev/VexonTV) | Live TV player for Samsung Tizen TVs: M3U, Xtream Codes and Stalker portals, provider EPG and a remote-first interface. | `9aa670e` |
-| **VortixTV**<br>[Rusty24h](https://github.com/Rusty24h/VortixTV) | High-performance IPTV player supporting Stalker MAC portals, Xtream Codes, M3U playlists, and MPEG-DASH (ClearKey & PlayReady DRM) with 2D EPG and catch-up. | `2.2.1` |
+| **VortixTV**<br>[Rusty24h](https://github.com/Rusty24h/VortixTV) | High-performance IPTV player supporting Stalker MAC portals, Xtream Codes, M3U playlists, and MPEG-DASH (ClearKey & PlayReady DRM) with 2D EPG and catch-up. | `2.2.2` |
 | **WEMIN TV Player**<br>[Shicknovz](https://github.com/Shicknovz/WEMIN_TV_Player) | Player for Samsung Tizen 5.5+ based on Saimo TV (MIT). | `v0.4.0` |
 | **Xtivio IPTV**<br>[Xtivio](https://github.com/xtivio/xtivio-iptv) | Free IPTV player for M3U, Xtream Codes and Stalker portals, with a guide, catch-up, movies and series with resume, and pairing from your phone. | `v1.0.13` |
 
@@ -127,9 +127,9 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **AniUltimatium Lite**<br>[AdvaithAvinash](https://github.com/AdvaithAvinash/AniUltimatium) | Player for your own Stremio add-ons, debrid account, IPTV playlist and direct streams; nothing built in. | `stable-v1.29` |
 | **Apex TV**<br>[Pajuodelis](https://github.com/Pajuodelis/apex-tv) | Independent F1 TV client for Samsung Tizen 6.0+. | `v0.5.14` |
 | **Bili TV**<br>[LeiYi1196](https://github.com/LeiYi1196/bili-tv-tizen) | Lightweight unofficial bilibili client for Samsung TVs, driven by the remote: recommended, popular and history feeds, search, multi-part videos, selectable quality, watch-progress sync, optional QR sign-in and voice search. | `v0.4.8` |
-| **bilibili**<br>[titlog](https://github.com/titlog/bilibili-tizen) | Unofficial bilibili client for Samsung TVs, driven entirely by the remote: QR sign-in with multiple accounts, continue-watching row, danmaku, search, live, up to 1080p H.265 (4K with premium). | `v1.6.0` |
+| **bilibili**<br>[titlog](https://github.com/titlog/bilibili-tizen) | Unofficial bilibili client for Samsung TVs, driven entirely by the remote: QR sign-in with multiple accounts, continue-watching row, danmaku, search, live, up to 1080p H.265 (4K with premium). | `v1.6.1` |
 | **Crunchyroll**<br>[jhassan8](https://github.com/jhassan8/crunchyroll-tizen) | Unofficial Crunchyroll client for Samsung Tizen TVs with anime streaming support. | `latest` |
-| **Douyin (抖音)**<br>[titlog](https://github.com/titlog/douyin-tizen) | Unofficial Douyin client for Samsung Tizen 6.0+ TVs, driven by the remote: Featured, Following and For You feeds, QR sign-in, your history, likes and favourites, creator pages, collections and comments. | `v1.4.9` |
+| **Douyin (抖音)**<br>[titlog](https://github.com/titlog/douyin-tizen) | Unofficial Douyin client for Samsung Tizen 6.0+ TVs, driven by the remote: Featured, Following and For You feeds, QR sign-in, your history, likes and favourites, creator pages, collections and comments. | `v1.4.10` |
 | **F1 TV**<br>[nicbra](https://github.com/nicbra/f1tv-tizen) | Unofficial F1 TV client: live sessions and replays up to 4K HDR, every onboard camera, multiview of up to four feeds, synced live timing display, multi-language commentary and spoiler-free mode. | `v1.2.1` |
 | **Film Merkezi**<br>[enesk4yh4n-lab](https://github.com/enesk4yh4n-lab/TizenTV-Film-Merkezi) | Open-source Turkish/English media center for Samsung Tizen TVs. | `v2.0.3` |
 | **Kick**<br>[Replexo](https://github.com/Replexo/kick-tizen) | Unofficial Kick client modeled on the official TV app: live streams, chat, rewind, clips and 10 languages. | `v1.3.4` |
@@ -150,7 +150,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Streamix TV**<br>[gabrielmaialva33](https://github.com/gabrielmaialva33/streamix-tv) | Cinematic 10-foot TV client for the self-hosted Streamix platform. | `v1.0.027` |
 | **Stremio (Tizen 4)**<br>[Apps2Samsung](https://github.com/Apps2Samsung/tizen-community-packages) | Stremio media center packaged for Tizen 4.0 devices. | `latest` |
 | **StremioK**<br>[Kepler75](https://github.com/Kepler75/StremioK) | Stremio-addon streaming client for Samsung Tizen 3.0+ TVs: catalogs, sources and subtitles from your addons, Jellyfin/Emby/Plex, IPTV (M3U, Xtream, Stalker, TV guide), YouTube, USB and network folders (WebDAV, SMB, DLNA), Trakt and Stremio sync, Nuvio plugins, 17 languages. | `v2.4.10` |
-| **Telegram Videos**<br>[titlog](https://github.com/titlog/telegram-tizen) | Plays the videos in your Telegram groups and channels on Samsung Tizen 6.0+ TVs: QR sign-in, several accounts, MP4 and MKV streamed while downloading, audio tracks and subtitles, search across chats. | `v1.2.9` |
+| **Telegram Videos**<br>[titlog](https://github.com/titlog/telegram-tizen) | Plays the videos in your Telegram groups and channels on Samsung Tizen 6.0+ TVs: QR sign-in, several accounts, MP4 and MKV streamed while downloading, audio tracks and subtitles, search across chats. | `v1.2.10` |
 | **TizenTube 2.4 Native**<br>[numbereleven-a](https://github.com/numbereleven-a/TizenTube-2.4-Native) | YouTube client with SponsorBlock for Samsung TVs running Tizen 2.4, with a custom remote-friendly interface and native hardware playback. | `v1.0.2` |
 | **TizenTube Old Tizen**<br>[numbereleven-a](https://github.com/numbereleven-a/TizenTube-old-tizen) | Standalone YouTube with SponsorBlock for older Samsung TVs (Tizen 2.4 and 3.0). | `v2.5.0` |
 | **TorrStream**<br>[cash94](https://github.com/cash94/TorrStream-Tizen) | Movies and TV shows through TorrServer, with TMDB catalogs and audio and subtitle track names read on the TV. | `v1.2.0` |
@@ -176,7 +176,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Moonlight**<br>[OneLiberty](https://github.com/OneLiberty/moonlight-chrome-tizen) | Open-source client for NVIDIA GameStream and Sunshine. | `v1.2.1` |
 | **Moonlight (No Gamemode)**<br>[MrPhaze62](https://github.com/MrPhaze62/moonlight-chrome-tizen-no-gamemode) | Open-source client for NVIDIA GameStream and Sunshine with gamemode disabled. | `samsung_wasm-21031261929` |
 | **Moonlight (ToypoodleGaming)**<br>[toypoodlegaming](https://github.com/toypoodlegaming/moonlight-chrome-tizen) | Moonlight NVIDIA GameStream / Sunshine client (ToypoodleGaming fork). | `samsung_wasm-21031332442` |
-| **Moonlight Enhanced (AC-3)**<br>[fidoboy](https://github.com/fidoboy/moonlight-tizen-ac3) | Open-source Moonlight client for Tizen OS with optional support for Dolby Digital and Dolby Digital Plus (stereo and 5.1) optical-audio and HDMI passthrough. | `v1.3.0` |
+| **Moonlight Enhanced (AC-3)**<br>[fidoboy](https://github.com/fidoboy/moonlight-tizen-ac3) | Open-source Moonlight client for Tizen OS with optional support for Dolby Digital and Dolby Digital Plus (stereo and 5.1) optical-audio and HDMI passthrough. | `v1.3.1` |
 | **Moonlight-Tizen**<br>[BrightCraft](https://github.com/brightcraft/moonlight-tizen) | Open-source client for NVIDIA GameStream and Sunshine Tizen OS 5.5 or higher. | `v1.20.0` |
 | **Padthru**<br>[labanmne](https://github.com/labanmne/padthru) | Play PC games over a long HDMI cable with the controller paired to your TV: shows the PC's HDMI input full screen and forwards the controller to the PC over your network. | `v0.5.0` |
 | **RetroArch**<br>[Sype0](https://github.com/Sype0/retroarch-tizen) | RetroArch (libretro WebAssembly) for Samsung Tizen 6.5+ TVs: remote-driven launcher, gamepad support, ROMs from a USB drive or a network folder. | `v0.3.2` |
@@ -216,16 +216,16 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **/dev/null on TV**<br>[HelgeSverre](https://github.com/HelgeSverre/devnull-tv) | Big-screen client for dev-null.sh, the social network for developers: the commit log of the people you add, drawn as a git graph, with ambient modes. | `8bc5f09` |
 | **Aerial Screensaver**<br>[jeancarlos](https://github.com/jeancarlos/aerial-tizen) | Apple TV Aerial screensavers: 115 videos streamed from Apple's CDN and decoded in hardware as HEVC 4K via AVPlay. | `3f80ef0` |
 | **Ambient TV**<br>[Bryan-Cee](https://github.com/Bryan-Cee/Ambient) | Ambient dashboard for Samsung Tizen 5.5+ TVs: clock, weather, calendar, Google Photos slideshow and daily quotes. | `73bc869` |
-| **APL Launcher**<br>[Knikt](https://github.com/Knikt/APL-Launcher-for-TizenOS) | Apple-TV-style home screen: Top Shelf, glass dock, Control Center over any app, Settings and Sources. | `v1.3.10` |
+| **APL Launcher**<br>[Knikt](https://github.com/Knikt/APL-Launcher-for-TizenOS) | Apple-TV-style home screen: Top Shelf, glass dock, Control Center over any app, Settings and Sources. | `v1.3.11` |
 | **Arn0 Launcher**<br>[NelsonEU](https://github.com/NelsonEU/arn0-tv) | Minimal remote-friendly home screen for Samsung TVs: a clock, your apps, your consoles and rotating wallpapers. | `b35c292` |
-| **Arn0+**<br>[dx616b](https://github.com/dx616b/arn0-tv) | Fork of Arn0 Launcher: quiet Samsung Tizen home screen with Immich/Mix live wallpapers, weather and Navidrome music. | `v0.7.3` |
+| **Arn0+**<br>[dx616b](https://github.com/dx616b/arn0-tv) | Fork of Arn0 Launcher: quiet Samsung Tizen home screen with Immich/Mix live wallpapers, weather and Navidrome music. | `v0.7.4` |
 | **Athan TV**<br>[hvmzx](https://github.com/hvmzx/Athan-TV) | Prayer times on your TV, powered by mawaqit.net: pick your mosque and see its adhan and iqama times, Jumu'ah and announcements. | `v0.1.0` |
 | **Copenhagen Weather**<br>[cocodedk](https://github.com/cocodedk/copenhagen-weather-tv) | Current conditions, hourly and 7-day forecast for Copenhagen on Samsung Tizen 6.0+ TVs. | `1a934d6` |
 | **Frame Dashboard**<br>[joseamijares](https://github.com/joseamijares/frame-dashboard) | Daily dashboard for the Samsung Frame TV: a public-domain painting beside your calendar, focus and tasks. | `8cc81fe` |
 | **Free My TV**<br>[simbasjungles](https://github.com/simbasjungles/free-my-tv) | Fast, ad-free home screen with your app shelf, weather, sunset-based day/night theme and a photo screensaver. | `v1.5.0` |
 | **Haven**<br>[natureglass](https://github.com/natureglass/haven-tizen-ha) | Home Assistant powered home screen: sensors, lights and scenes by room, weather, live cameras, a Jellyfin client and music from Home Assistant's media folder. | `f436b05` |
 | **Nhà Mình**<br>[meocong](https://github.com/meocong/prj-tv-samsung) | Apple TV-style home screen for Samsung Tizen TVs: your installed apps, a YouTube shelf, weather, a lunar calendar, news, an English word of the day read aloud, Bing wallpapers and a family photo screensaver. | `v1.4.0` |
-| **Salah Launcher**<br>[abdok30303-coder](https://github.com/abdok30303-coder/apl-plus-musalla) | Arabic home screen launcher with prayer times, Quran radio and an offline Mushaf with tafsir. | `v8.7.45` |
+| **Salah Launcher**<br>[abdok30303-coder](https://github.com/abdok30303-coder/apl-plus-musalla) | Arabic home screen launcher with prayer times, Quran radio and an offline Mushaf with tafsir. | `v8.7.51` |
 | **Settle**<br>[SherrySingh03](https://github.com/SherrySingh03/settle) | Calm home screen: an icon dock, rows of films and shows to watch tonight on the apps you have, Up next from Trakt, search and trailers. | `v1.1.1` |
 | **TV Clock**<br>[anandhuremanan](https://github.com/anandhuremanan/samsung-tizen-clock-app) | Simple clock and screen saver for Samsung Tizen 6.0+ TVs. | `1b9ad6f` |
 | **TV Dashboard**<br>[lvndry](https://github.com/lvndry/tv-dashboard) | A calm remote-first home screen: weather and news as a short letter, an app rack, and an ambient art gallery. | `d2b0c47` |
