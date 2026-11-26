@@ -39,7 +39,7 @@
   "release:Apps2Samsung/ReolinkViewer": "v1.2.0",
   "release:Apps2Samsung/TV-Store": "v0.3.43",
   "release:AquaPlayIPTV/aquaplay-samsung": "v1.0.54",
-  "release:Artic0din/Auger-Tizen": "v0.8.0",
+  "release:Artic0din/Auger-Tizen": "v0.12.0",
   "release:Dysprohol/duobeam": "v0.8.9",
   "release:Edsol/go2rtc-tizen": "v0.1.0",
   "release:IIyn/omegatube": "v1.6.0",
@@ -113,6 +113,7 @@
   "release:kromatv/kroma": "v0.1.38",
   "release:labanmne/padthru": "v0.5.0",
   "release:mahmutisik/light-kick-tv": "v1.0.3",
+  "release:mdluex/mdluex-iptv": "v1.2.0",
   "release:mejri02/Lumora-TV_iptv_tizen": "v4.9.18",
   "release:meocong/prj-tv-samsung": "v1.4.0",
   "release:mhma26395-ctrl/tizen-iptv-player": "V1.0",
@@ -276,6 +277,7 @@
   "config:release:kromatv/kroma": "9672f98cc895ccf5",
   "config:release:labanmne/padthru": "5f8dc655a00fd832",
   "config:release:mahmutisik/light-kick-tv": "cf442caa69d3d2de",
+  "config:release:mdluex/mdluex-iptv": "58a70c972c813c37",
   "config:release:mejri02/Lumora-TV_iptv_tizen": "4bb6343afa715a0d",
   "config:release:meocong/prj-tv-samsung": "010de5e0ddf5fd50",
   "config:release:mhma26395-ctrl/tizen-iptv-player": "a223ca63b5a85746",
@@ -326,6 +328,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-932",
-  "stale:release:christopherklint97/streamvault": "community-932"
+  "stale:release:MrSimmo/sonance3": "community-933",
+  "stale:release:christopherklint97/streamvault": "community-933"
 }
