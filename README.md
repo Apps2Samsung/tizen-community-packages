@@ -47,7 +47,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | 🧩 Application | 📝 Description | ⚙️ Version |
 |----------------|----------------|------------|
 | **AmorecoFlix**<br>[Pablitorox](https://github.com/Pablitorox/AmorecoFlix) | Personal Netflix-style player for a USB drive plugged into the TV: posters, synopses, continue watching, next episode, skip intro, audio and subtitle choice. | `e6212b3` |
-| **Auger**<br>[Artic0din](https://github.com/Artic0din/Auger-Tizen) | Third-party Samsung TV client for Silo self-hosted media servers (Tizen 8.0+). | `v0.12.0` |
+| **Auger**<br>[Artic0din](https://github.com/Artic0din/Auger-Tizen) | Third-party Samsung TV client for Silo self-hosted media servers (Tizen 8.0+). | `v0.13.0` |
 | **Beam-TV**<br>[TAGISWILD](https://github.com/TAGISWILD/beam-tv) | Open-source USB and DLNA media player for Samsung Tizen TVs: subtitles, resume playback, remote navigation, and a local companion server. | `v1.0.1` |
 | **Chorus2-Tizen**<br>[Chorus2-Tizen](https://github.com/PatrickSt1991/chorus2-tizen) | Chorus2-Tizen (Kodi) Samsung Tizen. | `tizen-v21.x-1.0.1-2026-05-21-1443` |
 | **Fladder**<br>[popdollar](https://github.com/popdollar/Fladder-Tizen) | Jellyfin client for Samsung Tizen TV, built with Flutter (native .tpk). | `Tizen` |
@@ -140,7 +140,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Lampa**<br>[yumata](https://github.com/yumata/lampa) | Free movie and TV catalogue with info, new releases and trailers. | `v1.4.1` |
 | **Light Kick TV**<br>[mahmutisik](https://github.com/mahmutisik/light-kick-tv) | Lightweight unofficial Kick client: live streams, past broadcasts, read-only chat and a language/sort filter, in 10 languages. | `v1.0.3` |
 | **Native AIO**<br>[thomasrtg](https://github.com/thomasrtg/native-aio) | Unofficial native .NET client for your own AIOStreams server, built for the TV remote. | `v1.2.0` |
-| **Nuvio**<br>[NuvioMedia](https://github.com/NuvioMedia/NuvioTVSmart) | TV-first streaming UI for Samsung Tizen. | `1.4.7` |
+| **Nuvio**<br>[NuvioMedia](https://github.com/NuvioMedia/NuvioTVSmart) | TV-first streaming UI for Samsung Tizen. | `1.4.8` |
 | **Nuvio Native Legacy**<br>[iqui27](https://github.com/iqui27/nuvio-native-legacy) | Unofficial native C/SDL2 Nuvio client, fast on older TVs. | `v2.0.8` |
 | **OmegaTube**<br>[OmegaTube](https://github.com/IIyn/omegatube) | Ad-free YouTube client with SponsorBlock and a native 4K player (Tizen 6+). | `v1.6.0` |
 | **OsmTwich**<br>[OsmTwichPlayer](https://github.com/josepvarela/OsmTwichPlayer) | Unofficial Twitch Player with 7TV emotes for Samsung Smart TVs with Tizen OS. | `v2.7.3` |
@@ -219,7 +219,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Ambient TV**<br>[Bryan-Cee](https://github.com/Bryan-Cee/Ambient) | Ambient dashboard for Samsung Tizen 5.5+ TVs: clock, weather, calendar, Google Photos slideshow and daily quotes. | `73bc869` |
 | **APL Launcher**<br>[Knikt](https://github.com/Knikt/APL-Launcher-for-TizenOS) | Apple-TV-style home screen: Top Shelf, glass dock, Control Center over any app, Settings and Sources. | `v1.3.11` |
 | **Arn0 Launcher**<br>[NelsonEU](https://github.com/NelsonEU/arn0-tv) | Minimal remote-friendly home screen for Samsung TVs: a clock, your apps, your consoles and rotating wallpapers. | `b35c292` |
-| **Arn0+**<br>[dx616b](https://github.com/dx616b/arn0-tv) | Fork of Arn0 Launcher: quiet Samsung Tizen home screen with Immich/Mix live wallpapers, weather and Navidrome music. | `v0.7.4` |
+| **Arn0+**<br>[dx616b](https://github.com/dx616b/arn0-tv) | Fork of Arn0 Launcher: quiet Samsung Tizen home screen with Immich/Mix live wallpapers, weather and Navidrome music. | `v0.7.5` |
 | **Athan TV**<br>[hvmzx](https://github.com/hvmzx/Athan-TV) | Prayer times on your TV, powered by mawaqit.net: pick your mosque and see its adhan and iqama times, Jumu'ah and announcements. | `v0.1.0` |
 | **Copenhagen Weather**<br>[cocodedk](https://github.com/cocodedk/copenhagen-weather-tv) | Current conditions, hourly and 7-day forecast for Copenhagen on Samsung Tizen 6.0+ TVs. | `1a934d6` |
 | **Frame Dashboard**<br>[joseamijares](https://github.com/joseamijares/frame-dashboard) | Daily dashboard for the Samsung Frame TV: a public-domain painting beside your calendar, focus and tasks. | `8cc81fe` |
@@ -252,8 +252,8 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **TizenBrew**<br>[reisxd](https://github.com/reisxd/TizenBrew) | A way to experience modded websites and you can install newer apps without fighting with Tizen Studio. | `v2.0.5` |
 | **TizenUtility**<br>[no-cover](https://github.com/no-cover/tizenutility) | System utility for Samsung Tizen TVs: detailed device, firmware and network info, plus a launcher for hidden built-in Samsung apps that are not reachable from the normal UI. | `1.1.1` |
 | **Torr Streaming**<br>[no-cover](https://github.com/no-cover/torr-streaming) | Runs TorrServer as a background service on the TV itself, so local web apps can stream torrents directly without a separate box. | `1.0.0` |
-| **TV-Store**<br>[Apps2Samsung](https://github.com/Apps2Samsung/TV-Store) | The Apps2Samsung catalog on the TV itself: browse with the remote and install apps natively through the set's own developer connection, with no PC or phone in the loop after a one-time arming from the Apps2Samsung 3.0 (or newer) toolbox. | `v0.3.43` |
-| **Vetro**<br>[andrearicci93](https://github.com/andrearicci93/vetro) | TV management dashboard with root integration: app inventory, controls and diagnostics in your browser. | `4d6cdf0` |
+| **TV-Store**<br>[Apps2Samsung](https://github.com/Apps2Samsung/TV-Store) | The Apps2Samsung catalog on the TV itself: browse with the remote and install apps natively through the set's own developer connection, with no PC or phone in the loop after a one-time arming from the Apps2Samsung 3.0 (or newer) toolbox. | `v0.3.44` |
+| **Vetro**<br>[andrearicci93](https://github.com/andrearicci93/vetro) | TV management dashboard with root integration: app inventory, controls and diagnostics in your browser. | `24cbee6` |
 
 </details>
 
