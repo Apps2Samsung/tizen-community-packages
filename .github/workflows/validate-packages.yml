@@ -268,7 +268,8 @@ jobs:
           exit $failed
 
       # Guesses about "What we accept" for the reviewer: missing closed-source /
-      # self-updating flags, brand-new accounts, forks without a shared group.
+      # self-updating flags, brand-new accounts, forks without a shared group, content
+      # sources built into the package or added by a fork.
       # Never fails the check (continue-on-error, and the script always exits 0).
       # Runs after a failed scan too, and keeps one comment up to date.
       - name: Policy hints (warnings only)

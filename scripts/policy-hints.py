@@ -17,6 +17,10 @@ For every added or changed manifest it looks for:
   new-account    the repo or its owner's account is only days old
   fork-group     the repo is a fork of an app already in the catalog and doesn't
                  share its "group"
+  default-source the app may ship with a content source of its own: the shipped
+                 package has a hard-coded playlist, Xtream login, addon manifest or
+                 magnet link (packages in --scan-dir), or the repo is a fork whose
+                 source adds hosts its upstream doesn't have (compare with the parent)
 
 Every hint is a guess for a person to check, never a verdict: this script always
 exits 0 and never fails a PR. It prints ::warning annotations and, with --md,
@@ -49,6 +53,28 @@ WINDOW = 3000
 UPDATE_PATH = re.compile(rb"/updates?(?:/|$)", re.I)
 NPM = re.compile(rb"https?://(?:cdn\.jsdelivr\.net/npm|unpkg\.com)/((?:@[\w.-]+/)?[\w.-]+)(@[\w.^~-]+)?/")
 CODE_FILE = re.compile(r"\.(js|mjs|html?)$", re.I)
+# default-source: where a shipped package or a fork's diff names a content source.
+SCAN_FILE = re.compile(r"\.(js|mjs|cjs|html?|json|xml|txt|m3u8?|so|dll|wasm|bin)$", re.I)
+SCAN_MAX = 96 * 1024 * 1024
+URL = re.compile(rb"https?://([A-Za-z0-9.-]+\.[A-Za-z0-9-]+)(?::\d+)?(/[^\s\"'`<>\\\x00-\x1f\x7f-\xff]{0,200})?")
+MAGNET = re.compile(rb"magnet:\?xt=urn:bt[im]h:[A-Za-z0-9]{20,}")
+SOURCE_KINDS = (
+    ("playlist", re.compile(rb"\.m3u8?(?:[?#]|$)", re.I)),
+    ("Xtream login", re.compile(rb"/(?:get|player_api|xmltv)\.php", re.I)),
+    ("addon manifest", re.compile(rb"/manifest\.json(?:[?#]|$)", re.I)),
+)
+# Placeholders and the device itself: never a source.
+LOCAL = re.compile(r"(^|\.)(localhost|example\.(com|org|net))$|\.(example|test|invalid|local)$|^(127|10|192\.168|0)\.", re.I)
+# Allowed as a default by "What we accept".
+SOURCE_OK = re.compile(r"(^|\.)iptv-org\.github\.io$", re.I)
+IPTV_ORG = re.compile(rb"^/iptv-org/", re.I)
+# Hosts every fork may add without it saying anything about content.
+NEUTRAL = re.compile(r"(^|\.)(github\.com|w3\.org|tizen\.org|samsung\.com|apache\.org|gnu\.org|mozilla\.org|opensource\.org"
+                     r"|creativecommons\.org|fonts\.googleapis\.com|fonts\.gstatic\.com|themoviedb\.org|tmdb\.org)$", re.I)
+INCLUDE_EXT = re.compile(r"\.(inc|inl)$", re.I)
+ROUTES = re.compile(r"/stream/|\.m3u8?\b|player_api\.php|get\.php\?username|/manifest\.json|magnet:\?", re.I)
+ACCOUNT = re.compile(r"subscri|assinatura|suscrip|abonnement|\bplano\b|\bbanned\b|banido|anti-?bloqueio|anti-?block|unblock", re.I)
+MAX_SHOWN = 8
 
 
 def gh(path):
@@ -120,6 +146,61 @@ def code_findings(path):
     return sorted(evidence)
 
 
+def source_findings(path):
+    """Content sources hard-coded in a package: {host or 'magnet link': kind}."""
+    found = {}
+    try:
+        z = zipfile.ZipFile(path)
+    except (zipfile.BadZipFile, OSError):
+        return found
+    for item in z.infolist():
+        if not SCAN_FILE.search(item.filename) or "node_modules/" in item.filename or item.file_size > SCAN_MAX:
+            continue
+        try:
+            data = z.read(item)
+        except Exception:
+            continue
+        if MAGNET.search(data):
+            found.setdefault("magnet link", "torrent")
+        for m in URL.finditer(data):
+            host, rest = m.group(1).decode("ascii", "replace").lower(), m.group(2) or b""
+            if LOCAL.search(host) or SOURCE_OK.search(host) or (host == "raw.githubusercontent.com" and IPTV_ORG.search(rest)):
+                continue
+            for kind, pattern in SOURCE_KINDS:
+                if pattern.search(rest):
+                    found.setdefault(host, kind)
+                    break
+    return found
+
+
+def fork_findings(repo, info, branch):
+    """What a fork's source adds over its parent: (new hosts, most used first; notes)."""
+    parent = info["parent"]
+    base = f"{parent['owner']['login']}:{parent.get('default_branch', 'main')}"
+    diff = gh(f"/repos/{repo}/compare/{base}...{branch or info.get('default_branch', 'main')}")
+    if not diff or "_status" in diff:
+        return [], []
+    added, removed, routes, account = {}, set(), False, False
+    for f in diff.get("files", []):
+        name = f.get("filename", "")
+        if not (SOURCE_EXT.search(name) or INCLUDE_EXT.search(name)):
+            continue
+        for line in (f.get("patch") or "").split("\n"):
+            if line[:1] not in "+-" or line[:3] in ("+++", "---"):
+                continue
+            hosts = [m.group(1).decode("ascii", "replace").lower() for m in URL.finditer(line.encode("utf-8", "replace"))]
+            if line[0] == "-":
+                removed.update(hosts)
+                continue
+            for host in hosts:
+                added[host] = added.get(host, 0) + 1
+            routes = routes or bool(ROUTES.search(line))
+            account = account or bool(ACCOUNT.search(line))
+    hosts = sorted((h for h in added if h not in removed and not NEUTRAL.search(h) and not LOCAL.search(h)), key=lambda h: (-added[h], h))
+    notes = (["stream, playlist or addon routes"] if routes else []) + (["account, subscription or unblocking wording"] if account else [])
+    return hosts, notes
+
+
 def has_source_files(repo):
     """True / False from the repo tree, None when it can't be told."""
     info = gh(f"/repos/{repo}")
@@ -161,6 +242,25 @@ def hints_for(path, catalog, scan_dir, pr_author):
                 if ev:
                     out.append(("self-updating", f"`{out_name}` may download and run newer code: " + "; ".join(ev[:4])
                                 + ". If it really does, add `\"flags\": [\"self-updating\"]` (allowed only from its own repo/domain or the upstream it names). A \"new version available\" notice alone doesn't count."))
+
+    # default-source
+    if scan_dir:
+        for out_name in output_names(m):
+            f = os.path.join(scan_dir, out_name)
+            found = source_findings(f) if os.path.isfile(f) else {}
+            if found:
+                shown = ", ".join(f"`{safe(h)}` ({kind})" for h, kind in sorted(found.items())[:MAX_SHOWN])
+                more = f" and {len(found) - MAX_SHOWN} more" if len(found) > MAX_SHOWN else ""
+                out.append(("default-source", f"`{out_name}` has a content source built in: {shown}{more}. "
+                            "A preset playlist, addon or scraper is not accepted, unless it is iptv-org or the rights holder's own server. A source the user adds is fine."))
+    if info and info.get("fork") and info.get("parent"):
+        hosts, notes = fork_findings(repo, info, m.get("branch"))
+        if hosts:
+            shown = ", ".join(f"`{safe(h)}`" for h in hosts[:MAX_SHOWN])
+            more = f" and {len(hosts) - MAX_SHOWN} more" if len(hosts) > MAX_SHOWN else ""
+            extra = f" The same changes also add {' and '.join(notes)}." if notes else ""
+            out.append(("default-source", f"Compared with `{info['parent']['full_name']}`, the source adds these hosts: {shown}{more}.{extra} "
+                        "Check that none of them is a content source the app ships with."))
 
     # new-account
     if info and "_status" not in info:
