@@ -1,0 +1,36 @@
+{
+  "name": "BestCine TV",
+  "description": "Open-source native C/SDL2 media client for Samsung Tizen (GPL-3.0 fork of iqui27/nuvio-native-legacy) with PT-BR UI, QR login, DoH DNS, multi-profile support, and native .tpk builds for Tizen 4.0-9.0 plus WebAssembly .wgt.",
+  "category": "streaming",
+  "repo": "BestCine/BestCine-TV",
+  "repo_label": "BestCine",
+  "source": "release",
+  "branch": "master",
+  "assets": [
+    {
+      "match": "-NuvioTpk40[.]tpk$",
+      "variant": "Tizen 4.0 to 5.5",
+      "output_name": "BestCineTV-tizen4.tpk"
+    },
+    {
+      "match": "-NuvioTpk60[.]tpk$",
+      "variant": "Tizen 6.0",
+      "output_name": "BestCineTV-tizen6.tpk"
+    },
+    {
+      "match": "-NuvioTpk65[.]tpk$",
+      "variant": "Tizen 6.5 to 7",
+      "output_name": "BestCineTV-tizen6.5.tpk"
+    },
+    {
+      "match": "-NuvioTpk[.]tpk$",
+      "variant": "Tizen 8 to 9",
+      "output_name": "BestCineTV-tizen8.tpk"
+    },
+    {
+      "match": "^BestCineTV-.*-tizen[.]wgt$",
+      "variant": "WebAssembly (Tizen 5.5+)",
+      "output_name": "BestCineTV.wgt"
+    }
+  ]
+}
