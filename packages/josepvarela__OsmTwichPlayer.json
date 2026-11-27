@@ -1,8 +1,9 @@
 {
   "name": "OsmTwich",
-  "description": "Unofficial Twitch Player with 7TV emotes for Samsung Smart TVs with Tizen OS.",
+  "description": "Twitch Player with 7TV, BTTV & FFZ emotes for Samsung Smart TVs with Tizen OS.",
   "category": "streaming",
   "repo": "josepvarela/OsmTwichPlayer",
+  "preview_image": "https://raw.githubusercontent.com/josepvarela/OsmTwichPlayer/refs/heads/main/screenshots/01-featured-streams.png",
   "repo_label": "OsmTwichPlayer",
   "source": "release",
   "branch": "release",
