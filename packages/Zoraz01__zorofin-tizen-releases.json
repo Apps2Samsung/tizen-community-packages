@@ -1,0 +1,18 @@
+{
+  "name": "Zorofin",
+  "description": "Zorofin native Flutter Jellyfin client for Samsung Tizen 6.0+ (2021+ TVs). Bring your own server. Re-sign for the target TV.",
+  "category": "media",
+  "repo": "Zoraz01/zorofin-tizen-releases",
+  "source": "release",
+  "branch": "main",
+  "release_tag_prefix": "tizen-v",
+  "flags": [
+    "closed-source"
+  ],
+  "assets": [
+    {
+      "match": "^zorofin-tizen-[0-9.]+[.]tpk$",
+      "output_name": "Zorofin.tpk"
+    }
+  ]
+}
