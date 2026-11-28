@@ -1,0 +1,15 @@
+{
+"name": "Megatron",
+"description": "Media player for Samsung TVs: USB drives, SMB, WebDAV and DLNA with sort/view modes, subtitles, fanart, themes and a clock (fork of Tessel).",
+"category": "media",
+"preview_image": "https://raw.githubusercontent.com/Megatro-nn/megatron-tizen-tv/main/docs/screenshots/home-aurora.jpg",
+"repo": "Megatro-nn/megatron-tizen-tv",
+"source": "release",
+"branch": "main",
+"assets": [
+{
+"match": "^megatron\\.wgt$",
+"output_name": "Megatron.wgt"
+}
+]
+}
