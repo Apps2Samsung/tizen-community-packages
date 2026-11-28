@@ -47,7 +47,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | 🧩 Application | 📝 Description | ⚙️ Version |
 |----------------|----------------|------------|
 | **AmorecoFlix**<br>[Pablitorox](https://github.com/Pablitorox/AmorecoFlix) | Personal Netflix-style player for a USB drive plugged into the TV: posters, synopses, continue watching, next episode, skip intro, audio and subtitle choice. | `e6212b3` |
-| **Auger**<br>[Artic0din](https://github.com/Artic0din/Auger-Tizen) | Third-party Samsung TV client for Silo self-hosted media servers (Tizen 8.0+). | `v0.17.0` |
+| **Auger**<br>[Artic0din](https://github.com/Artic0din/Auger-Tizen) | Third-party Samsung TV client for Silo self-hosted media servers (Tizen 8.0+). | `v0.19.0` |
 | **Beam-TV**<br>[TAGISWILD](https://github.com/TAGISWILD/beam-tv) | Open-source USB and DLNA media player for Samsung Tizen TVs: subtitles, resume playback, remote navigation, and a local companion server. | `v1.0.1` |
 | **Chorus2-Tizen**<br>[Chorus2-Tizen](https://github.com/PatrickSt1991/chorus2-tizen) | Chorus2-Tizen (Kodi) Samsung Tizen. | `tizen-v21.x-1.0.1-2026-05-21-1443` |
 | **Fladder**<br>[popdollar](https://github.com/popdollar/Fladder-Tizen) | Jellyfin client for Samsung Tizen TV, built with Flutter (native .tpk). | `Tizen` |
@@ -67,7 +67,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **Pelagica**<br>[PelagicaApp](https://github.com/PelagicaApp/pelagica) | A modern web, desktop and TV client for Jellyfin | `4.17.0` |
 | **Phlix**<br>[detain](https://github.com/detain/phlix-tizen-client) | Samsung Tizen TV client for the Phlix media server: HLS streaming and spatial navigation. | `latest` |
 | **PlayerAVPlay**<br>[yadPe](https://github.com/yadPe/PlayerAVPlay) | AVPlayer app | `latest` |
-| **Pley**<br>[pley-media-server](https://github.com/pley-media-server/pley) | Client for the Pley media server: movies, shows, music and live TV with a guide, played through the TV's own player (AVPlay). | `636368e` |
+| **Pley**<br>[pley-media-server](https://github.com/pley-media-server/pley) | Client for the Pley media server: movies, shows, music and live TV with a guide, played through the TV's own player (AVPlay). | `c7f1e0b` |
 | **Pley (native)**<br>[pley-media-server](https://github.com/pley-media-server/pley) | Native C#/NUI build of the Pley client for Tizen 9 TVs, from the samsung-native releases. | `n/a` |
 | **Prairie**<br>[Prairie-Server](https://github.com/Prairie-Server/prairie-smarttv) | Flutter client for the self-hosted Prairie media server (native .tpk): multi-server registry with LAN discovery, profiles with PIN, Quick Connect sign-in and AVPlay playback. | `v0.5.4` |
 | **Reiverr**<br>[aleksilassila](https://github.com/aleksilassila/reiverr) | A clean combined interface for Jellyfin, TMDB, Radarr and Sonarr, as well as a replacement to Overseerr. | `5923207` |
@@ -100,7 +100,7 @@ Please check the [Releases](../../releases) page for version-specific details.
 | **HackTV**<br>[kosmodrey](https://github.com/kosmodrey/hackTV) | IPTV client for Samsung Tizen TVs. | `bf27ba9` |
 | **IPTV Manager**<br>[matifDreamIt](https://github.com/matifDreamIt/IPTV-Tizen-TV) | IPTV manager for Samsung Tizen TV with Xtream Codes support and HLS playback. | `d8eb66b` |
 | **Lumio IPTV**<br>[smjmusavi](https://github.com/smjmusavi/Lumio-IPTV) | IPTV player for Samsung TVs from 2016 on (Tizen 2.4 and newer): live TV in list, grid and card views, programme guides, movies and series from your own playlists | `v3.1.0` |
-| **Lumora**<br>[mejri02](https://github.com/mejri02/Lumora-TV_iptv_tizen) | Modern IPTV player for Samsung Tizen TVs with Xtream Codes, Stalker portal and M3U support. | `v4.9.19` |
+| **Lumora**<br>[mejri02](https://github.com/mejri02/Lumora-TV_iptv_tizen) | Modern IPTV player for Samsung Tizen TVs with Xtream Codes, Stalker portal and M3U support. | `v5.1.6` |
 | **Mdluex IPTV**<br>[Mdluex IPTV](https://github.com/mdluex/mdluex-iptv) | Netflix-style IPTV player for your own Xtream Codes account (live TV, movies, series, resume, favorites), plus the Mdluex Industries YouTube channel. | `v1.5.3` |
 | **Nyx**<br>[victorreinor](https://github.com/victorreinor/nyx-tv) | IPTV player for your own Xtream or M3U playlist with a simple, remote-first interface. | `v1.10.0` |
 | **opencream TV**<br>[opencream-ai](https://github.com/opencream-ai/opencream-tv) | A calm home screen for Samsung TVs with your own Xtream Codes IPTV built in: live TV, films, series, guide search. | `v0.1.5` |

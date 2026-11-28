@@ -25,7 +25,7 @@
   "build:lvndry/tv-dashboard@main": "d2b0c479ca5c4b30f33b67e9ef602d92c2ce3be2",
   "build:matifDreamIt/IPTV-Tizen-TV@main": "d8eb66b9874d54a225cf584824544925e7dd521f",
   "build:natureglass/haven-tizen-ha@main": "f436b058b5b61a398a2feddc73f7f79a0aed87ef",
-  "build:pley-media-server/pley@master": "636368eb075f5a52183874517c685acfe9509204",
+  "build:pley-media-server/pley@master": "c7f1e0bffa70a89b1d4806a334a51b5808b2e767",
   "build:pvk689/snake-game-tizen@master": "62ccffcf53fd72d482bd943c865cd55e8dbf6c54",
   "build:raykholo/tubearchivist-tv@main": "3cb035faf4d9e630761cee288513929fb993af41",
   "build:rfaile313/samsucks@main": "6b00e926e163a3154dd1993a26b47482d61ebf40",
@@ -39,7 +39,7 @@
   "release:Apps2Samsung/ReolinkViewer": "v1.2.0",
   "release:Apps2Samsung/TV-Store": "v0.3.45",
   "release:AquaPlayIPTV/aquaplay-samsung": "v1.0.54",
-  "release:Artic0din/Auger-Tizen": "v0.17.0",
+  "release:Artic0din/Auger-Tizen": "v0.19.0",
   "release:Dysprohol/duobeam": "v0.8.9",
   "release:Edsol/go2rtc-tizen": "v0.1.0",
   "release:IIyn/omegatube": "v1.6.0",
@@ -115,7 +115,7 @@
   "release:labanmne/padthru": "v0.5.0",
   "release:mahmutisik/light-kick-tv": "v1.0.3",
   "release:mdluex/mdluex-iptv": "v1.5.3",
-  "release:mejri02/Lumora-TV_iptv_tizen": "v4.9.19",
+  "release:mejri02/Lumora-TV_iptv_tizen": "v5.1.6",
   "release:meocong/prj-tv-samsung": "v1.4.0",
   "release:mhma26395-ctrl/tizen-iptv-player": "V1.0",
   "release:nicbra/f1tv-tizen": "v1.2.2",
@@ -330,6 +330,6 @@
   "config:direct:jhassan8/crunchyroll-tizen": "08f3c26dbcdb89ba",
   "config:direct:prog4food/ottplay-foss-thin-clients": "1e753ee77ddc6551",
   "config:direct:yadPe/PlayerAVPlay": "636885ffc75ddb59",
-  "stale:release:MrSimmo/sonance3": "community-940",
-  "stale:release:christopherklint97/streamvault": "community-940"
+  "stale:release:MrSimmo/sonance3": "community-941",
+  "stale:release:christopherklint97/streamvault": "community-941"
 }
